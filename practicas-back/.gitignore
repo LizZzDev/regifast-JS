@@ -1,0 +1,51 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# dotenv
+.env
+.env.*          # .env.dev, .env.test, etc.
+
+# Logs
+logs
+*.log
+*.log.*
+
+# OS-specific
+.DS_Store       # macOS
+Thumbs.db       # Windows
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Build output
+dist/
+build/
+tmp/
+temp/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# IDEs / Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Optional
+*.tgz
+*.tar.gz
+
+# Docker
+docker-compose.override.yml
+
+# Misc
+*.swp
