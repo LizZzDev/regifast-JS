@@ -23,8 +23,7 @@ const crearUsuario = async (datos) => {
 
     // Si el rol es empresa, insertar datos en empresa
     if (rol === 'empresa') {
-      const { nombreEmpresa, direccion, telefono, rfc } = empresas;
-      await Empresa.crearEmpresa(connection, idUsuario, nombreEmpresa, direccion, telefono, rfc);
+      await Empresa.crearEmpresa(connection, empresas, idUsuario);
     }
 
     await connection.commit(); // Confirmar la transacción
