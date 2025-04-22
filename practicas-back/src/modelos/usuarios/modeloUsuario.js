@@ -32,8 +32,8 @@ const Usuario = {
 
     try { 
         const [result] = await pool.query(
-            'INSERT INTO usuarios (Nombre, Correo, Contrasena, TipoDeUsuario) VALUES (?, ?, ?)',
-            [Nombre, Correo, Contrasena]
+            'INSERT INTO usuarios (Nombre, Correo, Contrasena, TipoDeUsuario) VALUES (?, ?, ?. ?)',
+            [Nombre, Correo, Contrasena, TipoDeUsuario]
         );
         return result; 
     } catch (error) {

@@ -38,8 +38,19 @@ const crearUsuario = async (req, res) => {
     }
 };
 
+const cerrarSesion = async (req, res) => {
+  try {
+      const response = await cerrarSesion(req);
+      return response;
+  } catch (error) {
+        console.error("Error al cerrar sesion:", error.message);
+        return res.status(401).json({ success: false, message: error.message });
+  }
+};
+
 
 module.exports = {
     iniciarSesion,
     crearUsuario,
+    cerrarSesion
 };

@@ -1,19 +1,19 @@
 const pool = require('../../configuracion/db');
 
 const Alumno = {
-  // Buscar un usuario por correo
-  buscarPorCorreo: async (correo) => {
+  // Buscar un usuario por codigo
+  buscarPorCodigo: async (codigo) => {
     try {
-      const [rows] = await pool.query('SELECT * FROM alumnos WHERE Correo = ?', [correo]);
+      const [rows] = await pool.query('SELECT * FROM alumnos WHERE Codigo = ?', [codigo]);
       return rows[0]; 
     } catch (error) {
-      console.error("Error en buscar por correo:", error);
+      console.error("Error en buscar por codigo al alumno:", error);
       throw error;
     }
   },
 
-   // Buscar todos los usuarios
-  obtenerAlumnos: async (correo) => {
+   // Buscar todos los alumnos
+  obtenerAlumnos: async () => {
     try {
       const result = await pool.query('SELECT * FROM alumnos');
       return result; 
@@ -23,8 +23,8 @@ const Alumno = {
     }
   },
 
-  // Crear un nuevo usuario
-  agregarNuevoUsuario: async (data) => {
+  // Crear un nuevo alumno
+  agregarNuevoAlumno: async (data) => {
     const {
             Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
             Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
