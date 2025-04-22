@@ -1,4 +1,4 @@
-const pool = require('../../configuracion/db');
+const pool = require('../configuracion/db');
 
 const Alumno = {
   // Buscar un usuario por codigo
@@ -15,8 +15,8 @@ const Alumno = {
    // Buscar todos los alumnos
   obtenerAlumnos: async () => {
     try {
-      const result = await pool.query('SELECT * FROM alumnos');
-      return result; 
+      const [rows] = await pool.query('SELECT * FROM alumnos');
+      return rows; 
     } catch (error) {
       console.error("Error en obtener todos los alumnos:", error);
       throw error;
@@ -26,7 +26,7 @@ const Alumno = {
   // Crear un nuevo alumno
   agregarNuevoAlumno: async (data) => {
     const {
-            Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
+            IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
             Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
             Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
             Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
@@ -35,19 +35,19 @@ const Alumno = {
 
     try {
         const [result] = await pool.query(
-            `INSERT INTO usuarios (
-              Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
+            `INSERT INTO alumnos (
+              IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
               Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
               Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
               Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-              Movil, Revisado
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+              Movil, BarraStatus, Revisado
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
-              Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
+              IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
               Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
               Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
               Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-              Movil, 0
+              Movil, 1, 0
             ]
           );
       
@@ -58,10 +58,20 @@ const Alumno = {
     }
   },
 
+  aumentarEnUnoBarraStatus: async (id) => {
+    try {
+      const [result] = await pool.query('UPDATE alumnos SET BarraStatus = BarraStatus + 1 WHERE IdAlumno = ?', [id]);
+      return result; 
+    } catch (error) {
+      console.error("Error en aumentar barra status:", error);
+      throw error;
+    }
+  },
+
   // Eliminar un usuario por ID
   eliminarPorId: async (id) => {
     try {
-      const [result] = await pool.query('DELETE FROM usuarios WHERE IdUsuario = ?', [id]);
+      const [result] = await pool.query('DELETE FROM alumnos WHERE IdUsuario = ?', [id]);
       return result; 
     } catch (error) {
       console.error("Error en eliminar por id:", error);

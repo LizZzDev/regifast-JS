@@ -1,10 +1,10 @@
 const bcrypt = require('bcrypt');
 const pool = require('../../configuracion/db');
-const Usuario = require('../../modelos/usuarios/modeloUsuario');
-const Empresa = require('../../modelos/empresas/modeloEmpresa');
+const Usuario = require('../../modelos/modeloUsuario');
+const Empresa = require('../../modelos/modeloEmpresa');
 
-const crearUsuario = async (datos) => {
-  const { correo, contrasena, rol, empresas } = datos;
+const crearUsuario = async (req) => {
+  const { correo, contrasena, rol, datosEmpresa } = req.body;
   const connection = await pool.getConnection();
 
   try {
@@ -23,7 +23,7 @@ const crearUsuario = async (datos) => {
 
     // Si el rol es empresa, insertar datos en empresa
     if (rol === 'empresa') {
-      await Empresa.crearEmpresa(connection, empresas, idUsuario);
+      await Empresa.crearEmpresa(connection, datosEmpresa, idUsuario);
     }
 
     await connection.commit(); // Confirmar la transacción

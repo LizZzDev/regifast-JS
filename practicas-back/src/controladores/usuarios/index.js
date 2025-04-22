@@ -2,13 +2,8 @@ const crearUsuarioServicio = require("./crearUsuario");
 const inicioSesionServicio = require("./iniciarSesion");
 
 const iniciarSesion = async (req, res) => {
-  const { correo, contrasena } = req.body;
-  if (!correo || !contrasena) {
-    return res.status(400).json({ success: false, message: "Datos insuficientes." });
-  }
-
   try {
-     const response = await inicioSesionServicio(correo, contrasena);
+     const response = await inicioSesionServicio(req.body);
 
     // Configurar la sesión
     req.session.log = true;
@@ -24,11 +19,6 @@ const iniciarSesion = async (req, res) => {
 };
 
 const crearUsuario = async (req, res) => {
-  const { correo, contrasena, rol, empresas } = req.body;
-  if (!correo || !contrasena || !rol || !empresas) {
-    return res.status(400).json({ success: false, message: "Datos insuficientes." });
-  }
-
   try {
      const response = await crearUsuarioServicio(req.body);
     return response;

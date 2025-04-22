@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
-const Usuario = require('../../modelos/usuarios/modeloUsuario'); 
+const Usuario = require('../../modelos/modeloUsuario'); 
 
-const iniciarSesion = async (correo, contrasena) => {  
+const iniciarSesion = async (req) => {  
+  const { correo, contrasena } = req;
   const user = await Usuario.buscarPorCorreo(correo.trim());
     
   if (!user) {
