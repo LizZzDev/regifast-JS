@@ -1,10 +1,10 @@
 import pool from '../configuracion/db.js';
-
+//¿modificar y cambiar a orms?
 const Alumno = {
   // Buscar un usuario por código
-  buscarPorCodigo: async (codigo) => {
+  obtenerAlumno: async (id) => {
     try {
-      const [rows] = await pool.query('SELECT * FROM alumnos WHERE Codigo = ?', [codigo]);
+      const [rows] = await pool.query('SELECT * FROM alumnos WHERE IdAlumno = ?', [id]);
       return rows[0];
     } catch (error) {
       console.error("Error en buscar por código al alumno:", error);
@@ -40,14 +40,14 @@ const Alumno = {
           Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
           Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
           Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-          Movil, BarraStatus, Revisado
+          Movil, BarraStatus
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
           Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
           Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
           Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-          Movil, 1, 0
+          Movil, 1
         ]
       );
 

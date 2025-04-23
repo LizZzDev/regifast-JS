@@ -1,4 +1,5 @@
 const validarCampos = () => {
+  //faltaba que recibira el next
   return (req, res, next) => {
     const errores = [];
 

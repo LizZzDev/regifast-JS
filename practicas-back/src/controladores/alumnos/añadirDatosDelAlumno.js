@@ -6,7 +6,7 @@ const añadirDatosDelAlumno = async (req, res) => {
     const idUsuario = req.session?.id;
 
     const datos = {
-      ...req.body,
+      ...req,
       CorreoInstitucional: correo,
       Id: idUsuario,
     };
