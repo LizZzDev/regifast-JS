@@ -1,23 +1,23 @@
-const Alumno = require("../../modelos/modeloAlumno");
+import Alumno from "../../modelos/modeloAlumno.js";
 
 const añadirDatosDelAlumno = async (req, res) => {
-    try {
-        const correo = req.session?.correo;
-        const idUsuario = req.session?.id;
+  try {
+    const correo = req.session?.correo;
+    const idUsuario = req.session?.id;
 
-        const datos = {
-        ...req.body,
-        CorreoInstitucional: correo,
-        Id: idUsuario
-        };
+    const datos = {
+      ...req.body,
+      CorreoInstitucional: correo,
+      Id: idUsuario,
+    };
 
-        const resultado = Alumno.agregarNuevoAlumno(datos);
+    const resultado = await Alumno.agregarNuevoAlumno(datos);
 
-        res.status(201).json({ mensaje: "Alumno agregado correctamente", resultado });
-    } catch (error) {
-        console.error("Error al añadir datos del alumno:", error.message);
-        throw new Error("No se pudo procesar el formulario.");
-    }
-}
+    res.status(201).json({ mensaje: "Alumno agregado correctamente", resultado });
+  } catch (error) {
+    console.error("Error al añadir datos del alumno:", error.message);
+    throw new Error("No se pudo procesar el formulario.");
+  }
+};
 
-module.exports = añadirDatosDelAlumno;
+export default añadirDatosDelAlumno;

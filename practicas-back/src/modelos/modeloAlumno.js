@@ -1,22 +1,22 @@
-const pool = require('../configuracion/db');
+import pool from '../configuracion/db.js';
 
 const Alumno = {
-  // Buscar un usuario por codigo
+  // Buscar un usuario por código
   buscarPorCodigo: async (codigo) => {
     try {
       const [rows] = await pool.query('SELECT * FROM alumnos WHERE Codigo = ?', [codigo]);
-      return rows[0]; 
+      return rows[0];
     } catch (error) {
-      console.error("Error en buscar por codigo al alumno:", error);
+      console.error("Error en buscar por código al alumno:", error);
       throw error;
     }
   },
 
-   // Buscar todos los alumnos
+  // Buscar todos los alumnos
   obtenerAlumnos: async () => {
     try {
       const [rows] = await pool.query('SELECT * FROM alumnos');
-      return rows; 
+      return rows;
     } catch (error) {
       console.error("Error en obtener todos los alumnos:", error);
       throw error;
@@ -26,32 +26,32 @@ const Alumno = {
   // Crear un nuevo alumno
   agregarNuevoAlumno: async (data) => {
     const {
-            IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
-            Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
-            Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
-            Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-            Movil
-        } = data;  
+      IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
+      Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
+      Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
+      Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
+      Movil
+    } = data;
 
     try {
-        const [result] = await pool.query(
-            `INSERT INTO alumnos (
-              IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
-              Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
-              Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
-              Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-              Movil, BarraStatus, Revisado
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [
-              IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
-              Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
-              Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
-              Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-              Movil, 1, 0
-            ]
-          );
-      
-          return result;
+      const [result] = await pool.query(
+        `INSERT INTO alumnos (
+          IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
+          Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
+          Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
+          Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
+          Movil, BarraStatus, Revisado
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+          IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
+          Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
+          Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
+          Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
+          Movil, 1, 0
+        ]
+      );
+
+      return result;
     } catch (error) {
       console.error("Error en agregar nuevo usuario:", error);
       throw error;
@@ -61,7 +61,7 @@ const Alumno = {
   aumentarEnUnoBarraStatus: async (id) => {
     try {
       const [result] = await pool.query('UPDATE alumnos SET BarraStatus = BarraStatus + 1 WHERE IdAlumno = ?', [id]);
-      return result; 
+      return result;
     } catch (error) {
       console.error("Error en aumentar barra status:", error);
       throw error;
@@ -72,7 +72,7 @@ const Alumno = {
   eliminarPorId: async (id) => {
     try {
       const [result] = await pool.query('DELETE FROM alumnos WHERE IdUsuario = ?', [id]);
-      return result; 
+      return result;
     } catch (error) {
       console.error("Error en eliminar por id:", error);
       throw error;
@@ -80,4 +80,4 @@ const Alumno = {
   },
 };
 
-module.exports = Alumno;
+export default Alumno;

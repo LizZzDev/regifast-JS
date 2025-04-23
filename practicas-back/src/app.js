@@ -1,7 +1,7 @@
 import express from 'express';
+import cors from 'cors';
 import { PORT } from './configuracion/constantes.js';
-const cors = require('cors');
-const rutas = require('./rutas/index.js');
+import rutas from './rutas/index.js';
 
 const app = express();
 

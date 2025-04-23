@@ -1,14 +1,15 @@
-const express = require('express');
-const router = express.Router();
-const validarCampos = require('../middlewares/validarCampos');
-const { 
+import express from 'express';
+import validarCampos from '../middlewares/validarCampos.js';
+import { 
     iniciarSesion,
     crearUsuario,
     cerrarSesion
-} = require('../controladores/usuarios/index');
+} from '../controladores/usuarios/index.js';
 
-router.post('/iniciarSesion', validarCampos(), iniciarSesion);
-router.post('/crearUsuario', validarCampos(), crearUsuario);
+const router = express.Router();
+
+router.post('/iniciarSesion', iniciarSesion);
+router.post('/crearUsuario', crearUsuario);
 router.post('/cerrarSesion', cerrarSesion);
 
-module.exports = router;
+export default router;

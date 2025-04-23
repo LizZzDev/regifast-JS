@@ -1,16 +1,11 @@
-const express = require('express');
+import express from 'express';
+import usuarios from './usuarios.js';
+import alumnos from './alumnos.js';
+
+
 const router = express.Router();
 
-const usuarios = require('./usuarios');
-const alumnos = require('./alumnos');
-const jefeDepartamento = require('./jefeDepartamento');
-const coordinador = require('./coordinador');
-const empresas = require('./empresas');
+router.use('/usuarios', usuarios);
+router.use('/alumnos', alumnos);
 
-router.post('/usuarios', usuarios);
-router.post('/alumnos', alumnos);
-router.post('/jefeDepartamento', jefeDepartamento);
-router.post('/coordinador', coordinador);
-router.post('/empresas', empresas);
-
-module.exports = router;
+export default router;

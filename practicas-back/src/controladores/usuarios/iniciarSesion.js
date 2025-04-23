@@ -1,10 +1,10 @@
-const bcrypt = require('bcrypt');
-const Usuario = require('../../modelos/modeloUsuario'); 
+import bcrypt from 'bcrypt';
+import Usuario from '../../modelos/modeloUsuario.js';
 
-const iniciarSesion = async (req) => {  
+const iniciarSesion = async (req) => {
   const { correo, contrasena } = req;
   const user = await Usuario.buscarPorCorreo(correo.trim());
-    
+
   if (!user) {
     throw new Error("Usuario no encontrado.");
   }
@@ -13,15 +13,14 @@ const iniciarSesion = async (req) => {
 
   if (!match) {
     throw new Error("Datos incorrectos.");
-  } 
+  }
 
   return {
     id: user.IdUsuario,
     nombre: user.Nombre,
     correo: user.Correo,
-    rol: user.Rol
+    rol: user.Rol,
   };
-
 };
 
-module.exports = iniciarSesion;
+export default iniciarSesion;

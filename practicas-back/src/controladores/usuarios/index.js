@@ -1,9 +1,11 @@
-const crearUsuarioServicio = require("./crearUsuario");
-const inicioSesionServicio = require("./iniciarSesion");
+import crearUsuarioServicio from './crearUsuario.js';
+import inicioSesionServicio from './iniciarSesion.js';
+import cerrarSesionServicio from './cerrarSesion.js';
 
-const iniciarSesion = async (req, res) => {
+export const iniciarSesion = async (req, res) => {
+  console.log ("entro a iniciarSesion.js");
   try {
-     const response = await inicioSesionServicio(req.body);
+    const response = await inicioSesionServicio(req.body);
 
     // Configurar la sesión
     req.session.log = true;
@@ -11,36 +13,36 @@ const iniciarSesion = async (req, res) => {
     req.session.usuario = response.nombre;
     req.session.correo = response.correo;
 
-    return response;
-    } catch (error) {
-        console.error("Error al iniciar sesión:", error.message);
-        return res.status(401).json({ success: false, message: error.message });
-    }
-};
-
-const crearUsuario = async (req, res) => {
-  try {
-     const response = await crearUsuarioServicio(req.body);
-    return response;
-    } catch (error) {
-        console.error("Error al crear cuenta:", error.message);
-        return res.status(401).json({ success: false, message: error.message });
-    }
-};
-
-const cerrarSesion = async (req, res) => {
-  try {
-      const response = await cerrarSesion(req);
-      return response;
+    return res.status(200).json({
+      data: response,
+    });
   } catch (error) {
-        console.error("Error al cerrar sesion:", error.message);
-        return res.status(401).json({ success: false, message: error.message });
+    console.error("Error al iniciar sesión:", error.message);
+    return res.status(401).json({ success: false, message: error.message });
   }
 };
 
+export const crearUsuario = async (req, res) => {
+  console.log ("entro a crear.js");
+  try {
+    const response = await crearUsuarioServicio(req.body);
+    return res.status(201).json({
+      data: response,
+    });
+  } catch (error) {
+    console.error("Error al crear cuenta:", error.message);
+    return res.status(401).json({ success: false, message: error.message });
+  }
+};
 
-module.exports = {
-    iniciarSesion,
-    crearUsuario,
-    cerrarSesion
+export const cerrarSesion = async (req, res) => {
+  try {
+    const response = await cerrarSesionServicio(req);
+    return res.status(200).json({
+      data: response,
+    });
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error.message);
+    return res.status(401).json({ success: false, message: error.message });
+  }
 };

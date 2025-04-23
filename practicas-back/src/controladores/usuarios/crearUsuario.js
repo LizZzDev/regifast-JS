@@ -1,10 +1,10 @@
-const bcrypt = require('bcrypt');
-const pool = require('../../configuracion/db');
-const Usuario = require('../../modelos/modeloUsuario');
-const Empresa = require('../../modelos/modeloEmpresa');
+import bcrypt from 'bcrypt';
+import pool from '../../configuracion/db.js';
+import Usuario from '../../modelos/modeloUsuario.js';
+import Empresa from '../../modelos/modeloEmpresa.js';
 
 const crearUsuario = async (req) => {
-  const { correo, contrasena, rol, datosEmpresa } = req.body;
+  const { correo, contrasena, nombre, rol, datosEmpresa } = req;
   const connection = await pool.getConnection();
 
   try {
@@ -19,13 +19,17 @@ const crearUsuario = async (req) => {
     const hashedPassword = await bcrypt.hash(contrasena, 10);
 
     // Crear el usuario en la tabla `usuarios`
-    const idUsuario = await Usuario.crearUsuario(connection, correo, hashedPassword, rol);
+    const idUsuario = await Usuario.agregarNuevoUsuario(connection, {
+      correo,
+      hashedPassword,
+      nombre,
+      rol,
+    });
 
     // Si el rol es empresa, insertar datos en empresa
     if (rol === 'empresa') {
       await Empresa.crearEmpresa(connection, datosEmpresa, idUsuario);
     }
-
     await connection.commit(); // Confirmar la transacción
     return { success: true, message: "Usuario creado exitosamente." };
   } catch (error) {
@@ -37,4 +41,4 @@ const crearUsuario = async (req) => {
   }
 };
 
-module.exports = crearUsuario;
+export default crearUsuario;
