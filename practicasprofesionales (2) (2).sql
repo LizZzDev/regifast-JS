@@ -22,92 +22,83 @@ SET time_zone = "+00:00";
 -- Tabla: `alumnos`
 DROP TABLE IF EXISTS `alumnos`;
 CREATE TABLE `alumnos` (
-  `IdAlumnos` INT NOT NULL AUTO_INCREMENT,
-  `Codigo` INT DEFAULT NULL,
-  `NombreCompleto` VARCHAR(255) DEFAULT NULL,
-  `Carrera` VARCHAR(255) DEFAULT NULL,
-  `Grado` VARCHAR(255) DEFAULT NULL,
-  `Grupo` VARCHAR(255) DEFAULT NULL,
-  `Turno` VARCHAR(255) DEFAULT NULL,
-  `Domicilio` VARCHAR(255) DEFAULT NULL,
-  `NumeroCasa` INT DEFAULT NULL,
-  `Colonia` VARCHAR(255) DEFAULT NULL,
-  `CodigoPostal` INT DEFAULT NULL,
-  `Municipio` VARCHAR(255) DEFAULT NULL,
-  `Estado` VARCHAR(255) DEFAULT NULL,
-  `Telefono` VARCHAR(15) DEFAULT NULL,
-  `TelefonoEmergencia` VARCHAR(15) DEFAULT NULL,
-  `CorreoInstitucional` VARCHAR(255) DEFAULT NULL,
-  `NSS` VARCHAR(20) DEFAULT NULL,
-  `Edad` INT DEFAULT NULL,
-  `Nacionalidad` VARCHAR(255) DEFAULT NULL,
-  `NombrePadre` VARCHAR(255) DEFAULT NULL,
-  `TelefonoPadre` VARCHAR(15) DEFAULT NULL,
-  `NombreMadre` VARCHAR(255) DEFAULT NULL,
-  `TelefonoMadre` VARCHAR(15) DEFAULT NULL,
-  `Movil` VARCHAR(15) DEFAULT NULL,
-  `Revisado` INT DEFAULT NULL,
-  PRIMARY KEY (`IdAlumnos`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
+  `IdAlumno` INT NOT NULL AUTO_INCREMENT,
+  `IdUsuario` INT NOT NULL,
+  `Codigo` VARCHAR(50) NOT NULL,
+  `NombreCompleto` VARCHAR(255) NOT NULL,
+  `Carrera` VARCHAR(255) NOT NULL,
+  `Grado` VARCHAR(50) NOT NULL,
+  `Grupo` VARCHAR(50) NOT NULL,
+  `Turno` ENUM('Matutino', 'Vespertino') NOT NULL,
+  `Domicilio` VARCHAR(255) NOT NULL,
+  `NumeroCasa` VARCHAR(10) NOT NULL,
+  `Colonia` VARCHAR(255) NOT NULL,
+  `CodigoPostal` VARCHAR(10) NOT NULL,
+  `Municipio` VARCHAR(255) NOT NULL,
+  `Estado` VARCHAR(255) NOT NULL,
+  `Telefono` VARCHAR(15) NOT NULL,
+  `TelefonoEmergencia` VARCHAR(15) NOT NULL,
+  `CorreoInstitucional` VARCHAR(255) NOT NULL,
+  `NSS` VARCHAR(20) NOT NULL UNIQUE,
+  `Edad` INT NOT NULL,
+  `Nacionalidad` VARCHAR(255) NOT NULL,
+  `NombrePadre` VARCHAR(255) NOT NULL,
+  `TelefonoPadre` VARCHAR(15) NOT NULL,
+  `NombreMadre` VARCHAR(255) NOT NULL,
+  `TelefonoMadre` VARCHAR(15) NOT NULL,
+  `Movil` VARCHAR(15) NOT NULL,
+  `Revision` TINYINT(1) DEFAULT 0,
+  `BarraStatus` TINYINT(1) DEFAULT 0,
+  `IdEmpresa` INT NULL,
+  PRIMARY KEY (`IdAlumno`),
+  FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios`(`IdUsuario`) ON DELETE CASCADE,
+  FOREIGN KEY (`IdEmpresa`) REFERENCES `empresas`(`IdEmpresa`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Tabla: `empresasnoverificadas`
-DROP TABLE IF EXISTS `empresasnoverificadas`;
-CREATE TABLE `empresasnoverificadas` (
-  `id_empresa` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(100) NOT NULL,
-  `rfc` VARCHAR(13) NOT NULL,
-  `telefono` VARCHAR(15) NOT NULL,
-  `calle` VARCHAR(100) NOT NULL,
-  `colonia` VARCHAR(100) NOT NULL,
-  `numero` INT NOT NULL,
-  `estado` VARCHAR(50) NOT NULL,
-  `codigo_postal` VARCHAR(10) NOT NULL,
-  `descripcion` TEXT NOT NULL,
-  `municipio` VARCHAR(50) NOT NULL,
-  `logo` VARCHAR(255) NOT NULL,
-  `actividades` TEXT NOT NULL,
-  `vacantes` INT NOT NULL,
-  PRIMARY KEY (`id_empresa`),
-  UNIQUE KEY `rfc` (`rfc`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Tabla: `empresass`
-DROP TABLE IF EXISTS `empresass`;
-CREATE TABLE `empresass` (
+-- Tabla: `empresas`
+DROP TABLE IF EXISTS `empresas`;
+CREATE TABLE `empresas` (
   `IdEmpresa` INT NOT NULL AUTO_INCREMENT,
-  `NombreEmpresa` VARCHAR(255) DEFAULT NULL,
-  `DomicilioFiscal` VARCHAR(255) DEFAULT NULL,
-  `Telefono` VARCHAR(255) DEFAULT NULL,
-  `CorreoElectronico` VARCHAR(255) DEFAULT NULL,
-  `RFC` VARCHAR(255) DEFAULT NULL,
-  `DescripcionEmpresa` TEXT,
-  `TareasRealizar` TEXT,
-  `LogoEmpresa` VARCHAR(255) DEFAULT NULL,
-  `Vacantes` INT DEFAULT NULL,
+  `Nombre` VARCHAR(255) NOT NULL,
+  `RFC` VARCHAR(13) NOT NULL UNIQUE,
+  `Telefono` VARCHAR(15),
+  `Calle` VARCHAR(100),
+  `Colonia` VARCHAR(100),
+  `Numero` VARCHAR(10),
+  `Estado` VARCHAR(50),
+  `CodigoPostal` VARCHAR(10),
+  `Municipio` VARCHAR(50),
+  `Descripcion` TEXT,
+  `Logo` VARCHAR(255),
+  `Actividades` TEXT,
+  `Vacantes` INT DEFAULT 0,
+  `Validada` TINYINT(1) DEFAULT 0,
   PRIMARY KEY (`IdEmpresa`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Tabla: `opiniones`
-DROP TABLE IF EXISTS `opiniones`;
-CREATE TABLE `opiniones` (
+-- Tabla: `opinionEmpresa`
+DROP TABLE IF EXISTS `opinionEmpresa`;
+CREATE TABLE `opinionEmpresa` (
   `IdOpinion` INT NOT NULL AUTO_INCREMENT,
-  `Usuario` VARCHAR(255) DEFAULT NULL,
+  `IdUsuario` INT NOT NULL,
+  `IdEmpresa` INT NOT NULL,
   `Opinion` TEXT,
-  `Calificacion` INT DEFAULT NULL,
-  `Empresa` VARCHAR(255) DEFAULT NULL,
-  PRIMARY KEY (`IdOpinion`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
+  `Calificacion` TINYINT NOT NULL CHECK (`Calificacion` BETWEEN 1 AND 5),
+  PRIMARY KEY (`IdOpinion`),
+  FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios`(`IdUsuario`) ON DELETE CASCADE,
+  FOREIGN KEY (`IdEmpresa`) REFERENCES `empresas`(`IdEmpresa`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Tabla: `usuarios`
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `IdUsuario` INT NOT NULL AUTO_INCREMENT,
-  `Correo` VARCHAR(255) DEFAULT NULL,
-  `Contrasena` VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `Nombre` VARCHAR(255) DEFAULT NULL,
-  `Rol` VARCHAR(255) DEFAULT NULL,
+  `Correo` VARCHAR(255) NOT NULL UNIQUE,
+  `Contrasena` VARCHAR(255) NOT NULL,
+  `Nombre` VARCHAR(255) NOT NULL,
+  `Rol` ENUM('coordinador', 'alumno', 'empresa', "jefe de departamento") NOT NULL,
   PRIMARY KEY (`IdUsuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Restaurar codificaciones
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
