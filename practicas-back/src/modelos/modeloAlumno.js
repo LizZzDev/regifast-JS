@@ -24,38 +24,39 @@ const Alumno = {
   },
 
   // Crear un nuevo alumno
-  agregarNuevoAlumno: async (data) => {
-    const {
-      IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
-      Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
-      Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
-      Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-      Movil
-    } = data;
+    agregarNuevoAlumno: async (data) => {
+      console.log ("data", data);
+      const {
+        IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
+        Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
+        Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
+        Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
+        Movil
+      } = data;
 
-    try {
-      const [result] = await pool.query(
-        `INSERT INTO alumnos (
-          IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
-          Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
-          Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
-          Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-          Movil, BarraStatus
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [
-          IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
-          Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
-          Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
-          Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-          Movil, 1
-        ]
-      );
+      try {
+        const [result] = await pool.query(
+          `INSERT INTO alumnos (
+            IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
+            Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
+            Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
+            Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
+            Movil, BarraStatus
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
+            Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
+            Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
+            Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
+            Movil, 1
+          ]
+        );
 
-      return result;
-    } catch (error) {
-      console.error("Error en agregar nuevo usuario:", error);
-      throw error;
-    }
+        return result;
+      } catch (error) {
+        console.error("Error en agregar nuevo usuario:", error);
+        throw error;
+      }
   },
 
   aumentarEnUnoBarraStatus: async (id) => {

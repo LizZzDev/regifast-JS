@@ -1,3 +1,4 @@
+import session from "express-session";
 import crearUsuarioServicio from './crearUsuario.js';
 import inicioSesionServicio from './iniciarSesion.js';
 import cerrarSesionServicio from './cerrarSesion.js';
@@ -7,11 +8,15 @@ export const iniciarSesion = async (req, res) => {
   try {
     const response = await inicioSesionServicio(req.body);
 
+    console.log ("response", response);
+
     // Configurar la sesión
     req.session.log = true;
     req.session.ID = response.id;
     req.session.usuario = response.nombre;
     req.session.correo = response.correo;
+
+    console.log("Sesión creada:", req.session);
 
     return res.status(200).json({
       data: response,

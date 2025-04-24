@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import Usuario from '../../modelos/modeloUsuario.js';
 
 const iniciarSesion = async (req) => {
+  console.log ("entro a iniciarSesion.js", req);
   const { correo, contrasena } = req;
   const user = await Usuario.buscarPorCorreo(correo.trim());
 
@@ -15,11 +16,11 @@ const iniciarSesion = async (req) => {
     throw new Error("Datos incorrectos.");
   }
 
+  console.log(user);
   return {
     id: user.IdUsuario,
     nombre: user.Nombre,
     correo: user.Correo,
-    rol: user.Rol,
   };
 };
 

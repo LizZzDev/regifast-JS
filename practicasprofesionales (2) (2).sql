@@ -19,6 +19,38 @@ SET time_zone = "+00:00";
 -- Base de datos: `practicasprofesionales`
 -- --------------------------------------------------------
 
+-- Tabla: `usuarios`
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE `usuarios` (
+  `IdUsuario` INT NOT NULL AUTO_INCREMENT,
+  `Correo` VARCHAR(255) NOT NULL UNIQUE,
+  `Contrasena` VARCHAR(255) NOT NULL,
+  `Nombre` VARCHAR(255) NOT NULL,
+  `Rol` ENUM('coordinador', 'alumno', 'empresa', "jefe de departamento") NOT NULL,
+  PRIMARY KEY (`IdUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla: `empresas`
+DROP TABLE IF EXISTS `empresas`;
+CREATE TABLE `empresas` (
+  `IdEmpresa` INT NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(255) NOT NULL,
+  `RFC` VARCHAR(13) NOT NULL UNIQUE,
+  `Telefono` VARCHAR(15),
+  `Calle` VARCHAR(100),
+  `Colonia` VARCHAR(100),
+  `Numero` VARCHAR(10),
+  `Estado` VARCHAR(50),
+  `CodigoPostal` VARCHAR(10),
+  `Municipio` VARCHAR(50),
+  `Descripcion` TEXT,
+  `Logo` VARCHAR(255),
+  `Actividades` TEXT,
+  `Vacantes` INT DEFAULT 0,
+  `Validada` TINYINT(1) DEFAULT 0,
+  PRIMARY KEY (`IdEmpresa`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- Tabla: `alumnos`
 DROP TABLE IF EXISTS `alumnos`;
 CREATE TABLE `alumnos` (
@@ -55,27 +87,6 @@ CREATE TABLE `alumnos` (
   FOREIGN KEY (`IdEmpresa`) REFERENCES `empresas`(`IdEmpresa`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Tabla: `empresas`
-DROP TABLE IF EXISTS `empresas`;
-CREATE TABLE `empresas` (
-  `IdEmpresa` INT NOT NULL AUTO_INCREMENT,
-  `Nombre` VARCHAR(255) NOT NULL,
-  `RFC` VARCHAR(13) NOT NULL UNIQUE,
-  `Telefono` VARCHAR(15),
-  `Calle` VARCHAR(100),
-  `Colonia` VARCHAR(100),
-  `Numero` VARCHAR(10),
-  `Estado` VARCHAR(50),
-  `CodigoPostal` VARCHAR(10),
-  `Municipio` VARCHAR(50),
-  `Descripcion` TEXT,
-  `Logo` VARCHAR(255),
-  `Actividades` TEXT,
-  `Vacantes` INT DEFAULT 0,
-  `Validada` TINYINT(1) DEFAULT 0,
-  PRIMARY KEY (`IdEmpresa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- Tabla: `opinionEmpresa`
 DROP TABLE IF EXISTS `opinionEmpresa`;
 CREATE TABLE `opinionEmpresa` (
@@ -89,15 +100,15 @@ CREATE TABLE `opinionEmpresa` (
   FOREIGN KEY (`IdEmpresa`) REFERENCES `empresas`(`IdEmpresa`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Tabla: `usuarios`
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE `usuarios` (
-  `IdUsuario` INT NOT NULL AUTO_INCREMENT,
-  `Correo` VARCHAR(255) NOT NULL UNIQUE,
-  `Contrasena` VARCHAR(255) NOT NULL,
-  `Nombre` VARCHAR(255) NOT NULL,
-  `Rol` ENUM('coordinador', 'alumno', 'empresa', "jefe de departamento") NOT NULL,
-  PRIMARY KEY (`IdUsuario`)
+-- Tabla: `accesoPorCalificacion`
+DROP TABLE IF EXISTS `accesoPorCalificacion`;
+CREATE TABLE `accesoPorCalificacion` (
+  `IdRango` INT NOT NULL AUTO_INCREMENT,
+  `MinCalificacion` INT NOT NULL,
+  `MaxCalificacion` INT NOT NULL,
+  `FechaInicio` DATE DEFAULT NULL,
+  `FechaFin` DATE DEFAULT NULL,
+  PRIMARY KEY (`IdRango`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Restaurar codificaciones
