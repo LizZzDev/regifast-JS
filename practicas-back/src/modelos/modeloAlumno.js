@@ -1,10 +1,9 @@
 import pool from '../configuracion/db.js';
-//¿modificar y cambiar a orms?
 const Alumno = {
-  // Buscar un usuario por código
+  // Buscar un usuario por su id de usuario
   obtenerAlumno: async (id) => {
     try {
-      const [rows] = await pool.query('SELECT * FROM alumnos WHERE IdAlumno = ?', [id]);
+      const [rows] = await pool.query('SELECT * FROM alumnos WHERE IdUsuario = ?', [id]);
       return rows[0];
     } catch (error) {
       console.error("Error en buscar por código al alumno:", error);

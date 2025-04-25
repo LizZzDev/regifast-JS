@@ -1,6 +1,4 @@
-import session from "express-session";
 import Alumno from "../../modelos/modeloAlumno.js";
-
 
 const anadirDatosDelAlumno = async (req, res) => {
   const correo = req.session.correo;
