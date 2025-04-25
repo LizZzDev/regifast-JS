@@ -23,7 +23,7 @@ export const iniciarSesion = async (req, res) => {
     });
   } catch (error) {
     console.error("Error al iniciar sesión:", error.message);
-    return res.status(401).json({ success: false, message: error.message });
+    return res.status(401).json({ success: false, message: error });
   }
 };
 
