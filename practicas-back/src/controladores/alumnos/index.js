@@ -11,7 +11,7 @@ export const anadirDatosDelAlumno = async (req, res) => {
     }
   };
   
-export const obtenerBarraStatus = async (req, res) => {
+export const  obtenerBarraStatus = async (req, res) => {
     try {
       const response = await barraStatusService.obtenerBarraStatusPorId(req);
       res.status(201).json({ mensaje: "Se obtuvo la barra status", response });

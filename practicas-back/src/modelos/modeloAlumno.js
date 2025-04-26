@@ -24,7 +24,6 @@ const Alumno = {
 
   // Crear un nuevo alumno
     agregarNuevoAlumno: async (data) => {
-      console.log ("data", data);
       const {
         IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
         Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,

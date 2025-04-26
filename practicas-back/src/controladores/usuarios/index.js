@@ -4,11 +4,9 @@ import inicioSesionServicio from './iniciarSesion.js';
 import cerrarSesionServicio from './cerrarSesion.js';
 
 export const iniciarSesion = async (req, res) => {
-  console.log ("entro a iniciarSesion.js");
   try {
     const response = await inicioSesionServicio(req.body);
 
-    console.log ("response", response);
 
     // Configurar la sesión
     req.session.log = true;
@@ -16,7 +14,6 @@ export const iniciarSesion = async (req, res) => {
     req.session.usuario = response.nombre;
     req.session.correo = response.correo;
 
-    console.log("Sesión creada:", req.session);
 
     return res.status(200).json({
       data: response,
@@ -28,7 +25,6 @@ export const iniciarSesion = async (req, res) => {
 };
 
 export const crearUsuario = async (req, res) => {
-  console.log ("entro a crear.js");
   try {
     const response = await crearUsuarioServicio(req.body);
     return res.status(201).json({
