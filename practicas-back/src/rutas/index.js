@@ -10,4 +10,6 @@ router.use('/usuarios', usuarios);
 router.use('/alumnos', alumnos);
 router.use('/empresas', empresas);
 
+//añadir validacion joi
+
 export default router;
