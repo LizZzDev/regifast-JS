@@ -1,8 +1,6 @@
 import Alumno from "../../modelos/modeloAlumno.js";
-import express from 'express';
 
-const barraStatus = {
-    obtenerBarraStatusPorId: async (req) => {
+const obtenerBarraStatusPorId = async (req, res) => {
         try {
             const idUsuario = req.session.ID;
             const alumno = await Alumno.obtenerAlumno(idUsuario);
@@ -14,11 +12,6 @@ const barraStatus = {
             console.error("Error al obtener la barra de status:", error);
             throw error;
         }
-    },
+    };
 
-    aumentarBarraStatusPorId: async (id) => {
-    
-    }
-}
-
-export default barraStatus;
+export default obtenerBarraStatusPorId;

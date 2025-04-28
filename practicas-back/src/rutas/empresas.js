@@ -8,6 +8,6 @@ import {
 const router = express.Router();
 
 router.get('/obtenerEmpresasConVacantes', obtenerEmpresasConVacantes);
-router.get('/obtenerTodas', obtenerTodas);
+router.get('/obtenerTodasLasEmpresas', obtenerTodas);
 
 export default router;

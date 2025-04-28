@@ -1,6 +1,6 @@
 import Empresas from "../../modelos/modeloEmpresa.js";
 
-export const obtenerEmpresasConVacantes = async () => {
+const obtenerEmpresasConVacantes = async () => {
   try {
     const empresas = await Empresas.obtenerEmpresas(true);
     return empresas;
@@ -9,3 +9,5 @@ export const obtenerEmpresasConVacantes = async () => {
     throw error;
   }
 };
+
+export default obtenerEmpresasConVacantes;

@@ -1,19 +1,12 @@
 import express from 'express';
 import Alumno from "../../modelos/modeloAlumno.js";
 
-const anadirDatosDelAlumno = async (req, res) => {
-  const correo = req.session.correo;
+const modificarDatosDelAlumno = async (req, res) => {
   const idUsuario = req.session.ID;
+  const datos = req.body; 
 
   try {
-
-    const datos = {
-      ...req.body,
-      CorreoInstitucional: correo,
-      IdUsuario: idUsuario,
-    };
-
-    const resultado = await Alumno.agregarNuevoAlumno(datos);
+    const resultado = await Alumno.modificarDatosAlumno(datos, idUsuario);
 
     return {resultado};
   } catch (error) {
@@ -24,4 +17,4 @@ const anadirDatosDelAlumno = async (req, res) => {
 
 //recuerda añadir el middlware express para validar el body
 
-export default anadirDatosDelAlumno;
+export default modificarDatosDelAlumno;

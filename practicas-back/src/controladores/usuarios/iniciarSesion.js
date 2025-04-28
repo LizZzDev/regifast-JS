@@ -6,13 +6,13 @@ const iniciarSesion = async (req) => {
   const user = await Usuario.buscarPorCorreo(Correo.trim());
 
   if (!user) {
-    throw new Error("Usuario no encontrado.");
+    throw new Error("Usuario o contraseña incorrectos");
   }
 
   const match = await bcrypt.compare(Contrasena.trim(), user.Contrasena);
 
   if (!match) {
-    throw new Error("Datos incorrectos.");
+    throw new Error("Usuario o contraseña incorrectos");
   }
 
   return {

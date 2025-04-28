@@ -5,8 +5,7 @@ const cerrarSesion = (req) => {
         console.error("Error al cerrar sesión:", error);
         return reject(new Error("No se pudo cerrar la sesión."));
       }
-
-      resolve({ success: true, message: "Sesión cerrada exitosamente." });
+      resolve(); 
     });
   });
 };

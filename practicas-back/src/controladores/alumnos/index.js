@@ -1,35 +1,67 @@
 import anadirDatosDelAlumnoService from "./anadirDatosDelAlumno.js";
-import barraStatusService from "./barraStatus.js";
+import obtenerBarraStatusService from "./obtenerBarraStatus.js";
+import modificarDatosDelAlumnoService from "./modificarDatosDelAlumno.js";
+import postularOfertaEmpresaService from "./postularOfertaEmpresa.js";
+import calificarEmpresaSerive from "./calificarEmpresa.js";
+import mostrarEmpresaSeleccionadaService from "./mostrarEmpresaSeleccionada.js";
 
 export const anadirDatosDelAlumno = async (req, res) => {
     try {
       const response = await anadirDatosDelAlumnoService(req);
-      res.status(201).json({ mensaje: "Alumno agregado correctamente", response });
+      res.status(201).json({ response });
     } catch (error) {
-      console.error("Error al crear cuenta:", error.message);
-      return res.status(401).json({ success: false, message: error.message });
+      console.error("Error al agregar datos del alumno:", error.message);
+      return res.status(401).json({ success: false, message: error });
+    }
+  };
+
+export const modificarDatosDelAlumno = async (req, res) => {
+    try {
+      const response = await modificarDatosDelAlumnoService(req);
+      res.status(201).json({ response });
+    } catch (error) {
+      console.error("Error al modificar datos del alumno:", error.message);
+      return res.status(401).json({ success: false, message: error });
     }
   };
   
 export const  obtenerBarraStatus = async (req, res) => {
     try {
-      const response = await barraStatusService.obtenerBarraStatusPorId(req);
-      res.status(201).json({ mensaje: "Se obtuvo la barra status", response });
+      const response = await obtenerBarraStatusService(req);
+      res.status(201).json({ response });
     } catch (error) {
-      console.error("Error al obtener la cifra:", error.message);
-      return res.status(401).json({ success: false, message: error.message });
+      console.error("Error al obtener barra status:", error.message);
+      return res.status(401).json({ success: false, message: error });
     }
   };
 
 
-export const aumentarBarraStatusPorId = async (req, res) => {
+export const postularOfertaEmpresa = async (req, res) => {
     try {
-      const response = await barraStatusService.aumentarBarraStatusPorId(req);
-      res.status(201).json({ mensaje: "Se aumento la barra satatus", response });
+      const response = await postularOfertaEmpresaService(req);
+      res.status(201).json({ response });
     } catch (error) {
-      console.error("Error al aumentar:");
-      return res.status(401).json({ success: false, message: error.message });
+      console.error("Error al realizar la postulacion:", error.message);
+      return res.status(401).json({ success: false, message: error });
     }
   };
   
-  
+export const calificarEmpresa = async (req, res) => {
+    try {
+      const response = await calificarEmpresaSerive(req);
+      res.status(201).json({ response });
+    } catch (error) {
+      console.error("Error al calificar empresa:", error.message);
+      return res.status(401).json({ success: false, message: error });
+    }
+  };
+
+export const mostrarEmpresaSeleccionada = async (req, res) => {
+    try {
+      const response = await mostrarEmpresaSeleccionadaService(req);
+      res.status(201).json({ response });
+    } catch (error) {
+      console.error("Error al mostrar empresa seleccionada:", error.message);
+      return res.status(401).json({ success: false, message: error });
+    }
+  };

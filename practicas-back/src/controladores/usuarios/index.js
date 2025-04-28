@@ -7,13 +7,11 @@ export const iniciarSesion = async (req, res) => {
   try {
     const response = await inicioSesionServicio(req.body);
 
-
     // Configurar la sesión
     req.session.log = true;
     req.session.ID = response.id;
     req.session.usuario = response.nombre;
     req.session.correo = response.correo;
-
 
     return res.status(200).json({
       data: response,

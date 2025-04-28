@@ -57,9 +57,28 @@ const Alumno = {
       }
   },
 
+modificarDatosAlumno: async (data, idUsuario) => {
+  const fields = Object.keys(data); 
+  const values = Object.values(data); 
+
+  const setClause = fields.map(field => `${field} = ?`).join(', ');
+
+  try {
+    const [result] = await pool.query(
+      `UPDATE alumnos SET ${setClause} WHERE IdUsuario = ?`,
+      [...values, idUsuario]
+    );
+
+    return result;
+  } catch (error) {
+    console.error("Error al modificar datos del alumno:", error);
+    throw error;
+  }
+},
+
   aumentarEnUnoBarraStatus: async (id) => {
     try {
-      const [result] = await pool.query('UPDATE alumnos SET BarraStatus = BarraStatus + 1 WHERE IdAlumno = ?', [id]);
+      const [result] = await pool.query('UPDATE alumnos SET BarraStatus = BarraStatus + 1 WHERE IdUsuario = ?', [id]);
       return result;
     } catch (error) {
       console.error("Error en aumentar barra status:", error);
@@ -67,7 +86,6 @@ const Alumno = {
     }
   },
 
-  // Eliminar un usuario por ID
   eliminarPorId: async (id) => {
     try {
       const [result] = await pool.query('DELETE FROM alumnos WHERE IdUsuario = ?', [id]);

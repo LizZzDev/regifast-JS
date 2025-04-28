@@ -1,7 +1,7 @@
 import express from 'express';
 import Empresas from "../../modelos/modeloEmpresa.js";
 
-export const obtenerTodasLasEmpresas = async () => {
+const obtenerTodasLasEmpresas = async () => {
   try {
     const empresas = await Empresas.obtenerEmpresas(false);
     return empresas;
@@ -10,3 +10,5 @@ export const obtenerTodasLasEmpresas = async () => {
     throw error;
   }
 };
+
+export default obtenerTodasLasEmpresas;
