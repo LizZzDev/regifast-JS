@@ -11,7 +11,7 @@ const calificarEmpresa = async (req, res) => {
             IdUsuario: idUsuario,
             Opinion: req.body.Opinion,
             Calificacion: req.body.Calificacion,
-            Empresa: idEmpresa
+            IdEmpresa: idEmpresa
         };
         
         const resultado = await Opinion.agregarOpinion(data);

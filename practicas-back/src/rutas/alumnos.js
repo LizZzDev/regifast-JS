@@ -6,7 +6,9 @@ import {
     obtenerBarraStatus,
     postularOfertaEmpresa,
     calificarEmpresa,
-    mostrarEmpresaSeleccionada
+    obtenerCalificarEmpresa,
+    mostrarEmpresaSeleccionada,
+    generarCartaAsignacion
 
 } from '../controladores/alumnos/index.js';
 
@@ -14,6 +16,8 @@ const router = express.Router();
 
 router.get('/obtenerBarraStatus', obtenerBarraStatus);
 router.get('/mostrarEmpresaSeleccionada', mostrarEmpresaSeleccionada);
+router.get('/obtenerCalificarEmpresa', obtenerCalificarEmpresa);
+router.get('/generarCartaAsignacion', generarCartaAsignacion);
 router.post('/calificarEmpresa', calificarEmpresa);
 router.post('/anadirDatosDelAlumno', anadirDatosDelAlumno);
 router.put('/modificarDatosDelAlumno', modificarDatosDelAlumno);

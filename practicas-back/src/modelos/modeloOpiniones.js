@@ -3,7 +3,7 @@ import pool from '../configuracion/db.js';
 const Opiniones = {
   obtenerOpinionesPorId: async (id) => {
     try {
-      const [rows] = await pool.query('SELECT * FROM opiniones WHERE IdEmpresa = ?', [id]);
+      const [rows] = await pool.query('SELECT * FROM opinionempresa WHERE IdEmpresa = ?', [id]);
       return rows;
     } catch (error) {
       console.error("Error en obtener opiniones por id:", error);
@@ -13,7 +13,7 @@ const Opiniones = {
 
   obtenerNumeroDeOpinionesPorId: async (id) => {
     try {
-      const [rows] = await pool.query('SELECT COUNT(*) FROM opiniones WHERE IdEmpresa = ?', [id]);
+      const [rows] = await pool.query('SELECT COUNT(*) FROM opinionempresa WHERE IdEmpresa = ?', [id]);
       return rows;
     } catch (error) {
       console.error("Error en obtener numeros de opiniones por id", error);
@@ -23,7 +23,7 @@ const Opiniones = {
 
   obtenerSumaDeCalificacionesAEmpresasPorId: async (id) => {
     try {
-      const [rows] = await pool.query('SELECT SUM(Calificacion) AS total_calificaciones FROM opiniones WHERE IdEmpresa = ?', [id]);
+      const [rows] = await pool.query('SELECT SUM(Calificacion) AS total_calificaciones FROM opinionempresa WHERE IdEmpresa = ?', [id]);
       return rows;
     } catch (error) {
       console.error("Error en obtener suma de calificacion de empresa por id:", error);
@@ -32,11 +32,11 @@ const Opiniones = {
   },
 
   agregarOpinion: async (data) => {
-    const {IdUsuario, Opinion, Calificacion, Empresa } = data;
+    const {IdUsuario, Opinion, Calificacion, IdEmpresa } = data;
     try {
       const [result] = await pool.query(
-        'INSERT INTO opiniones (Usuario, Opinion, Calificacion, Empresa) VALUES (?, ?, ?, ?)',
-        [IdUsuario, Opinion, Calificacion, Empresa]
+        'INSERT INTO opinionempresa (IdUsuario, IdEmpresa, Opinion, Calificacion) VALUES (?, ?, ?, ?)',
+        [IdUsuario, IdEmpresa, Opinion, Calificacion]
       );
       return result.insertId;
     } catch (error) {
