@@ -12,7 +12,7 @@ const Empresa = {
             Nombre, RFC, Telefono, Calle, Colonia, Numero,
             Estado, CodigoPostal, Municipio, Descripcion, Logo,
             Actividades, Vacantes, Validada
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
           CodigoPostal, Municipio, Descripcion, Logo, Actividades, Vacantes, Validada]
         );
@@ -23,16 +23,44 @@ const Empresa = {
       }
     },
 
-    obtenerEmpresas: async (soloConVacantes = false) => {
+    obtenerEmpresasFiltradas: async ({ pagina, limite, validada, soloConVacantes }) => {
       try {
-        let query = ` SELECT * FROM empresas`;
-        if (soloConVacantes) {
-          query += ' WHERE Vacantes > 0';
+        const offset = (pagina - 1) * limite;
+    
+        let query = `SELECT * FROM empresas WHERE 1=1`;
+        let queryCount = `SELECT COUNT(*) as total FROM empresas WHERE 1=1`;
+        const params = [];
+        const countParams = [];
+    
+        if (validada !== null) {
+          query += ` AND Validada = ?`;
+          queryCount += ` AND Validada = ?`;
+          params.push(validada);
+          countParams.push(validada);
         }
-        const [rows] = await pool.query(query);
-        return rows;
+    
+        if (soloConVacantes) {
+          query += ` AND Vacantes > 0`;
+          queryCount += ` AND Vacantes > 0`;
+        }
+    
+        query += ` ORDER BY Nombre ASC LIMIT ? OFFSET ?`;
+        params.push(limite, offset);
+    
+        const [rows] = await pool.query(query, params);
+        const [countRows] = await pool.query(queryCount, countParams);
+        const total = countRows[0].total;
+    
+        return { 
+          empresas: rows, 
+          total,
+          totalPaginas: Math.ceil(total / limite),
+          pagina: pagina,
+          limite: limite,
+          
+        };
       } catch (error) {
-        console.error("Error al obtener la empresa:", error);
+        console.error("Error al obtener empresas filtradas:", error);
         throw error;
       }
     },
@@ -62,7 +90,7 @@ const Empresa = {
         throw error;
       }
     },
-    
+
     disminuirVacante: async (IdEmpresa) => {
       try {
         const [result] = await pool.query(
