@@ -25,3 +25,5 @@ const anadirDatosDelAlumno = async (req, res) => {
 //recuerda añadir el middlware express para validar el body
 
 export default anadirDatosDelAlumno;
+
+//cambie algo prueba
