@@ -1,7 +1,7 @@
 import pool from '../configuracion/db.js';
 
 const Empresa = {
-    crearEmpresa: async (connection, datos) => {
+    crearEmpresa: async (connection, datos, idUsuario) => {
       const { 
         Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
         CodigoPostal, Municipio, Descripcion, Logo, Actividades, Vacantes, Validada 
@@ -9,11 +9,11 @@ const Empresa = {
       try {
         const [result] = await connection.query(
           `INSERT INTO empresas (
-            Nombre, RFC, Telefono, Calle, Colonia, Numero,
+            IdUsuario, Nombre, RFC, Telefono, Calle, Colonia, Numero,
             Estado, CodigoPostal, Municipio, Descripcion, Logo,
             Actividades, Vacantes, Validada
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          [Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [idUsuario, Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
           CodigoPostal, Municipio, Descripcion, Logo, Actividades, Vacantes, Validada]
         );
         return result;
@@ -61,6 +61,19 @@ const Empresa = {
         };
       } catch (error) {
         console.error("Error al obtener empresas filtradas:", error);
+        throw error;
+      }
+    },
+
+    obtenerEmpresaPorIdUsuario: async (id) => {
+      try {
+        const [rows] = await pool.query(
+          `SELECT * FROM empresas WHERE IdUsuario = ?`,
+          [id]
+        );
+        return rows;
+      } catch (error) {
+        console.error("Error al obtener la empresa:", error);
         throw error;
       }
     },

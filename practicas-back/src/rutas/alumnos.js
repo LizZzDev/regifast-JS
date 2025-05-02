@@ -2,7 +2,6 @@ import express from 'express';
 import validarCampos from '../middlewares/validarCampos.js';
 import { 
     anadirDatosDelAlumno,
-    modificarDatosDelAlumno,
     obtenerBarraStatus,
     postularOfertaEmpresa,
     calificarEmpresa,
@@ -20,7 +19,6 @@ router.get('/obtenerCalificarEmpresa', obtenerCalificarEmpresa);
 router.get('/generarCartaAsignacion', generarCartaAsignacion);
 router.post('/calificarEmpresa', calificarEmpresa);
 router.post('/anadirDatosDelAlumno', anadirDatosDelAlumno);
-router.put('/modificarDatosDelAlumno', modificarDatosDelAlumno);
 router.put('/postularOfertaEmpresa', postularOfertaEmpresa);
 
 

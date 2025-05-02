@@ -1,10 +1,9 @@
 import anadirDatosDelAlumnoService from "./anadirDatosDelAlumno.js";
 import obtenerBarraStatusService from "./obtenerBarraStatus.js";
-import modificarDatosDelAlumnoService from "./modificarDatosDelAlumno.js";
 import postularOfertaEmpresaService from "./postularOfertaEmpresa.js";
 import calificarEmpresaSerive from "./calificarEmpresa.js";
 import mostrarEmpresaSeleccionadaService from "./mostrarEmpresaSeleccionada.js";
-import obtenerCalificarEmpresaSerive from "./obtenerCalificarEmpresa.js";
+import obtenerCalificarEmpresaSerive from "./obtenerCalificacionesDeLasEmpresas.js";
 import descargarCartaAsignacionService from "./generarCartaAsignacion.js";
 
 export const anadirDatosDelAlumno = async (req, res) => {
@@ -17,15 +16,6 @@ export const anadirDatosDelAlumno = async (req, res) => {
     }
   };
 
-export const modificarDatosDelAlumno = async (req, res) => {
-    try {
-      const response = await modificarDatosDelAlumnoService(req);
-      res.status(201).json({ response });
-    } catch (error) {
-      console.error("Error al modificar datos del alumno:", error.message);
-      return res.status(401).json({ success: false, message: error });
-    }
-  };
   
 export const  obtenerBarraStatus = async (req, res) => {
     try {

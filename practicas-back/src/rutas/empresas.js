@@ -1,13 +1,13 @@
 import express from 'express';
 import validarCampos from '../middlewares/validarCampos.js';
 import { 
-    obtenerEmpresasConVacantes,
-    obtenerTodas,
+    obtenerEmpresas,
+    obtenerEmpresa,
 } from '../controladores/empresas/index.js';
 
 const router = express.Router();
 
-router.get('/obtenerEmpresasConVacantes', obtenerEmpresasConVacantes);
-router.get('/obtenerTodasLasEmpresas', obtenerTodas);
+router.get('/obtenerEmpresas', obtenerEmpresas);
+router.get('/obtenerEmpresa', obtenerEmpresa);
 
 export default router;

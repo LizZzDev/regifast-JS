@@ -36,6 +36,8 @@ const crearUsuario = async (req) => {
       nombre,
       rol,
     });
+
+    console.log("ID del nuevo usuario:", idUsuario);
   
     if (rol === 'empresa') {
       await Empresa.crearEmpresa(connection, datosEmpresa, idUsuario);

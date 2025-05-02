@@ -5,7 +5,7 @@ const obtenerEmpresas = async (req) => {
   const pagina = parseInt(req.query.pagina) || 1;
   const limite = parseInt(req.query.limite) || 10;
   const validada = req.query.validada === 'true' ? 1 
-                 : req.query.validada === 'false' ? 2 
+                 : req.query.validada === 'false' ? 0
                  : null;
   const soloConVacantes = req.query.vacantes === 'true';
 

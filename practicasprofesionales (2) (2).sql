@@ -34,6 +34,7 @@ CREATE TABLE `usuarios` (
 DROP TABLE IF EXISTS `empresas`;
 CREATE TABLE `empresas` (
   `IdEmpresa` INT NOT NULL AUTO_INCREMENT,
+  `IdUsuario` INT NOT NULL,
   `Nombre` VARCHAR(255) NOT NULL,
   `RFC` VARCHAR(13) NOT NULL UNIQUE,
   `Telefono` VARCHAR(15),
@@ -48,7 +49,8 @@ CREATE TABLE `empresas` (
   `Actividades` TEXT,
   `Vacantes` INT DEFAULT 0,
   `Validada` TINYINT(1) DEFAULT 0,
-  PRIMARY KEY (`IdEmpresa`)
+  PRIMARY KEY (`IdEmpresa`),
+  FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios`(`IdUsuario`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Tabla: `alumnos`
@@ -79,6 +81,8 @@ CREATE TABLE `alumnos` (
   `NombreMadre` VARCHAR(255) NOT NULL,
   `TelefonoMadre` VARCHAR(15) NOT NULL,
   `Movil` VARCHAR(15) NOT NULL,
+  `Calificacion` INT DEFAULT NULL,
+  `Ordinario` INT DEFAULT NULL,
   `Revision` TINYINT(1) DEFAULT 0,
   `BarraStatus` TINYINT(1) DEFAULT 0,
   `IdEmpresa` INT NULL,

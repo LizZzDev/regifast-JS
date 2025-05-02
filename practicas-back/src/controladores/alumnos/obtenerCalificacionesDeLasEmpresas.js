@@ -1,7 +1,7 @@
 import Alumnos from "../../modelos/modeloAlumno.js";
 import Opinion from "../../modelos/modeloOpiniones.js";
 
-const obtenerCalificarEmpresa = async (req, res) => {    
+const obtenerCalificacionesDeLasEmpresas = async (req, res) => {    
     const idUsuario = req.session.ID;
     try { 
         const empresa = await Alumnos.obtenerAlumno(idUsuario);
@@ -29,4 +29,4 @@ const obtenerCalificarEmpresa = async (req, res) => {
     }
 }       
 
-export default obtenerCalificarEmpresa;
+export default obtenerCalificacionesDeLasEmpresas;
