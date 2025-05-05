@@ -3,7 +3,7 @@ import Empresas from "../../modelos/modeloEmpresa.js";
 
 const obtenerEmpresas = async (req) => {
   const pagina = parseInt(req.query.pagina) || 1;
-  const limite = parseInt(req.query.limite) || 10;
+  const limite = parseInt(req.query.limite) || 20;
   const validada = req.query.validada === 'true' ? 1 
                  : req.query.validada === 'false' ? 0
                  : null;

@@ -116,6 +116,17 @@ const Empresa = {
         throw error;
       }
     },
+
+    validarEmpresa: async (id) => {
+      try {
+        const [result] = await pool.query("UPDATE empresas SET Validada= '1' WHERE IdUsuario = ?", [id]);
+        return result;
+      } catch (error) {
+        console.error("Error en validar empresa:", error);
+        throw error;
+      }
+    },
+  
   };
   
   export default Empresa;

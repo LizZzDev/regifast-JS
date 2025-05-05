@@ -2,14 +2,14 @@ import bcrypt from 'bcrypt';
 import Usuario from '../../modelos/modeloUsuario.js';
 
 const iniciarSesion = async (req) => {
-  const { Correo, Contrasena } = req;
-  const user = await Usuario.buscarPorCorreo(Correo.trim());
+  const { correo, contrasena, rol } = req;
+  const user = await Usuario.buscarPorCorreo(correo.trim());
 
   if (!user) {
     throw new Error("Usuario o contraseña incorrectos");
   }
 
-  const match = await bcrypt.compare(Contrasena.trim(), user.Contrasena);
+  const match = await bcrypt.compare(contrasena.trim(), user.Contrasena);
 
   if (!match) {
     throw new Error("Usuario o contraseña incorrectos");
@@ -19,6 +19,7 @@ const iniciarSesion = async (req) => {
     id: user.IdUsuario,
     nombre: user.Nombre,
     correo: user.Correo,
+    rol: user.Rol,
   };
 };
 

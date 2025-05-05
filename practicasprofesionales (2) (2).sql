@@ -26,7 +26,7 @@ CREATE TABLE `usuarios` (
   `Correo` VARCHAR(255) NOT NULL UNIQUE,
   `Contrasena` VARCHAR(255) NOT NULL,
   `Nombre` VARCHAR(255) NOT NULL,
-  `Rol` ENUM('coordinador', 'alumno', 'empresa', "jefe de departamento") NOT NULL,
+  `Rol` ENUM('coordinador', 'alumno', 'empresa', 'jefe de departamento') NOT NULL,
   PRIMARY KEY (`IdUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -91,6 +91,17 @@ CREATE TABLE `alumnos` (
   FOREIGN KEY (`IdEmpresa`) REFERENCES `empresas`(`IdEmpresa`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- Tabla: `cartasDeAsignacion`
+DROP TABLE IF EXISTS `cartasDeAsignacion`;
+CREATE TABLE `cartasDeAsignacion` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `IdUsuario` INT NOT NULL,
+  `Clave` VARCHAR(255) NOT NULL,
+  `Fecha` DATE NOT NULL,
+  PRIMARY KEY (`Id`),
+  FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios`(`IdUsuario`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- Tabla: `opinionEmpresa`
 DROP TABLE IF EXISTS `opinionEmpresa`;
 CREATE TABLE `opinionEmpresa` (
@@ -114,6 +125,16 @@ CREATE TABLE `accesoPorCalificacion` (
   `FechaFin` DATE DEFAULT NULL,
   PRIMARY KEY (`IdRango`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla: `fechaCartaAsignacion`
+DROP TABLE IF EXISTS `fechaCartaAsignacion`;
+CREATE TABLE `fechaCartaAsignacion` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Ciclo` VARCHAR(100) NOT NULL,
+  `Fecha` DATE NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- Restaurar codificaciones
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

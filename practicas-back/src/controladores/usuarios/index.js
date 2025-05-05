@@ -30,7 +30,7 @@ export const crearUsuario = async (req, res) => {
     });
   } catch (error) {
     console.error("Error al crear cuenta:", error.message);
-    return res.status(401).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -42,6 +42,6 @@ export const cerrarSesion = async (req, res) => {
     });
   } catch (error) {
     console.error("Error al cerrar sesión:", error.message);
-    return res.status(401).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };

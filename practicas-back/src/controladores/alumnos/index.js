@@ -12,7 +12,7 @@ export const anadirDatosDelAlumno = async (req, res) => {
       res.status(201).json({ response });
     } catch (error) {
       console.error("Error al agregar datos del alumno:", error.message);
-      return res.status(401).json({ success: false, message: error });
+      return res.status(500).json({ success: false, message: error });
     }
   };
 
@@ -23,7 +23,7 @@ export const  obtenerBarraStatus = async (req, res) => {
       res.status(201).json({ response });
     } catch (error) {
       console.error("Error al obtener barra status:", error.message);
-      return res.status(401).json({ success: false, message: error });
+      return res.status(500).json({ success: false, message: error });
     }
   };
 
@@ -34,7 +34,7 @@ export const postularOfertaEmpresa = async (req, res) => {
       res.status(201).json({ response });
     } catch (error) {
       console.error("Error al realizar la postulacion:", error.message);
-      return res.status(401).json({ success: false, message: error });
+      return res.status(500).json({ success: false, message: error });
     }
   };
   
@@ -44,17 +44,17 @@ export const calificarEmpresa = async (req, res) => {
       res.status(201).json({ response });
     } catch (error) {
       console.error("Error al calificar empresa:", error.message);
-      return res.status(401).json({ success: false, message: error });
+      return res.status(500).json({ success: false, message: error });
     }
   };
 
-export const obtenerCalificarEmpresa = async (req, res) => {
+export const obtenerCalificacionesDeLasEmpresas = async (req, res) => {
     try {
       const response = await obtenerCalificarEmpresaSerive(req);
       res.status(201).json({ response });
     } catch (error) {
       console.error("Error al obtener calificar empresa:", error.message);
-      return res.status(401).json({ success: false, message: error });
+      return res.status(500).json({ success: false, message: error });
     }
   };
 
@@ -64,7 +64,7 @@ export const mostrarEmpresaSeleccionada = async (req, res) => {
       res.status(201).json({ response });
     } catch (error) {
       console.error("Error al mostrar empresa seleccionada:", error.message);
-      return res.status(401).json({ success: false, message: error });
+      return res.status(500).json({ success: false, message: error });
     }
   };
 

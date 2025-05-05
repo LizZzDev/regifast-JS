@@ -5,7 +5,7 @@ import {
     obtenerBarraStatus,
     postularOfertaEmpresa,
     calificarEmpresa,
-    obtenerCalificarEmpresa,
+    obtenerCalificacionesDeLasEmpresas,
     mostrarEmpresaSeleccionada,
     generarCartaAsignacion
 
@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.get('/obtenerBarraStatus', obtenerBarraStatus);
 router.get('/mostrarEmpresaSeleccionada', mostrarEmpresaSeleccionada);
-router.get('/obtenerCalificarEmpresa', obtenerCalificarEmpresa);
+router.get('/obtenerCalificarEmpresa', obtenerCalificacionesDeLasEmpresas);
 router.get('/generarCartaAsignacion', generarCartaAsignacion);
 router.post('/calificarEmpresa', calificarEmpresa);
 router.post('/anadirDatosDelAlumno', anadirDatosDelAlumno);

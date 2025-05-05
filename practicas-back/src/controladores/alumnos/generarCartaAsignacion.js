@@ -5,7 +5,7 @@ import Empresa from '../../modelos/modeloEmpresa.js';
 
 const descargarCartaAsignacion = async (req, res) => {
     try {
-        const idUsuario = req.session.ID;
+        const idUsuario = req.session.ID || req.body.idUsuario;
 
         const alumno = await Alumnos.obtenerAlumno(idUsuario);
         const empresa = await Empresa.obtenerEmpresaPorId(alumno.IdEmpresa);
