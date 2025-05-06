@@ -1,6 +1,5 @@
 import pool from '../configuracion/db.js';
 const Alumno = {
-  // Buscar un usuario por su id de usuario
   obtenerAlumno: async (id) => {
     try {
       const [rows] = await pool.query('SELECT * FROM alumnos WHERE IdUsuario = ?', [id]);
@@ -11,7 +10,6 @@ const Alumno = {
     }
   },
 
-  // Buscar todos los alumnos
   obtenerAlumnos: async ({ pagina, limite, carrera, busqueda, validado }) => {
     try {
       const offset = (pagina - 1) * limite;
@@ -63,8 +61,7 @@ const Alumno = {
     }
   },
 
-  // Crear un nuevo alumno
-    agregarNuevoAlumno: async (data) => {
+  agregarNuevoAlumno: async (data) => {
       const {
         IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
         Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,

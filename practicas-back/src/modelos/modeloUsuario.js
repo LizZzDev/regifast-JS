@@ -1,7 +1,6 @@
 import pool from '../configuracion/db.js';
 
 const Usuario = {
-  // Buscar un usuario por correo
   buscarPorCorreo: async (correo) => {
     try {
       const [rows] = await pool.query('SELECT * FROM usuarios WHERE Correo = ?', [correo]);
@@ -12,7 +11,6 @@ const Usuario = {
     }
   },
 
-  // Buscar un usuario por rol
   buscarPorRol: async (rol) => {
     try {
       const [rows] = await pool.query('SELECT * FROM usuarios WHERE Rol = ?', [rol]);
@@ -23,7 +21,6 @@ const Usuario = {
     }
   },
 
-  // Crear un nuevo usuario
   agregarNuevoUsuario: async (connection, data) => {
     const {correo, hashedPassword, nombre, rol } = data;
     try {
@@ -38,7 +35,6 @@ const Usuario = {
     }
   },
 
-  // Eliminar un usuario por ID
   eliminarPorId: async (id) => {
     try {
       const [result] = await pool.query('DELETE FROM usuarios WHERE IdUsuario = ?', [id]);

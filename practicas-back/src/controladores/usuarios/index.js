@@ -38,6 +38,7 @@ export const cerrarSesion = async (req, res) => {
   try {
     const response = await cerrarSesionServicio(req);
     return res.status(200).json({
+      message: "Sesión cerrada correctamente",
       data: response,
     });
   } catch (error) {

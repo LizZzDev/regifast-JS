@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import pool from '../../configuracion/db.js';
 import Usuario from '../../modelos/modeloUsuario.js';
 import Empresa from '../../modelos/modeloEmpresa.js';
+import JefeDepartamento from '../../modelos/modeloJefeDepartamento.js';
 
 const validarCorreoAlumno = (correo) => {
   return correo.endsWith('@alumnos.udg.mx');
@@ -12,7 +13,7 @@ const validarCorreoAlumno = (correo) => {
  */
 
 const crearUsuario = async (req) => {
-  const { correo, contrasena, nombre, rol, datosEmpresa } = req;
+  const { correo, contrasena, nombre, rol, datosEmpresa, datosJefeDeparamento } = req;
   const connection = await pool.getConnection();
 
   try {
@@ -42,6 +43,11 @@ const crearUsuario = async (req) => {
     if (rol === 'empresa') {
       await Empresa.crearEmpresa(connection, datosEmpresa, idUsuario);
     }
+
+    if (rol === 'jefeDepartamento') {
+      await JefeDepartamento.crearJefeDepartamento(connection, datosJefeDeparamento, idUsuario);
+    }
+
     await connection.commit(); 
 
     return { 

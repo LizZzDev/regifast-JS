@@ -104,6 +104,25 @@ const Empresa = {
       }
     },
 
+    modificarDatosEmpresa: async (data, idUsuario) => {
+      const fields = Object.keys(data); 
+      const values = Object.values(data); 
+  
+      const setClause = fields.map(field => `${field} = ?`).join(', ');
+  
+      try {
+        const [result] = await pool.query(
+          `UPDATE empresas SET ${setClause} WHERE IdUsuario = ?`,
+          [...values, idUsuario]
+        );
+  
+        return result;
+      } catch (error) {
+        console.error("Error al modificar datos de la empresa:", error);
+        throw error;
+      }
+    },
+
     disminuirVacante: async (IdEmpresa) => {
       try {
         const [result] = await pool.query(
