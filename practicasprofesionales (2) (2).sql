@@ -53,6 +53,16 @@ CREATE TABLE `empresas` (
   FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios`(`IdUsuario`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- Tabla: `jefeDeDepartamento`
+DROP TABLE IF EXISTS `jefeDeDepartamento`;
+CREATE TABLE `jefeDeDepartamento` (
+  `IdJefeDepartamento` INT NOT NULL AUTO_INCREMENT,
+  `IdUsuario` INT NOT NULL,
+  `Carrera` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`IdJefeDepartamento`),
+  FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios`(`IdUsuario`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- Tabla: `alumnos`
 DROP TABLE IF EXISTS `alumnos`;
 CREATE TABLE `alumnos` (
