@@ -1,6 +1,6 @@
 // src/components/RegistroEmpresa.jsx
 import React, { useState } from 'react';
-import axios from 'axios';
+import { crearUsuario } from '../../api/usuarios';
 
 const RegistroEmpresa = () => {
   const [formData, setFormData] = useState({
@@ -68,47 +68,39 @@ const RegistroEmpresa = () => {
       return;
     }
 
-    // Construimos FormData para incluir imagen
-    const payload = new FormData();
-    payload.append('correo', formData.correo);
-    payload.append('contrasena', formData.password);
-    payload.append('nombre', formData.nombre);
-    payload.append('rol', 'empresa');
-
     // datosEmpresa debe coincidir con tu backend
     const datosEmpresa = {
-      nombre: formData.nombre,
-      descripcion: formData.descripcion,
-      telefono: formData.telefono,
-      rfc: formData.rfc,
-      actividades: formData.actividades,
-      vacantes: formData.vacantes,
-      calle: formData.calle,
-      numero: formData.numero,
-      colonia: formData.colonia,
-      codigo_postal: formData.codigo_postal,
-      estado: formData.estado,
-      municipio: formData.municipio,
+      Nombre: formData.nombre,
+      Descripcion: formData.descripcion,
+      Telefono: formData.telefono,
+      RFC: formData.rfc,
+      Actividades: formData.actividades,
+      Vacantes: formData.vacantes,
+      Calle: formData.calle,
+      Numero: formData.numero,
+      Colonia: formData.colonia,
+      CodigoPostal: formData.codigo_postal,
+      Estado: formData.estado,
+      Municipio: formData.municipio,
+      Logo: formData.imagen, // Asegúrate de que el backend acepte archivos;
     };
 
-    payload.append('datosEmpresa', JSON.stringify(datosEmpresa));
-    if (formData.imagen) {
-      payload.append('logo', formData.imagen);
-    }
-
-    try {
-      const res = await axios.post('http://localhost:3000/api/usuarios/crear', payload, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+     try {
+      await crearUsuario({
+        correo: formData.correo,
+        contrasena: formData.password,
+        nombre: formData.nombre,
+        rol: 'empresa',
+        datosEmpresa,
+        datosJefeDepartamento: null, // si no aplica, mándalo como null
       });
-      setMensaje('Empresa registrada exitosamente.');
-      console.log(res.data);
-    } catch (error) {
-      console.error('Error al registrar empresa:', error);
-      setMensaje('Error al registrar empresa.');
-    }
-  };
+
+    setMensaje('Empresa registrada exitosamente.');
+  } catch (error) {
+    console.error('Error al registrar empresa:', error);
+    setMensaje('Error al registrar empresa.');
+  }
+};
 
   return (
     <div className="registro-container">
