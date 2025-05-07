@@ -13,7 +13,7 @@ const validarCorreoAlumno = (correo) => {
  */
 
 const crearUsuario = async (req) => {
-  const { correo, contrasena, nombre, rol, datosEmpresa, datosJefeDeparamento } = req;
+  const { correo, contrasena, nombre, rol, datosEmpresa, datosJefeDepartamento } = req;
   const connection = await pool.getConnection();
 
   try {
@@ -41,11 +41,11 @@ const crearUsuario = async (req) => {
     console.log("ID del nuevo usuario:", idUsuario);
   
     if (rol === 'empresa') {
-      await Empresa.crearEmpresa(connection, datosEmpresa, idUsuario);
+      await Empresa.agregarNuevaEmpresa(connection, datosEmpresa, idUsuario);
     }
 
     if (rol === 'jefeDepartamento') {
-      await JefeDepartamento.crearJefeDepartamento(connection, datosJefeDeparamento, idUsuario);
+      await JefeDepartamento.crearJefeDepartamento(connection, datosJefeDepartamento, idUsuario);
     }
 
     await connection.commit(); 

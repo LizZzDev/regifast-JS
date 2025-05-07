@@ -9,8 +9,12 @@ const descargarCartaAsignacion = async (req, res) => {
 
         const alumno = await Alumnos.obtenerAlumno(idUsuario);
         const empresa = await Empresa.obtenerEmpresaPorId(alumno.IdEmpresa);
+
+        const hoy = new Date();
+        const anio = hoy.getFullYear();;
         
         const datos = {
+            fecha: anio,
             empresa:  empresa[0].Nombre,
             nombre: alumno.NombreCompleto,
             codigo: alumno.Codigo,

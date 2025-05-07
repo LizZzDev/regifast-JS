@@ -1,7 +1,11 @@
 import pool from '../configuracion/db.js';
 
 const Empresa = {
-    crearEmpresa: async (connection, datos, idUsuario) => {
+    agregarNuevaEmpresa: async (connection, datos, idUsuario) => {
+      if (!connection) {
+        connection = await pool.getConnection();
+      }
+
       const { 
         Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
         CodigoPostal, Municipio, Descripcion, Logo, Actividades, Vacantes, Validada 

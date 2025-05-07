@@ -18,3 +18,22 @@ export async function iniciarSesion({ Correo, Contrasena }) {
     throw error;
   }
 }
+
+export async function crearUsuario({ correo, contrasena, nombre, rol, datosEmpresa, datosJefeDepartamento }) {
+  try {
+    const response = await axios.post( API_BASE_URL + router.USUARIOS + endpoints.CREAR_USUARIO,
+      { 
+        correo, 
+        contrasena, 
+        nombre, 
+        rol, 
+        datosEmpresa, 
+        datosJefeDepartamento },
+    );
+
+    return response.data.data; 
+  } catch (error) {
+    console.error("Error al crear usuario:", error);
+    throw error;
+  }
+}

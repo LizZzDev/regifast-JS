@@ -19,6 +19,14 @@ SET time_zone = "+00:00";
 -- Base de datos: `practicasprofesionales`
 -- --------------------------------------------------------
 
+-- Crear la base de datos 
+CREATE DATABASE IF NOT EXISTS practicasprofesionales
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+-- Usar esa base de datos
+USE practicasprofesionales;
+
 -- Tabla: `usuarios`
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
@@ -129,12 +137,23 @@ CREATE TABLE `opinionEmpresa` (
 DROP TABLE IF EXISTS `accesoPorCalificacion`;
 CREATE TABLE `accesoPorCalificacion` (
   `IdRango` INT NOT NULL AUTO_INCREMENT,
-  `MinCalificacion` INT NOT NULL,
   `MaxCalificacion` INT NOT NULL,
+  `MinCalificacion` INT NOT NULL,
   `FechaInicio` DATE DEFAULT NULL,
   `FechaFin` DATE DEFAULT NULL,
   PRIMARY KEY (`IdRango`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `accesoporcalificacion`
+--
+
+INSERT INTO `accesoporcalificacion` (`IdRango`, `MinCalificacion`, `MaxCalificacion`, `FechaInicio`, `FechaFin`) VALUES
+(1, 100, 90, NULL, NULL),
+(2, 90, 80, NULL, NULL),
+(3, 80, 70, NULL, NULL),
+(4, 70, 60, NULL, NULL);
+COMMIT;
 
 -- Tabla: `fechaCartaAsignacion`
 DROP TABLE IF EXISTS `fechaCartaAsignacion`;
