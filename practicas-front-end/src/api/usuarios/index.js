@@ -1,15 +1,14 @@
 import axios from 'axios';
-import { router, endpoints } from '../constantes/routes.js';
+import { API_BASE_URL, router  } from '../constantes/router.js';
+import { endpoints } from '../constantes/endpoints.js';
 
-const API_BASE_URL = 'http://localhost:3000'; 
-
-export async function iniciarSesion({ Correo, Contrasena }) {
+export async function iniciarSesion({ correo, contrasena }) {
   try {
-    const response = await axios.post( API_BASE_URL + router.USUARIOS + endpoints.INICIAR_SESION,
+    const response = await axios.post( API_BASE_URL + router.USUARIOS + endpoints.USUARIOS.INICIAR_SESION,
       { 
-        Correo, 
-        Contrasena },
-      { withCredentials: true } //esto es solo para permitir sesion, usalo en los que necesiten de req.session
+        correo, 
+        contrasena },
+      { withCredentials: true }
     );
 
     return response.data.data; 
@@ -21,7 +20,7 @@ export async function iniciarSesion({ Correo, Contrasena }) {
 
 export async function crearUsuario({ correo, contrasena, nombre, rol, datosEmpresa, datosJefeDepartamento }) {
   try {
-    const response = await axios.post( API_BASE_URL + router.USUARIOS + endpoints.CREAR_USUARIO,
+    const response = await axios.post( API_BASE_URL + router.USUARIOS + endpoints.USUARIOS.CREAR_USUARIO,
       { 
         correo, 
         contrasena, 

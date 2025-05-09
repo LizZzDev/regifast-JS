@@ -26,13 +26,10 @@ const RegistroEmpresa = () => {
   const [fuerza, setFuerza] = useState('');
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value } = e.target;
 
-    if (name === 'imagen') {
-      setFormData({ ...formData, imagen: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    setFormData({ ...formData, [name]: value });
+
 
     if (name === 'descripcion') {
       const palabras = value.trim().split(/\s+/).filter(Boolean);
