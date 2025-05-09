@@ -1,6 +1,7 @@
 // src/components/RegistroEmpresa.jsx
 import React, { useState } from 'react';
 import { crearUsuario } from '../../api/usuarios';
+import "./RegistroEmpresa.css";
 
 const RegistroEmpresa = () => {
   const [formData, setFormData] = useState({
@@ -102,37 +103,60 @@ const RegistroEmpresa = () => {
   }
 };
 
-  return (
-    <div className="registro-container">
-      <h2>Registro de Empresa</h2>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <input type="text" name="nombre" placeholder="Nombre de la empresa" value={formData.nombre} onChange={handleChange} required />
-        <textarea name="descripcion" placeholder="Descripción (máx. 150 palabras)" value={formData.descripcion} onChange={handleChange} required />
+return (
+  <div>
+    <header>
+      <section id="nomUDG">
+        <img src="img/Logo_UDG_horiz_blanco-01.svg" alt="Logo UDG" />
+      </section>
+      <nav className="menu">
+        <ul>
+          <li><a href="/inicioSesion">INICIO</a></li>
+        </ul>
+      </nav>
+    </header>
 
-        <input type="email" name="correo" placeholder="Correo electrónico" value={formData.correo} onChange={handleChange} required />
-        <input type="text" name="telefono" placeholder="Teléfono" value={formData.telefono} onChange={handleChange} required />
-        <input type="text" name="rfc" placeholder="RFC" value={formData.rfc} onChange={handleChange} required />
-        <input type="text" name="actividades" placeholder="Actividades" value={formData.actividades} onChange={handleChange} required />
-        <input type="number" name="vacantes" placeholder="Vacantes" value={formData.vacantes} onChange={handleChange} required />
+    <article id="Formulario">
+      <section id="Titulo">
+        <h1>PRACTICAS PROFESIONALES</h1>
+      </section>
+      <form onSubmit={handleSubmit}>
+        <fieldset>
+          <legend>Datos Generales</legend>
+          <input name="nombre" placeholder="Nombre de la empresa" value={formData.nombre} onChange={handleChange} required />
+          <input name="descripcion" placeholder="Descripción de la empresa (máx. 150 palabras)" value={formData.descripcion} onChange={handleDescripcion} required />
+          <input type="email" name="correo" placeholder="Correo electrónico" value={formData.correo} onChange={handleChange} required />
+          <input name="telefono" placeholder="Teléfono" value={formData.telefono} onChange={handleChange} pattern="\d{10,15}" required />
+          <input name="rfc" placeholder="RFC" value={formData.rfc} onChange={handleChange} pattern="[A-Z0-9]{12,13}" required />
+          <input name="actividades" placeholder="Actividades para estudiantes" value={formData.actividades} onChange={handleChange} required />
+          <input name="vacantes" placeholder="Cantidad de vacantes" value={formData.vacantes} onChange={handleChange} pattern="\d+" required />
+          <input type="password" name="password" placeholder="Contraseña" value={formData.password} onChange={handlePasswordChange} required />
+          {fuerzaPassword && <div style={{ color: fuerzaPassword.color }}>{fuerzaPassword.texto}</div>}
+          <input type="password" name="confirm_password" placeholder="Confirmar Contraseña" value={formData.confirm_password} onChange={handleChange} required />
+        </fieldset>
 
-        <input type="password" name="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} required />
-        <input type="password" name="confirm_password" placeholder="Confirmar contraseña" value={formData.confirm_password} onChange={handleChange} required />
-        <div>Fuerza: {fuerza}</div>
+        <fieldset>
+          <legend>Domicilio Fiscal</legend>
+          <input name="calle" placeholder="Calle" value={formData.calle} onChange={handleChange} required />
+          <input name="numero" placeholder="Número exterior (opcional)" value={formData.numero} onChange={handleChange} />
+          <input name="colonia" placeholder="Colonia" value={formData.colonia} onChange={handleChange} required />
+          <input name="codigo_postal" placeholder="Código Postal" value={formData.codigo_postal} onChange={handleChange} pattern="\d{5}" required />
+          <input name="estado" placeholder="Estado" value={formData.estado} onChange={handleChange} required />
+          <input name="municipio" placeholder="Municipio" value={formData.municipio} onChange={handleChange} required />
+        </fieldset>
 
-        <input type="text" name="calle" placeholder="Calle" value={formData.calle} onChange={handleChange} required />
-        <input type="text" name="numero" placeholder="Número exterior" value={formData.numero} onChange={handleChange} />
-        <input type="text" name="colonia" placeholder="Colonia" value={formData.colonia} onChange={handleChange} required />
-        <input type="text" name="codigo_postal" placeholder="Código Postal" value={formData.codigo_postal} onChange={handleChange} required />
-        <input type="text" name="estado" placeholder="Estado" value={formData.estado} onChange={handleChange} required />
-        <input type="text" name="municipio" placeholder="Municipio" value={formData.municipio} onChange={handleChange} required />
+        <fieldset>
+          <legend>Subir Logotipo</legend>
+          <p>Sube el logotipo de tu empresa en formato JPG o PNG</p>
+          <input type="file" name="imagen" accept="image/png, image/jpeg" onChange={handleChange} required />
+        </fieldset>
 
-        <input type="file" name="imagen" accept="image/png, image/jpeg" onChange={handleChange} required />
-
-        <button type="submit">Registrar Empresa</button>
+        <input id="MandarInformacion" type="submit" value="Guardar" />
       </form>
       {mensaje && <p>{mensaje}</p>}
-    </div>
-  );
+    </article>
+  </div>
+);
 };
 
 export default RegistroEmpresa;

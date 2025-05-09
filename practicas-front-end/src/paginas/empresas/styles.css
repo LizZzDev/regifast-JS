@@ -1,0 +1,312 @@
+:root {
+    --primario: #890831;
+    --secundario: #c7a97b;
+    --gris: #d9d9d9;
+    --grisSecundario: #9d9d9d;
+    --negro: #000;
+}
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+html, body{
+    height: 100%;
+}
+/* Header */
+
+header{
+    width: 100%;
+    height: 25%;
+    background-color: #890831;
+    float: left;
+    text-align: center;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+
+#nomUDG{
+    width: 100%;
+    height: 85%;
+    background-color: #890831;
+    float: left;
+}
+
+img{
+    width: 20%;
+    height: 70%;
+    padding-top: 1%;
+}
+
+.menu{
+    width: 100%;
+    height: 16%;
+    background-color: #d9d9d9;
+    float: left;
+    max-width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+}
+
+ul li{
+    display: inline-block;
+}
+
+ul li a{
+    color: black;
+    text-decoration: none;
+    display: block;
+    padding: 10.1px 50px;
+}
+
+ul li a:hover{
+    color: #890831;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.iconUser{
+
+    width: 0;
+    height: 50px;
+    float: right;
+}
+
+.iconUser a{
+    padding: 0;
+    margin-top: 5px;
+    margin-left: 310px;
+}
+
+#iconSize{
+    width: 30px;
+    height: auto;
+    display: block;
+}
+
+
+
+.montserrat{
+
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+     font-weight: 900;
+    font-style: normal;
+}
+.montserratChiquita{
+
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+     font-weight: 400;
+    font-style: normal;
+}
+
+
+/* aca va lo de inicio principal empresas */
+
+main{
+    width: 100%;
+    height: 75%;
+    clear: both;
+}
+
+#generalPrincipal {
+    height: 75%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    gap: 10px; /* Espacio entre los artículos*/
+}
+
+#contentLeft {
+    width: 40%;
+    height: 100%;
+    flex-direction: column; /* Para alinear la imagen y descripción verticalmente */
+}
+
+#articleImagen {
+    width: 25vw;
+    min-width: 320px;
+    margin-top: 5%;
+    float: left;
+    margin-left: 25%;
+    border-radius: 15px;
+    box-shadow: 3px 3px rgba(15, 15, 15, .5);
+    background-color: #eeeded;
+}
+
+#imagenEmpresa {
+    width: 100%;
+}
+
+
+#calificacionPrincipal {
+    width: 25vw;
+    height: 15%;
+    float: left;
+    margin-left: 25%;
+    min-width: 320px;
+    margin-top: 5%;
+    text-align: justify;
+    position: relative;
+}
+#articleDatos{
+    height: 10%;
+    width: 25vw;
+    float: left;
+    min-width: 320px;
+    margin-left: 25%;
+    margin-top: 4%;
+}
+
+#h1empresa {
+    font-size: 2em;
+}
+.estrellas {
+    font-size: 2em; /* Tamaño de las estrellas */
+    margin-right: 10px; /* Espacio entre las estrellas y el número */
+    
+}
+
+.EstrellitasCalificacion {
+    color: #c7a97b; /* Color dorado para las estrellas llenas */
+}
+
+.far.fa-star {
+    color: #d3d3d3; /* Color gris para las estrellas vacías */
+}
+
+.fas.fa-star-half-alt {
+    color: #c7a97b; /* Color dorado para la estrella a la mitad */
+}
+
+.calificacionPromedio {
+    font-size: 1em; /* Tamaño del texto de la calificación */
+    color: #333; /* Color del número */
+}
+#aOpiniones{
+    text-decoration: none;
+}
+#opiniones{
+    color: #890831;
+}
+#opiniones:hover{
+    color: #d39331;
+}
+#opiniones:active{
+    color: #8b601e;
+}
+.secundarioDatos{
+    color: #9d9d9d;
+    font-size: 1.2em;
+}
+
+
+/*de aca para abajo es lo del contenedor derecho de la pagina principal de la empresa*/
+#contentRight{
+    width: 60%;
+    height: 100%;
+}
+#nombreEmpresa {
+    width: 90%;
+    height: 10%;
+    margin-top: 5%;
+    min-width: 320px;
+}
+#articleDescripcion {
+    width: 90%;
+    height: 40%;
+    min-width: 320px;
+    float: left;
+    margin-top: 0%;
+    text-align: justify;
+    position: relative;
+    margin-top: 0%;
+}
+h4{
+    color: #383434;
+}
+#containerTareas{
+    float: left;
+    height: 50%;
+    width: 100%;
+    min-width: 320px;
+}
+#sectionTareas{
+    width: 50%;
+    height: 80%;
+    float: left;
+    margin-top: 2%;
+    min-width: 320px;
+}
+#sectionContador{
+    width: 40%;
+    height: 80%;
+    float: left;
+    margin-top: 2%;
+    min-width: 320px;
+}
+#sectionEditar{
+    width: 90%;
+    height: 20%;
+    float: left;
+    min-width: 320px;
+}
+
+
+/* Botón de guardar */
+/* Botón de guardar */
+button {
+    float: left; 
+    margin-left: 89%;
+    bottom: 10px; /* Espaciado desde el borde inferior del contenedor */
+    right: 10px; /* Espaciado desde el borde derecho del contenedor */
+    background-color: #12448C; /* Azul sólido */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover del botón */
+button:hover {
+    background-color: #890831; /* Cambia a tinto al pasar el cursor */
+}
+
+/*Consultar oferta*/
+#sectionTabla{
+    width: 90%;
+    float: left;
+    margin-left: 5%;
+    margin-top: 3%;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    height: 100%;
+}
+th, td {
+    border: 1px solid var(--grisSecundario);
+    padding: 8px;
+    text-align: center;
+    width: 20%;
+    height: 4rem;
+}
+th{
+    background-color: #c7a97b;
+    color: white;
+}
+#calificacion {
+    font-size: 30px;
+    color: #d39331;
+}
