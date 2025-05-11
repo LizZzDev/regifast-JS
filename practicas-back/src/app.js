@@ -32,12 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', rutas);
-// --------------------------------------------------------------------------------------------------------
-app.use('/api/generar-token', generartokenRouter);
-app.use((req, res, next) => {
-  res.status(404).json({ error: 'Ruta no encontrada' });
-});
-// --------------------------------------------------------------------------------------------------------
+
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
   });
