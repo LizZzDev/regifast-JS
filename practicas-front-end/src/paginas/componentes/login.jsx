@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.css";
+import "./styles.css";
 
 const Login = ({ onLogin }) => {
     const [correo, setCorreo] = useState("");
