@@ -3,6 +3,7 @@ import usuarios from './usuarios.js';
 import alumnos from './alumnos.js';
 import empresas from './empresas.js';
 import coordinador from './coordinador.js';
+import enviar from '../utils/enviarCorreo.js'
 
 const router = express.Router();
 

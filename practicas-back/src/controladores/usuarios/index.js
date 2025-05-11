@@ -2,6 +2,7 @@ import session from "express-session";
 import crearUsuarioServicio from './crearUsuario.js';
 import inicioSesionServicio from './iniciarSesion.js';
 import cerrarSesionServicio from './cerrarSesion.js';
+import  generarToken  from './generarToken.js';
 
 export const iniciarSesion = async (req, res) => {
   try {
@@ -46,3 +47,4 @@ export const cerrarSesion = async (req, res) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 };
+
