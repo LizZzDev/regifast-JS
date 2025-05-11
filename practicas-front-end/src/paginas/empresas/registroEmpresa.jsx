@@ -66,7 +66,6 @@ const RegistroEmpresa = () => {
       return;
     }
 
-    // datosEmpresa debe coincidir con tu backend
     const datosEmpresa = {
       Nombre: formData.nombre,
       Descripcion: formData.descripcion,
@@ -80,7 +79,7 @@ const RegistroEmpresa = () => {
       CodigoPostal: formData.codigo_postal,
       Estado: formData.estado,
       Municipio: formData.municipio,
-      Logo: formData.imagen, // Asegúrate de que el backend acepte archivos;
+      Logo: formData.imagen, 
     };
 
      try {
