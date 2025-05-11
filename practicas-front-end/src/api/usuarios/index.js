@@ -37,3 +37,4 @@ export async function crearUsuario({ correo, contrasena, nombre, rol, datosEmpre
     throw error;
   }
 }
+

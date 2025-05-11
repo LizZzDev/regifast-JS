@@ -3,10 +3,9 @@ import session from 'express-session';
 import cors from 'cors';
 import { PORT } from './configuracion/constantes.js';
 import rutas from './rutas/index.js';
+import generartokenRouter from './controladores/usuarios/generarToken.js';
 import dotenv from 'dotenv';
 dotenv.config();
-
-const app = express();
 
 app.use(
   session({
@@ -33,7 +32,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', rutas);
-
+// --------------------------------------------------------------------------------------------------------
+app.use('/api/generar-token', generartokenRouter);
+app.use((req, res, next) => {
+  res.status(404).json({ error: 'Ruta no encontrada' });
+});
+// --------------------------------------------------------------------------------------------------------
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
   });
+const app = express();
+app.use(express.json());
+
+app.use(generartokenRouter);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
+});
+// --------------------------------------------------------------------------------------------------------
