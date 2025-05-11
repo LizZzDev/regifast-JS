@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from './componentes/Header';
+import Header from "../../componentes/header.jsx";
 import "./styles.css";
 
 const Login = ({ onLogin }) => {
