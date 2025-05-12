@@ -1,5 +1,6 @@
 import obtenerEmpresasServicio from "./obtenerEmpresas.js";
 import obtenerEmpresaServicio from "./obtenerEmpresa.js";
+import crearEmpresaServicio from "./crearEmpresa.js";
 
 export const obtenerEmpresas = async (req, res) => {
     try {
@@ -21,5 +22,24 @@ export const obtenerEmpresa = async (req, res) => {
     }
   };
 
+export const crearEmpresa = async (req, res) => {
+  try {
+    const file = req.file;
+    const body = req.body;
 
+    if (body.rol === 'empresa' && file) {
+      body.datosEmpresa = {
+        ...JSON.parse(body.datosEmpresa),
+        imagen: file.filename,
+      };
+    }
+    const response = await crearEmpresaServicio(req.body);
+    return res.status(201).json({
+      data: response,
+    });
+  } catch (error) {
+    console.error("Error al crear empresa:", error.message);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
 

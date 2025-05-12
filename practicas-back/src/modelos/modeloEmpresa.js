@@ -8,7 +8,7 @@ const Empresa = {
 
       const { 
         Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
-        CodigoPostal, Municipio, Descripcion, Logo, Actividades, Vacantes, Validada 
+        CodigoPostal, Municipio, Descripcion, imagen, Actividades, Vacantes, Validada 
        } = datos;
       try {
         const [result] = await connection.query(
@@ -18,7 +18,7 @@ const Empresa = {
             Actividades, Vacantes, Validada
           ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [idUsuario, Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
-          CodigoPostal, Municipio, Descripcion, Logo, Actividades, Vacantes, Validada]
+          CodigoPostal, Municipio, Descripcion, imagen, Actividades, Vacantes, Validada]
         );
         return result;
       } catch (error) {

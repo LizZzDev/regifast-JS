@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { crearUsuario } from "../../api/usuarios/index.js";
+import { crearEmpresa } from "../../api/empresas/index.js";
 import Header from "../../componentes/header.jsx";
 
 const RegistroEmpresa = () => {
@@ -29,7 +29,7 @@ const RegistroEmpresa = () => {
     const { name, value, files } = e.target;
 
     if (name === 'imagen') {
-      setFormData({ ...formData, imagen: files[0].name }); // Almacenamos solo el nombre del archivo
+      setFormData({ ...formData, imagen: files[0] }); // Almacenamos solo el nombre del archivo
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -60,39 +60,44 @@ const RegistroEmpresa = () => {
     else setFuerza('Fuerte');
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (formData.password !== formData.confirm_password) {
-      setMensaje('Las contraseñas no coinciden.');
-      return;
-    }
+  if (formData.password !== formData.confirm_password) {
+    setMensaje('Las contraseñas no coinciden.');
+    return;
+  }
 
-    const datosEmpresa = {
-      Nombre: formData.nombre,
-      Descripcion: formData.descripcion,
-      Telefono: formData.telefono,
-      RFC: formData.rfc,
-      Actividades: formData.actividades,
-      Vacantes: formData.vacantes,
-      Calle: formData.calle,
-      Numero: formData.numero,
-      Colonia: formData.colonia,
-      CodigoPostal: formData.codigo_postal,
-      Estado: formData.estado,
-      Municipio: formData.municipio,
-      Logo: formData.imagen,  // Solo el nombre de la imagen
-    };
+  const form = new FormData();
+
+  form.append('correo', formData.correo);
+  form.append('contrasena', formData.password);
+  form.append('nombre', formData.nombre);
+  form.append('rol', 'empresa');
+
+  const datosEmpresa = {
+    Nombre: formData.nombre,
+    Descripcion: formData.descripcion,
+    Telefono: formData.telefono,
+    RFC: formData.rfc,
+    Actividades: formData.actividades,
+    Vacantes: formData.vacantes,
+    Calle: formData.calle,
+    Numero: formData.numero,
+    Colonia: formData.colonia,
+    CodigoPostal: formData.codigo_postal,
+    Estado: formData.estado,
+    Municipio: formData.municipio,
+  };
+
+  form.append('datosEmpresa', JSON.stringify(datosEmpresa));
+
+  if (formData.imagen instanceof File) {
+    form.append('imagen', formData.imagen); 
+  }
 
      try 
-     { await crearUsuario({
-        correo: formData.correo,
-        contrasena: formData.password,
-        nombre: formData.nombre,
-        rol: 'empresa',
-        datosEmpresa,
-        datosJefeDepartamento: null, // si no aplica, mándalo como null
-      });
+     { await crearEmpresa(form);
 
     setMensaje('Empresa registrada exitosamente.');
   } catch (error) {
@@ -103,6 +108,7 @@ const RegistroEmpresa = () => {
 
   return (
     <div className="registro-container">
+      <Header />
       <h2>Registro de Empresa</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" name="nombre" placeholder="Nombre de la empresa" value={formData.nombre} onChange={handleChange} required />

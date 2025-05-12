@@ -4,10 +4,18 @@ import cors from 'cors';
 import { PORT } from './configuracion/constantes.js';
 import rutas from './rutas/index.js';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+app.use('/logos', express.static(path.join(__dirname, 'uploads/logos')));
 
 app.use(
   session({
@@ -17,17 +25,6 @@ app.use(
     cookie: { secure: false }        
   })
 );
-
-app.get("/ver-sesion", (req, res) => {
-  if (req.session && req.session.usuario) {
-    res.json({
-      sesionActiva: true,
-      datos: req.session,
-    });
-  } else {
-    res.json({ sesionActiva: false, mensaje: "No hay sesión activa." });
-  }
-});
 
 app.use(cors());
 app.use(express.json());

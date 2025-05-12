@@ -5,7 +5,6 @@ import Docxtemplater from 'docxtemplater';
 
 const generarDocumentoDesdeTemplate = (rutaTemplate, datos) => {
     try {
-        console.log(datos);
         const templatePath = path.resolve(rutaTemplate);
         const content = fs.readFileSync(templatePath, 'binary');
 

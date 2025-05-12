@@ -12,6 +12,7 @@ export const iniciarSesion = async (req, res) => {
     req.session.ID = response.id;
     req.session.usuario = response.nombre;
     req.session.correo = response.correo;
+    req.session.rol = response.rol;
 
     return res.status(200).json({
       data: response,
