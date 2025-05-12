@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Header from "../../componentes/header.jsx";
+import { iniciarSesion } from "../../api/usuarios/index.js";
 import "./styles.css";
 
 const Login = ({ onLogin }) => {
@@ -7,12 +8,18 @@ const Login = ({ onLogin }) => {
   const [password, setPassword] = useState("");
   const [mensaje, setMensaje] = useState("");
 
-  const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (correo && password) {
-      onLogin?.(correo, password);
-      setMensaje("Sesión iniciada correctamente.");
+      try {
+        const usuario = await iniciarSesion({ correo, contrasena: password }); // llamada al backend
+        console.log(usuario);
+        onLogin?.(usuario); // pasas el usuario al componente padre si lo necesita
+        setMensaje("Sesión iniciada correctamente.");
+      } catch (error) {
+        setMensaje("Error al iniciar sesión. Verifica tus credenciales.", error);
+      }
     } else {
       setMensaje("Por favor llena todos los campos.");
     }
