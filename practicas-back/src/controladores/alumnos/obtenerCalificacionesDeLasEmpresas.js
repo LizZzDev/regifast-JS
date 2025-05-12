@@ -2,11 +2,9 @@ import Alumnos from "../../modelos/modeloAlumno.js";
 import Opinion from "../../modelos/modeloOpiniones.js";
 
 const obtenerCalificacionesDeLasEmpresas = async (req, res) => {    
-    const idUsuario = req.session.ID;
+    const { idEmpresa } = req.body;
+    
     try { 
-        const empresa = await Alumnos.obtenerAlumno(idUsuario);
-        const idEmpresa = empresa.IdEmpresa;
-        
         const opiniones = await Opinion.obtenerOpinionesPorId(idEmpresa);
         const numeroDeOpiniones = await Opinion.obtenerNumeroDeOpinionesPorId(idEmpresa);
         const sumaDeCalificaciones = await Opinion.obtenerSumaDeCalificacionesAEmpresasPorId(idEmpresa);

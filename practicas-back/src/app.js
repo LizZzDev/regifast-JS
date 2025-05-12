@@ -3,9 +3,11 @@ import session from 'express-session';
 import cors from 'cors';
 import { PORT } from './configuracion/constantes.js';
 import rutas from './rutas/index.js';
-import generartokenRouter from './controladores/usuarios/generarToken.js';
 import dotenv from 'dotenv';
 dotenv.config();
+
+const app = express();
+app.use(express.json());
 
 app.use(
   session({
@@ -36,13 +38,3 @@ app.use('/', rutas);
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
   });
-const app = express();
-app.use(express.json());
-
-app.use(generartokenRouter);
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
-});
-// --------------------------------------------------------------------------------------------------------

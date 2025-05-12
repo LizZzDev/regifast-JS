@@ -11,7 +11,7 @@ import asignarFechaIngresoPorCalificacionesService from "./asignarFechaIngresoPo
 export const anadirEmpresa = async (req, res) => {
   try {
     const response = await anadirEmpresaService(req);
-    res.status(201).json({ response });
+    res.status(201).json({ success: true, data: response });
   } catch (error) {
     console.error("Error al añadir empresa:", error.message);
     return res.status(500).json({ success: false, message: error });
@@ -21,7 +21,7 @@ export const anadirEmpresa = async (req, res) => {
 export const asignarFechaIngresoPorCalificaciones = async (req, res) => {
   try {
     const response = await asignarFechaIngresoPorCalificacionesService(req);
-    res.status(201).json({ response });
+    res.status(201).json({ success: true, data: response });
   } catch (error) {
     console.error("Error al asignar fecha de ingreso por calificaciones:", error.message);
     return res.status(500).json({ success: false, message: error });
@@ -31,7 +31,7 @@ export const asignarFechaIngresoPorCalificaciones = async (req, res) => {
 export const modificarDatosDelAlumno = async (req, res) => {
   try {
     const response = await modificarDatosDelAlumnoService(req);
-    res.status(201).json({ response });
+    res.status(201).json({ success: true, data: response });
   } catch (error) {
     console.error("Error al modificar datos del alumno:", error.message);
     return res.status(500).json({ success: false, message: error });
@@ -41,7 +41,7 @@ export const modificarDatosDelAlumno = async (req, res) => {
 export const modificarDatosEmpresa = async (req, res) => {
   try {
     const response = await modificarDatosEmpresaService(req);
-    res.status(201).json({ response });
+    res.status(201).json({ success: true, data: response });
   } catch (error) {
     console.error("Error al modificar datos de la empresa:", error.message);
     return res.status(500).json({ success: false, message: error });
@@ -51,7 +51,7 @@ export const modificarDatosEmpresa = async (req, res) => {
 export const obtenerAlumno = async (req, res) => {
   try {
     const response = await obtenerAlumnoService(req);
-    res.status(200).json({ response });
+    res.status(201).json({ success: true, data: response });
   } catch (error) {
     console.error("Error al obtener datos del alumno:", error.message);
     return res.status(500).json({ success: false, message: error });
@@ -61,7 +61,7 @@ export const obtenerAlumno = async (req, res) => {
 export const obtenerAlumnos = async (req, res) => {
   try {
     const response = await obtenerAlumnosService(req);
-    res.status(200).json({ response });
+    res.status(201).json({ success: true, data: response });
   } catch (error) {
     console.error("Error al obtener datos del alumno:", error.message);
     return res.status(500).json({ success: false, message: error });
@@ -71,7 +71,7 @@ export const obtenerAlumnos = async (req, res) => {
 export const obtenerBarraStatusParaEstadisticas = async (req, res) => {
   try {
     const response = await obtenerBarraStatusParaEstadisticasService(req);
-    res.status(200).json({ response });
+    res.status(201).json({ success: true, data: response });
   } catch (error) {
     console.error("Error al obtener datos del alumno:", error.message);
     return res.status(500).json({ success: false, message: error });
@@ -81,7 +81,7 @@ export const obtenerBarraStatusParaEstadisticas = async (req, res) => {
 export const validarAlumno = async (req, res) => {
   try {
     const response = await validarAlumnoService(req);
-    res.status(200).json({ response });
+    res.status(201).json({ success: true, data: response });
   } catch (error) {
     console.error("Error al validar alumno:", error.message);
     return res.status(500).json({ success: false, message: error });
@@ -91,7 +91,7 @@ export const validarAlumno = async (req, res) => {
 export const validarEmpresa = async (req, res) => {
     try {
       const response = await validarEmpresaService(req);
-      res.status(200).json({ response });
+      res.status(201).json({ success: true, data: response });
     } catch (error) {
       console.error("Error al validar empresa:", error.message);
       return res.status(500).json({ success: false, message: error });

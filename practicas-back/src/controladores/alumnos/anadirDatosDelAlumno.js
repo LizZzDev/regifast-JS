@@ -15,7 +15,7 @@ const anadirDatosDelAlumno = async (req, res) => {
 
     const resultado = await Alumno.agregarNuevoAlumno(datos);
 
-    return {resultado};
+    return resultado;
   } catch (error) {
     console.error("Error al añadir datos del alumno:", error);
     throw error;
