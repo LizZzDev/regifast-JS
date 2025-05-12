@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Header from "./componentes/Header";
 import ".empresas/registro.css";
 
+import Header from "../../componentes/header.jsx";
+
+
 const RegistroEmpresa = () => {
   const [formData, setFormData] = useState({
     nombre: "",
