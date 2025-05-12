@@ -15,7 +15,7 @@ const calificarEmpresa = async (req, res) => {
         };
         
         const resultado = await Opinion.agregarOpinion(data);
-        return {resultado};
+        return resultado;
     } catch (error) {
         console.error("Error al calificar empresa:", error);
         throw error;

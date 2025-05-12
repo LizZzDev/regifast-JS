@@ -1,0 +1,177 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+html, body{
+    height: 100%;
+}
+body{
+    font-size: 5px;
+}
+
+/* -------------------------------------- HEADER Y NAV ---------------------------------------- */
+header{
+    width: 100%;
+    height: 25%;
+    background-color: #103E7E;
+    float: left;
+    text-align: center;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#nomUDG{
+    width: 100%;
+    height: 80%;
+    background-color: #103E7E;
+    float: left;
+}
+
+img{
+    width: 21%;
+    height: 70%;
+    padding-top: 1.55%;
+}
+
+.menu {
+    width: 100%;
+    background-color: #d9d9d9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu li a {
+    color: black;
+    text-decoration: none;
+    padding: 12px 24px;
+    display: block;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.menu li a:hover {
+    color: #103E7E;
+    background-color: white;
+    border-radius: 5px;
+}
+
+/* --------------------------------------- SUBMENUS ---------------------------------------- */
+
+.submenu2 {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #a5a4a4;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+
+.submenu2 a {
+    padding: 10px 20px;
+    display: block;
+    color: black;
+    text-decoration: none;
+}
+
+.submenu2 a:hover {
+    background-color: #d9d9d9;
+}
+
+.dropdown:hover .submenu2 {
+    display: block;
+}
+
+
+
+/* -------------------------------------- MAIN ----------------------------------------- */
+
+main {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+}
+
+#titleA {
+    margin-top: 15px;
+    margin-bottom: 50px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* ---------------------------------------- form + imput's/label's --------------------------------------- */
+
+form {
+    width: 90%;
+    max-width: 600px;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 1em;
+    color: black;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    color: #363636;
+}
+
+#crear {
+    color: white;
+    background-color: #12448c;
+    border-radius: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+    height: 40px;
+    width: 200px;
+    border: none;
+    cursor: pointer;
+    align-self: center;
+    margin-top: 20px;
+}
