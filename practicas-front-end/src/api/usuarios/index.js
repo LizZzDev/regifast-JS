@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { API_BASE_URL, 
-  router  } from '../constantes/router.js';
+import { API_BASE_URL, router  } from '../constantes/router.js';
 import { endpoints } from '../constantes/endpoints.js';
 
 export async function iniciarSesion({ correo, contrasena }) {

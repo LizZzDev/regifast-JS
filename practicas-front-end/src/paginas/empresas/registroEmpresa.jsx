@@ -1,130 +1,142 @@
 import React, { useState } from "react";
+import { crearUsuario } from "../../api/usuarios/index.js";
 import Header from "../../componentes/header.jsx";
 import "./registro.css";
 
 const RegistroEmpresa = () => {
   const [formData, setFormData] = useState({
-    nombre: "",
-    descripcion: "",
-    correo: "",
-    telefono: "",
-    rfc: "",
-    actividades: "",
-    vacantes: "",
-    password: "",
-    confirmPassword: "",
-    calle: "",
-    numero: "",
-    colonia: "",
-    codigo_postal: "",
-    estado: "",
-    municipio: "",
-    imagen: null,
+    nombre: '',
+    descripcion: '',
+    correo: '',
+    telefono: '',
+    rfc: '',
+    actividades: '',
+    vacantes: '',
+    password: '',
+    confirm_password: '',
+    calle: '',
+    numero: '',
+    colonia: '',
+    codigo_postal: '',
+    estado: '',
+    municipio: '',
+    imagen: null, // La imagen es seleccionada, pero no se enviará como archivo
   });
 
-  const [fuerzaColor, setFuerzaColor] = useState("");
-  const [fuerzaTexto, setFuerzaTexto] = useState("");
+  const [mensaje, setMensaje] = useState('');
+  const [fuerza, setFuerza] = useState('');
 
-  const contarPalabras = (texto) =>
-    texto.trim().split(/\s+/).filter((palabra) => palabra.length > 0).length;
-
-  const evaluarFuerzaContraseña = (password) => {
-    let fuerza = 0;
-    if (password.length >= 6) fuerza++;
-    if (/[A-Za-z]/.test(password) && /\d/.test(password)) fuerza++;
-    if (/[A-Z]/.test(password) && /[a-z]/.test(password)) fuerza++;
-    return fuerza;
-  };
-
-  const manejarCambio = (e) => {
+  const handleChange = (e) => {
     const { name, value, files } = e.target;
 
-    // Limitar la descripción a 150 palabras
-    if (name === "descripcion") {
-      const palabras = contarPalabras(value);
-      if (palabras > 150) {
-        alert("No puedes ingresar más de 150 palabras.");
-        return;
+    if (name === 'imagen') {
+      setFormData({ ...formData, imagen: files[0].name }); // Almacenamos solo el nombre del archivo
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+
+    if (name === 'descripcion') {
+      const palabras = value.trim().split(/\s+/).filter(Boolean);
+      if (palabras.length > 150) {
+        const cortado = palabras.slice(0, 150).join(' ');
+        setFormData((prev) => ({ ...prev, descripcion: cortado }));
+        alert('No puedes ingresar más de 150 palabras en la descripción.');
       }
     }
 
-    if (name === "imagen") {
-      setFormData((prev) => ({ ...prev, imagen: files[0] }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
-
-    // Evaluar la fuerza de la contraseña
-    if (name === "password") {
-      const fuerza = evaluarFuerzaContraseña(value);
-      const textos = [
-        "Contraseña muy débil",
-        "Contraseña débil",
-        "Contraseña media",
-        "Contraseña fuerte",
-      ];
-      const colores = ["red", "orange", "goldenrod", "green"];
-      setFuerzaTexto(textos[fuerza]);
-      setFuerzaColor(colores[fuerza]);
+    if (name === 'password') {
+      evaluarFuerzaContraseña(value);
     }
   };
 
-  const manejarEnvio = (e) => {
+  const evaluarFuerzaContraseña = (password) => {
+    let score = 0;
+    if (password.length >= 6) score++;
+    if (/[A-Za-z]/.test(password) && /\d/.test(password)) score++;
+    if (/[A-Z]/.test(password) && /[a-z]/.test(password)) score++;
+
+    if (score === 0) setFuerza('Muy débil');
+    else if (score === 1) setFuerza('Débil');
+    else if (score === 2) setFuerza('Media');
+    else setFuerza('Fuerte');
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("Las contraseñas no coinciden. Inténtalo de nuevo.");
+
+    if (formData.password !== formData.confirm_password) {
+      setMensaje('Las contraseñas no coinciden.');
       return;
     }
 
-    alert("Formulario enviado correctamente (simulado).");
+    const datosEmpresa = {
+      Nombre: formData.nombre,
+      Descripcion: formData.descripcion,
+      Telefono: formData.telefono,
+      RFC: formData.rfc,
+      Actividades: formData.actividades,
+      Vacantes: formData.vacantes,
+      Calle: formData.calle,
+      Numero: formData.numero,
+      Colonia: formData.colonia,
+      CodigoPostal: formData.codigo_postal,
+      Estado: formData.estado,
+      Municipio: formData.municipio,
+      Logo: formData.imagen,  // Solo el nombre de la imagen
+    };
 
+<<<<<<< HEAD
 
   };
+=======
+     try 
+     { await crearUsuario({
+        correo: formData.correo,
+        contrasena: formData.password,
+        nombre: formData.nombre,
+        rol: 'empresa',
+        datosEmpresa,
+        datosJefeDepartamento: null, // si no aplica, mándalo como null
+      });
+
+    setMensaje('Empresa registrada exitosamente.');
+  } catch (error) {
+    console.error('Error al registrar empresa:', error);
+    setMensaje('Error al registrar empresa.');
+  }
+};
+>>>>>>> 0dc14de912cb1b0f846b54123dca5256ee1d4ff0
 
   return (
-    <>
-      <Header />
-      <article id="Formulario">
-        <section id="Titulo">
-          <h1>PRACTICAS PROFESIONALES</h1>
-        </section>
-        <form onSubmit={manejarEnvio}>
-          <fieldset>
-            <legend>Datos Generales</legend>
-            <input name="nombre" placeholder="Nombre de la empresa" required onChange={manejarCambio} />
-            <input name="descripcion" placeholder="Descripción (máx. 150 palabras)" required value={formData.descripcion} onChange={manejarCambio} />
-            <input type="email" name="correo" placeholder="Correo electrónico" required onChange={manejarCambio} />
-            <input name="telefono" placeholder="Teléfono (10-15 dígitos)" pattern="\d{10,15}" required onChange={manejarCambio} />
-            <input name="rfc" placeholder="RFC (12-13 caracteres alfanuméricos)" pattern="[A-Z0-9]{12,13}" required onChange={manejarCambio} />
-            <input name="actividades" placeholder="Actividades que serán asignadas a los estudiantes" required onChange={manejarCambio} />
-            <input name="vacantes" placeholder="Cantidad de vacantes" pattern="\d+" required onChange={manejarCambio} />
-            <input type="password" name="password" placeholder="Contraseña" required onChange={manejarCambio} />
-            <input type="password" name="confirmPassword" placeholder="Confirmar Contraseña" required onChange={manejarCambio} />
-            {fuerzaTexto && (
-              <div style={{ color: fuerzaColor, marginTop: "5px" }}>{fuerzaTexto}</div>
-            )}
-          </fieldset>
+    <div className="registro-container">
+      <h2>Registro de Empresa</h2>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="nombre" placeholder="Nombre de la empresa" value={formData.nombre} onChange={handleChange} required />
+        <textarea name="descripcion" placeholder="Descripción (máx. 150 palabras)" value={formData.descripcion} onChange={handleChange} required />
 
-          <fieldset>
-            <legend>Domicilio Fiscal</legend>
-            <input name="calle" placeholder="Calle" required onChange={manejarCambio} />
-            <input name="numero" placeholder="Número exterior (opcional)" onChange={manejarCambio} />
-            <input name="colonia" placeholder="Colonia" required onChange={manejarCambio} />
-            <input name="codigo_postal" placeholder="Código Postal (5 dígitos)" pattern="\d{5}" required onChange={manejarCambio} />
-            <input name="estado" placeholder="Estado" required onChange={manejarCambio} />
-            <input name="municipio" placeholder="Municipio" required onChange={manejarCambio} />
-          </fieldset>
+        <input type="email" name="correo" placeholder="Correo electrónico" value={formData.correo} onChange={handleChange} required />
+        <input type="text" name="telefono" placeholder="Teléfono" value={formData.telefono} onChange={handleChange} required />
+        <input type="text" name="rfc" placeholder="RFC" value={formData.rfc} onChange={handleChange} required />
+        <input type="text" name="actividades" placeholder="Actividades" value={formData.actividades} onChange={handleChange} required />
+        <input type="number" name="vacantes" placeholder="Vacantes" value={formData.vacantes} onChange={handleChange} required />
 
-          <fieldset>
-            <legend>Subir Logotipo</legend>
-            <p>Sube el logotipo de tu empresa en formato JPG o PNG</p>
-            <input type="file" name="imagen" accept="image/png, image/jpeg" required onChange={manejarCambio} />
-          </fieldset>
+        <input type="password" name="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} required />
+        <input type="password" name="confirm_password" placeholder="Confirmar contraseña" value={formData.confirm_password} onChange={handleChange} required />
+        <div>Fuerza: {fuerza}</div>
 
-          <input id="MandarInformacion" type="submit" value="Guardar" />
-        </form>
-      </article>
-    </>
+        <input type="text" name="calle" placeholder="Calle" value={formData.calle} onChange={handleChange} required />
+        <input type="text" name="numero" placeholder="Número exterior" value={formData.numero} onChange={handleChange} />
+        <input type="text" name="colonia" placeholder="Colonia" value={formData.colonia} onChange={handleChange} required />
+        <input type="text" name="codigo_postal" placeholder="Código Postal" value={formData.codigo_postal} onChange={handleChange} required />
+        <input type="text" name="estado" placeholder="Estado" value={formData.estado} onChange={handleChange} required />
+        <input type="text" name="municipio" placeholder="Municipio" value={formData.municipio} onChange={handleChange} required />
+
+        <input type="file" name="imagen" accept="image/png, image/jpeg" onChange={handleChange} required />
+
+        <button type="submit">Registrar Empresa</button>
+      </form>
+      {mensaje && <p>{mensaje}</p>}
+    </div>
   );
 };
 
