@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "./componentes/Header";
-import "./registro.css";
+import ".empresas/registro.css";
 
 const RegistroEmpresa = () => {
   const [formData, setFormData] = useState({
@@ -78,7 +78,7 @@ const RegistroEmpresa = () => {
 
     alert("Formulario enviado correctamente (simulado).");
 
-    // Aquí iría tu lógica de envío con fetch o axios
+
   };
 
   return (
