@@ -8,7 +8,7 @@ const modificarDatosDelAlumno = async (req, res) => {
   try {
     const resultado = await Alumno.modificarDatosAlumno(datos, idUsuario);
 
-    return {resultado};
+    return resultado;
   } catch (error) {
     console.error("Error al añadir datos del alumno:", error);
     throw error;

@@ -5,9 +5,7 @@ const obtenerBarraStatusPorId = async (req, res) => {
             const idUsuario = req.session.ID;
             const alumno = await Alumno.obtenerAlumno(idUsuario);
             const barraStatus = alumno.BarraStatus;
-            return {
-                barraStatus
-            };
+            return barraStatus;
         } catch (error) {
             console.error("Error al obtener la barra de status:", error);
             throw error;

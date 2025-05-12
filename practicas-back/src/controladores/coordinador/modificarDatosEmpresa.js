@@ -8,7 +8,7 @@ const modificarDatosDeLaEmpresa = async (req, res) => {
   try {
     const resultado = await Empresa.modificarDatosEmpresa(datos, idUsuario);
 
-    return {resultado};
+    return resultado;
   } catch (error) {
     console.error("Error al añadir datos del alumno:", error);
     throw error;
