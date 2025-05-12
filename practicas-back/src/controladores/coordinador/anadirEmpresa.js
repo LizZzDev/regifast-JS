@@ -9,7 +9,7 @@ const anadirDatosDeLaEmpresa = async (req, res) => {
   try {
     const resultado = await Empresa.agregarNuevaEmpresa(connection, datos, idUsuario); 
 
-    return {resultado};
+    return resultado;
   } catch (error) {
     console.error("Error al añadir datos de la empresa:", error);
     throw error;

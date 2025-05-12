@@ -6,7 +6,7 @@ const validarAlumno = async (req, res) => {
     try { 
         const validarEmpresa = await Empresa.validarEmpresa(idUsuario);
 
-        return { validarEmpresa };
+        return validarEmpresa;
     } catch (error) {
         console.error("Error al validar empresa:", error);
         throw error;

@@ -75,7 +75,7 @@ const Empresa = {
           `SELECT * FROM empresas WHERE IdUsuario = ?`,
           [id]
         );
-        return rows;
+        return rows[0]; 
       } catch (error) {
         console.error("Error al obtener la empresa:", error);
         throw error;
