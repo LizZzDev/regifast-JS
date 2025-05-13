@@ -1,5 +1,4 @@
 import Token from '../../modelos/modelotoken.js';
-import crypto from 'crypto';
 
 // console.log('[DEBUG] Métodos de Token:', Object.keys(Token)); 
 
@@ -35,9 +34,7 @@ import crypto from 'crypto';
 import express from 'express';
 import crypto from 'crypto';
 import enviarCorreo from '../../utils/enviarCorreo.js';
-import Token from '../../modelos/modelotoken.js'; 
 
-console.log('Token importado:', Token); 
 
 const generarToken = async (req, res) => {
     try {

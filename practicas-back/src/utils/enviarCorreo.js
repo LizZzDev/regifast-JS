@@ -10,14 +10,14 @@ import nodemailer from 'nodemailer';
  * 
  */
 const enviarCorreo = async (data) => {
-    const { email, subject, text, token } = data.body;
+    const { email, subject, text } = data.body;
 
     try {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: 'rodriguezjaramilloricardo103@gmail.com',
-                pass: 'klxz xngd yuqo eilq', // Usa siempre token de aplicación
+                pass: 'klxz xngd yuqo eilq', 
             },
         });
 
@@ -26,7 +26,6 @@ const enviarCorreo = async (data) => {
             to: email,
             subject: subject,
             text: text,
-            html: `<p>${text}</p><p>Token: ${token}</p>`, // Puedes personalizar el HTML
         };
 
         const info = await transporter.sendMail(mailOptions);
