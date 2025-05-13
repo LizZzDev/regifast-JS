@@ -15,7 +15,10 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.use('/logos', express.static(path.join(__dirname, 'uploads/logos')));
+app.use(cors({
+  origin: 'http://localhost:5173', 
+  credentials: true
+}));
 
 app.use(
   session({
@@ -26,10 +29,7 @@ app.use(
   })
 );
 
-app.use(cors({
-  origin: 'http://localhost:5173', 
-  credentials: true
-}));
+app.use('/logos', express.static(path.join(__dirname, 'uploads/logos')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
