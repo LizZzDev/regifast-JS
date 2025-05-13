@@ -58,7 +58,6 @@ export async function obtenerAlumnos() {
   try {
     const response = await axios.get(
       API_BASE_URL + router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNOS,
-      { withCredentials: true }
     );
     return manejarRespuesta(response);
   } catch (error) {

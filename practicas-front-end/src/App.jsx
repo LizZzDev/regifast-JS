@@ -1,15 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import RegistroEmpresa from './paginas/empresas/registroEmpresa';
 import Login from './paginas/usuarios/login';
+import RutasAlumnos from './rutas/RutasAlumnos';
+import RutasEmpresas from './rutas/RutasEmpresas';
+import RutasCoordinador from './rutas/RutasCoordinador';
+import RutasJefe from './rutas/RutasJefe';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/registro-empresa" element={<RegistroEmpresa />} />
+        <Route path="/alumno/*" element={<RutasAlumnos />} />
+        <Route path="/empresa/*" element={<RutasEmpresas />} />
+        <Route path="/coordinador/*" element={<RutasCoordinador />} />
+        <Route path="/jefe/*" element={<RutasJefe />} />
       </Routes>
     </Router>
   );
