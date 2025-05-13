@@ -1,6 +1,6 @@
-// src/components/RegistroEmpresa.jsx
-import React, { useState } from 'react';
-import { crearUsuario } from '../../api/usuarios';
+import React, { useState } from "react";
+import { crearEmpresa } from "../../api/empresas/index.js";
+import Header from "../../componentes/header.jsx";
 
 const RegistroEmpresa = () => {
   const [formData, setFormData] = useState({
@@ -19,17 +19,20 @@ const RegistroEmpresa = () => {
     codigo_postal: '',
     estado: '',
     municipio: '',
-    imagen: null,
+    imagen: null, // La imagen es seleccionada, pero no se enviará como archivo
   });
 
   const [mensaje, setMensaje] = useState('');
   const [fuerza, setFuerza] = useState('');
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
 
-    setFormData({ ...formData, [name]: value });
-
+    if (name === 'imagen') {
+      setFormData({ ...formData, imagen: files[0] }); // Almacenamos solo el nombre del archivo
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
 
     if (name === 'descripcion') {
       const palabras = value.trim().split(/\s+/).filter(Boolean);
@@ -57,40 +60,44 @@ const RegistroEmpresa = () => {
     else setFuerza('Fuerte');
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (formData.password !== formData.confirm_password) {
-      setMensaje('Las contraseñas no coinciden.');
-      return;
-    }
+  if (formData.password !== formData.confirm_password) {
+    setMensaje('Las contraseñas no coinciden.');
+    return;
+  }
 
-    // datosEmpresa debe coincidir con tu backend
-    const datosEmpresa = {
-      Nombre: formData.nombre,
-      Descripcion: formData.descripcion,
-      Telefono: formData.telefono,
-      RFC: formData.rfc,
-      Actividades: formData.actividades,
-      Vacantes: formData.vacantes,
-      Calle: formData.calle,
-      Numero: formData.numero,
-      Colonia: formData.colonia,
-      CodigoPostal: formData.codigo_postal,
-      Estado: formData.estado,
-      Municipio: formData.municipio,
-      Logo: formData.imagen, // Asegúrate de que el backend acepte archivos;
-    };
+  const form = new FormData();
 
-     try {
-      await crearUsuario({
-        correo: formData.correo,
-        contrasena: formData.password,
-        nombre: formData.nombre,
-        rol: 'empresa',
-        datosEmpresa,
-        datosJefeDepartamento: null, // si no aplica, mándalo como null
-      });
+  form.append('correo', formData.correo);
+  form.append('contrasena', formData.password);
+  form.append('nombre', formData.nombre);
+  form.append('rol', 'empresa');
+
+  const datosEmpresa = {
+    Nombre: formData.nombre,
+    Descripcion: formData.descripcion,
+    Telefono: formData.telefono,
+    RFC: formData.rfc,
+    Actividades: formData.actividades,
+    Vacantes: formData.vacantes,
+    Calle: formData.calle,
+    Numero: formData.numero,
+    Colonia: formData.colonia,
+    CodigoPostal: formData.codigo_postal,
+    Estado: formData.estado,
+    Municipio: formData.municipio,
+  };
+
+  form.append('datosEmpresa', JSON.stringify(datosEmpresa));
+
+  if (formData.imagen instanceof File) {
+    form.append('imagen', formData.imagen); 
+  }
+
+     try 
+     { await crearEmpresa(form);
 
     setMensaje('Empresa registrada exitosamente.');
   } catch (error) {
@@ -101,8 +108,9 @@ const RegistroEmpresa = () => {
 
   return (
     <div className="registro-container">
+      <Header />
       <h2>Registro de Empresa</h2>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
+      <form onSubmit={handleSubmit}>
         <input type="text" name="nombre" placeholder="Nombre de la empresa" value={formData.nombre} onChange={handleChange} required />
         <textarea name="descripcion" placeholder="Descripción (máx. 150 palabras)" value={formData.descripcion} onChange={handleChange} required />
 

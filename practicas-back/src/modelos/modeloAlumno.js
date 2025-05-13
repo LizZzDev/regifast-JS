@@ -88,7 +88,7 @@ const Alumno = {
           ]
         );
 
-        return result;
+        return result[0];
       } catch (error) {
         console.error("Error en agregar nuevo usuario:", error);
         throw error;

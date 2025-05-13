@@ -8,10 +8,8 @@ const mostrarEmpresaSeleccionada = async (req, res) => {
         const alumno = await Alumnos.obtenerAlumno(idUsuario);
         const idEmpresa = alumno.IdEmpresa;
         const empresa = await Empresas.obtenerEmpresaPorId(idEmpresa);
-
-        return {
-            empresa
-        };
+        
+        return empresa;
     } catch (error) {
         console.error("Error al mostrar empresa seleccionada:", error);
         throw error;

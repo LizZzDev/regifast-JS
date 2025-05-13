@@ -2,7 +2,6 @@ import session from "express-session";
 import crearUsuarioServicio from './crearUsuario.js';
 import inicioSesionServicio from './iniciarSesion.js';
 import cerrarSesionServicio from './cerrarSesion.js';
-import  generarToken  from './generarToken.js';
 
 export const iniciarSesion = async (req, res) => {
   try {
@@ -13,6 +12,7 @@ export const iniciarSesion = async (req, res) => {
     req.session.ID = response.id;
     req.session.usuario = response.nombre;
     req.session.correo = response.correo;
+    req.session.rol = response.rol;
 
     return res.status(200).json({
       data: response,

@@ -4,6 +4,7 @@ import cors from 'cors';
 import { PORT } from './configuracion/constantes.js';
 import rutas from './rutas/index.js';
 import dotenv from 'dotenv';
+<<<<<<< HEAD
 // cambio de richi
 import usuariosRutas from './rutas/usuarios.js';
 //----------------------------------------------------
@@ -13,6 +14,20 @@ dotenv.config();
 const app = express();
 //----------------------------------------------------
 
+=======
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config();
+
+const app = express();
+app.use(express.json());
+
+app.use('/logos', express.static(path.join(__dirname, 'uploads/logos')));
+>>>>>>> b76310e4e3d94f1f5e9b93c37e4db65d0c685de8
 
 app.use(
   session({
@@ -23,21 +38,15 @@ app.use(
   })
 );
 
-app.get("/ver-sesion", (req, res) => {
-  if (req.session && req.session.usuario) {
-    res.json({
-      sesionActiva: true,
-      datos: req.session,
-    });
-  } else {
-    res.json({ sesionActiva: false, mensaje: "No hay sesión activa." });
-  }
-});
+app.use(cors({
+  origin: 'http://localhost:5173', 
+  credentials: true
+}));
 
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+<<<<<<< HEAD
 // aqui esta lo del puerto **richi**
 app.use('/usuarios', usuariosRutas);
 // ----------------------------------------------------
@@ -47,3 +56,10 @@ app.listen(PORT, () => {
 });
 // ----------------------------------------------------
 app.use('/', rutas);
+=======
+app.use('/', rutas);
+
+app.listen(PORT, () => {
+    console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  });
+>>>>>>> b76310e4e3d94f1f5e9b93c37e4db65d0c685de8

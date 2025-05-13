@@ -2,19 +2,19 @@ import Alumnos from "../../modelos/modeloAlumno.js";
 import Empresas from "../../modelos/modeloEmpresa.js";
 
 const postularOfertaEmpresa = async (req, res) => {
-    const idEmpresa = req.body;
+    const { IdEmpresa } = req.body;
     const idUsuario = req.session.ID;
 
     try { 
-        const vacantes = await Empresas.obtenerVacantesPorId(idEmpresa);
+        const vacantes = await Empresas.obtenerVacantesPorId(IdEmpresa);
 
         if (vacantes <= 0) {
            throw new Error("No hay vacantes disponibles para esta empresa.");
         }
 
         await Alumnos.aumentarEnUnoBarraStatus(idUsuario);
-        await Alumnos.modificarDatosAlumno({ IdEmpresa: idEmpresa }, idUsuario);
-        await Empresas.disminuirVacante(idEmpresa);
+        await Alumnos.modificarDatosAlumno({ IdEmpresa: IdEmpresa }, idUsuario);
+        await Empresas.disminuirVacante(IdEmpresa);
 
         return { mensaje: "Postulación exitosa" };
           
