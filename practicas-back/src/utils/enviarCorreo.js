@@ -1,13 +1,16 @@
 import nodemailer from 'nodemailer';
 
+
 /**
  * Envía un correo electrónico.
- * @param {string} email - Dirección del destinatario.
+ * @param {string} correo - Dirección del destinatario. (aqui antes decia email)
  * @param {string} subject - Asunto del correo.
  * @param {string} text - Contenido del correo.
+ * @param {string} token - Token de autenticación.
+ * 
  */
 const enviarCorreo = async (data) => {
-    const { email, subject, text } = data.body;
+    const { email, subject, text, token } = data.body;
 
     try {
         const transporter = nodemailer.createTransport({
@@ -23,6 +26,7 @@ const enviarCorreo = async (data) => {
             to: email,
             subject: subject,
             text: text,
+            html: `<p>${text}</p><p>Token: ${token}</p>`, // Puedes personalizar el HTML
         };
 
         const info = await transporter.sendMail(mailOptions);

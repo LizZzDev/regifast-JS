@@ -1,13 +1,11 @@
 import pool from '../configuracion/db.js';
-import jwt from 'jsonwebtoken';
-import token from '../usuarios/generarToken.js';
 
 const Token = {
-    guardarToken: async (token, email, generatedAt, expiresAt) => {
+    guardarToken: async (tokenGenerado, IdUsuario, fechaCreacion, fechaExpiracion) => {
         try {
         const [result] = await pool.query(
-            'INSERT INTO tokens (Token, IdUsuario, generatedAt, expiresAt) VALUES (?, ?, ?, ?)', 
-            [token, id, generatedAt, expiresAt]
+            'INSERT INTO tokens (token, id, fecha_registro, fecha_vencimiento, usado) VALUES (?, ?, ?, ?, 0)', 
+            [tokenGenerado, IdUsuario, fechaCreacion, fechaExpiracion]
         );
         return result.insertId;
         } catch (error) {
@@ -16,7 +14,8 @@ const Token = {
         }
     },
 
-    eliminarToken: async (token) => {
+
+    eliminarToken: async () => {
         try {
         const [result] = await pool.query(
             'DELETE FROM tokens WHERE usado = 1',
@@ -67,3 +66,5 @@ const Token = {
         }
     }
 };
+
+export default Token;

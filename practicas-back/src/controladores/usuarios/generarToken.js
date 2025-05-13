@@ -1,10 +1,45 @@
-const express = require('express');
-const crypto = require('crypto');
-const app = express.Router();
-import token from '../modelos/modelotoken.js';
+import Token from '../../modelos/modelotoken.js';
+import crypto from 'crypto';
+
+// console.log('[DEBUG] Métodos de Token:', Object.keys(Token)); 
+
+// const generarToken = async (req, res) => {
+//     try { 
+//         const { correo: IdUsuario } = req.body;
+
+//         const tokenGenerado = crypto.randomBytes(32).toString('hex');
+//         const fechaCreacion = new Date();
+//         const fechaExpiracion = new Date(fechaCreacion.getTime() + 5 * 60 * 1000);
+
+//         await Token.guardarToken(tokenGenerado, IdUsuario, fechaCreacion, fechaExpiracion);
+        
+//         res.json({
+//             token: tokenGenerado,
+//             expiracion: fechaExpiracion,
+//             creacion: fechaCreacion
+//         });
+
+//     } catch (error) {
+//         console.error('[ERROR DETALLADO]', error.message, error.stack);
+//         res.status(500).json({ 
+//             error: 'Error interno',
+//             detalle: error.message // Ahora verás el error real
+//         });
+//     }
+// };
+
+// export default generarToken;
 
 
-router.post('/api/generar-token', async (req, res) => {
+
+import express from 'express';
+import crypto from 'crypto';
+import enviarCorreo from '../../utils/enviarCorreo.js';
+import Token from '../../modelos/modelotoken.js'; 
+
+console.log('Token importado:', Token); 
+
+const generarToken = async (req, res) => {
     try {
         const { correo } = req.body;
 
@@ -12,38 +47,35 @@ router.post('/api/generar-token', async (req, res) => {
             return res.status(400).json({ error: 'Correo es requerido' });
         }
 
-        const token = crypto.randomBytes(32).toString('hex');
+        const tokenGenerado = crypto.randomBytes(32).toString('hex');
         const fechaCreacion = new Date();
-        const fechaExpiracion = new Date(fechaCreacion.getTime() + 5 * 60 * 1000); // 5 min
+        const fechaExpiracion = new Date(fechaCreacion.getTime() + 5 * 60 * 1000);
 
-        await token.guardarToken(token, correo, fechaCreacion, fechaExpiracion);
+        // Asegúrate que Token.guardarToken exista como método
+        await Token.guardarToken(tokenGenerado, fechaCreacion, fechaExpiracion);
+        
+        await enviarCorreo({
+            email: correo,
+            subject: 'Token de autenticación',
+            text: `Tu token es: ${tokenGenerado}`,
+            token: tokenGenerado
+        });
 
         res.json({
-            token,
+            token: tokenGenerado,
             fechaCreacion,
             fechaExpiracion
         });
     } catch (error) {
-        console.error("Error al generar y guardar el token:", error);
-        res.status(500).json({ error: 'No se pudo generar el token' });
+        console.error("Error:", error);
+        res.status(500).json({
+            error: 'No se pudo generar el token',
+            message: error.message
+        });
+        
     }
-});
-export default router;
+};
 
-// app.use(express.json());
-// app.post('/api/generar-token', (req, res) => {
-//     const token = crypto.randomBytes(32).toString('hex'); // Genera un token aleatorio
-//     const fechaCreacion = new Date(); // Fecha de creación
-//     const fechaExpiracion = new Date(fechaCreacion.getTime() + 5 * 60 * 1000); // Fecha de expiración (5 minutos después)
+export default generarToken;
 
-//     res.json({
-//         token,
-//         fechaCreacion,
-//         fechaExpiracion
-//     });
-// });
 
-// const PORT = 3000;
-// app.listen(PORT, () => {
-//     console.log(`Servidor corriendo en el puerto ${PORT}`);
-// })

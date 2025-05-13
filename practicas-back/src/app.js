@@ -3,9 +3,16 @@ import session from 'express-session';
 import cors from 'cors';
 import { PORT } from './configuracion/constantes.js';
 import rutas from './rutas/index.js';
-import generartokenRouter from './controladores/usuarios/generarToken.js';
 import dotenv from 'dotenv';
+// cambio de richi
+import usuariosRutas from './rutas/usuarios.js';
+//----------------------------------------------------
 dotenv.config();
+
+//quiero ver si me deja hacer esto **richi**
+const app = express();
+//----------------------------------------------------
+
 
 app.use(
   session({
@@ -31,23 +38,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// aqui esta lo del puerto **richi**
+app.use('/usuarios', usuariosRutas);
+// ----------------------------------------------------
+
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
+});
+// ----------------------------------------------------
 app.use('/', rutas);
-// --------------------------------------------------------------------------------------------------------
-app.use('/api/generar-token', generartokenRouter);
-app.use((req, res, next) => {
-  res.status(404).json({ error: 'Ruta no encontrada' });
-});
-// --------------------------------------------------------------------------------------------------------
-app.listen(PORT, () => {
-    console.log(`Servidor escuchando en http://localhost:${PORT}`);
-  });
-const app = express();
-app.use(express.json());
-
-app.use(generartokenRouter);
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
-});
-// --------------------------------------------------------------------------------------------------------
