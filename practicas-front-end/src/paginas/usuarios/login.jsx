@@ -11,14 +11,18 @@ const Login = ({ onLogin }) => {
     const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     if (correo && password) {
       try {
+      console.log (correo, password);
+
         const usuario = await iniciarSesion({ correo, contrasena: password }); // llamada al backend
-        console.log(usuario);
+        console.log("e", usuario);
         onLogin?.(usuario); // pasas el usuario al componente padre si lo necesita
         setMensaje("Sesión iniciada correctamente.");
       } catch (error) {
-        setMensaje("Error al iniciar sesión. Verifica tus credenciales.", error);
+         console.error("Error al iniciar sesión:", error);
+         setMensaje("Error al iniciar sesión. Verifica tus credenciales.");
       }
     } else {
       setMensaje("Por favor llena todos los campos.");

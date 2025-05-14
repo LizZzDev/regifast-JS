@@ -1,17 +1,16 @@
-import axios from 'axios';
-import { API_BASE_URL, router  } from '../constantes/router.js';
+import { router  } from '../constantes/router.js';
 import { endpoints } from '../constantes/endpoints.js';
+import api from '../auxiliares/manejarCatch.js';
 
 export async function iniciarSesion({ correo, contrasena }) {
   try {
-    const response = await axios.post( API_BASE_URL + router.USUARIOS + endpoints.USUARIOS.INICIAR_SESION,
+    const response = await api.post(router.USUARIOS + endpoints.USUARIOS.INICIAR_SESION,
       { 
         correo, 
         contrasena },
-      { withCredentials: true }
     );
 
-    return response.data.data; 
+    return response.data.data;; 
   } catch (error) {
     console.error("Error en iniciarSesion:", error);
     throw error;
@@ -20,7 +19,7 @@ export async function iniciarSesion({ correo, contrasena }) {
 
 export async function crearUsuario({ correo, contrasena, nombre, rol, datosEmpresa, datosJefeDepartamento }) {
   try {
-    const response = await axios.post( API_BASE_URL + router.USUARIOS + endpoints.USUARIOS.CREAR_USUARIO,
+    const response = await api.post(router.USUARIOS + endpoints.USUARIOS.CREAR_USUARIO,
       { 
         correo, 
         contrasena, 
@@ -30,21 +29,46 @@ export async function crearUsuario({ correo, contrasena, nombre, rol, datosEmpre
         datosJefeDepartamento },
     );
 
-    return response.data.data; 
+    return response.data.data;; 
   } catch (error) {
     console.error("Error al crear usuario:", error);
     throw error;
   }
 }
 
-export async function cerrarSesion() {
+export async function generarToken({ correo }) {
   try {
-    const response = await axios.post( API_BASE_URL + router.USUARIOS + endpoints.USUARIOS.INICIAR_SESION,
-      { payload: {} },
-      { withCredentials: true }
+    const response = await api.post(router.USUARIOS + endpoints.USUARIOS.GENERAR_TOKEN,
+      { correo }
     );
 
-    return response.data.data; 
+    return response.data.data;; 
+  } catch (error) {
+    console.error("Error en generar token:", error);
+    throw error;
+  }
+}
+
+export async function validarToken({ correo, token }) {
+  try {
+    const response = await api.post(router.USUARIOS + endpoints.USUARIOS.VALIDAR_TOKEN,
+      { 
+        correo, 
+        token },
+    );
+
+    return response.data.data;; 
+  } catch (error) {
+    console.error("Error en validar token:", error);
+    throw error;
+  }
+}
+
+export async function cerrarSesion() {
+  try {
+    const response = await api.post(router.USUARIOS + endpoints.USUARIOS.CERRAR_SESION);
+
+    return response.data.data;; 
   } catch (error) {
     console.error("Error en iniciarSesion:", error);
     throw error;

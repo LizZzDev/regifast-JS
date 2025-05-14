@@ -10,7 +10,7 @@ import nodemailer from 'nodemailer';
  * 
  */
 const enviarCorreo = async (data) => {
-    const { email, subject, text } = data.body;
+    const { email, subject, text } = data;
 
     try {
         const transporter = nodemailer.createTransport({

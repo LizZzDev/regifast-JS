@@ -2,6 +2,8 @@ export const endpoints = {
     USUARIOS: {
       CREAR_USUARIO: '/crearUsuario',
       INICIAR_SESION: '/iniciarSesion',
+      GENERAR_TOKEN: '/generarToken',
+      VALIDAR_TOKEN: '/validarToken',
       CERRAR_SESION: '/cerrarSesion',
     },
 

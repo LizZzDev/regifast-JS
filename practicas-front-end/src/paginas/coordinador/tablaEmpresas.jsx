@@ -1,37 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // <--- IMPORTANTE
+import { obtenerEmpresas } from '../../api/empresas';
 import './ver_empresas.css';
 
 const TablaEmpresas = () => {
   const [empresas, setEmpresas] = useState([]);
+  const navigate = useNavigate(); // <--- AQUÍ DEBE ESTAR
 
   useEffect(() => {
-    fetch('/api/empresas')
-      .then(res => res.json())
-      .then(data => setEmpresas(data))
-      .catch(err => console.error('Error al cargar empresas:', err));
-  }, []);
+    const cargarEmpresas = async () => {
+      try {
+        const datos = await obtenerEmpresas();
+        setEmpresas(datos.empresas);
+      } catch (error) {
+        console.error('Error al cargar empresas:', error);
+      }
+    };
+
+    cargarEmpresas();
+  }, []); // <--- TE FALTABA ESTE CORCHETE CERRANDO EL useEffect
 
   const enviarOpiniones = (idEmpresa, logoEmpresa) => {
-    // Simula redirección al formulario de opiniones
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = '/opiniones'; // o la ruta correspondiente
-
-    const input1 = document.createElement('input');
-    input1.type = 'hidden';
-    input1.name = 'codigoValidar';
-    input1.value = idEmpresa;
-
-    const input2 = document.createElement('input');
-    input2.type = 'hidden';
-    input2.name = 'LogoEmpresa';
-    input2.value = logoEmpresa;
-
-    form.appendChild(input1);
-    form.appendChild(input2);
-
-    document.body.appendChild(form);
-    form.submit();
+    navigate(`/opiniones?idEmpresa=${idEmpresa}&logoEmpresa=${encodeURIComponent(logoEmpresa)}`);
   };
 
   return (
@@ -90,12 +80,12 @@ const TablaEmpresas = () => {
             <tbody>
               {empresas.map(empresa => (
                 <tr key={empresa.IdEmpresa}>
-                  <td>{empresa.NombreEmpresa}</td>
+                  <td>{empresa.Nombre}</td>
                   <td>{empresa.Telefono}</td>
-                  <td>{empresa.CorreoElectronico}</td>
+                  <td>{empresa.Correo}</td>
                   <td>{empresa.RFC}</td>
-                  <td>{empresa.DescripcionEmpresa}</td>
-                  <td>{empresa.TareasRealizar}</td>
+                  <td>{empresa.Descripcion}</td>
+                  <td>{empresa.Actividades}</td>
                   <td>{empresa.DomicilioFiscal}</td>
                   <td>{empresa.Vacantes}</td>
                   <td>

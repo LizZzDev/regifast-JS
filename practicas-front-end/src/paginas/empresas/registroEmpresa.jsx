@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { crearEmpresa } from "../../api/empresas/index.js";
 import Header from "../../componentes/header.jsx";
-import Header from "./componentes/Header";
-import ".empresas/registro.css";
+import "./registro.css";
 
 const RegistroEmpresa = () => {
   const [formData, setFormData] = useState({

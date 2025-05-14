@@ -2,6 +2,8 @@ import session from "express-session";
 import crearUsuarioServicio from './crearUsuario.js';
 import inicioSesionServicio from './iniciarSesion.js';
 import cerrarSesionServicio from './cerrarSesion.js';
+import generarTokenService from './generarToken.js';
+import validarTokenService from './validarToken.js';
 
 export const iniciarSesion = async (req, res) => {
   try {
@@ -31,6 +33,30 @@ export const crearUsuario = async (req, res) => {
     });
   } catch (error) {
     console.error("Error al crear cuenta:", error.message);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const generarToken = async (req, res) => {
+  try {
+    const response = await generarTokenService(req.body);
+    return res.status(201).json({
+      data: response,
+    });
+  } catch (error) {
+    console.error("Error al generar token:", error.message);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const validarToken = async (req, res) => {
+  try {
+    const response = await validarTokenService(req.body);
+    return res.status(201).json({
+      data: response,
+    });
+  } catch (error) {
+    console.error("Error al generar token:", error.message);
     return res.status(500).json({ success: false, message: error.message });
   }
 };
