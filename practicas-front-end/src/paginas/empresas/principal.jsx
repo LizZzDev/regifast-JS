@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { obtenerEmpresa } from '../../api/empresas';
 import './principal.css';
 
 function PrincipalEmpresa() {
-  // Estado para los datos dinámicos de la empresa
-  const [empresa, setEmpresa] = useState({
-    nombre: 'NOMBRE_EMPRESA',
-    logo: 'RUTA_DEL_LOGO_EMPRESA',
-    calificacion: 3.5,
-    telefono: 'NUMERO_TELEFONO',
-    direccion: 'DIRECCION_COMPLETA',
-    correo: 'CORREO_EMPRESA',
-    descripcion: 'DESCRIPCION_EMPRESA',
-    vacantes: 45,
-    actividades: 'pipi'
-  });
+  const [empresa, setEmpresa] = useState(null);
 
+  useEffect(() => {
+    const cargarEmpresa = async () => {
+      try {
+        const datos = await obtenerEmpresa();
+        console.log (datos);
+        setEmpresa(datos);
+      } catch (error) {
+        console.error('Error al cargar empresa:', error);
+      }
+    };
+
+    cargarEmpresa();
+  }, []);
+
+    if (!empresa) {
+    return <div>Cargando empresa...</div>;
+  }
   // Función para renderizar las estrellas de calificación
   const renderEstrellas = () => {
     const estrellas = [];
@@ -46,7 +53,7 @@ function PrincipalEmpresa() {
         {/* Columna izquierda */}
         <article id="contentLeft">
           <article id="articleImagen">
-            <img src={empresa.logo} id="imagenEmpresa" alt={`Logo de ${empresa.nombre}`} />
+            <img src={`http://localhost:3000/logos/${empresa.Logo}`} id="imagenEmpresa" alt={`Logo de ${empresa.Nombre}`} />
           </article>
           
           <article id="calificacionPrincipal">
@@ -62,18 +69,18 @@ function PrincipalEmpresa() {
           
           <article id="articleDatos">
             <p>Número:</p>
-            <p className="secundarioDatos montserratChiquita">{empresa.telefono}</p><br />
+            <p className="secundarioDatos montserratChiquita">{empresa.Telefono}</p><br />
             <p>Dirección:</p>
-            <p className="secundarioDatos montserratChiquita">{empresa.direccion}</p><br />
+            <p className="secundarioDatos montserratChiquita">{empresa.DomicilioFiscal}</p><br />
             <p>Correo electrónico:</p>
-            <p className="secundarioDatos montserratChiquita">{empresa.correo}</p><br />
+            <p className="secundarioDatos montserratChiquita">{empresa.Correo}</p><br />
           </article>
         </article>
 
         {/* Columna derecha */}
         <article id="contentRight">
           <article id="nombreEmpresa">
-            <h1 id="h1empresa">¡Hola, {empresa.nombre}!</h1>
+            <h1 id="h1empresa">¡Hola, {empresa.Nombre}!</h1>
             <hr />
           </article>
           
@@ -88,18 +95,18 @@ function PrincipalEmpresa() {
             {/* Actividades */}
             <section className="infoCard">
               <h3><i className="fas fa-tasks"></i> Actividades asignadas</h3>
-              <p className="montserratChiquita">{empresa.actividades}</p>
+              <p className="montserratChiquita">{empresa.Actividades}</p>
             </section>
 
             {/* Vacantes */}
             <section className="infoCard">
               <h3><i className="fas fa-briefcase"></i> Vacantes disponibles</h3>
-              <p className="montserratChiquita">{empresa.vacantes}</p>
+              <p className="montserratChiquita">{empresa.Vacantes}</p>
             </section>
 
             {/* Botón editar */}
             <section id="sectionEditar">
-              <button type="button" onClick={() => window.location.href = 'editar.html'}>
+              <button type="button" onClick={() => window.location.href = 'editar'}>
                 EDITAR
               </button>
             </section>

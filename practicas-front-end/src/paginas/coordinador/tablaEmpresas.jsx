@@ -5,7 +5,7 @@ import './ver_empresas.css';
 
 const TablaEmpresas = () => {
   const [empresas, setEmpresas] = useState([]);
-  const navigate = useNavigate(); // <--- AQUÍ DEBE ESTAR
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const cargarEmpresas = async () => {

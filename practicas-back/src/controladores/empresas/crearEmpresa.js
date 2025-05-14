@@ -31,7 +31,7 @@ const crearEmpresa = async (req) => {
       rol: 'empresa'
     });
 
-    await Empresa.agregarNuevaEmpresa(connection, datosEmpresa, idUsuario);
+    await Empresa.agregarNuevaEmpresa(connection, datosEmpresa, idUsuario, correo);
 
     await connection.commit();
 

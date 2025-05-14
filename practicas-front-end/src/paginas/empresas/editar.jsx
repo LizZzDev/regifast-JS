@@ -1,23 +1,31 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { obtenerEmpresa } from '../../api/empresas';
 import './editar.css';
-import './principal.css'; // Reutilizando estilos existentes
+import './principal.css';
 
 function EditarEmpresa() {
-  // Estado para los datos del formulario
-  const [empresa, setEmpresa] = useState({
-    nombre: '',
-    telefono: '',
-    correo: '',
-    direccion: '',
-    descripcion: '',
-    actividades: '',
-    vacantes: 0,
-    imagen: '/img/user.png' // Imagen por defecto
-  });
+    const fileInputRef = useRef(null);
+
+    const [empresa, setEmpresa] = useState(null);
+  
+    useEffect(() => {
+      const cargarEmpresa = async () => {
+        try {
+          const datos = await obtenerEmpresa();
+          setEmpresa(datos);
+        } catch (error) {
+          console.error('Error al cargar empresa:', error);
+        }
+      };
+  
+      cargarEmpresa();
+    }, []);
+  
+      if (!empresa) {
+      return <div>Cargando empresa...</div>;
+    }
 
   // Referencia para el input de archivo
-  const fileInputRef = useRef(null);
-
   // Manejar cambios en los inputs del formulario
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -69,7 +77,7 @@ function EditarEmpresa() {
         <article id="contentLeft">
           <article id="articleImagen">
             <img 
-              src={empresa.imagen} 
+              src={`http://localhost:3000/logos/${empresa.Logo}`}
               id="imagenEmpresa" 
               alt="Logo empresa"
             /><br />

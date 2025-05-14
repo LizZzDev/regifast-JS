@@ -36,3 +36,17 @@ export async function obtenerEmpresas({ pagina = 1, limite = 20, validada = null
     throw error;
   }
 }
+
+export async function obtenerEmpresa() {
+  try {
+    const response = await api.get(
+      router.EMPRESAS + endpoints.EMPRESAS.OBTENER_EMPRESA,
+    );
+
+    console.log (response)
+    return response.data.data;; 
+  } catch (error) {
+    console.error("Error al obtener empresa:", error);
+    throw error;
+  }
+}

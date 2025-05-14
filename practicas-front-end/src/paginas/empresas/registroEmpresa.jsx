@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { crearEmpresa } from "../../api/empresas/index.js";
 import Header from "../../componentes/header.jsx";
 import "./registro.css";
@@ -25,6 +26,8 @@ const RegistroEmpresa = () => {
 
   const [mensaje, setMensaje] = useState('');
   const [fuerza, setFuerza] = useState('');
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -60,7 +63,6 @@ const RegistroEmpresa = () => {
     else if (score === 1) setFuerza('Débil');
     else if (score === 2) setFuerza('Media');
     else setFuerza('Fuerte');
-    alert("Formulario enviado correctamente (simulado).");
   };
 
  const handleSubmit = async (e) => {
@@ -91,6 +93,8 @@ const RegistroEmpresa = () => {
     CodigoPostal: formData.codigo_postal,
     Estado: formData.estado,
     Municipio: formData.municipio,
+    Validada: 0,
+    PracticasExtraordinarias: 0
   };
 
   form.append('datosEmpresa', JSON.stringify(datosEmpresa));
@@ -99,15 +103,17 @@ const RegistroEmpresa = () => {
     form.append('imagen', formData.imagen); 
   }
 
-     try 
-     { await crearEmpresa(form);
-
+  try {
+    await crearEmpresa(form);
     setMensaje('Empresa registrada exitosamente.');
+    setTimeout(() => {
+      navigate("/login");
+  }, 1000);
   } catch (error) {
     console.error('Error al registrar empresa:', error);
     setMensaje('Error al registrar empresa.');
-  }
-};
+  };
+ };
 
   return (
     <div className="registro-container">

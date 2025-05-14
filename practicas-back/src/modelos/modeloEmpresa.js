@@ -1,24 +1,27 @@
 import pool from '../configuracion/db.js';
 
 const Empresa = {
-    agregarNuevaEmpresa: async (connection, datos, idUsuario) => {
+    agregarNuevaEmpresa: async (connection, datos, idUsuario, correo) => {
       if (!connection) {
         connection = await pool.getConnection();
       }
+
+      console.log (datos);
 
       const { 
         Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
         CodigoPostal, Municipio, Descripcion, imagen, Actividades, Vacantes, Validada, PracticasExtraordinarias
        } = datos;
+
+      const DomicilioFiscal = `${Calle} ${Numero}, ${Colonia}, ${CodigoPostal}, ${Municipio}, ${Estado}`;
+      
       try {
         const [result] = await connection.query(
           `INSERT INTO empresas (
-            IdUsuario, Nombre, RFC, Telefono, Calle, Colonia, Numero,
-            Estado, CodigoPostal, Municipio, Descripcion, Logo,
-            Actividades, Vacantes, Validada
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          [idUsuario, Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
-          CodigoPostal, Municipio, Descripcion, imagen, Actividades, Vacantes, Validada, PracticasExtraordinarias]
+            IdUsuario, Nombre, RFC, Telefono, Correo, DomicilioFiscal, Descripcion, Logo,
+            Actividades, Vacantes, Validada, PracticasExtraordinarias
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [idUsuario, Nombre, RFC, Telefono, correo, DomicilioFiscal, Descripcion, imagen, Actividades, Vacantes, Validada, PracticasExtraordinarias]
         );
         return result;
       } catch (error) {
