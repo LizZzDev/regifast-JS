@@ -61,7 +61,7 @@ const RegistroEmpresa = () => {
     else setFuerza('Fuerte');
   };
 
-  const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirm_password) {
@@ -82,60 +82,78 @@ const RegistroEmpresa = () => {
       CodigoPostal: formData.codigo_postal,
       Estado: formData.estado,
       Municipio: formData.municipio,
-      Logo: formData.imagen,  // Solo el nombre de la imagen
+      Logo: formData.imagen,
     };
 
-<<<<<<< HEAD
-
-  };
-=======
-     try 
-     { await crearUsuario({
+    try {
+      await crearUsuario({
         correo: formData.correo,
         contrasena: formData.password,
         nombre: formData.nombre,
         rol: 'empresa',
         datosEmpresa,
-        datosJefeDepartamento: null, // si no aplica, mándalo como null
+        datosJefeDepartamento: null,
       });
 
-    setMensaje('Empresa registrada exitosamente.');
-  } catch (error) {
-    console.error('Error al registrar empresa:', error);
-    setMensaje('Error al registrar empresa.');
-  }
-};
->>>>>>> 0dc14de912cb1b0f846b54123dca5256ee1d4ff0
+      setMensaje('Empresa registrada exitosamente.');
+    } catch (error) {
+      console.error('Error al registrar empresa:', error);
+      setMensaje('Error al registrar empresa.');
+    }
+  };
+ return (
+    <div>
+      <header>
+        <section id="nomUDG">
+          <img src="/img/udg_white.png" alt="Logo UDG" />
+        </section>
+      </header>
+    <nav class="menu">
+        <ul>
+            <li><a href="principal.html">INICIO</a></li>
+        </ul>
+    </nav>
+      <article id="Formulario">
+        <section id="Titulo">
+          <h1>PRACTICAS PROFESIONALES</h1>
+        </section>
 
-  return (
-    <div className="registro-container">
-      <h2>Registro de Empresa</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="nombre" placeholder="Nombre de la empresa" value={formData.nombre} onChange={handleChange} required />
-        <textarea name="descripcion" placeholder="Descripción (máx. 150 palabras)" value={formData.descripcion} onChange={handleChange} required />
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
+          <fieldset>
+            <legend>Datos Generales</legend>
+            <input type="text" name="nombre" placeholder="Nombre de la empresa" value={formData.nombre} onChange={handleChange} required />
+            <input type="text" name="descripcion" id="descripcion" placeholder="Descripción de la empresa (máx. 150 palabras)" value={formData.descripcion} onChange={handleChange} required />
+            <input type="email" name="correo" placeholder="Correo electrónico" value={formData.correo} onChange={handleChange} required />
+            <input type="text" name="telefono" placeholder="Teléfono (10-15 dígitos)" pattern="\\d{10,15}" value={formData.telefono} onChange={handleChange} required />
+            <input type="text" name="rfc" placeholder="RFC (12-13 caracteres alfanuméricos)" pattern="[A-Z0-9]{12,13}" value={formData.rfc} onChange={handleChange} required />
+            <input type="text" name="actividades" placeholder="Actividades que serán asignadas a los estudiantes" value={formData.actividades} onChange={handleChange} required />
+            <input type="text" name="vacantes" placeholder="Cantidad de vacantes" pattern="\\d+" value={formData.vacantes} onChange={handleChange} required />
+            <input type="password" name="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} required />
+            <input type="password" name="confirmPassword" placeholder="Confirmar Contraseña" value={formData.confirmPassword} onChange={handleChange} required />
+            <div style={{ color: fuerzaContraseña.includes("fuerte") ? "green" : fuerzaContraseña.includes("media") ? "goldenrod" : fuerzaContraseña.includes("débil") ? "orange" : "red" }}>
+              {fuerzaContraseña}
+            </div>
+          </fieldset>
 
-        <input type="email" name="correo" placeholder="Correo electrónico" value={formData.correo} onChange={handleChange} required />
-        <input type="text" name="telefono" placeholder="Teléfono" value={formData.telefono} onChange={handleChange} required />
-        <input type="text" name="rfc" placeholder="RFC" value={formData.rfc} onChange={handleChange} required />
-        <input type="text" name="actividades" placeholder="Actividades" value={formData.actividades} onChange={handleChange} required />
-        <input type="number" name="vacantes" placeholder="Vacantes" value={formData.vacantes} onChange={handleChange} required />
+          <fieldset>
+            <legend>Domicilio Fiscal</legend>
+            <input type="text" name="calle" placeholder="Calle" value={formData.calle} onChange={handleChange} required />
+            <input type="text" name="numero" placeholder="Número exterior (opcional)" value={formData.numero} onChange={handleChange} />
+            <input type="text" name="colonia" placeholder="Colonia" value={formData.colonia} onChange={handleChange} required />
+            <input type="text" name="codigo_postal" placeholder="Código Postal (5 dígitos)" pattern="\\d{5}" value={formData.codigo_postal} onChange={handleChange} required />
+            <input type="text" name="estado" placeholder="Estado" value={formData.estado} onChange={handleChange} required />
+            <input type="text" name="municipio" placeholder="Municipio" value={formData.municipio} onChange={handleChange} required />
+          </fieldset>
 
-        <input type="password" name="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} required />
-        <input type="password" name="confirm_password" placeholder="Confirmar contraseña" value={formData.confirm_password} onChange={handleChange} required />
-        <div>Fuerza: {fuerza}</div>
+          <fieldset>
+            <legend>Subir Logotipo</legend>
+            <p>Sube el logotipo de tu empresa en formato JPG o PNG</p>
+            <input type="file" name="imagen" accept="image/png, image/jpeg" onChange={handleChange} required />
+          </fieldset>
 
-        <input type="text" name="calle" placeholder="Calle" value={formData.calle} onChange={handleChange} required />
-        <input type="text" name="numero" placeholder="Número exterior" value={formData.numero} onChange={handleChange} />
-        <input type="text" name="colonia" placeholder="Colonia" value={formData.colonia} onChange={handleChange} required />
-        <input type="text" name="codigo_postal" placeholder="Código Postal" value={formData.codigo_postal} onChange={handleChange} required />
-        <input type="text" name="estado" placeholder="Estado" value={formData.estado} onChange={handleChange} required />
-        <input type="text" name="municipio" placeholder="Municipio" value={formData.municipio} onChange={handleChange} required />
-
-        <input type="file" name="imagen" accept="image/png, image/jpeg" onChange={handleChange} required />
-
-        <button type="submit">Registrar Empresa</button>
-      </form>
-      {mensaje && <p>{mensaje}</p>}
+          <input id="MandarInformacion" type="submit" value="Guardar" />
+        </form>
+      </article>
     </div>
   );
 };
