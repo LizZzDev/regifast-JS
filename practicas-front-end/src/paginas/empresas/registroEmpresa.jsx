@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { crearUsuario } from "../../api/usuarios/index.js";
+import { crearEmpresa } from "../../api/empresas/index.js";
 import Header from "../../componentes/header.jsx";
-import "./registro.css";
+import Header from "./componentes/Header";
+import ".empresas/registro.css";
 
 const RegistroEmpresa = () => {
   const [formData, setFormData] = useState({
@@ -30,7 +31,7 @@ const RegistroEmpresa = () => {
     const { name, value, files } = e.target;
 
     if (name === 'imagen') {
-      setFormData({ ...formData, imagen: files[0].name }); // Almacenamos solo el nombre del archivo
+      setFormData({ ...formData, imagen: files[0] }); // Almacenamos solo el nombre del archivo
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -55,105 +56,90 @@ const RegistroEmpresa = () => {
     if (/[A-Za-z]/.test(password) && /\d/.test(password)) score++;
     if (/[A-Z]/.test(password) && /[a-z]/.test(password)) score++;
 
+
     if (score === 0) setFuerza('Muy débil');
     else if (score === 1) setFuerza('Débil');
     else if (score === 2) setFuerza('Media');
     else setFuerza('Fuerte');
+    alert("Formulario enviado correctamente (simulado).");
   };
 
-    const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (formData.password !== formData.confirm_password) {
-      setMensaje('Las contraseñas no coinciden.');
-      return;
-    }
+  if (formData.password !== formData.confirm_password) {
+    setMensaje('Las contraseñas no coinciden.');
+    return;
+  }
 
-    const datosEmpresa = {
-      Nombre: formData.nombre,
-      Descripcion: formData.descripcion,
-      Telefono: formData.telefono,
-      RFC: formData.rfc,
-      Actividades: formData.actividades,
-      Vacantes: formData.vacantes,
-      Calle: formData.calle,
-      Numero: formData.numero,
-      Colonia: formData.colonia,
-      CodigoPostal: formData.codigo_postal,
-      Estado: formData.estado,
-      Municipio: formData.municipio,
-      Logo: formData.imagen,
-    };
+  const form = new FormData();
 
-    try {
-      await crearUsuario({
-        correo: formData.correo,
-        contrasena: formData.password,
-        nombre: formData.nombre,
-        rol: 'empresa',
-        datosEmpresa,
-        datosJefeDepartamento: null,
-      });
+  form.append('correo', formData.correo);
+  form.append('contrasena', formData.password);
+  form.append('nombre', formData.nombre);
+  form.append('rol', 'empresa');
 
-      setMensaje('Empresa registrada exitosamente.');
-    } catch (error) {
-      console.error('Error al registrar empresa:', error);
-      setMensaje('Error al registrar empresa.');
-    }
+  const datosEmpresa = {
+    Nombre: formData.nombre,
+    Descripcion: formData.descripcion,
+    Telefono: formData.telefono,
+    RFC: formData.rfc,
+    Actividades: formData.actividades,
+    Vacantes: formData.vacantes,
+    Calle: formData.calle,
+    Numero: formData.numero,
+    Colonia: formData.colonia,
+    CodigoPostal: formData.codigo_postal,
+    Estado: formData.estado,
+    Municipio: formData.municipio,
   };
- return (
-    <div>
-      <header>
-        <section id="nomUDG">
-          <img src="/img/udg_white.png" alt="Logo UDG" />
-        </section>
-      </header>
-    <nav class="menu">
-        <ul>
-            <li><a href="principal.html">INICIO</a></li>
-        </ul>
-    </nav>
-      <article id="Formulario">
-        <section id="Titulo">
-          <h1>PRACTICAS PROFESIONALES</h1>
-        </section>
 
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
-          <fieldset>
-            <legend>Datos Generales</legend>
-            <input type="text" name="nombre" placeholder="Nombre de la empresa" value={formData.nombre} onChange={handleChange} required />
-            <input type="text" name="descripcion" id="descripcion" placeholder="Descripción de la empresa (máx. 150 palabras)" value={formData.descripcion} onChange={handleChange} required />
-            <input type="email" name="correo" placeholder="Correo electrónico" value={formData.correo} onChange={handleChange} required />
-            <input type="text" name="telefono" placeholder="Teléfono (10-15 dígitos)" pattern="\\d{10,15}" value={formData.telefono} onChange={handleChange} required />
-            <input type="text" name="rfc" placeholder="RFC (12-13 caracteres alfanuméricos)" pattern="[A-Z0-9]{12,13}" value={formData.rfc} onChange={handleChange} required />
-            <input type="text" name="actividades" placeholder="Actividades que serán asignadas a los estudiantes" value={formData.actividades} onChange={handleChange} required />
-            <input type="text" name="vacantes" placeholder="Cantidad de vacantes" pattern="\\d+" value={formData.vacantes} onChange={handleChange} required />
-            <input type="password" name="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} required />
-            <input type="password" name="confirmPassword" placeholder="Confirmar Contraseña" value={formData.confirmPassword} onChange={handleChange} required />
-            <div style={{ color: fuerzaContraseña.includes("fuerte") ? "green" : fuerzaContraseña.includes("media") ? "goldenrod" : fuerzaContraseña.includes("débil") ? "orange" : "red" }}>
-              {fuerzaContraseña}
-            </div>
-          </fieldset>
+  form.append('datosEmpresa', JSON.stringify(datosEmpresa));
 
-          <fieldset>
-            <legend>Domicilio Fiscal</legend>
-            <input type="text" name="calle" placeholder="Calle" value={formData.calle} onChange={handleChange} required />
-            <input type="text" name="numero" placeholder="Número exterior (opcional)" value={formData.numero} onChange={handleChange} />
-            <input type="text" name="colonia" placeholder="Colonia" value={formData.colonia} onChange={handleChange} required />
-            <input type="text" name="codigo_postal" placeholder="Código Postal (5 dígitos)" pattern="\\d{5}" value={formData.codigo_postal} onChange={handleChange} required />
-            <input type="text" name="estado" placeholder="Estado" value={formData.estado} onChange={handleChange} required />
-            <input type="text" name="municipio" placeholder="Municipio" value={formData.municipio} onChange={handleChange} required />
-          </fieldset>
+  if (formData.imagen instanceof File) {
+    form.append('imagen', formData.imagen); 
+  }
 
-          <fieldset>
-            <legend>Subir Logotipo</legend>
-            <p>Sube el logotipo de tu empresa en formato JPG o PNG</p>
-            <input type="file" name="imagen" accept="image/png, image/jpeg" onChange={handleChange} required />
-          </fieldset>
+     try 
+     { await crearEmpresa(form);
 
-          <input id="MandarInformacion" type="submit" value="Guardar" />
-        </form>
-      </article>
+    setMensaje('Empresa registrada exitosamente.');
+  } catch (error) {
+    console.error('Error al registrar empresa:', error);
+    setMensaje('Error al registrar empresa.');
+  }
+};
+
+  return (
+    <div className="registro-container">
+      <Header />
+      <h2>Registro de Empresa</h2>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="nombre" placeholder="Nombre de la empresa" value={formData.nombre} onChange={handleChange} required />
+        <textarea name="descripcion" placeholder="Descripción (máx. 150 palabras)" value={formData.descripcion} onChange={handleChange} required />
+
+        <input type="email" name="correo" placeholder="Correo electrónico" value={formData.correo} onChange={handleChange} required />
+        <input type="text" name="telefono" placeholder="Teléfono" value={formData.telefono} onChange={handleChange} required />
+        <input type="text" name="rfc" placeholder="RFC" value={formData.rfc} onChange={handleChange} required />
+        <input type="text" name="actividades" placeholder="Actividades" value={formData.actividades} onChange={handleChange} required />
+        <input type="number" name="vacantes" placeholder="Vacantes" value={formData.vacantes} onChange={handleChange} required />
+
+        <input type="password" name="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} required />
+        <input type="password" name="confirm_password" placeholder="Confirmar contraseña" value={formData.confirm_password} onChange={handleChange} required />
+        <div>Fuerza: {fuerza}</div>
+
+        <input type="text" name="calle" placeholder="Calle" value={formData.calle} onChange={handleChange} required />
+        <input type="text" name="numero" placeholder="Número exterior" value={formData.numero} onChange={handleChange} />
+        <input type="text" name="colonia" placeholder="Colonia" value={formData.colonia} onChange={handleChange} required />
+        <input type="text" name="codigo_postal" placeholder="Código Postal" value={formData.codigo_postal} onChange={handleChange} required />
+        <input type="text" name="estado" placeholder="Estado" value={formData.estado} onChange={handleChange} required />
+        <input type="text" name="municipio" placeholder="Municipio" value={formData.municipio} onChange={handleChange} required />
+
+        <input type="file" name="imagen" accept="image/png, image/jpeg" onChange={handleChange} required />
+
+        <button type="submit">Registrar Empresa</button>
+      </form>
+      {mensaje && <p>{mensaje}</p>}
     </div>
   );
 };

@@ -8,7 +8,7 @@ const Empresa = {
 
       const { 
         Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
-        CodigoPostal, Municipio, Descripcion, Logo, Actividades, Vacantes, Validada 
+        CodigoPostal, Municipio, Descripcion, imagen, Actividades, Vacantes, Validada, PracticasExtraordinarias
        } = datos;
       try {
         const [result] = await connection.query(
@@ -18,7 +18,7 @@ const Empresa = {
             Actividades, Vacantes, Validada
           ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [idUsuario, Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
-          CodigoPostal, Municipio, Descripcion, Logo, Actividades, Vacantes, Validada]
+          CodigoPostal, Municipio, Descripcion, imagen, Actividades, Vacantes, Validada, PracticasExtraordinarias]
         );
         return result;
       } catch (error) {
@@ -27,7 +27,7 @@ const Empresa = {
       }
     },
 
-    obtenerEmpresasFiltradas: async ({ pagina, limite, validada, soloConVacantes }) => {
+    obtenerEmpresasFiltradas: async ({ pagina, limite, validada, soloConVacantes, practicasExtraordinarias }) => {
       try {
         const offset = (pagina - 1) * limite;
     
@@ -41,6 +41,11 @@ const Empresa = {
           queryCount += ` AND Validada = ?`;
           params.push(validada);
           countParams.push(validada);
+        }
+
+        if (practicasExtraordinarias) {
+          query += ` AND PracticasExtraordinarias > 0`;
+          queryCount += ` AND PracticasExtraordinarias > 0`;
         }
     
         if (soloConVacantes) {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./nuevoAdmin.css";
+import "./crearAdmin.css";
 
 function CrearNuevoAdmin() {
   const [formData, setFormData] = useState({
@@ -18,7 +18,7 @@ function CrearNuevoAdmin() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3001/crear-admin", { // ruta pa modificar (enlazar)
+    fetch("http://localhost:3001/crear-admin", { //ruta pa modificar (enlazar)
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ function CrearNuevoAdmin() {
     <div className="page">
       <header>
         <section id="nomUDG">
-          <img src="/img/Logo_UDG_horiz_blanco-01.svg" alt="Logo UDG" />
+          <img src="img/Logo_UDG_horiz_blanco-01.svg" alt="Logo UDG" />
         </section>
         <nav className="menu">
           <ul>

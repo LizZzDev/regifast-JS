@@ -29,9 +29,9 @@ function principalJefe() {
         </section>
         <nav className="menu">
           <ul>
-            <li><a href="principalJefe.html">INICIO</a></li>
-            <li><a href="tabla_ver_alumnos.html">VER ALUMNOS</a></li>
-            <li><a href="##########" className="opcion">CERRAR SESIÓN</a></li>
+            <li><a href="#">INICIO</a></li>
+            <li><a href="#">VER ALUMNOS</a></li>
+            <li><a href="#" className="opcion">CERRAR SESIÓN</a></li>
           </ul>
         </nav>
       </header>

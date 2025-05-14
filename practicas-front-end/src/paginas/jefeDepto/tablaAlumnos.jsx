@@ -6,10 +6,10 @@ function TablaAlumnos() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3001/alumnos") // Cambia la URL si es necesario
+    fetch("http://localhost:3001/alumnos")
       .then((res) => res.json())
       .then((data) => {
-        setAlumnos(data); // Guardar los datos en el estado
+        setAlumnos(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -21,21 +21,27 @@ function TablaAlumnos() {
   const handleEstadoChange = (index, nuevoEstado) => {
     const nuevos = [...alumnos];
     nuevos[index].estado = nuevoEstado;
-    setAlumnos(nuevos); // Actualizar el estado en el frontend
+    setAlumnos(nuevos);
   };
 
-  const confirmarEstado = (codigo, estado) => {
-    fetch("http://localhost:3001/alumnos/estado", {
+  const handleCalificacionChange = (index, nuevaCalificacion) => {
+    const nuevos = [...alumnos];
+    nuevos[index].calificacion = nuevaCalificacion;
+    setAlumnos(nuevos);
+  };
+
+  const confirmarDatos = (codigo, estado, calificacion) => {
+    fetch("http://localhost:3001/alumnos/actualizar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ codigo, nuevoEstado: estado })
+      body: JSON.stringify({ codigo, estado, calificacion })
     })
       .then((res) => res.json())
       .then((data) => {
-        alert(`Estado actualizado: ${estado.toUpperCase()}`); // Mostrar un mensaje de confirmación
+        alert(`Datos actualizados:\nEstado: ${estado.toUpperCase()}\nCalificación: ${calificacion}`);
       })
       .catch((err) => {
-        console.error("Error al actualizar estado:", err);
+        console.error("Error al actualizar datos:", err);
       });
   };
 
@@ -75,6 +81,7 @@ function TablaAlumnos() {
               <th>Grupo</th>
               <th>Turno</th>
               <th>Correo institucional</th>
+              <th>Calificación</th>
               <th>Estado</th>
             </tr>
           </thead>
@@ -88,6 +95,20 @@ function TablaAlumnos() {
                 <td>{alumno.grupo}</td>
                 <td>{alumno.turno}</td>
                 <td>{alumno.correo}</td>
+
+                <td>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={alumno.calificacion || ""}
+                    onChange={(e) =>
+                      handleCalificacionChange(index, e.target.value)
+                    }
+                    className="calificacion-input"
+                  />
+                </td>
+
                 <td className="estado-selector">
                   <select
                     className="estado-dropdown"
@@ -100,7 +121,13 @@ function TablaAlumnos() {
                   </select>
                   <button
                     className="confirmar-btn"
-                    onClick={() => confirmarEstado(alumno.codigo, alumno.estado)}
+                    onClick={() =>
+                      confirmarDatos(
+                        alumno.codigo,
+                        alumno.estado,
+                        alumno.calificacion || ""
+                      )
+                    }
                   >
                     Confirmar
                   </button>

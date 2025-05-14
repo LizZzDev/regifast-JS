@@ -1,10 +1,13 @@
 import nodemailer from 'nodemailer';
 
+
 /**
  * Envía un correo electrónico.
- * @param {string} email - Dirección del destinatario.
+ * @param {string} correo - Dirección del destinatario. (aqui antes decia email)
  * @param {string} subject - Asunto del correo.
  * @param {string} text - Contenido del correo.
+ * @param {string} token - Token de autenticación.
+ * 
  */
 const enviarCorreo = async (data) => {
     const { email, subject, text } = data.body;
@@ -14,7 +17,7 @@ const enviarCorreo = async (data) => {
             service: 'gmail',
             auth: {
                 user: 'rodriguezjaramilloricardo103@gmail.com',
-                pass: 'klxz xngd yuqo eilq', // Usa siempre token de aplicación
+                pass: 'klxz xngd yuqo eilq', 
             },
         });
 

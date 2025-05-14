@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './principal.css'; // Asegúrate de tener este archivo CSS
+import './principal.css';
 
 function PrincipalEmpresa() {
   // Estado para los datos dinámicos de la empresa

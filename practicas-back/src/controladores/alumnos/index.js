@@ -5,6 +5,7 @@ import calificarEmpresaSerive from "./calificarEmpresa.js";
 import mostrarEmpresaSeleccionadaService from "./mostrarEmpresaSeleccionada.js";
 import obtenerCalificarEmpresaSerive from "./obtenerCalificacionesDeLasEmpresas.js";
 import descargarCartaAsignacionService from "./generarCartaAsignacion.js";
+import obtenerEmpresasAlumnosService from "./obtenerEmpresasAlumnos.js";
 
 export const anadirDatosDelAlumno = async (req, res) => {
   try {
@@ -13,6 +14,16 @@ export const anadirDatosDelAlumno = async (req, res) => {
   } catch (error) {
     console.error("Error al agregar datos del alumno:", error.message);
     res.status(500).json({ success: false, message: "Error al agregar datos del alumno" });
+  }
+};
+
+export const obtenerEmpresasAlumnos = async (req, res) => {
+  try {
+    const data = await obtenerEmpresasAlumnosService(req);
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    console.error("Error al obtener barra status:", error.message);
+    res.status(500).json({ success: false, message: "Error al obtener barra status" });
   }
 };
 

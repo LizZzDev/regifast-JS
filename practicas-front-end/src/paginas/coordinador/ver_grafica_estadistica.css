@@ -1,0 +1,73 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Header */
+header {
+  width: 100%;
+  background-color: #103E7E;
+  text-align: center;
+}
+
+#nomUDG {
+  background-color: #103E7E;
+  padding: 20px 0;
+}
+
+#nomUDG img {
+  width: 200px;
+}
+
+/* Nav */
+.menu {
+  width: 100%;
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+}
+
+.menu ul {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  padding: 10px 0;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: 0.3s ease;
+}
+
+.menu li a:hover {
+  background-color: white;
+  color: #103E7E;
+  border-radius: 5px;
+}
+
+/* Contenido */
+#contenido3 {
+  height: calc(100vh - 150px);
+  width: 100%;
+  margin: 40px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+canvas {
+  max-width: 850px; /* tmaño del gráfico */
+  width: 100%;
+  height: auto;
+}

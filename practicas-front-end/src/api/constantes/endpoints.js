@@ -27,7 +27,8 @@ export const endpoints = {
     },
   
     EMPRESAS: {
-      OBTENER_EMPRESA: 'obtenerEmpresa',
-      OBTENER_EMPRESAS: 'obtenerEmpresas'
+      OBTENER_EMPRESA: '/obtenerEmpresa',
+      OBTENER_EMPRESAS: '/obtenerEmpresas',
+      CREAR_EMPRESA: '/crearEmpresa',
     },
   };
