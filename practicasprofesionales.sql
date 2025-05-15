@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 11-05-2025 a las 19:07:15
+-- Tiempo de generación: 15-05-2025 a las 03:51:23
 -- Versión del servidor: 8.0.31
 -- Versión de PHP: 8.0.26
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `accesoporcalificacion` (
 --
 
 INSERT INTO `accesoporcalificacion` (`IdRango`, `MaxCalificacion`, `MinCalificacion`, `FechaInicio`, `FechaFin`) VALUES
-(1, 100, 90, '2025-06-01', '2025-06-30'),
+(1, 100, 90, '2025-05-11', '2025-05-14'),
 (2, 90, 80, '2025-07-01', '2025-07-31'),
 (3, 80, 70, '2025-08-01', '2025-08-31'),
 (4, 70, 50, '2025-09-01', '2025-09-30');
@@ -89,7 +89,15 @@ CREATE TABLE IF NOT EXISTS `alumnos` (
   UNIQUE KEY `NSS` (`NSS`),
   KEY `IdUsuario` (`IdUsuario`),
   KEY `IdEmpresa` (`IdEmpresa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `alumnos`
+--
+
+INSERT INTO `alumnos` (`IdAlumno`, `IdUsuario`, `Codigo`, `NombreCompleto`, `Carrera`, `Grado`, `Grupo`, `Turno`, `Domicilio`, `NumeroCasa`, `Colonia`, `CodigoPostal`, `Municipio`, `Estado`, `Telefono`, `TelefonoEmergencia`, `CorreoInstitucional`, `NSS`, `Edad`, `Nacionalidad`, `NombrePadre`, `TelefonoPadre`, `NombreMadre`, `TelefonoMadre`, `Movil`, `Calificacion`, `Ordinario`, `Revision`, `BarraStatus`, `IdEmpresa`) VALUES
+(1, 11, '123456', 'Juan Pérez López', 'Ingeniería en Sistemas', '7', 'A', 'Matutino', 'Calle Falsa 123', '123', 'Centro', '12345', 'Ciudad Ejemplo', 'Estado Ejemplo', '5551234567', '5557654321', 'liz@alumnos.udg.mx', '98765432101', 22, 'Mexicana', 'Carlos Pérez', '5551122334', 'Laura López', '5552233445', '5553344556', 100, 1, 0, 1, NULL),
+(3, 12, '1234567', 'Juan Pérez López', 'Ingeniería en Sistemas', '7', 'A', 'Matutino', 'Calle Falsa 123', '123', 'Centro', '12345', 'Ciudad Ejemplo', 'Estado Ejemplo', '5551234567', '5557654321', 'liza@alumnos.udg.mx', '98765532101', 22, 'Mexicana', 'Carlos Pérez', '5551122334', 'Laura López', '5552233445', '5553344556', 100, 1, 0, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -104,31 +112,46 @@ CREATE TABLE IF NOT EXISTS `empresas` (
   `Nombre` varchar(255) NOT NULL,
   `RFC` varchar(13) NOT NULL,
   `Telefono` varchar(15) DEFAULT NULL,
-  `Calle` varchar(100) DEFAULT NULL,
-  `Colonia` varchar(100) DEFAULT NULL,
-  `Numero` varchar(10) DEFAULT NULL,
-  `Estado` varchar(50) DEFAULT NULL,
-  `CodigoPostal` varchar(10) DEFAULT NULL,
-  `Municipio` varchar(50) DEFAULT NULL,
+  `Correo` varchar(255) NOT NULL,
+  `DomicilioFiscal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `Descripcion` text,
   `Logo` varchar(255) DEFAULT NULL,
   `Actividades` text,
   `Vacantes` int DEFAULT '0',
   `Validada` tinyint(1) DEFAULT '0',
+  `PracticasExtraordinarias` int DEFAULT NULL,
   PRIMARY KEY (`IdEmpresa`),
   UNIQUE KEY `RFC` (`RFC`),
   KEY `IdUsuario` (`IdUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `empresas`
 --
 
-INSERT INTO `empresas` (`IdEmpresa`, `IdUsuario`, `Nombre`, `RFC`, `Telefono`, `Calle`, `Colonia`, `Numero`, `Estado`, `CodigoPostal`, `Municipio`, `Descripcion`, `Logo`, `Actividades`, `Vacantes`, `Validada`) VALUES
-(1, NULL, 'Tech Solutions S.A.', 'TSO123456XYZ', '3322456789', 'Av. Tecnológica', 'Parques Industriales', '123', 'Jalisco', '45100', 'Zapopan', 'Empresa dedicada al desarrollo de software empresarial.', 'https://example.com/logo.png', 'Desarrollo de software, consultoría IT', 5, 1),
-(2, 3, 'sdaf', 'ZYB150127NW3', '3318879514', 'arra', '2', '1841', '2', '44571', '2', 'aasfaf', 'C:\\fakepath\\WhatsApp Image 2025-05-03 at 10.26.28 PM.jpeg', 'yes', 12, NULL),
-(3, 4, 'Citlaly Lizeth Cruz Gomez', 'ZYB1501275W3', '3318879514', 'arra', '2', '1841', '2', '44571', 'w', 'sdadasd', 'C:\\fakepath\\WhatsApp Image 2025-05-03 at 8.32.10 PM (3).jpeg', 'yes', 10, NULL),
-(4, 5, 'LizPro', 'JFSN621121GB1', '22222', 's', 's', 's', '23', '44502', '3', 'yessuperpro', 'C:\\fakepath\\orden-58984.jpg', 'ssss', 10, NULL);
+INSERT INTO `empresas` (`IdEmpresa`, `IdUsuario`, `Nombre`, `RFC`, `Telefono`, `Correo`, `DomicilioFiscal`, `Descripcion`, `Logo`, `Actividades`, `Vacantes`, `Validada`, `PracticasExtraordinarias`) VALUES
+(1, NULL, 'Tech Solutions S.A.', 'TSO123456XYZ', '3322456789', 'a', 'Av. Tecnológica', 'Empresa dedicada al desarrollo de software empresarial.', 'https://example.com/logo.png', 'Desarrollo de software, consultoría IT', 2, 1, NULL),
+(2, 3, 'sdaf', 'ZYB150127NW3', '3318879514', 'e', 'arra', 'aasfaf', 'C:\\fakepath\\WhatsApp Image 2025-05-03 at 10.26.28 PM.jpeg', 'yes', 10, NULL, NULL),
+(3, 4, 'Citlaly Lizeth Cruz Gomez', 'ZYB1501275W3', '3318879514', 'i', 'arra', 'sdadasd', 'C:\\fakepath\\WhatsApp Image 2025-05-03 at 8.32.10 PM (3).jpeg', 'yes', 8, NULL, NULL),
+(4, 5, 'LizPro', 'JFSN621121GB1', '22222', '', 's', 'yessuperpro', 'C:\\fakepath\\orden-58984.jpg', 'ssss', 8, NULL, NULL),
+(5, 14, 'Yes', 'ZYB1505275W6', '3318879514', '', 'arra', 'fasfasf', 'WhatsApp Image 2025-05-03 at 8.32.10 PM (3).jpeg', 'yes', 4, NULL, NULL),
+(6, 15, 'Empresa X', 'XYB150127NW3', '331875145', '', 'arra', 'Esta es solo una empresa x ', '1508px-Escudo_UdeG.svg.png', 'Ser muy x', 10, NULL, NULL),
+(7, 16, 'Empresa X', 'XYB150127NW8', '331875145', '', 'arra', 'Esta es solo una empresa x ', 'WhatsApp Image 2025-05-03 at 8.32.10 PM (3).jpeg', 'Ser muy x', 10, NULL, NULL),
+(8, 17, 'Empresa X', 'vYB150127NW8', '331875145', '', 'arra', 'Esta es solo una empresa x ', NULL, 'Ser muy x', 10, NULL, NULL),
+(9, 18, 'Empresa X', 'vtB150127NW8', '331875145', '', 'arra', 'Esta es solo una empresa x ', 'WhatsApp Image 2025-05-03 at 8.32.10 PM (3).jpeg', 'Ser muy x', 10, NULL, NULL),
+(10, 21, 'empresa ', '3424325235', '232424', '', 'yes1', 'empresa y nada mas', NULL, 'ewtfnk', 10, NULL, NULL),
+(12, 23, 'empresaaa', '344325235', '232424', '', 'yes1', 'empresa y nada mas', NULL, 'ewtfnk', 10, NULL, NULL),
+(13, 24, 'empresaaaaaa', '3t4325235', '232424', '', 'yes1', 'empresa y nada mas', NULL, 'ewtfnk', 10, NULL, NULL),
+(14, 25, 'empresaaaaaaa', '3t43a25235', '232424', '', 'yes1', 'empresa y nada mas', '1747082544608-1508px-Escudo_UdeG.svg.png', 'ewtfnk', 10, NULL, NULL),
+(15, 26, 'empresaaaaaaa', '3t43a252a35', '232424', '', 'yes1', 'empresa y nada mas', '1747082684488-1508px-Escudo_UdeG.svg.png', 'ewtfnk', 10, NULL, NULL),
+(16, 27, 'empresaaaaaaaa', '3t43aa252a35', '232424', '', 'yes1', 'empresa y nada mas', '1747083215991-1508px-Escudo_UdeG.svg.png', 'ewtfnk', 10, NULL, NULL),
+(17, 28, 'Empresa', '1254124dsf', '333333', '', 'arra', 'empresa', '1747089290790-1508px-Escudo_UdeG.svg.png', 'asdda', 10, NULL, NULL),
+(18, 29, 'EmpresaSupercool', 'ZYB150527XXX', '3318879514', '', 'Rio Autlan 1824, Atlas, 44870, Guadalajara, Jalisco', 'mucha empresa', '1747256465322-WhatsApp Image 2025-05-03 at 10.26.28 PM.jpeg', 'Hacer cosas cool', 10, NULL, NULL),
+(19, 34, 'aaa', 'ZYB150xxxxxx', '3318879514', 'aaaa@aaaa', 'Rio Autlan 1841, Atlas, 44870, Guadalajara, Jalisco', 'aaa', '1747260421664-aaa', 'aaa', 10, 0, 0),
+(20, 35, 'e', 'xxxxxxxx', '232424', 'citlaly@gmail', 'Rio Autlan 11213, ALTA12, 44870, Guadalajara, Jalisco', 'e\n\ne\ne\ne\n\nee\n', '1747260599248-undefined', 'yes', 5, 0, 0),
+(21, 36, 'e', 'xxxx', '3318879514', '22@222222', 'w w, w, w, w, w', 'e\ne\n', '1747260670455-undefined', 'xxx', 12, 0, 0),
+(22, 37, 'err', 'xxxasda', '3318879514', '12@12', 'Rio Autlan 1824, Atlas, w, Guadalajara, SADF', 'erer\n\n', '1747262655665-WhatsApp Image 2025-05-03 at 8.32.10 PM (3).jpeg', 'yes', 12, 0, 0),
+(24, 39, 'Citlaly Lizeth Cruz Gomez', 'XXXXTR', '3318879514', 'citlaly@gmaile', '123 123, 31, 313, 31, 13', '123', '1747263992190-WhatsApp Image 2025-05-03 at 10.26.28 PM.jpeg', 'yes', 12, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -163,6 +186,30 @@ CREATE TABLE IF NOT EXISTS `opinionempresa` (
   KEY `IdEmpresa` (`IdEmpresa`)
 ) ;
 
+--
+-- Volcado de datos para la tabla `opinionempresa`
+--
+
+INSERT INTO `opinionempresa` (`IdOpinion`, `IdUsuario`, `IdEmpresa`, `Opinion`, `Calificacion`) VALUES
+(1, 12, 1, 'Muy buena empresa, aprendí mucho.', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `token`
+--
+
+DROP TABLE IF EXISTS `token`;
+CREATE TABLE IF NOT EXISTS `token` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `Token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Fecha_registro` datetime NOT NULL,
+  `Fecha_vencimiento` datetime NOT NULL,
+  `Correo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Intentos` int NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- --------------------------------------------------------
 
 --
@@ -178,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `Rol` enum('coordinador','alumno','empresa','jefe de departamento') NOT NULL,
   PRIMARY KEY (`IdUsuario`),
   UNIQUE KEY `Correo` (`Correo`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -187,7 +234,27 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 INSERT INTO `usuarios` (`IdUsuario`, `Correo`, `Contrasena`, `Nombre`, `Rol`) VALUES
 (3, '22@2', '$2b$10$IKiv2B./r6Ea.kzPuHFhsuiy0T3Cogc2riFBCxloew8UhIS6F9fQq', 'sdaf', 'empresa'),
 (4, '22@2222', '$2b$10$nbJ0pAKDcg6MEOiiANqDh.OnbBPFBB0F12CF4Ch5MGJ.lV1aEfDw.', 'Citlaly Lizeth Cruz Gomez', 'empresa'),
-(5, 'citlaly.cruz2175@alumnos.udg.mx', '$2b$10$BEqtdTPFjP/h.voT0QbaHe2tXQvDDOR11mAjKrFy8FKlAXqH5wjCG', 'LizPro', 'empresa');
+(5, 'citlaly.cruz2175@alumnos.udg.mx', '$2b$10$BEqtdTPFjP/h.voT0QbaHe2tXQvDDOR11mAjKrFy8FKlAXqH5wjCG', 'LizPro', 'empresa'),
+(11, 'liz@alumnos.udg.mx', '$2b$10$zhGEh/0RFEEoVX3ee2MuK.d8R2T3Nc2QXuMD7zA3mEnflwzNdUy42', 'liz', 'alumno'),
+(12, 'liza@alumnos.udg.mx', '$2b$10$ReZfWmdW3i2bDftVH8qeCen.QkdsaS/BzGkL8gnkiIyWxwtfwkhoC', 'lize', 'alumno'),
+(14, '22@2256', '$2b$10$gYZrztHLAVtL.6zECHSiuuJekGX5i1bGtC0Gf70ZmvD2AGNMcDMpy', 'Yes', 'empresa'),
+(15, 'empresax@gmail.com', '$2b$10$hYXuSTXxsaFPx0revD5rWOG/nEMu7wZemcZOCXujGq741jMQxCNDe', 'Empresa X', 'empresa'),
+(16, 'empresaxxx@gmail.com', '$2b$10$XWM5xiB06Aa9ICcxq9g1IuU2sQP35xeKM9MP9ckUPBf1XgYjZYhUu', 'Empresa X', 'empresa'),
+(17, 'empresaxxxxx@gmail.com', '$2b$10$8m874S9A0.QyQpldRVJ2AuWOSv4QZt1OqhE9/OiiLQM259zoVmtYe', 'Empresa X', 'empresa'),
+(18, 'empresssaxxxxx@gmail.com', '$2b$10$JHeysuDAf9/zVOvWKfxXJ.ttuwp1vztUedVqXzOGAWgpr3yt3nnZC', 'Empresa X', 'empresa'),
+(21, 'emres@gmail.com', '$2b$10$zt8JklTkFgWiHpbZvYWwAO19xkYYysjmMp1upGAPOLgo4VWhP0GzG', 'empresa ', 'empresa'),
+(23, 'emresas@gmail.com', '$2b$10$1mWV7Th3/0EP.DQdaFuPxO0IJsJn/cm1cT2Fxnpo624am1AjuYX4.', 'empresaaa', 'empresa'),
+(24, 'emresaaaas@gmail.com', '$2b$10$dGSBOybc.6LMppbcR6bi6utNzImrmZ1BBpyePjyzK7EJawMIC20Nm', 'empresaaaaaa', 'empresa'),
+(25, 'emresaaaaas@gmail.com', '$2b$10$rdxh.BJoQRIQ50eRpTbQ3ed3ogETsQtNX1FTZTAXGhpZWLQaSAk/C', 'empresaaaaaaa', 'empresa'),
+(26, 'emresaaaaaas@gmail.com', '$2b$10$Whvy9h/kM3zf6AdK2OO/1eAJQcMB7Ev3TiA8q53no/mXppdstF6w.', 'empresaaaaaaa', 'empresa'),
+(27, 'emresaaaaasdaaaas@gmail.com', '$2b$10$lW5brPMgpQbJGcSQgc76megw9KCfub4f4.rL5P5C1Kce62965MpNC', 'empresaaaaaaaa', 'empresa'),
+(28, 'empres@gma', '$2b$10$.MXzOpJgeKSy9jV2.Zfxw.aQLi3VCPqgjFGgFjF5mTgpJ6SXG9vHC', 'Empresa', 'empresa'),
+(29, 'empresa@empresasupercool', '$2b$10$/Kz6qI/aPDuX6t4x9muw7.cOOii5TiZKcrOUOi1k4kcrfCsWoch5e', 'EmpresaSupercool', 'empresa'),
+(34, 'aaaa@aaaa', '$2b$10$DlxmvxcqGfXCxsiw4Zh6tuW7.zm5TvP4zRNf5oNB9f689sBlf5.te', 'aaa', 'empresa'),
+(35, 'citlaly@gmail', '$2b$10$l9BnlF70RYwQCB0kjwAYh.Lxp.XlJiJ01ZyI1d7BL7aMltDV/wkCa', 'e', 'empresa'),
+(36, '22@222222', '$2b$10$7KpKkCQ7IHwuehYpq3Cz3.G5NTy1YToRgm5L1bvy5Rm2H1EVtbfNW', 'e', 'empresa'),
+(37, '12@12', '$2b$10$bcnTiNrE7jUT0dyuZFN9TefPu.mT08lOt5iZOyVZGLJNheCqsGz9G', 'err', 'empresa'),
+(39, 'citlaly@gmaile', '$2b$10$3tVP1zQ2kMglELDNBo4Jj.SAKtEFyFHCdjOJia8bCO8PC5mcgPQ1y', 'Citlaly Lizeth Cruz Gomez', 'empresa');
 
 --
 -- Restricciones para tablas volcadas
