@@ -17,6 +17,7 @@ export async function crearEmpresa(formData) {
 
 export async function obtenerEmpresas({ pagina = 1, limite = 20, validada = null, vacantes = false } = {}) {
   try {
+    console.log (validada);
     const params = {
       pagina,
       limite,
@@ -41,6 +42,21 @@ export async function obtenerEmpresa() {
   try {
     const response = await api.get(
       router.EMPRESAS + endpoints.EMPRESAS.OBTENER_EMPRESA,
+    );
+
+    console.log (response)
+    return response.data.data;; 
+  } catch (error) {
+    console.error("Error al obtener empresa:", error);
+    throw error;
+  }
+}
+
+export async function modificarDatosEmpresa(data) {
+  try {
+    const response = await api.put(
+      router.EMPRESAS + endpoints.EMPRESAS.MODIFICAR_EMPRESA,
+      data
     );
 
     console.log (response)

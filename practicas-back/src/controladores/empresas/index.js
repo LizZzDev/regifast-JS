@@ -1,6 +1,7 @@
 import obtenerEmpresasServicio from "./obtenerEmpresas.js";
 import obtenerEmpresaServicio from "./obtenerEmpresa.js";
 import crearEmpresaServicio from "./crearEmpresa.js";
+import modificarDatosEmpresaService from "./modificarDatosEmpresa.js";
 
 export const obtenerEmpresas = async (req, res) => {
     try {
@@ -38,6 +39,17 @@ export const crearEmpresa = async (req, res) => {
   } catch (error) {
     console.error("Error al crear empresa:", error.message);
     return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+
+export const modificarDatosEmpresa = async (req, res) => {
+  try {
+    const response = await modificarDatosEmpresaService(req);
+    res.status(201).json({ success: true, data: response });
+  } catch (error) {
+    console.error("Error al modificar datos de la empresa:", error.message);
+    return res.status(500).json({ success: false, message: error });
   }
 };
 

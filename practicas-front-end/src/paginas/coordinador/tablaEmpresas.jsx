@@ -10,7 +10,8 @@ const TablaEmpresas = () => {
   useEffect(() => {
     const cargarEmpresas = async () => {
       try {
-        const datos = await obtenerEmpresas();
+        const validada = true;
+        const datos = await obtenerEmpresas({validada});
         setEmpresas(datos.empresas);
       } catch (error) {
         console.error('Error al cargar empresas:', error);
@@ -42,8 +43,8 @@ const TablaEmpresas = () => {
               <section id="navegacion2">
                 <a href="#">EMPRESAS</a>
                 <div className="submenu2">
-                  <a href="/empresas/verificadas" className="opcion">Verificadas</a>
-                  <a href="/empresas/sin-verificar" className="opcion">Sin verificar</a>
+                  <a href="/coordinador/verificadas" className="opcion">Verificadas</a>
+                  <a href="/coordinador/sin-verificar" className="opcion">Sin verificar</a>
                 </div>
               </section>
             </li>

@@ -6,7 +6,6 @@ import {
     asignarFechaIngresoPorCalificaciones,
     anadirEmpresa,
     modificarDatosDelAlumno,
-    modificarDatosEmpresa,
     obtenerAlumnos,
     obtenerAlumno, 
     validarAlumno,
@@ -20,10 +19,9 @@ router.get('/obtenerAlumnos', obtenerAlumnos);
 router.get('/obtenerAlumno', obtenerAlumno);
 router.get('/obtenerBarraStatusParaEstadisticas', obtenerBarraStatusParaEstadisticas);
 router.post('/anadirEmpresa', verificarSesion, soloCoordinador, anadirEmpresa);
-router.put('/modificarDatosEmpresa', verificarSesion, soloCoordinador, modificarDatosEmpresa);
 router.put('/asignarFechaIngresoPorCalificaciones', verificarSesion, soloCoordinador, asignarFechaIngresoPorCalificaciones);
 router.put('/modificarDatosAlumno', modificarDatosDelAlumno);
 router.put('/validarAlumno', verificarSesion, soloCoordinador, validarAlumno);
-router.put('/validarEmpresa', verificarSesion, soloCoordinador, validarEmpresa);
+router.put('/validarEmpresa', verificarSesion, validarEmpresa);
 
 export default router;

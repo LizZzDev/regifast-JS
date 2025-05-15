@@ -1,6 +1,7 @@
 import express from 'express';
 import Empresa from "../../modelos/modeloEmpresa.js";
 
+
 const modificarDatosDeLaEmpresa = async (req, res) => {
   const { datos, idUsuario } = req.body;
   

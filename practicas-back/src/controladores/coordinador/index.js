@@ -4,7 +4,6 @@ import obtenerAlumnoService from "./obtenerAlumno.js";
 import validarAlumnoService from "./validarAlumno.js";
 import validarEmpresaService from "./validarEmpresa.js";
 import obtenerBarraStatusParaEstadisticasService from "./obtenerBarraStatusParaEstadisticas.js";
-import modificarDatosEmpresaService from "./modificarDatosEmpresa.js";
 import anadirEmpresaService from "./anadirEmpresa.js";
 import asignarFechaIngresoPorCalificacionesService from "./asignarFechaIngresoPorCalificaciones.js";
 
@@ -34,16 +33,6 @@ export const modificarDatosDelAlumno = async (req, res) => {
     res.status(201).json({ success: true, data: response });
   } catch (error) {
     console.error("Error al modificar datos del alumno:", error.message);
-    return res.status(500).json({ success: false, message: error });
-  }
-};
-
-export const modificarDatosEmpresa = async (req, res) => {
-  try {
-    const response = await modificarDatosEmpresaService(req);
-    res.status(201).json({ success: true, data: response });
-  } catch (error) {
-    console.error("Error al modificar datos de la empresa:", error.message);
     return res.status(500).json({ success: false, message: error });
   }
 };

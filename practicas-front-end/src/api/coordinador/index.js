@@ -30,7 +30,7 @@ export async function asignarFechaIngresoPorCalificacion(data) {
 
 export async function modificarDatosAlumno(data) {
   try {
-    const response = await api.post(
+    const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.MODIFICAR_DATOS_ALUMNO,
       data,
     );
@@ -77,11 +77,11 @@ export async function obtenerBarraStatusParaEstadisticas() {
   }
 }
 
-export async function validarAlumno(data) {
+export async function validarAlumno(idAlumno) {
   try {
-    const response = await api.post(
+    const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.VALIDAR_ALUMNO,
-      data,
+      { idAlumno }
     );
     return response.data.data;;
   } catch (error) {
@@ -90,12 +90,14 @@ export async function validarAlumno(data) {
   }
 }
 
-export async function validarEmpresa(data) {
+export async function validarEmpresa(idEmpresa) {
   try {
-    const response = await api.post(
+    const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.VALIDAR_EMPRESA,
-      data,
+      { idEmpresa }
     );
+
+    console.log (idEmpresa, response)
     return response.data.data;;
   } catch (error) {
     console.error("Error en validar empresa:", error);

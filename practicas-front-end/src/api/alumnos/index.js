@@ -82,7 +82,7 @@
 
   export async function postularOfertaEmpresa(data) {
     try {
-      const response = await api.post(
+      const response = await api.put(
         router.ALUMNOS + endpoints.ALUMNOS.POSTULAR_OFERTA_EMPRESA,
         data,
       );

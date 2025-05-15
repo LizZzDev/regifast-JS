@@ -1,41 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import './ver_empresas_sin_verificar.css';
+import { obtenerEmpresas } from '../../api/empresas';
+import { validarEmpresa } from '../../api/coordinador';
 
-const EmpresasSinVerificar = () => {
-  const [empresas, setEmpresas] = useState([]);
+const EmpresasSinVerificar = () => {  
+   const [empresas, setEmpresas] = useState([]);
 
   useEffect(() => {
-    fetch('/api/empresas/no-verificadas') // Cambia según tu ruta real en Express
-      .then((res) => res.json())
-      .then((data) => setEmpresas(data))
-      .catch((error) => console.error('Error al obtener empresas:', error));
-  }, []);
-
-  const validarEmpresa = async (empresa) => {
-    try {
-      const response = await fetch('/api/empresas/validar', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          rfc: empresa.rfc,
-          nombre: empresa.nombre,
-          telefono: empresa.telefono,
-          descripcion: empresa.descripcion,
-          actividades: empresa.actividades,
-          vacantes: empresa.vacantes,
-          logo: empresa.logo,
-          DomicilioFiscal: `${empresa.calle}, ${empresa.numero}, ${empresa.colonia}, ${empresa.municipio}, ${empresa.estado}, CP: ${empresa.codigo_postal}`
-        })
-      });
-
-      if (response.ok) {
-        alert('Empresa validada correctamente.');
-        setEmpresas(empresas.filter(e => e.rfc !== empresa.rfc));
-      } else {
-        alert('Error al validar la empresa.');
+    const cargarEmpresas = async () => {
+      try {
+        const validada = false;
+        const datos = await obtenerEmpresas({validada});
+        setEmpresas(datos.empresas);
+      } catch (error) {
+        console.error('Error al cargar empresas:', error);
       }
+    };
+
+    cargarEmpresas();
+  }, []); 
+
+  const validarEmpresaConst = async (idEmpresa) => {
+    try {
+        await validarEmpresa(idEmpresa);
+        
+        const validada = false;
+        const datos = await obtenerEmpresas({ validada });
+        setEmpresas(datos.empresas);
     } catch (error) {
       console.error('Error al enviar datos de validación:', error);
     }
@@ -55,8 +46,8 @@ const EmpresasSinVerificar = () => {
               <section id="navegacion2">
                 <a href="#">EMPRESAS</a>
                 <div className="submenu2">
-                  <a href="/empresas/verificadas" className="opcion">Verificadas</a>
-                  <a href="/empresas/sin-verificar" className="opcion">Sin verificar</a>
+                   <a href="/coordinador/verificadas" className="opcion">Verificadas</a>
+                  <a href="/coordinador/sin-verificar" className="opcion">Sin verificar</a>
                 </div>
               </section>
             </li>
@@ -81,6 +72,7 @@ const EmpresasSinVerificar = () => {
               <tr>
                 <th>Nombre de la empresa</th>
                 <th>Teléfono</th>
+                <th>Correo</th>
                 <th>RFC</th>
                 <th>Descripción</th>
                 <th>Actividades</th>
@@ -91,18 +83,18 @@ const EmpresasSinVerificar = () => {
             </thead>
             <tbody>
               {empresas.map((empresa) => {
-                const domicilio = `${empresa.calle}, ${empresa.numero}, ${empresa.colonia}, ${empresa.municipio}, ${empresa.estado}, CP: ${empresa.codigo_postal}`;
                 return (
-                  <tr key={empresa.rfc}>
-                    <td>{empresa.nombre}</td>
-                    <td>{empresa.telefono}</td>
-                    <td>{empresa.rfc}</td>
-                    <td>{empresa.descripcion}</td>
-                    <td>{empresa.actividades}</td>
-                    <td>{domicilio}</td>
-                    <td>{empresa.vacantes}</td>
+                  <tr key={empresa.RFC}>
+                     <td>{empresa.Nombre}</td>
+                    <td>{empresa.Telefono}</td>
+                    <td>{empresa.Correo}</td>
+                    <td>{empresa.RFC}</td>
+                    <td>{empresa.Descripcion}</td>
+                    <td>{empresa.Actividades}</td>
+                    <td>{empresa.DomicilioFiscal}</td>
+                    <td>{empresa.Vacantes}</td>
                     <td>
-                      <button className="validar" onClick={() => validarEmpresa(empresa)}>
+                      <button className="validar" onClick={() => validarEmpresaConst(empresa.IdUsuario)}>
                         Validar
                       </button>
                     </td>

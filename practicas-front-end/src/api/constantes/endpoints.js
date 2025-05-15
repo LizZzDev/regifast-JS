@@ -32,5 +32,6 @@ export const endpoints = {
       OBTENER_EMPRESA: '/obtenerEmpresa',
       OBTENER_EMPRESAS: '/obtenerEmpresas',
       CREAR_EMPRESA: '/crearEmpresa',
+      MODIFICAR_EMPRESA: '/modificarEmpresa'
     },
   };

@@ -5,8 +5,8 @@ import TablaEmpresasSinVerificar from '../paginas/coordinador/tablaEmpresasSinVe
 
 const RutasCoordinador = () => (
     <Routes>
-        <Route path="/tablaEmpresas" element={<TablaEmpreass />} />
-        <Route path="/tablaEmpresasSinVerificar" element={<TablaEmpresasSinVerificar />} />
+        <Route path="/verificadas" element={<TablaEmpreass />} />
+        <Route path="/sin-verificar" element={<TablaEmpresasSinVerificar />} />
 
     </Routes>
 );
