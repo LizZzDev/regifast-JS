@@ -1,0 +1,17 @@
+input[type="number"] {
+    width: calc(100% - 40px);
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+select[name="carreras"],
+select[name="grado"],
+select[name="grupo"],
+select[name="turno"]{
+    width: calc(25% - 40px);
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
