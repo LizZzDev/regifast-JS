@@ -69,5 +69,5 @@ header {
 canvas {
   max-width: 850px; /* tmaño del gráfico */
   width: 100%;
-  height: auto;
+  height: 100%;
 }

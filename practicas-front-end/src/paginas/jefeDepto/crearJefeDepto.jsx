@@ -42,7 +42,7 @@ function CrearNuevoAdmin() {
     <div className="page">
       <header>
         <section id="nomUDG">
-          <img src="/img/Logo_UDG_horiz_blanco-01.svg" alt="Logo UDG" />
+          <img src="./img/udg_white.png" alt="Logo UDG" />
         </section>
         <nav className="menu">
           <ul>
