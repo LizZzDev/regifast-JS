@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./ver_alumnos_al_validar.css";
+import "./ver_alumnos_validar.css";
 
 function ValidacionAlumnos() {
   const [alumnos, setAlumnos] = useState([]);

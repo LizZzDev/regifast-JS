@@ -77,11 +77,11 @@ export async function obtenerBarraStatusParaEstadisticas() {
   }
 }
 
-export async function validarAlumno(idAlumno) {
+export async function validarAlumno(idUsuario) {
   try {
     const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.VALIDAR_ALUMNO,
-      { idAlumno }
+      { idUsuario: idUsuario }
     );
     return response.data.data;;
   } catch (error) {
@@ -90,14 +90,14 @@ export async function validarAlumno(idAlumno) {
   }
 }
 
-export async function validarEmpresa(idEmpresa) {
+export async function validarEmpresa(idUsuario) {
   try {
     const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.VALIDAR_EMPRESA,
-      { idEmpresa }
+      { idUsuario: idUsuario }
     );
 
-    console.log (idEmpresa, response)
+    console.log (idUsuario, response)
     return response.data.data;;
   } catch (error) {
     console.error("Error en validar empresa:", error);

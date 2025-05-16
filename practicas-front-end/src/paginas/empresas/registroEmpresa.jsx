@@ -129,6 +129,19 @@ const RegistroEmpresa = () => {
         <input type="text" name="actividades" placeholder="Actividades" value={formData.actividades} onChange={handleChange} required />
         <input type="number" name="vacantes" placeholder="Vacantes" value={formData.vacantes} onChange={handleChange} required />
 
+        <select name="carreras" required>
+          <option value="">Seleccionar preferencia de carrera</option>
+          <option value="TPSI">TPSI</option>
+          <option value="TPAL">TPAL</option>
+          <option value="TPEI">TPEI</option>
+          <option value="TPPQ">TPPQ</option>
+          <option value="TPMF">TPMF</option>
+          <option value="TPMI">TPMI</option>
+          <option value="TPPL">TPPL</option>
+          <option value="BTDC">BTDC</option>
+          <option value="BTQM">BTQM</option>
+        </select>
+
         <input type="password" name="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} required />
         <input type="password" name="confirm_password" placeholder="Confirmar contraseña" value={formData.confirm_password} onChange={handleChange} required />
         <div>Fuerza: {fuerza}</div>
