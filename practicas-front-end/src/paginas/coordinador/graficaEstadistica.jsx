@@ -25,7 +25,8 @@ const Estadistica = () => {
     if (datos) {
       const ctx = document.getElementById('myChart').getContext('2d');
       new Chart(ctx, {
-        type: 'bar',
+        
+        type: 'pie',
         data: {
           labels: ['Revisión', 'Selección de empresa', 'Documentación', 'En prácticas'],
           datasets: [{
