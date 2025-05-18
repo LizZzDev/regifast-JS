@@ -58,16 +58,6 @@ const CalificacionEmpresa = () => {
   return (
     <div>
       <Header/>
-
-<<<<<<< HEAD
-      <body>
-        <Header />
-          <nav className="menu">
-            <ul>
-              <li><a href="/principalAlumno">INICIO</a></li>
-            </ul>
-          </nav>
-=======
       <main>
         <article id="TituloNombreEmpresa">
           <h1 className='colorLetra'>Opiniones y calificación de {empresa.Nombre}</h1>
@@ -77,7 +67,6 @@ const CalificacionEmpresa = () => {
           <section className="LogoDeLaEmpresa">
             <img id="logoempresa" src={`http://localhost:3000/logos/${empresa.Logo}`} alt="Logo de la empresa" />
           </section>
->>>>>>> ccbf776f6d20ec0686198a457f08eb75e197c493
 
           <section className="Calificacion">
             <section className="Barras">
