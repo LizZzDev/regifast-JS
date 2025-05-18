@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // <--- IMPORTANTE
 import { obtenerEmpresas } from '../../api/empresas';
 import './ver_empresas.css';
+import Header from "../../componentes/header.jsx";
 
 const TablaEmpresas = () => {
   const [empresas, setEmpresas] = useState([]);
@@ -27,10 +28,8 @@ const TablaEmpresas = () => {
 
   return (
     <div className="montserrat">
-      <header>
-        <section id="nomUDG">
-          <img src="/img/Logo_UDG_horiz_blanco-01.svg" alt="Logo UDG" />
-        </section>
+      <Header />
+
         <nav className="menu">
           <ul>
             <li><a href="/inicio">INICIO</a></li>
@@ -60,8 +59,6 @@ const TablaEmpresas = () => {
             </li>
           </ul>
         </nav>
-      </header>
-
       <main>
         <section id="tabla">
           <table className="montserrat em2">

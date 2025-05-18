@@ -74,7 +74,16 @@ const BarraStatus = () => {
   return (
     <div className="montserrat">
       <Header/>
-      
+
+      <nav className="menu">
+        <ul>
+          <li><a href="/calificar-empresa">CALIFICAR EMPRESA</a></li>
+          <li><a href="/consultar-oferta">CONSULTAR OFERTA</a></li>
+          <li><a href="/documentos">DOCUMENTOS</a></li>
+          <li><a href="/logout">SALIR</a></li>
+        </ul>
+      </nav>
+
       <main>
         <article id="BienvenidoUsuario">
           <p id="SaludoUsuario">¡Hola, Usuario!</p>

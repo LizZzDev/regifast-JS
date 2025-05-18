@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ver_empresas_sin_verificar.css';
+import Header from "../../componentes/header.jsx";
 import { obtenerEmpresas } from '../../api/empresas';
 import { validarEmpresa } from '../../api/coordinador';
 

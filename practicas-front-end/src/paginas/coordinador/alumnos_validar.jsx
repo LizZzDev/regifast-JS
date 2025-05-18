@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./ver_alumnos_validar.css";
+import Header from "../../componentes/header.jsx";
 import { validarAlumno, obtenerAlumnos } from '../../api/coordinador';
- 
+
 
 function ValidacionAlumnos() {
   const [alumnos, setAlumnos] = useState([]);
 
   useEffect(() => {
+
+    fetch("http://localhost:3001/alumnos-proceso") 
+      .then((res) => res.json())
+      .then((data) => {
+        setAlumnos(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error al obtener alumnos:", error);
+        setLoading(false);
+      });
+  }, []);
+
     const cargarEmpresas = async () => {
       try {
         const datos = await obtenerAlumnos();
@@ -16,8 +30,9 @@ function ValidacionAlumnos() {
       }
     };
 
+
     cargarEmpresas();
-  }, []); 
+
 
   const validarAlumnoConst = async (idEmpresa) => {
     try {

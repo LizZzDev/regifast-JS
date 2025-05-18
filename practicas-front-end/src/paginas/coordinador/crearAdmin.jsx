@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./crearAdmin.css";
+import Header from "../../componentes/header.jsx";
 
 function CrearNuevoAdmin() {
   const [formData, setFormData] = useState({
