@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import PrincipalJefe from '../paginas/jefeDepto/principalJefe';
-import TablaAlumnos from '../paginas/jefeDepto/tablaAlumnos';
+import PrincipalJefe from '../paginas/jefeDepartamentos/principalJefe';
+import TablaAlumnos from '../paginas/jefeDepartamentos/tablaAlumnos';
 
 const RutasJefe = () => (
     <Routes>
