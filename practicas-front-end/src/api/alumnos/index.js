@@ -69,10 +69,32 @@
     }
   }
 
-  export async function obtenerCalificacionesEmpresa () {
+  export async function obtenerCalificacionesEmpresa (id=null) {
     try {
       const response = await api.get(
         router.ALUMNOS + endpoints.ALUMNOS.OBTENER_CALIFICACIONES_DE_LA_EMPRESA,
+        {
+          params: {
+          id: id, 
+        }
+        }
+      );
+      return response.data.data;;
+    } catch (error) {
+      console.error("Error en obtener calificaciones de las empresas:", error);
+      throw error;
+    }
+  }
+
+    export async function obtenerEmpresaParaUsuario (id=null) {
+    try {
+      const response = await api.get(
+        router.ALUMNOS + endpoints.ALUMNOS.OBTENER_EMPRESA_PARA_USUARIO,
+        {
+          params: {
+          id: id, 
+        }
+        }
       );
       return response.data.data;;
     } catch (error) {

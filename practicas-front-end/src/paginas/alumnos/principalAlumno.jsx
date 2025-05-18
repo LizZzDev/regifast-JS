@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './principalAlumno.css';
 import Header from '../../componentes/alumnos/header';
+import { obtenerBarraStatus } from '../../api/alumnos';
 
 const BarraStatus = () => {
   // Estado para el progreso (simulando el valor que vendría de PHP)
-  const [progreso, setProgreso] = useState(1); // Valor inicial, puedes cambiarlo o cargarlo desde una API
-  
+  const [progreso, setProgreso] = useState(); 
+
   // Datos para la barra de progreso
   const [pasos, setPasos] = useState([
     {
@@ -38,7 +39,21 @@ const BarraStatus = () => {
     }
   ]);
 
-  // Efecto para actualizar el estado de los pasos cuando cambia el progreso
+
+  useEffect(() => {
+      const cargarBarraStatus = async () => {
+        try {
+          const datos = await obtenerBarraStatus();
+          setProgreso(datos);
+        } catch (error) {
+          console.error('Error al cargar empresas:', error);
+        }
+      };
+  
+      cargarBarraStatus();
+    }, []); 
+
+ // Efecto para actualizar el estado de los pasos cuando cambia el progreso
   useEffect(() => {
     const pasosActualizados = pasos.map((paso) => ({
       ...paso,

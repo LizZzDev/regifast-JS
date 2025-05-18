@@ -14,6 +14,7 @@ export const endpoints = {
       MOSTRAR_EMPRESA_SELECCIONADA: '/mostrarEmpresaSeleccionada',
       OBTENER_BARRA_STATUS: '/obtenerBarraStatus',
       OBTENER_CALIFICACIONES_DE_LA_EMPRESA: '/obtenerCalificarEmpresa',
+      OBTENER_EMPRESA_PARA_USUARIO: '/obtenerEmpresaParaUsuario',
       POSTULAR_OFERTA_EMPRESA: '/postularOfertaEmpresa',
     },
 
