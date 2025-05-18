@@ -1,8 +1,38 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../../componentes/header.jsx";
 import { iniciarSesion } from "../../api/usuarios/index.js";
 import "../usuarios/styles.css";  
-  
+
+const LoginAlumnos = ({ onLogin }) => {
+  const [correo, setCorreo] = useState("");
+  const [password, setPassword] = useState("");
+  const [mensaje, setMensaje] = useState("");
+  const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+
+
+    if (correo && password) {
+      try {
+      console.log (correo, password);
+
+        const usuario = await iniciarSesion({ correo, contrasena: password }); // llamada al backend
+        onLogin?.(usuario); 
+        if (usuario?.rol === "empresa") {
+          navigate("/alumno/principal");
+        } else {
+          navigate("/no-autorizado"); 
+        }
+      } catch (error) {
+         console.error("Error al iniciar sesión:", error);
+         setMensaje("Error al iniciar sesión. Verifica tus credenciales.");
+      }
+    } else {
+      setMensaje("Por favor llena todos los campos.");
+    }
+  };
   return (
     <div>
       <Header />
@@ -42,5 +72,5 @@ import "../usuarios/styles.css";
       </section>
     </div>
   );
-
+}
   export default LoginAlumnos;

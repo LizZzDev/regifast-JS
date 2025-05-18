@@ -1,50 +1,34 @@
 import React, { useEffect, useState } from "react";
 import "./ver_alumnos_validar.css";
+import { validarAlumno, obtenerAlumnos } from '../../api/coordinador';
+ 
 
 function ValidacionAlumnos() {
   const [alumnos, setAlumnos] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3001/alumnos-proceso") // Ajusta según tu API real
-      .then((res) => res.json())
-      .then((data) => {
-        setAlumnos(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error al obtener alumnos:", error);
-        setLoading(false);
-      });
-  }, []);
+    const cargarEmpresas = async () => {
+      try {
+        const datos = await obtenerAlumnos();
+        setAlumnos(datos.empresas);
+      } catch (error) {
+        console.error('Error al cargar empresas:', error);
+      }
+    };
 
-  const validarDatos = (codigo) => {
-    const confirmacion = window.confirm("¿Estás seguro de validar tus datos?");
-    if (!confirmacion) return;
+    cargarEmpresas();
+  }, []); 
 
-    fetch("http://localhost:3001/validar-datos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ codigo }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert("Tus datos han sido validados correctamente.");
-        setAlumnos((prev) =>
-          prev.map((a) =>
-            a.codigo === codigo ? { ...a, etapa: "Validado" } : a
-          )
-        );
-      })
-      .catch((err) => {
-        console.error("Error al validar:", err);
-        alert("Hubo un error al validar tus datos.");
-      });
+  const validarAlumnoConst = async (idEmpresa) => {
+    try {
+        await validarAlumno(idEmpresa);
+    
+        const datos = await obtenerAlumnos();
+        setAlumnos(datos.empresas);
+    } catch (error) {
+      console.error('Error al enviar datos de validación:', error);
+    }
   };
-
-  if (loading) return <p>Cargando alumnos...</p>;
 
   return (
     <div className="page">
@@ -93,7 +77,7 @@ function ValidacionAlumnos() {
                   ) : (
                     <button
                       className="confirmar-btn"
-                      onClick={() => validarDatos(alumno.codigo)}
+                      onClick={() => validarAlumnoConst(alumno.codigo)}
                     >
                       Validar
                     </button>

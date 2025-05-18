@@ -1,5 +1,4 @@
 import React from 'react';
-import RegistroEmpresa from './paginas/empresas/registroEmpresa';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './paginas/usuarios/login';
 import RutasAlumnos from './rutas/RutasAlumnos';

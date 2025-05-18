@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './principalAlumno.css';
-import 'https://unicons.iconscout.com/release/v4.0.8/css/line.css';
 
 const BarraStatus = () => {
   // Estado para el progreso (simulando el valor que vendría de PHP)
