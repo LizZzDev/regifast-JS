@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
-import { obtenerBarraStatusParaEstadisticas } from "../../services/estadisticas.service";
 import { Bar } from "react-chartjs-2";
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -11,8 +10,8 @@ const BarraEstadistica = () => {
   useEffect(() => {
     async function fetchBarraData() {
       try {
-        const resultado = await obtenerBarraStatusParaEstadisticas();
-        setData(resultado);
+       // const resultado = await obtenerBarraStatusParaEstadisticas();
+       setData(1, 2, 3, 4);
       } catch (error) {
         console.error("Error al obtener datos de la gráfica", error);
       }

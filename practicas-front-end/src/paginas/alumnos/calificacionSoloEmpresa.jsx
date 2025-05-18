@@ -1,25 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './calificacionSoloEmpresa.css';
+import { obtenerEmpresa } from '../../api/empresas';
+import { obtenerCalificacionesEmpresa } from '../../api/alumnos';
+import Header from '../../componentes/alumnos/header';
 
 const CalificacionEmpresa = () => {
    const [empresa, setEmpresa] = useState([]);
-    const [opiniones, setOpiniones] = useState([]);
+    const [datosCalificacion, setDatosCalificacion] = useState([]);
 
   useEffect(() => {
-      const cargarEmpresas = async () => {
+      const cargarEmpresa = async () => {
         try {
-          const validada = true;
-          const datos = await obtenerEmpresas({validada});
+          const datos = await obtenerEmpresa();
           setEmpresa(datos.empresa);
         } catch (error) {
           console.error('Error al cargar empresas:', error);
         }
       };
   
-      cargarEmpresas();
-    }, []); // <--- TE FALTABA ESTE CORCHETE CERRANDO EL useEffect
+      cargarEmpresa();
+    }, []); 
   
-
+  useEffect(() => {
+      const cargarOpiniones = async () => {
+        try {
+          const datos = await obtenerCalificacionesEmpresa();
+          setDatosCalificacion(datos.datosCalificacion);
+        } catch (error) {
+          console.error('Error al cargar empresas:', error);
+        }
+      };
+  
+      cargarOpiniones();
+    }, []); 
+  
 
 
   const RatingStars = ({ rating }) => {
@@ -39,16 +53,7 @@ const CalificacionEmpresa = () => {
 
   return (
     <div>
-      <header>
-        <section id="nomUDG">
-          <img src="/img/udg_white.png" alt="UDG Logo" />
-        </section>
-        <nav className="menu">
-          <ul>
-            <li><a href="/principalAlumno">INICIO</a></li>
-          </ul>
-        </nav>
-      </header>
+      <Header/>
 
       <main>
         <article id="TituloNombreEmpresa">
@@ -65,19 +70,19 @@ const CalificacionEmpresa = () => {
               {/* Aquí puedes implementar barras de calificación si lo deseas */}
             </section>
             <section className="NuCalificacionMasEstrellas">
-              <p className="CalificacionNumero">{empresa.calificacion}</p>
-              <RatingStars rating={Math.round(empresa.calificacion)} />
-              <p className="NumeroOpinones">{empresa.opinionesTotal} opiniones</p>
+              <p className="CalificacionNumero">{datosCalificacion.calificacion}</p>
+              <RatingStars rating={Math.round(datosCalificacion.calificacion)} />
+              <p className="NumeroOpinones">{datosCalificacion.opinionesTotal} opiniones</p>
             </section>
           </section>
         </article>
 
         <article className="OpinionesYEstrellasUsuario">
           <section>
-            {empresa.opiniones.map((opinion, index) => (
+            {datosCalificacion.opiniones.map((opinion, index) => (
               <section key={index} className="EspacioOpinionUsuarios">
                 <p className="NombreUsuarioOpinion">{opinion.usuario}</p>
-                <RatingStars rating={opinion.calificacion} />
+                <RatingStars rating={opinion.Calificacion} />
                 <p className="OpinionUsuarioTexto">{opinion.texto}</p>
               </section>
             ))}

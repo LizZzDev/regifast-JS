@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../empresas/registro.css';
 import './registroAlumnos.css';
 import { anadirDatosDelAlumno } from '../../api/alumnos';
+import Header from '../../componentes/alumnos/header';
 
 const RegistroAlumnos = () => {
   // Estado para los datos del formulario
@@ -142,11 +142,7 @@ const handleSubmit = async (e) => {
 
   return (
     <div>
-      <header>
-        <section id="nomUDG">
-          <img src="/img/udg_white.png" alt="Logo UDG" />
-        </section>
-      </header>
+      <Header/>
 
       <article id="Formulario">
         <section id="Titulo">

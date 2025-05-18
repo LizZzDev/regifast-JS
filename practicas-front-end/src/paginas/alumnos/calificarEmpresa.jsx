@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './calificarEmpresa.css';
+import Header from '../../componentes/alumnos/header';
 
 const CalificarEmpresa = () => {
   // Datos de ejemplo que reemplazan los valores PHP
@@ -34,16 +35,7 @@ const CalificarEmpresa = () => {
 
   return (
     <div>
-      <header>
-        <section id="nomUDG">
-          <img src="../img/udg_white.png" alt="UDG Logo" />
-        </section>
-        <nav className="menu">
-          <ul>
-            <li><a href="/5barra">INICIO</a></li>
-          </ul>
-        </nav>
-      </header>
+      <Header/>
       
       <main>
         <article className="InformacionEmpresa">

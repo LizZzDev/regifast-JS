@@ -2,7 +2,7 @@ import Alumnos from "../../modelos/modeloAlumno.js";
 import Opinion from "../../modelos/modeloOpiniones.js";
 
 const obtenerCalificacionesDeLasEmpresas = async (req, res) => {    
-    const { idEmpresa } = req.body;
+    const { idEmpresa } = req.params;
     
     try { 
         const opiniones = await Opinion.obtenerOpinionesPorId(idEmpresa);

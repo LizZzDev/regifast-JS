@@ -1,5 +1,6 @@
 import React from 'react';
 import './consultarOferta.css';
+import Header from "../../componentes/alumnos/header.jsx";
 
 const ConsultarOferta = () => {
   const handleOpiniones = (empresa, logo) => {
@@ -12,16 +13,7 @@ const ConsultarOferta = () => {
 
   return (
     <div className="montserrat">
-      <header>
-        <section id="nomUDG">
-          <img src="../img/udg_white.png" alt="UDG Logo" />
-        </section>
-        <nav className="menu">
-          <ul>
-            <li><a href="principalAlumno.html">INICIO</a></li>
-          </ul>
-        </nav>
-      </header>
+      <Header/>
 
       <main>
         <section id="sectionTabla">

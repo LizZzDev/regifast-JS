@@ -5,13 +5,93 @@ input[type="number"] {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-select[name="carreras"],
-select[name="grado"],
-select[name="grupo"],
-select[name="turno"]{
-    width: calc(25% - 40px);
+@media screen and (max-width: 768px) {
+    select[name="carreras"],
+    select[name="grado"],
+    select[name="grupo"],
+    select[name="turno"] {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* General */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: rgb(249, 249, 249);
+}
+
+
+/* Formulario */
+
+#Titulo {
+    margin: 2%;
+    color:rgb(0, 0, 0);
+    display: block;
+}
+
+div {
+    width: 100%;
+}
+
+#Formulario {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 0;
+    text-align: center;
+    display: block;
+}
+#registroAlumnoForm {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 70%;
+    min-width: 60%;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+fieldset {
+    border: 2px solid #103E7E;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: left;
+}
+legend {
+    color: #000;
+    font-weight: bold;
+    padding: 0 10px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+    width: calc(100% - 40px);
     margin: 10px auto;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+#MandarInformacion {
+    background-color: #12448c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 150px;
+}
+#MandarInformacion:hover {
+    background-color: #103E7E;
+}
+
