@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './principalAlumno.css';
-import 'https://unicons.iconscout.com/release/v4.0.8/css/line.css';
+import Header from '../../componentes/alumnos/header';
 
 const BarraStatus = () => {
   // Estado para el progreso (simulando el valor que vendría de PHP)
@@ -58,8 +58,8 @@ const BarraStatus = () => {
 
   return (
     <div className="montserrat">
-      <Header />
-      
+      <Header/>
+
       <nav className="menu">
         <ul>
           <li><a href="/calificar-empresa">CALIFICAR EMPRESA</a></li>
@@ -68,7 +68,7 @@ const BarraStatus = () => {
           <li><a href="/logout">SALIR</a></li>
         </ul>
       </nav>
-      
+
       <main>
         <article id="BienvenidoUsuario">
           <p id="SaludoUsuario">¡Hola, Usuario!</p>

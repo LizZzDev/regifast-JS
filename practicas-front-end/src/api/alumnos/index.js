@@ -2,12 +2,13 @@
   import { endpoints } from '../constantes/endpoints.js';
   import api from '../auxiliares/manejarCatch.js';
 
-  export async function anadirDatosDelAlumno(data) {
+  export async function anadirDatosDelAlumno(formData) {
     try {
       const response = await api.post(
         router.ALUMNOS + endpoints.ALUMNOS.AÑADIR_DATOS,
-        data,
+        formData,
       );
+      console.log (formData);
       return response.data.data;;
     } catch (error) {
       console.error("Error en añadir datos del alumno:", error);

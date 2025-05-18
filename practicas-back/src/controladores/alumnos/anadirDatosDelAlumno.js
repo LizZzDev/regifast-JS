@@ -7,6 +7,8 @@ const anadirDatosDelAlumno = async (req, res) => {
 
   try {
 
+    console.log (req);
+
     const datos = {
       ...req.body,
       CorreoInstitucional: correo,

@@ -1,38 +1,39 @@
 import React, { useState } from 'react';
-import '../empresas/registro.css';
 import './registroAlumnos.css';
+import { anadirDatosDelAlumno } from '../../api/alumnos';
+import Header from '../../componentes/alumnos/header';
 
 const RegistroAlumnos = () => {
   // Estado para los datos del formulario
   const [formData, setFormData] = useState({
     // Datos Escolares
-    codigo: '',
-    nombre: '',
-    carreras: '',
-    grado: '',
-    grupo: '',
-    turno: '',
+    Codigo: '',
+    NombreCompleto: '',
+    Carrera: '',
+    Grado: '',
+    Grupo: '',
+    Turno: '',
     
     // Datos Generales
-    domicilio: '',
-    colonia: '',
-    municipio: '',
-    edad: '',
+    Domicilio: '',
+    Colonia: '',
+    Municipio: '',
+    Edad: '',
     NSS: '',
-    movil: '',
-    numero: '',
-    cp: '',
-    estado: '',
-    nacionalidad: '',
+    Movil: '',
+    NumeroCasa: '',
+    CodigoPostal: '',
+    Estado: '',
+    Nacionalidad: '',
     correo: '',
-    telefono: '',
-    emergencia: '',
+    Telefono: '',
+    TelefonoEmergencia: '',
     
     // Datos Familiares
-    nomPadre: '',
-    telPadre: '',
-    nomMadre: '',
-    telMadre: ''
+    NombrePadre: '',
+    TelefonoPadre: '',
+    NombreMadre: '',
+    TelefonoMadre: ''
   });
 
   // Estado para mensajes de error
@@ -57,16 +58,16 @@ const RegistroAlumnos = () => {
   };
 
   // Validación del formulario
-  const validateForm = () => {
+  const validateForm = async () => {
     const newErrors = {};
     let isValid = true;
 
     // Validación de campos requeridos
     const requiredFields = [
-      'codigo', 'nombre', 'carreras', 'grado', 'grupo', 'turno',
-      'domicilio', 'colonia', 'municipio', 'edad', 'NSS', 'movil',
-      'numero', 'cp', 'estado', 'nacionalidad', 'telefono', 'emergencia',
-      'nomPadre', 'telPadre', 'nomMadre', 'telMadre'
+      'Codigo', 'NombreCompleto', 'Carrera', 'Grado', 'Grupo', 'Turno',
+      'Domicilio', 'Colonia', 'Municipio', 'Edad', 'NSS', 'Movil',
+      'NumeroCasa', 'CodigoPostal', 'Estado', 'Nacionalidad', 'Telefono', 'TelefonoEmergencia',
+      'NombrePadre', 'TelefonoPadre', 'NombreMadre', 'TelefonoMadre'
     ];
 
     requiredFields.forEach(field => {
@@ -87,7 +88,7 @@ const RegistroAlumnos = () => {
       isValid = false;
     }
 
-    const telefonos = ['movil', 'telefono', 'emergencia', 'telPadre', 'telMadre'];
+    const telefonos = ['Movil', 'telefono', 'emergencia', 'telPadre', 'telMadre'];
     telefonos.forEach(tel => {
       if (formData[tel] && !/^\d{10}$/.test(formData[tel])) {
         newErrors[tel] = 'Debe tener 10 dígitos';
@@ -110,33 +111,38 @@ const RegistroAlumnos = () => {
       isValid = false;
     }
 
+      console.log (newErrors);
+
     setErrors(newErrors);
     return isValid;
   };
 
+
   // Manejar envío del formulario
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitAttempted(true);
-    
-    if (validateForm()) {
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setSubmitAttempted(true);
+
+   if (validateForm()) {
       if (window.confirm('¿Estás seguro de que deseas mandar la información? Una vez realizado no se puede modificar.')) {
-        // Aquí iría la lógica para enviar los datos al backend
-        console.log('Datos enviados:', formData);
-        // Ejemplo: fetch('/api/registro', { method: 'POST', body: JSON.stringify(formData) })
+        try {
+          console.log("Enviando datos:", formData);
+          await anadirDatosDelAlumno(formData);
+          alert("Registro exitoso.");
+          // Aquí podrías limpiar el formulario o redirigir, si deseas
+        } catch (error) {
+          console.error('Error al registrar alumno:', error);
+          alert("Error al registrar.");
+        }
       }
-    } else {
-      console.log('Errores en el formulario:', errors);
-    }
-  };
+   } else {
+        console.log('Errores en el formulario:', errors);
+   }
+};
 
   return (
     <div>
-      <header>
-        <section id="nomUDG">
-          <img src="/img/udg_white.png" alt="Logo UDG" />
-        </section>
-      </header>
+      <Header/>
 
       <article id="Formulario">
         <section id="Titulo">
@@ -150,31 +156,31 @@ const RegistroAlumnos = () => {
             
             <input
               type="text"
-              name="codigo"
+              name="Codigo"
               placeholder="Código"
-              value={formData.codigo}
+              value={formData.Codigo}
               onChange={handleChange}
-              className={errors.codigo ? 'error' : ''}
+              className={errors.Codigo ? 'error' : ''}
               required
             />
-            {errors.codigo && <span className="error-message">{errors.codigo}</span>}
+            {errors.Codigo && <span className="error-message">{errors.Codigo}</span>}
             
             <input
               type="text"
-              name="nombre"
+              name="NombreCompleto"
               placeholder="Nombre completo"
-              value={formData.nombre}
+              value={formData.NombreCompleto}
               onChange={handleChange}
-              className={errors.nombre ? 'error' : ''}
+              className={errors.NombreCompleto ? 'error' : ''}
               required
             />
-            {errors.nombre && <span className="error-message">{errors.nombre}</span>}
+            {errors.NombreCompleto && <span className="error-message">{errors.NombreCompleto}</span>}
             
             <select
-              name="carreras"
-              value={formData.carreras}
+              name="Carrera"
+              value={formData.Carrera}
               onChange={handleChange}
-              className={errors.carreras ? 'error' : ''}
+              className={errors.Carrera ? 'error' : ''}
               required
             >
               <option value="">Selecciona tu carrera</option>
@@ -188,46 +194,46 @@ const RegistroAlumnos = () => {
               <option value="BTDC">BTDC</option>
               <option value="BTQM">BTQM</option>
             </select>
-            {errors.carreras && <span className="error-message">{errors.carreras}</span>}
+            {errors.Carrera && <span className="error-message">{errors.Carrera}</span>}
             
             <select
-              name="grado"
-              value={formData.grado}
+              name="Grado"
+              value={formData.Grado}
               onChange={handleChange}
-              className={errors.grado ? 'error' : ''}
+              className={errors.Grado ? 'error' : ''}
               required
             >
               <option value="">Selecciona tu grado</option>
               <option value="8vo">8°</option>
               <option value="6to">6°</option>
             </select>
-            {errors.grado && <span className="error-message">{errors.grado}</span>}
+            {errors.Grado && <span className="error-message">{errors.Grado}</span>}
             
             <select
-              name="grupo"
-              value={formData.grupo}
+              name="Grupo"
+              value={formData.Grupo}
               onChange={handleChange}
-              className={errors.grupo ? 'error' : ''}
+              className={errors.Grupo ? 'error' : ''}
               required
             >
               <option value="">Selecciona tu grupo</option>
               <option value="A">A</option>
               <option value="B">B</option>
             </select>
-            {errors.grupo && <span className="error-message">{errors.grupo}</span>}
+            {errors.Grupo && <span className="error-message">{errors.Grupo}</span>}
             
             <select
-              name="turno"
-              value={formData.turno}
+              name="Turno"
+              value={formData.Turno}
               onChange={handleChange}
-              className={errors.turno ? 'error' : ''}
+              className={errors.Turno ? 'error' : ''}
               required
             >
               <option value="">Selecciona tu turno</option>
               <option value="Matutino">Matutino</option>
               <option value="Vespertino">Vespertino</option>
             </select>
-            {errors.turno && <span className="error-message">{errors.turno}</span>}
+            {errors.Turno && <span className="error-message">{errors.Turno}</span>}
           </fieldset>
 
           {/* Datos Generales */}
@@ -235,11 +241,11 @@ const RegistroAlumnos = () => {
             <legend>Datos Generales</legend>
             
             {[
-              { name: 'domicilio', placeholder: 'Domicilio', type: 'text' },
-              { name: 'colonia', placeholder: 'Colonia', type: 'text' },
-              { name: 'municipio', placeholder: 'Municipio', type: 'text' },
+              { name: 'Domicilio', placeholder: 'Domicilio', type: 'text' },
+              { name: 'Colonia', placeholder: 'Colonia', type: 'text' },
+              { name: 'Municipio', placeholder: 'Municipio', type: 'text' },
               { 
-                name: 'edad', 
+                name: 'Edad', 
                 placeholder: 'Edad', 
                 type: 'number',
                 min: 18,
@@ -253,25 +259,25 @@ const RegistroAlumnos = () => {
                 error: errors.NSS
               },
               { 
-                name: 'movil', 
+                name: 'Movil', 
                 placeholder: 'Móvil', 
                 type: 'number',
                 error: errors.movil
               },
               { 
-                name: 'numero', 
+                name: 'NumeroCasa', 
                 placeholder: 'Número exterior', 
                 type: 'number',
                 error: errors.numero
               },
               { 
-                name: 'cp', 
+                name: 'CodigoPostal', 
                 placeholder: 'Código Postal', 
                 type: 'number',
                 error: errors.cp
               },
-              { name: 'estado', placeholder: 'Estado', type: 'text' },
-              { name: 'nacionalidad', placeholder: 'Nacionalidad', type: 'text' },
+              { name: 'Estado', placeholder: 'Estado', type: 'text' },
+              { name: 'Nacionalidad', placeholder: 'Nacionalidad', type: 'text' },
               { 
                 name: 'correo', 
                 placeholder: 'Correo electrónico', 
@@ -280,13 +286,13 @@ const RegistroAlumnos = () => {
                 error: errors.correo
               },
               { 
-                name: 'telefono', 
+                name: 'Telefono', 
                 placeholder: 'Teléfono fijo', 
                 type: 'number',
                 error: errors.telefono
               },
               { 
-                name: 'emergencia', 
+                name: 'TelefonoEmergencia', 
                 placeholder: 'Teléfono de emergencia', 
                 type: 'number',
                 error: errors.emergencia
@@ -315,16 +321,16 @@ const RegistroAlumnos = () => {
             <legend>Datos Familiares</legend>
             
             {[
-              { name: 'nomPadre', placeholder: 'Nombre del padre', type: 'text' },
+              { name: 'NombrePadre', placeholder: 'Nombre del padre', type: 'text' },
               { 
-                name: 'telPadre', 
+                name: 'TelefonoPadre', 
                 placeholder: 'Teléfono del padre', 
                 type: 'number',
                 error: errors.telPadre
               },
-              { name: 'nomMadre', placeholder: 'Nombre de la madre', type: 'text' },
+              { name: 'NombreMadre', placeholder: 'Nombre de la madre', type: 'text' },
               { 
-                name: 'telMadre', 
+                name: 'TelefonoMadre', 
                 placeholder: 'Teléfono de la madre', 
                 type: 'number',
                 error: errors.telMadre
@@ -345,11 +351,9 @@ const RegistroAlumnos = () => {
             ))}
           </fieldset>
 
-          <input 
-            id="MandarInformacion" 
-            type="submit" 
-            value="Guardar" 
-          />
+          <button type="submit" id="MandarInformacion">
+            Guardar
+          </button>
         </form>
       </article>
     </div>
