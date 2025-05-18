@@ -55,16 +55,12 @@ const CalificacionEmpresa = () => {
       </head>
 
       <body>
-        <header>
-          <section id="nomUDG">
-            <img src="../img/udg_white.png" alt="UDG Logo" />
-          </section>
+        <Header />
           <nav className="menu">
             <ul>
               <li><a href="/principalAlumno">INICIO</a></li>
             </ul>
           </nav>
-        </header>
 
         <main>
           <article id="TituloNombreEmpresa">

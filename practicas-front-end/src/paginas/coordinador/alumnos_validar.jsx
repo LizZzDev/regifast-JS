@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./ver_alumnos_validar.css";
+import Header from "../../componentes/header.jsx";
 
 function ValidacionAlumnos() {
   const [alumnos, setAlumnos] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3001/alumnos-proceso") // Ajusta según tu API real
+    fetch("http://localhost:3001/alumnos-proceso") 
       .then((res) => res.json())
       .then((data) => {
         setAlumnos(data);

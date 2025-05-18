@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './asignarFechas.css';
+import Header from "../../componentes/header.jsx";
 
 const AsignarFechas = () => {
   const [alumnos, setAlumnos] = useState([]);
@@ -11,7 +12,7 @@ const AsignarFechas = () => {
   });
 
   useEffect(() => {
-    fetch('http://localhost:3001/alumnos') // Ajustar el endpoint (backedn)
+    fetch('http://localhost:3001/alumnos') 
       .then(res => res.json())
       .then(data => setAlumnos(data))
       .catch(err => console.error('Error al cargar alumnos:', err));

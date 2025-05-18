@@ -58,11 +58,7 @@ const BarraStatus = () => {
 
   return (
     <div className="montserrat">
-      <header>
-        <section id="nomUDG">
-          <img src="../img/udg_white.png" alt="Logo UDG" />
-        </section>
-      </header>
+      <Header />
       
       <nav className="menu">
         <ul>
