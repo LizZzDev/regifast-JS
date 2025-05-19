@@ -72,7 +72,8 @@ legend {
 input[type="text"],
 input[type="email"],
 input[type="password"],
-input[type="file"] {
+input[type="file"],
+input[type="number"] {
     width: calc(100% - 40px);
     margin: 10px auto;
     padding: 10px;
@@ -93,5 +94,16 @@ input[type="file"] {
 }
 #MandarInformacion:hover {
     background-color: #103E7E;
+}
+.token-buttons {
+  display: flex;
+  flex-direction:column; /* o row */
+  gap: 10px;
+}
+
+
+.token-buttons button {
+  padding: 8px 16px;
+  cursor: pointer;
 }
 
