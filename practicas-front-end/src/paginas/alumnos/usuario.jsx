@@ -64,7 +64,7 @@ const RegistroUsuario = () => {
             <Header />
             
             <section className="auth-section">
-                <div className="register-form">
+                <div className="loginForm">
                     <h1>Crear Cuenta</h1>
                     <form onSubmit={handleRegistro}>
                         <div className="form-group">
