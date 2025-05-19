@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // <--- IMPORTANTE
 import { obtenerEmpresas } from '../../api/empresas';
-import './ver_empresas.css';
+import './validarAlumnos.css';
 import Header from "../../componentes/header.jsx";
 
 const TablaEmpresas = () => {
@@ -27,78 +27,89 @@ const TablaEmpresas = () => {
   };
 
   return (
-    <div className="montserrat">
-      <Header />
+    <div className="page">
+      <header>
+        <section id="nomUDG">
+          <img src="img/Logo_UDG_horiz_blanco-01.svg" alt="Logo UDG" />
+        </section>
+      </header>
 
-        <nav className="menu">
-          <ul>
-            <li><a href="/inicio">INICIO</a></li>
-            <li>
-              <section id="navegacion1">
-                <a href="/alumnos" id="datalist">ALUMNOS</a>
-              </section>
-            </li>
-            <li>
-              <section id="navegacion2">
-                <a href="#">EMPRESAS</a>
-                <div className="submenu2">
-                  <a href="/coordinador/verificadas" className="opcion">Verificadas</a>
-                  <a href="/coordinador/sin-verificar" className="opcion">Sin verificar</a>
-                </div>
-              </section>
-            </li>
-            <li>
-              <section id="navegacion2">
-                <a href="#">OPCIONES</a>
-                <div className="submenu2">
-                  <a href="/admin/nuevo" className="opcion">Crear nuevo admin</a>
-                  <a href="/departamento/nuevo" className="opcion">Crear jefe de departamento</a>
-                  <a href="/logout" className="opcion">Cerrar sesión</a>
-                </div>
-              </section>
-            </li>
-          </ul>
-        </nav>
+      <nav className="menu">
+        <ul>
+          <li><a href="#">INICIO</a></li>
+          <li><a href="#">ALUMNOS</a></li>
+          <li><a href="#">EMPRESAS</a></li>
+          <li><a href="#">CERRAR SESIÓN</a></li>
+        </ul>
+      </nav>
+
       <main>
-        <section id="tabla">
-          <table className="montserrat em2">
+        <section id="titleA">
+          <h2>Lista de empresas</h2>
+        </section>
+
+        {/* Filters */}
+        <section className="filtros-container">
+          <div className="filtros-centrados">
+            <input
+              type="text"
+              placeholder="Buscar por nombre o RFC"
+              className="filtro-input"
+              name="busqueda"
+              value={filtros.busqueda}
+              onChange={handleFilterChange}
+            />
+
+            <select
+              className="filtro-select"
+              name="revision"
+              value={filtros.revision}
+              onChange={handleFilterChange}
+            >
+              <option value="">Todas</option>
+              <option value="revisado">Revisadas</option>
+              <option value="no-revisado">No Revisadas</option>
+            </select>
+          </div>
+
+          <div className="contador-total">Total: {totalEmpresas} empresas</div>
+        </section>
+
+        {/* Companies table */}
+        <div className="table-responsive">
+          <table>
             <thead>
-              <tr id="color">
-                <th>Nombre de la empresa</th>
-                <th>Teléfono</th>
-                <th>Correo</th>
+              <tr>
                 <th>RFC</th>
-                <th>Descripción</th>
-                <th>Actividades</th>
-                <th>Domicilio</th>
-                <th>Vacantes</th>
-                <th>Opiniones</th>
+                <th>Nombre de la empresa</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Etapa del proceso</th>
+                <th>Acción</th>
               </tr>
             </thead>
             <tbody>
-              {empresas.map(empresa => (
-                <tr key={empresa.IdEmpresa}>
-                  <td>{empresa.Nombre}</td>
-                  <td>{empresa.Telefono}</td>
-                  <td>{empresa.Correo}</td>
-                  <td>{empresa.RFC}</td>
-                  <td>{empresa.Descripcion}</td>
-                  <td>{empresa.Actividades}</td>
-                  <td>{empresa.DomicilioFiscal}</td>
-                  <td>{empresa.Vacantes}</td>
+              {empresasFiltradas.map(empresa => (
+                <tr key={empresa.rfc}>
+                  <td>{empresa.rfc}</td>
+                  <td>{empresa.nombre}</td>
+                  <td>{empresa.correo}</td>
+                  <td>{empresa.telefono}</td>
+                  <td>{empresa.etapa}</td>
                   <td>
-                    <button
-                      id="Opiniones"
-                      onClick={() => enviarOpiniones(empresa.IdEmpresa, empresa.LogoEmpresa)}
+                    <button 
+                      className="confirmar-btn" 
+                      onClick={() => handleValidar(empresa.rfc)}
+                      disabled={empresa.etapa !== 'Revisión'}
                     >
-                      Opiniones
+                      {empresa.etapa === 'Revisión' ? 'Validar' : 'Validada'}
                     </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </section>
+        </div>
       </main>
     </div>
   );

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './asignarFechas.css';
-import Header from "../../componentes/header.jsx";
 
 const AsignarFechas = () => {
   const [alumnos, setAlumnos] = useState([]);
@@ -10,6 +9,13 @@ const AsignarFechas = () => {
     3: { fechaInicio: '', fechaFin: '' },
     4: { fechaInicio: '', fechaFin: '' }
   });
+
+  const [rangos] = useState([
+    { idRango: 1, texto: "100-91" },
+    { idRango: 2, texto: "90-81" },
+    { idRango: 3, texto: "80-71" },
+    { idRango: 4, texto: "70-60" }
+  ]);
 
   useEffect(() => {
     fetch('http://localhost:3001/alumnos') 
@@ -70,63 +76,125 @@ const AsignarFechas = () => {
   };
 
   return (
-    <main>
-      <h2>Asignar Fechas por Calificación</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Carrera</th>
-            <th>Correo Institucional</th>
-            <th>Calificación</th>
-            <th>Rango</th>
-            <th>Fecha Inicio</th>
-            <th>Fecha Fin</th>
-            <th>Confirmar</th>
-          </tr>
-        </thead>
-        <tbody>
-          {alumnos.map((alumno) => {
-            const idRango = getRangoId(alumno.calificacion);
-            const fechas = fechasPorRango[idRango] || {};
+    <div>
+      <header>
+        <article id="nomUDG">
+          <img src="/img/udg_white.png" alt="Logo UDG" />
+        </article>
+      </header>
 
-            return (
-              <tr key={alumno.codigo}>
-                <td>{alumno.codigo}</td>
-                <td>{alumno.nombre}</td>
-                <td>{alumno.carrera}</td>
-                <td>{alumno.correo}</td>
-                <td>{alumno.calificacion}</td>
-                <td>{idRango ? `Rango ${idRango}` : 'N/A'}</td>
+      <main>
+        <h2>Asignar Fechas por Calificación</h2>
+        
+        {/* Tabla de Rangos */}
+        <h3>Configurar Fechas por Rango</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Rango</th>
+              <th>Fecha Inicio</th>
+              <th>Fecha Fin</th>
+              <th>Confirmar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rangos.map(rango => (
+              <tr key={rango.idRango}>
+                <td>{rango.texto}</td>
                 <td>
-                  <input
-                    type="date"
-                    value={fechas.fechaInicio}
-                    onChange={(e) => handleFechaChange(idRango, 'fechaInicio', e.target.value)}
+                  <input 
+                    type="date" 
+                    className="fecha-inicio" 
+                    value={fechasPorRango[rango.idRango]?.fechaInicio || ''}
+                    onChange={(e) => handleFechaChange(rango.idRango, 'fechaInicio', e.target.value)}
                   />
                 </td>
                 <td>
-                  <input
-                    type="date"
-                    value={fechas.fechaFin}
-                    onChange={(e) => handleFechaChange(idRango, 'fechaFin', e.target.value)}
+                  <input 
+                    type="date" 
+                    className="fecha-fin" 
+                    value={fechasPorRango[rango.idRango]?.fechaFin || ''}
+                    onChange={(e) => handleFechaChange(rango.idRango, 'fechaFin', e.target.value)}
                   />
                 </td>
                 <td>
-                  <button
+                  <button 
                     className="confirmar-btn"
-                    onClick={() => handleSubmitIndividual(alumno)}
+                    onClick={() => {
+                      const alumnosEnRango = alumnos.filter(alumno => getRangoId(alumno.calificacion) === rango.idRango);
+                      if (alumnosEnRango.length > 0) {
+                        alumnosEnRango.forEach(alumno => handleSubmitIndividual(alumno));
+                      } else {
+                        alert(`No hay alumnos en el rango ${rango.texto}`);
+                      }
+                    }}
                   >
-                    Confirmar
+                    Confirmar para todo el rango
                   </button>
                 </td>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </main>
+            ))}
+          </tbody>
+        </table>
+        
+        {/* Tabla de Alumnos */}
+        <h3>Asignación Individual</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Carrera</th>
+              <th>Correo Institucional</th>
+              <th>Calificación</th>
+              <th>Rango</th>
+              <th>Fecha Inicio</th>
+              <th>Fecha Fin</th>
+              <th>Confirmar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {alumnos.map((alumno) => {
+              const idRango = getRangoId(alumno.calificacion);
+              const fechas = fechasPorRango[idRango] || {};
+
+              return (
+                <tr key={alumno.codigo}>
+                  <td>{alumno.codigo}</td>
+                  <td>{alumno.nombre}</td>
+                  <td>{alumno.carrera}</td>
+                  <td>{alumno.correo}</td>
+                  <td>{alumno.calificacion}</td>
+                  <td>{idRango ? `Rango ${idRango}` : 'N/A'}</td>
+                  <td>
+                    <input
+                      type="date"
+                      value={fechas.fechaInicio || ''}
+                      onChange={(e) => handleFechaChange(idRango, 'fechaInicio', e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="date"
+                      value={fechas.fechaFin || ''}
+                      onChange={(e) => handleFechaChange(idRango, 'fechaFin', e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <button
+                      className="confirmar-btn"
+                      onClick={() => handleSubmitIndividual(alumno)}
+                    >
+                      Confirmar
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </main>
+    </div>
   );
 };
 

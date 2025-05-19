@@ -1,0 +1,193 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Header */
+header {
+  width: 100%;
+  background-color: #103E7E;
+  text-align: center;
+}
+
+#nomUDG {
+  padding: 10px 0;
+  background-color: #103E7E;
+}
+
+img {
+  width: 200px;
+  max-width: 80%;
+}
+
+/* Nav */
+.menu {
+  width: 100%;
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+}
+
+.menu ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: 0.3s ease;
+}
+
+.menu li a:hover {
+  background-color: white;
+  color: #103E7E;
+  border-radius: 5px;
+}
+
+/* Main */
+main {
+  padding: 30px 20px;
+}
+
+#titleA {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Filtros */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+.filtros-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filtros-centrados {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.contador-total {
+  font-weight: bold;
+  font-size: 14px;
+  color: #103E7E;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .filtros-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contador-total {
+    margin-top: 10px;
+  }
+}
+
+
+
+.filtro-input, .filtro-select, .filtro-btn {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.filtro-btn {
+  background-color: #103E7E;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.filtro-btn:hover {
+  background-color: #0d376f;
+}
+
+/* Tabla */
+.table-responsive {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 600px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #103E7E;
+  color: white;
+}
+
+.confirmar-btn {
+  background-color: #12448c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.confirmar-btn:hover {
+  background-color: #0d376f;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  .filtros {
+    flex-direction: column;
+    align-items: center;
+  }
+}
