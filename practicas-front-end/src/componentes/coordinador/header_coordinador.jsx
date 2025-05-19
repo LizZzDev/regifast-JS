@@ -3,6 +3,7 @@ import "./header_coordinador.css";
 import { useNavigate } from 'react-router-dom';
 import { cerrarSesion } from '../../api/usuarios';
 
+
 const HeaderCoordinador = () => {
     const navigate = useNavigate();
     
@@ -19,29 +20,31 @@ const HeaderCoordinador = () => {
   return (
     <header>
       <section id="nomUDG">
-        <img src="../../img/udg_white.png" alt="Logo UDG" />
+        <img src={logoUDG} alt="Logo UDG" />
       </section>
       <nav className="menu">
         <ul>
-          <li><a href="principal">INICIO</a></li>
-          <li><a href="alumnos">ALUMNOS</a></li>
+          <li><a href="#">INICIO</a></li>
+          <li><a href="#">ALUMNOS</a></li>
 
           <li className="dropdown">
             <a href="#">EMPRESAS</a>
             <div className="submenu2">
-              <a href="empresas" className="opcion">Empresas</a>
-              <a href="#" className="opcion">Añadir empresa</a>
+              <a href="#" className="opcion">Verificadas</a>
+              <a href="#" className="opcion">Sin verificar</a>
             </div>
           </li>
 
           <li className="dropdown">
             <a href="#">OPCIONES</a>
             <div className="submenu2">
-              <a href="crear-coordinador" className="opcion">Crear nuevo coordinador</a>
-              <a href="crear-jefe" className="opcion">Crear jefe de departamento</a>
-              <a href="#" onClick={manejarCerrarSesion}>Cerrar sesión</a>
+              <a href="#" className="opcion">Crear nuevo admin</a>
+              <a href="#" className="opcion">Crear jefe de departamento</a>
+              <a href="#" className="opcion">Cerrar sesión</a>
             </div>
           </li>
+        
+        <li><a href="#" onClick={manejarCerrarSesion}>SALIR</a></li>
         </ul>
       </nav>
     </header>
