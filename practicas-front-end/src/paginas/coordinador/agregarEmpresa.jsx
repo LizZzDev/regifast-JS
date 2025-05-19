@@ -1,126 +1,81 @@
-import React, { useState } from "react";
-import "./registro_empresa.css";
+import React, { useState } from 'react';
+import './registro_empresa.css';
 
-function RegistroEmpresaCoordinador() {
-  const [nombre, setNombre] = useState("");
-  const [correo, setCorreo] = useState("");
-  const [contrasena, setContrasena] = useState("");
-  const [confirmarContrasena, setConfirmarContrasena] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [tipoPractica, setTipoPractica] = useState("");
+function RegistroEmpresaCoord() {
+  const [formData, setFormData] = useState({
+    nombre: '',
+    descripcion: '',
+    correo: '',
+    telefono: '',
+    rfc: '',
+    actividades: '',
+    vacantes: '',
+    password: '',
+    confirm_password: '',
+    calle: '',
+    numero: '',
+    colonia: '',
+    codigo_postal: '',
+    estado: '',
+    municipio: '',
+    imagen: null,
+    carrera: '',
+    tipo_empresa: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === 'imagen') {
+      setFormData({ ...formData, imagen: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (contrasena !== confirmarContrasena) {
-      alert("Las contraseñas no coinciden");
-      return;
-    }
-
-    if (!tipoPractica) {
-      alert("Por favor selecciona el tipo de prácticas.");
-      return;
-    }
-
-    console.log({
-      nombre,
-      correo,
-      contrasena,
-      descripcion,
-      tipoPractica,
-    });
-
-    // Aquí va la lógica de envío real
+    console.log(formData);
   };
 
   return (
-    <section className="form-register-empresa" id="registroEmpresaSeccion">
-      <div className="form-container" id="registroEmpresaContenedor">
-        <img src="./img/udg_white" alt="Logo UDG" className="logo-udg" id="logoRegistroEmpresa" />
-        <h2 className="form-title" id="tituloRegistroEmpresa">Registro de Empresa (Coordinador)</h2>
-        <form onSubmit={handleSubmit} id="formularioRegistroEmpresa">
+    <div className="registro-container">
+      <h2 id="titulo-formulario">Registro de Empresa (Coordinador)</h2>
+      <form onSubmit={handleSubmit} className="formulario">
+        <input id="input-nombre" type="text" name="nombre" placeholder="Nombre de la empresa" onChange={handleChange} />
+        <textarea id="input-descripcion" name="descripcion" placeholder="Descripción" onChange={handleChange}></textarea>
+        <input id="input-correo" type="email" name="correo" placeholder="Correo electrónico" onChange={handleChange} />
+        <input id="input-telefono" type="tel" name="telefono" placeholder="Teléfono" onChange={handleChange} />
+        <input id="input-rfc" type="text" name="rfc" placeholder="RFC" onChange={handleChange} />
+        <input id="input-actividades" type="text" name="actividades" placeholder="Actividades principales" onChange={handleChange} />
+        <input id="input-vacantes" type="number" name="vacantes" placeholder="Vacantes disponibles" onChange={handleChange} />
+        <input id="input-password" type="password" name="password" placeholder="Contraseña" onChange={handleChange} />
+        <input id="input-confirm-password" type="password" name="confirm_password" placeholder="Confirmar contraseña" onChange={handleChange} />
+        <input id="input-calle" type="text" name="calle" placeholder="Calle" onChange={handleChange} />
+        <input id="input-numero" type="text" name="numero" placeholder="Número" onChange={handleChange} />
+        <input id="input-colonia" type="text" name="colonia" placeholder="Colonia" onChange={handleChange} />
+        <input id="input-codigo-postal" type="text" name="codigo_postal" placeholder="Código Postal" onChange={handleChange} />
+        <input id="input-estado" type="text" name="estado" placeholder="Estado" onChange={handleChange} />
+        <input id="input-municipio" type="text" name="municipio" placeholder="Municipio" onChange={handleChange} />
+        <input id="input-imagen" type="file" name="imagen" onChange={handleChange} />
 
-          <div className="inputBox" id="inputNombreEmpresaBox">
-            <label htmlFor="nombreEmpresa">Nombre de la empresa:</label>
-            <input
-              type="text"
-              id="nombreEmpresa"
-              placeholder="Nombre de la empresa"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              required
-            />
-          </div>
+        <select id="select-carrera" name="carrera" onChange={handleChange}>
+          <option value="">Selecciona carrera preferida</option>
+          <option value="TI">Tecnologías de la Información</option>
+          <option value="ADM">Administración</option>
+          <option value="MKT">Marketing</option>
+          <option value="IND">Ingeniería Industrial</option>
+        </select>
 
-          <div className="inputBox" id="inputCorreoEmpresaBox">
-            <label htmlFor="correoEmpresa">Correo electrónico:</label>
-            <input
-              type="email"
-              id="correoEmpresa"
-              placeholder="Correo electrónico"
-              value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
-              required
-            />
-          </div>
+        <select id="select-tipo-empresa" name="tipo_empresa" onChange={handleChange}>
+          <option value="">Tipo de empresa</option>
+          <option value="ordinaria">Ordinaria</option>
+          <option value="extraordinaria">Extraordinaria</option>
+        </select>
 
-          <div className="inputBox" id="inputContrasenaEmpresaBox">
-            <label htmlFor="contrasenaEmpresa">Contraseña:</label>
-            <input
-              type="password"
-              id="contrasenaEmpresa"
-              placeholder="Contraseña"
-              value={contrasena}
-              onChange={(e) => setContrasena(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="inputBox" id="inputConfirmarContrasenaEmpresaBox">
-            <label htmlFor="confirmarContrasenaEmpresa">Confirmar contraseña:</label>
-            <input
-              type="password"
-              id="confirmarContrasenaEmpresa"
-              placeholder="Confirmar contraseña"
-              value={confirmarContrasena}
-              onChange={(e) => setConfirmarContrasena(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="inputBox" id="inputDescripcionEmpresaBox">
-            <label htmlFor="descripcionEmpresa">Descripción de la empresa:</label>
-            <textarea
-              id="descripcionEmpresa"
-              placeholder="Escribe una breve descripción (máximo 150 palabras)"
-              value={descripcion}
-              onChange={(e) => setDescripcion(e.target.value)}
-              maxLength={150}
-              required
-            />
-          </div>
-
-          <div className="inputBox" id="inputTipoPracticaBox">
-            <label htmlFor="tipoPractica">Tipo de prácticas:</label>
-            <select
-              id="tipoPractica"
-              value={tipoPractica}
-              onChange={(e) => setTipoPractica(e.target.value)}
-              required
-            >
-              <option value="">Selecciona una opción</option>
-              <option value="ordinarias">Ordinarias</option>
-              <option value="extraordinarias">Extraordinarias</option>
-            </select>
-          </div>
-
-          <button type="submit" className="btn-submit" id="btnRegistroEmpresaCoordinador">
-            Registrarse
-          </button>
-        </form>
-      </div>
-    </section>
+        <button id="btn-registrar" type="submit">Registrar Empresa</button>
+      </form>
+    </div>
   );
 }
 
-export default RegistroEmpresaCoordinador;
+export default RegistroEmpresaCoord;
