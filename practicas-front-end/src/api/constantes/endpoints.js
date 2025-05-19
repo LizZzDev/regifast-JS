@@ -28,6 +28,7 @@ export const endpoints = {
         OBTENER_BARRA_STATUS_PARA_ESTADISTICAS: '/obtenerBarraStatusParaEstadisticas',
         VALIDAR_ALUMNO: '/validarAlumno',
         VALIDAR_EMPRESA: '/validarEmpresa',
+        OBTENER_NUMERO_ALUMNOS: '/obtenerNumeroAlumnos'
     },
   
     EMPRESAS: {

@@ -10,7 +10,8 @@ import {
     obtenerAlumno, 
     validarAlumno,
     validarEmpresa,
-    obtenerBarraStatusParaEstadisticas
+    obtenerBarraStatusParaEstadisticas,
+    obtenerNumeroAlumnos
 } from '../controladores/coordinador/index.js';
 
 const router = express.Router();
@@ -18,6 +19,7 @@ const router = express.Router();
 router.get('/obtenerAlumnos', obtenerAlumnos);
 router.get('/obtenerAlumno', obtenerAlumno);
 router.get('/obtenerBarraStatusParaEstadisticas', obtenerBarraStatusParaEstadisticas);
+router.get('/obtenerNumeroAlumnos', obtenerNumeroAlumnos);
 router.post('/anadirEmpresa', verificarSesion, soloCoordinador, anadirEmpresa);
 router.put('/asignarFechaIngresoPorCalificaciones', verificarSesion, soloCoordinador, asignarFechaIngresoPorCalificaciones);
 router.put('/modificarDatosAlumno', modificarDatosDelAlumno);

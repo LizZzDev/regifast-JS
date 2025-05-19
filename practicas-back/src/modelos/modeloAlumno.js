@@ -114,15 +114,24 @@ const Alumno = {
     }
   },
 
-  numeroAlumnos: async () => {
+  numeroAlumnos: async ({carrera}) => {
     try {
-      const [rows] = await pool.query(`
+      let query = `
         SELECT 
           COUNT(*) AS total,
           SUM(CASE WHEN Revisado = 1 THEN 1 ELSE 0 END) AS revisados,
           SUM(CASE WHEN Revisado = 0 THEN 1 ELSE 0 END) AS noRevisados
         FROM alumnos;
-      `);
+      `;
+
+    const values = [];
+  
+    if (carrera) {
+      query += " AND Carrera = ?";
+      values.push(carrera);
+    }
+
+    const [rows] = await pool.query(query, values);
 
       const { total, revisados, noRevisados } = rows[0];
       
@@ -183,7 +192,7 @@ const Alumno = {
 
   validarAlumno: async (id) => {
     try {
-      const [result] = await pool.query("UPDATE alumnos SET Revisado= '1' WHERE IdUsuario = ?", [id]);
+      const [result] = await pool.query("UPDATE alumnos SET Revision= '1' WHERE IdUsuario = ?", [id]);
       return result;
     } catch (error) {
       console.error("Error en validar alumno:", error);

@@ -30,16 +30,26 @@ const Estadisticas = () => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
-  // Inicializar y actualizar gráfico
+useEffect(() => {
+  const cargarAlumnos = async () => {
+    try {
+      const carrera = carreraSeleccionada === 'todas' ? null : carreraSeleccionada;
+
+      const datos = await obtenerNumeroAlumnos({ carrera: carrera });
+      console.log(datos);
+      setEstadisticas(datos);
+    } catch (error) {
+      console.error('Error al cargar empresas:', error);
+    }
+  };
+
+  cargarAlumnos();
+}, [carreraSeleccionada]);
+
+
   useEffect(() => {
     const datos = datosPorCarrera[carreraSeleccionada];
     
-    // Actualizar estadísticas
-    setEstadisticas({
-      revisados: datos.revisados,
-      noRevisados: datos.noRevisados,
-      total: datos.revisados + datos.noRevisados
-    });
 
     // Configurar gráfico
     const ctx = chartRef.current.getContext('2d');
@@ -156,9 +166,9 @@ const Estadisticas = () => {
             </thead>
             <tbody>
               <tr>
-                <td>{estadisticas.revisados.toLocaleString()}</td>
-                <td>{estadisticas.noRevisados.toLocaleString()}</td>
-                <td>{estadisticas.total.toLocaleString()}</td>
+                <td>{estadisticas.revisados}</td>
+                <td>{estadisticas.noRevisados}</td>
+                <td>{estadisticas.total}</td>
               </tr>
             </tbody>
           </table>

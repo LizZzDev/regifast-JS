@@ -6,7 +6,6 @@ import HeaderCoordinador from '../../componentes/coordinador/header_coordinador'
 
 const ValidacionAlumnos = () => {
   const [alumnos, setAlumnos] = useState([]);
-  const [loading, setLoading] = useState(true);
   
   // Estados para los filtros
   const [filtros, setFiltros] = useState({
@@ -21,13 +20,20 @@ const ValidacionAlumnos = () => {
   useEffect(() => {
     const cargarAlumnos = async () => {
       try {
-        const response = await fetch("http://localhost:3001/alumnos-proceso");
-        const data = await response.json();
-        setAlumnos(data);
-        setLoading(false);
+       const response = await obtenerAlumnos({
+          pagina: 1,
+          limite: 1000, // si quieres traer muchos para filtrar
+          carrera: filtros.carrera || null,
+          busqueda: filtros.busqueda || null,
+          validada:
+            filtros.revision === 'revisado' ? 1 :
+            filtros.revision === 'no-revisado' ? 0 :
+            null
+        });
+        console.log (response.alumnos)
+        setAlumnos(response.alumnos);
       } catch (error) {
         console.error("Error al obtener alumnos:", error);
-        setLoading(false);
       }
     };
 
@@ -38,23 +44,24 @@ const ValidacionAlumnos = () => {
   useEffect(() => {
     const filtered = alumnos.filter(alumno => {
       const coincideBusqueda = 
-        alumno.nombre.toLowerCase().includes(filtros.busqueda.toLowerCase()) ||
-        alumno.codigo.toLowerCase().includes(filtros.busqueda.toLowerCase());
+        alumno.NombreCompleto.toLowerCase().includes(filtros.busqueda.toLowerCase()) ||
+        alumno.Codigo.toLowerCase().includes(filtros.busqueda.toLowerCase());
       
       const coincideCarrera = 
-        !filtros.carrera || alumno.carrera === filtros.carrera;
+        !filtros.carrera || alumno.Carrera === filtros.carrera;
       
       const coincideRevision =
         !filtros.revision ||
-        (filtros.revision === "revisado" && alumno.etapa !== "Revisión") ||
-        (filtros.revision === "no-revisado" && alumno.etapa === "Revisión");
+        (filtros.revision === "revisado" && alumno.Revision === 1) ||
+        (filtros.revision === "no-revisado" && alumno.Revision === 0);
 
       return coincideBusqueda && coincideCarrera && coincideRevision;
     });
 
     setAlumnosFiltrados(filtered);
     setTotalAlumnos(filtered.length);
-  }, [filtros, alumnos]);
+}, [filtros, alumnos]);
+
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -64,22 +71,25 @@ const ValidacionAlumnos = () => {
     }));
   };
 
-  const validarAlumnoConst = async (codigo) => {
+  const validarAlumnoConst = async (IdUsuario) => {
     try {
-      await validarAlumno(codigo);
-      
-      // Actualizar el estado local para reflejar el cambio
-      setAlumnos(alumnos.map(alumno => 
-        alumno.codigo === codigo ? { ...alumno, etapa: 'Validado' } : alumno
-      ));
+      await validarAlumno(IdUsuario);
+      alert("Validacion exitosa");
+      const response = await obtenerAlumnos({
+      pagina: 1,
+      limite: 1000,
+      carrera: filtros.carrera || null,
+      busqueda: filtros.busqueda || null,
+      validada:
+        filtros.revision === 'revisado' ? 1 :
+        filtros.revision === 'no-revisado' ? 0 :
+        null
+    });
+    setAlumnos(response.alumnos);
     } catch (error) {
       console.error('Error al enviar datos de validación:', error);
     }
   };
-
-  if (loading) {
-    return <div className="loading">Cargando alumnos...</div>;
-  }
 
   return (
     <div className="page">
@@ -150,21 +160,21 @@ const ValidacionAlumnos = () => {
             </thead>
             <tbody>
               {alumnosFiltrados.map((alumno) => (
-                <tr key={alumno.codigo}>
-                  <td>{alumno.codigo}</td>
-                  <td>{alumno.nombre}</td>
-                  <td>{alumno.carrera}</td>
-                  <td>{alumno.correo}</td>
-                  <td>{alumno.etapa}</td>
+                <tr key={alumno.Codigo}>
+                  <td>{alumno.Codigo}</td>
+                  <td>{alumno.NombreCompleto}</td>
+                  <td>{alumno.Carrera}</td>
+                  <td>{alumno.CorreoInstitucional}</td>
+                  <td>{alumno.BarraStatus}</td>
                   <td>
-                    {alumno.etapa === "Validado" ? (
+                    {alumno.Revision === 1 ? (
                       <span style={{ color: "green", fontWeight: "bold" }}>
                         Validado
                       </span>
                     ) : (
                       <button
                         className="confirmar-btn"
-                        onClick={() => validarAlumnoConst(alumno.codigo)}
+                        onClick={() => validarAlumnoConst(alumno.IdUsuario)}
                       >
                         Validar
                       </button>

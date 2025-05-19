@@ -9,7 +9,7 @@ const obtenerAlumnosFiltrados = async (req) => {
   const validada = req.query.validada === 'true' ? 1 
                  : req.query.validada === 'false' ? 0
                  : null;
-
+  console.log (busqueda, validada, carrera)
   try {
     const alumnos = await Alumnos.obtenerAlumnos(
       {
