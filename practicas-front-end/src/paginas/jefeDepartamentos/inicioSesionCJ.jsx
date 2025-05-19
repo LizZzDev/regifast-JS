@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../componentes/header.jsx";
 import { iniciarSesion } from "../../api/usuarios/index.js";
 import "./styles.css";
+
+import HeaderJefeDepto from "../../componentes/jefeDepto/header_jefeDepto.jsx";
+
 
 const Login = ({ onLogin }) => {
   const [correo, setCorreo] = useState("");
@@ -36,7 +38,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <div>
-      <Header />
+      <HeaderJefeDepto />
       <section id="loginForm">
         <h1>Inicio de Sesión</h1>
         <form onSubmit={handleSubmit}>

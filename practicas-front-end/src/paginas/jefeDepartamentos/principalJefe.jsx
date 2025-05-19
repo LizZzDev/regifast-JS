@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./principalJefe.css";
 
+import HeaderJefeDepto from "../../componentes/jefeDepto/header_jefeDepto.jsx";
+
+
 function principalJefe() {
   const [nombreUsuario, setNombreUsuario] = useState("");
 
@@ -23,18 +26,7 @@ function principalJefe() {
 
   return (
     <div className="page">
-      <header>
-        <section id="nomUDG">
-          <img src="img/Logo_UDG_horiz_blanco-01.svg" alt="Logo UDG" />
-        </section>
-        <nav className="menu">
-          <ul>
-            <li><a href="#">INICIO</a></li>
-            <li><a href="#">VER ALUMNOS</a></li>
-            <li><a href="#" className="opcion">CERRAR SESIÓN</a></li>
-          </ul>
-        </nav>
-      </header>
+      <HeaderJefeDepto/>
 
       <main>
         <section id="titleA">

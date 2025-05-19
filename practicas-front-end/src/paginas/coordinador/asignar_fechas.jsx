@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './asignarFechas.css';
 
+import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
+
+
 const AsignarFechas = () => {
   const [alumnos, setAlumnos] = useState([]);
   const [fechasPorRango, setFechasPorRango] = useState({
@@ -77,11 +80,7 @@ const AsignarFechas = () => {
 
   return (
     <div>
-      <header>
-        <article id="nomUDG">
-          <img src="/img/udg_white.png" alt="Logo UDG" />
-        </article>
-      </header>
+      <HeaderCoordinador/>
 
       <main>
         <h2>Asignar Fechas por Calificación</h2>

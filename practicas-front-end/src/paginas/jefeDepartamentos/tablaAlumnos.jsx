@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./ver_alumnos.css";
 
+import HeaderJefeDepto from "../../componentes/jefeDepto/header_jefeDepto.jsx";
+
+
 function TablaAlumnos() {
   const [alumnos, setAlumnos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,18 +56,7 @@ function TablaAlumnos() {
 
   return (
     <div className="page">
-      <header>
-        <section id="nomUDG">
-          <img src="img/Logo_UDG_horiz_blanco-01.svg" alt="Logo UDG" />
-        </section>
-        <nav className="menu">
-          <ul>
-            <li><a href="#">INICIO</a></li>
-            <li><a href="#">ALUMNOS</a></li>
-            <li><a href="#">CERRAR SESIÓN</a></li>
-          </ul>
-        </nav>
-      </header>
+      <HeaderJefeDepto/>
 
       <main>
         <section id="titleA">

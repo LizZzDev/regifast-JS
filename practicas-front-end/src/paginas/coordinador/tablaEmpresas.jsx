@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // <--- IMPORTANTE
 import { obtenerEmpresas } from '../../api/empresas';
 import './validarAlumnos.css';
-import Header from "../../componentes/header.jsx";
+
+import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
 
 const TablaEmpresas = () => {
   const [empresas, setEmpresas] = useState([]);
@@ -28,20 +29,7 @@ const TablaEmpresas = () => {
 
   return (
     <div className="page">
-      <header>
-        <section id="nomUDG">
-          <img src="img/Logo_UDG_horiz_blanco-01.svg" alt="Logo UDG" />
-        </section>
-      </header>
-
-      <nav className="menu">
-        <ul>
-          <li><a href="#">INICIO</a></li>
-          <li><a href="#">ALUMNOS</a></li>
-          <li><a href="#">EMPRESAS</a></li>
-          <li><a href="#">CERRAR SESIÓN</a></li>
-        </ul>
-      </nav>
+      <HeaderCoordinador/>
 
       <main>
         <section id="titleA">

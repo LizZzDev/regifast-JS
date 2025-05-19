@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Chart } from 'chart.js/auto';
 import './grafica.css';
 
+import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
+
+
 const Estadisticas = () => {
   // Datos de ejemplo por carrera
   const datosPorCarrera = {
@@ -112,20 +115,7 @@ const Estadisticas = () => {
 
   return (
     <div>
-      <header>
-        <section id="nomUDG">
-          <img src="img/Logo_UDG_horiz_blanco-01.svg" alt="Logo UDG" />
-        </section>
-      </header>
-
-      <nav className="menu">
-        <ul>
-          <li><a href="#">INICIO</a></li>
-          <li><a href="#">ALUMNOS</a></li>
-          <li><a href="#">EMPRESAS</a></li>
-          <li><a href="#">OPCIONES</a></li>
-        </ul>
-      </nav>
+      <HeaderCoordinador/>
 
       <main>
         <section id="filtros">

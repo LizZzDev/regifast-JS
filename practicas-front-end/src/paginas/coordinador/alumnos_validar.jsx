@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './validarAlumnos.css';
 import { validarAlumno, obtenerAlumnos } from '../../api/coordinador';
 
+import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
+
 const ValidacionAlumnos = () => {
   const [alumnos, setAlumnos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -81,20 +83,7 @@ const ValidacionAlumnos = () => {
 
   return (
     <div className="page">
-      <header>
-        <section id="nomUDG">
-          <img src="img/Logo_UDG_horiz_blanco-01.svg" alt="Logo UDG" />
-        </section>
-      </header>
-
-      <nav className="menu">
-        <ul>
-          <li><a href="#">INICIO</a></li>
-          <li><a href="#">ALUMNOS</a></li>
-          <li><a href="#">EMPRESAS</a></li>
-          <li><a href="#">CERRAR SESIÓN</a></li>
-        </ul>
-      </nav>
+      <HeaderCoordinador/>
 
       <main>
         <section id="titleA">

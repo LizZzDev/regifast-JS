@@ -3,6 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './modificarAlumnos.css';
 
+import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
+
+
 const EditarDatosAlumno = () => {
   const { codigo } = useParams();
   const navigate = useNavigate();
@@ -79,40 +82,7 @@ const EditarDatosAlumno = () => {
 
   return (
     <div>
-      <header>
-        <section id="nomUDG">
-          <img src="img/Logo_UDG_horiz_blanco-01.svg" alt="UDG Logo" />
-        </section>
-        <nav className="menu">
-          <ul>
-            <li><a href="/">INICIO</a></li>
-            <li>
-              <section id="navegacion1">
-                <a href="/alumnos" id="datalist">ALUMNOS</a>
-              </section>
-            </li>
-            <li>
-              <section id="navegacion2">
-                <a href="">EMPRESAS</a>
-                <datalist className="submenu2">
-                  <a href="/empresas" className="opcion">Verificadas</a>
-                  <a href="/empresas/sin-verificar" className="opcion">Sin verificar</a>
-                </datalist>
-              </section>
-            </li>
-            <li>
-              <section id="navegacion2">
-                <a href="">OPCIONES</a>
-                <datalist className="submenu2">
-                  <a href="/nuevo-admin" className="opcion">Crear nuevo admin</a>
-                  <a href="/jefe-departamento" className="opcion">Crear jefe de departamento</a>
-                  <a href="/cerrar-sesion" className="opcion">Cerrar sesion</a>
-                </datalist>
-              </section>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <HeaderCoordinador/>
 
       <main>
         <section id="contenido">
