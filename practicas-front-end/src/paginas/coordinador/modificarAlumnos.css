@@ -1,0 +1,536 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+html, body{
+    height: 100%;
+}
+body{
+    font-size: 5px;
+}
+/* header y navegacion------------------------------------------------------------------------------- */
+header{
+    width: 100%;
+    height: 25%;
+    background-color: #890831;
+    float: left;
+    text-align: center;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+}
+.montserrat  {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    color: black;
+    
+}
+
+#nomUDG{
+    width: 100%;
+    height: 80%;
+    background-color: #890831;
+    float: left;
+}
+
+img{
+    width: 21%;
+    height: 70%;
+    padding-top: 1.55%;
+}
+
+.menu{
+    width: 100%;
+    height: 20%;
+    background-color: #d9d9d9;
+    float: left;
+    max-width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+ul li{
+    display: inline-block;
+}
+
+ul li a{
+    color: black;
+    text-decoration: none;
+    display: block;
+    padding: 10.1px 50px;
+}
+
+ul li a:hover{
+    color: #890831;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.iconUser{
+    margin-left: auto;
+    width: 0;
+    height: 50px;
+    float: right;
+}
+
+.iconUser a{
+    padding: 0;
+    margin-top: 5px;
+    margin-left: 300px;
+}
+
+#iconSize{
+    width: 30px;
+    height: auto;
+    display: block;
+}
+/**/
+#navegacion1{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#navegacion1:hover .submenu2{
+    display: block;
+}
+#datalist{
+    flex: 1;
+    cursor: pointer;
+}
+#navegacion2{
+    position: relative;
+    display: inline-block;
+    width: 70%;
+    height: 100%;
+    margin-left: 10%;
+}
+#navegacion2:hover .submenu2{
+    display: block;
+}
+.submenu2{
+    display: none;
+    position: absolute;
+    top: 25%;
+    background-color: #a5a4a4;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.submenu2 button{
+    color: black;
+    padding: 3% 2%;
+    text-decoration: none;
+    display: block;
+}
+.submenu2 button:hover{
+    background-color: #d9d9d9;
+}
+.submenu2 a:hover{
+    background-color: #d9d9d9;
+}
+#contenido{
+    width: 100%;
+    height: 100%;
+    float: left;
+    text-align: center;
+    border-radius: 15%;
+    /* es de todas las pantallas sobrantes */
+}
+#abajo{
+    margin-top: 3%;
+    /* titulo */
+}
+#margen1{
+    width: 80%;
+    min-height: fit-content;
+    float: left;
+    background-color: #890831;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    margin-left: 9.5%;
+    margin-right: 5%;
+    border-radius: 10px;
+    /* margen del registro */
+}
+#formulario{
+    width: 95%;
+    min-height: fit-content;
+    float: left;
+    background-color: white;
+    margin-left: 2.5%;
+    margin-right: 3%;
+    margin-top: 2.5%;
+    border-radius: 15px;
+    /* formulario del registrito */
+}
+#titulo{
+    width: 100%;
+    height: 7%;
+    float: left;
+    margin-top: 1.5%;
+}
+#resaltado{
+    font-weight: bold;
+    float: left;
+    margin-left: 15%;
+    margin-top: 2%;
+}
+#primer{
+    width: 100%;
+    height: 6%;
+    float: left;
+    /* section de las primeras preguntas */
+}
+/**/
+#codigo{
+    color: black;
+    float: left;
+    width: 25%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    margin-left: 3%;
+    padding-left: 2%;
+}
+input{
+    font-size: 3.8em;
+
+}
+/*nombre menos para 12estadistica*/
+#nombre{
+    float: left;
+    width: 25%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    margin-left: 2%;
+    padding-left: 2%;
+}
+/*se pregan en 10tablas y 11modificardatos*/
+#carreras{
+    float: left;
+    width: 25%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    margin-left: 3%;
+    padding-left: 2%;
+}
+.resaltado{
+    font-weight: bold;
+}
+/*11modificardatos*/
+#segundo{
+    width: 100%;
+    height:100%;
+    float: left;
+    margin-top: 1%;
+    /* segundo campo de preguntas */
+}
+/*10tablasalumnos y 11mdoficardatos*/
+#grado{
+    float: left;
+    width: 25%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    margin-left: 3%;
+    padding-left: 2%;
+}
+/*igual que grado*/
+#grupo{
+    float: left;
+    width: 25%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    margin-left: 2%;
+    padding-left: 2%;
+}
+/*igual*/
+#turno{
+    float: left;
+    width: 25%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    margin-left: 3%;
+    padding-left: 2%;
+}
+/*solo es para 11mdoficar datos*/
+option{
+    font-weight: bold;
+}
+/**/
+#titulo2{
+    width: 100%;
+    height:100%;
+    float: left;
+    margin-top: 1.5%;
+    /* titulo de segundos datos */
+}
+#primera{
+    width: 100%;
+    height: 100%;
+    float: left;
+    /* primer apartados para preguntas */
+}
+/*en todas menos la 12*/
+#domicilio{
+    float: left;
+    width: 15%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    margin-left: 3%;
+    padding-left: 2%;
+}
+/*todas menos tabla 10tablaempresas y la 12*/
+#num{
+    float: left;
+    width: 15%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    padding-left: 2%;
+    margin-left: 2%;
+}
+/*en todas*/
+#col{
+    float: left;
+    width: 15%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    padding-left: 2%;
+    margin-left: 2%;
+}
+/*en 10empresassinmodificar y en 11modificardatos*/
+#cp{
+    float: left;
+    width: 15%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    padding-left: 2%;
+    margin-left: 2%;
+}
+/*solo 11modificardatos*/
+#mun{
+    float: left;
+    width: 15%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    padding-left: 2%;
+    margin-left: 2%;
+
+}
+/*menos en la 12*/
+form{
+    height: 100%;
+    width: 100%;
+}
+/*solo en 11mdoficardatos*/
+fieldset{
+    border: none;
+}
+/*solo 11modificardatos-------------------------------------------------------------------------------------------*/
+#segundos{
+    width: 100%;
+    height: 100%;
+    float: left;
+    /* segundo apartado paa las preguntas */
+}
+#estado{
+    float: left;
+    width: 20%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    padding-left: 2%;
+    margin-left: 3%;
+}
+#tel{
+    float: left;
+    width: 20%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    margin-left: 2%;
+    padding-left: 2%;
+}
+#cel{
+    float: left;
+    width: 20%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    padding-left: 2%;
+    margin-left: 2%;
+}
+#correo{
+    float: left;
+    width: 20%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    padding-left: 2%;
+    margin-left: 2%;
+}
+
+/*solo 11modificardatos-------------------------------------------------------------------------------------------*/
+#terceros{
+    width: 100%;
+    height: 100%;
+    float: left;
+    /* tercer apartado para las preguntas */
+}
+#emergencia{
+    float: left;
+    width: 20%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    padding-left: 2%;
+    margin-left: 3%;
+}
+#NSS{
+    float: left;
+    width: 20%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    padding-left: 2%;
+    margin-left: 2%;
+}
+#nacimiento{
+    float: left;
+    width: 20%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    padding-left: 2%;
+    margin-left: 2%;
+}
+#nacionalidad{
+    float: left;
+    width: 20%;
+    height: 45%;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    padding-left: 2%;
+    margin-left: 2%;
+}
+/*------------------------------------------------------------------------------------------*/
+/* datos familiarares-------------solo 11modificardatos-----------------------------------------------------------*/
+#tituloFam{
+    float: left;
+    height: 100%;
+    width: 100%; 
+    margin-top: 1.5%;
+}
+#datosAres{
+    float: left;
+    margin-left: 15%;
+    margin-top: 1.5%;
+
+}
+#padre{
+    float: left;
+    height: 75%;
+    width: 100%;
+    margin-top: 1%;
+}
+#madre{
+    float: left;
+    height: 75%;
+    width: 100%;
+    margin-top: 2%
+}
+.input1{
+    width: 40%;
+    height: 90%;
+    border-radius: 10px;
+    float: left;
+    margin-left: 3%;
+    padding-left: 2%;
+}
+.input2{
+    width: 39.5%;
+    margin-left: 8%;
+    height: 90%;
+    border-radius: 10px;
+    float: left;
+    padding-left: 2%;
+}
+.si-no{
+    width: 40%;
+    height: 80%;
+    border-radius: 10px;
+
+    padding-left: 2%;
+    float: left;
+    margin-left: 3%;
+}
+.cual{
+    width: 40%;
+    height: 80%;
+    border-radius: 10px;
+
+    margin-left: 3%;
+    padding-left: 2%;
+}
+#discapacidad{
+    float: left;
+    height: 85%;
+    width: 100%;
+    margin-top: 1.5%;
+}
+#protesis{
+    float: left;
+    height: 85%;
+    width: 100%;
+    margin-top: 1.5%;
+}
+/* esta en todas///////////////////////////////////////////////////////////////////////////////////////////////////se ocupa//////////////////////////// */
+a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+/*btones*/
+#botones{
+    width: 50%;
+    height: 100%;
+    float: left;
+    margin-top: 3%;
+    position: relative;
+}
+/*esta tambien*/
+#btnFinalizar{
+    float: left;
+    height: 7vh;
+    width: 15vw;
+    margin-left: 15%;
+    background-color: #12448c;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    margin-bottom: 3%;
+}
+#btnvalidar{
+    position: absolute;
+    right: 25%; /* Alinearlo a la derecha */
+    top: 107%; /* Ajustar el valor de top para mover el botón hacia arriba */
+    height: 7vh;
+    width: 15vw;
+    background-color: #12448c;
+    border: none;
+    border-radius: 30px;
+    color: white;
+}
+/**/
