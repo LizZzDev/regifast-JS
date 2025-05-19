@@ -6,6 +6,7 @@ import Consultar from '../paginas/alumnos/consultarOferta';
 import Login from '../paginas/alumnos/loginAlumnos';
 import Principal from '../paginas/alumnos/principalAlumno';
 import Registro from '../paginas/alumnos/registroAlumnos';
+import RegistroUsuario from '../paginas/alumnos/usuario';
 
 const RutasAlumnos = () => (
     <Routes>
@@ -15,6 +16,7 @@ const RutasAlumnos = () => (
         <Route path="/consultar" element={<Consultar />} />
         <Route path="/principal" element={<Principal />} />
         <Route path="/registro" element={<Registro />} />
+        <Route path="/registro-usuario" element={<RegistroUsuario />} />
     </Routes>
 );
 

@@ -42,7 +42,7 @@ const EmpresasSinVerificar = () => {
         <nav className="menu">
           <ul>
             <li><a href="/inicio">INICIO</a></li>
-            <li><section id="navegacion1"><a href="/alumnos" id="datalist">ALUMNOS</a></section></li>
+            <li><section id="navegacion1"><a href="/coordinador/alumnos" id="datalist">ALUMNOS</a></section></li>
             <li>
               <section id="navegacion2">
                 <a href="#">EMPRESAS</a>
@@ -56,8 +56,8 @@ const EmpresasSinVerificar = () => {
               <section id="navegacion2">
                 <a href="#">OPCIONES</a>
                 <div className="submenu2">
-                  <a href="/admin/nuevo" className="opcion">Crear nuevo admin</a>
-                  <a href="/departamento/nuevo" className="opcion">Crear jefe de departamento</a>
+                  <a href="/coordinador/crear-coordinador" className="opcion">Crear nuevo admin</a>
+                  <a href="/coordinador/crear-jefe" className="opcion">Crear jefe de departamento</a>
                   <a href="/logout" className="opcion">Cerrar sesión</a>
                 </div>
               </section>

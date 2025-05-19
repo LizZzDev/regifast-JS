@@ -28,14 +28,13 @@ const TablaEmpresas = () => {
 
   return (
     <div className="montserrat">
-      <Header />
-
+      <Header/>
         <nav className="menu">
           <ul>
             <li><a href="/inicio">INICIO</a></li>
             <li>
               <section id="navegacion1">
-                <a href="/alumnos" id="datalist">ALUMNOS</a>
+                <a href="/coordindor/alumnos" id="datalist">ALUMNOS</a>
               </section>
             </li>
             <li>
@@ -51,8 +50,8 @@ const TablaEmpresas = () => {
               <section id="navegacion2">
                 <a href="#">OPCIONES</a>
                 <div className="submenu2">
-                  <a href="/admin/nuevo" className="opcion">Crear nuevo admin</a>
-                  <a href="/departamento/nuevo" className="opcion">Crear jefe de departamento</a>
+                  <a href="/coordindor/crear-coordinador" className="opcion">Crear nuevo admin</a>
+                  <a href="/departamento/crear-jefe" className="opcion">Crear jefe de departamento</a>
                   <a href="/logout" className="opcion">Cerrar sesión</a>
                 </div>
               </section>
