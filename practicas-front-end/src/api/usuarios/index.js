@@ -16,7 +16,7 @@ export async function iniciarSesion({ correo, contrasena }) {
   }
 }
 
-export async function crearUsuario({ correo, contrasena, nombre, rol, datosEmpresa, datosJefeDepartamento }) {
+export async function crearUsuario({ correo, contrasena, nombre, rol, datosJefeDepartamento }) {
   try {
     const response = await api.post(router.USUARIOS + endpoints.USUARIOS.CREAR_USUARIO,
       { 
@@ -24,7 +24,6 @@ export async function crearUsuario({ correo, contrasena, nombre, rol, datosEmpre
         contrasena, 
         nombre, 
         rol, 
-        datosEmpresa, 
         datosJefeDepartamento },
     );
 

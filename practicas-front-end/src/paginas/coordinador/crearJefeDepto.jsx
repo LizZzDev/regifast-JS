@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import "./crearJefeDepto.css";
-
+import "./crearAdmin.css";
 import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
+import { crearUsuario } from "../../api/usuarios";
 
 
 function CrearNuevoAdmin() {
   const [formData, setFormData] = useState({
+    nombre: "",
     correoAdmin: "",
     passwordDepto: "",
   });
@@ -18,27 +19,19 @@ function CrearNuevoAdmin() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    fetch("http://localhost:3001/crear-admin", { // ruta pa modificar (enlazar)
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message === "Admin creado correctamente") {
-          alert("Admin creado correctamente.");
-        } else {
-          alert("Error al crear admin.");
-        }
-      })
-      .catch((err) => {
-        console.error("Error:", err);
-      });
+    try {
+      await crearUsuario ( {
+        correo: formData.correoAdmin,
+        contrasena: formData.passwordDepto,
+        nombre: formData.nombre,
+        rol: 'coordinador'
+      } )
+      
+    } catch (error) {
+      
+    }
   };
 
   return (
@@ -47,12 +40,24 @@ function CrearNuevoAdmin() {
 
       <main>
         <section id="titleA">
-          <h2>Crear Nuevo Admin</h2>
+          <h2>Crear Nuevo Coordinador</h2>
         </section>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="correoIns">Correo electrónico institucional:</label>
+            <label htmlFor="nombre">Nombre:</label>
+            <input
+              type="text"
+              id="nombreCoordinador"
+              name="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="correoIns">Correo institucional:</label>
             <input
               type="email"
               id="correoIns"
