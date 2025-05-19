@@ -45,6 +45,8 @@ const descargarCartaAsignacion = async (req, res) => {
         const rutaTemplate = path.join('src', 'templates', 'carta_asignacion_template.docx');
         const documentoBuffer = await generarDocumentoDesdeTemplate(rutaTemplate, datos);
 
+        await Alumnos.aumentarEnUnoBarraStatus(idUsuario);
+
         return documentoBuffer;
     } catch (error) {
         console.error("Error en el servicio de generar carta de asignación:", error);

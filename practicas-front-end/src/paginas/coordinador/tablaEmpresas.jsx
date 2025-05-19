@@ -36,10 +36,11 @@ const TablaEmpresas = () => {
 
       <nav className="menu">
         <ul>
-          <li><a href="#">INICIO</a></li>
-          <li><a href="#">ALUMNOS</a></li>
-          <li><a href="#">EMPRESAS</a></li>
-          <li><a href="#">CERRAR SESIÓN</a></li>
+           <li><a href="principal">INICIO</a></li>
+          <li><a href="alumnos">ALUMNOS</a></li>
+          <li><a href="empresas">EMPRESAS</a></li>
+          <li><a href="fechas">FECHAS</a></li>
+          <li><a href="#">OPCIONES</a></li>
         </ul>
       </nav>
 

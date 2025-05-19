@@ -94,7 +94,7 @@
     }
   }
 
-  export async function obtenerEmpresasParaUsuario({ pagina = 1, limite = 20, validada = null, vacantes = false } = {}) {
+  export async function obtenerEmpresasParaUsuario({ pagina = 1, limite = 20, validada = null, vacantes = false } = {}, redirigirSiError = true) {
     try {
       const params = {
         pagina,
@@ -112,10 +112,10 @@
       return response.data.data;; 
     } catch (error) {
       console.log (error)
-      if (error.status == 409) {
+      if (error.response?.status === 409 && redirigirSiError) {
         alert("No tienes acceso a este apartado");
         window.location.href = '/alumno/principal';
-      }
+    }
 
       console.error("Error al obtener empresas:", error);
       throw error;

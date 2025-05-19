@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Chart } from 'chart.js/auto';
 import './grafica.css';
+import { obtenerNumeroAlumnos } from '../../api/coordinador';
 
 const Estadisticas = () => {
   // Datos de ejemplo por carrera
@@ -27,16 +28,26 @@ const Estadisticas = () => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
-  // Inicializar y actualizar gráfico
+useEffect(() => {
+  const cargarAlumnos = async () => {
+    try {
+      const carrera = carreraSeleccionada === 'todas' ? null : carreraSeleccionada;
+
+      const datos = await obtenerNumeroAlumnos({ carrera: carrera });
+      console.log(datos);
+      setEstadisticas(datos);
+    } catch (error) {
+      console.error('Error al cargar empresas:', error);
+    }
+  };
+
+  cargarAlumnos();
+}, [carreraSeleccionada]);
+
+
   useEffect(() => {
     const datos = datosPorCarrera[carreraSeleccionada];
     
-    // Actualizar estadísticas
-    setEstadisticas({
-      revisados: datos.revisados,
-      noRevisados: datos.noRevisados,
-      total: datos.revisados + datos.noRevisados
-    });
 
     // Configurar gráfico
     const ctx = chartRef.current.getContext('2d');
@@ -120,9 +131,10 @@ const Estadisticas = () => {
 
       <nav className="menu">
         <ul>
-          <li><a href="#">INICIO</a></li>
-          <li><a href="#">ALUMNOS</a></li>
-          <li><a href="#">EMPRESAS</a></li>
+          <li><a href="principal">INICIO</a></li>
+          <li><a href="alumnos">ALUMNOS</a></li>
+          <li><a href="empresas">EMPRESAS</a></li>
+          <li><a href="fechas">FECHAS</a></li>
           <li><a href="#">OPCIONES</a></li>
         </ul>
       </nav>
@@ -166,9 +178,9 @@ const Estadisticas = () => {
             </thead>
             <tbody>
               <tr>
-                <td>{estadisticas.revisados.toLocaleString()}</td>
-                <td>{estadisticas.noRevisados.toLocaleString()}</td>
-                <td>{estadisticas.total.toLocaleString()}</td>
+                <td>{estadisticas.revisados}</td>
+                <td>{estadisticas.noRevisados}</td>
+                <td>{estadisticas.total}</td>
               </tr>
             </tbody>
           </table>

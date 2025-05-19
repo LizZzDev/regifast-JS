@@ -6,6 +6,7 @@ import validarEmpresaService from "./validarEmpresa.js";
 import obtenerBarraStatusParaEstadisticasService from "./obtenerBarraStatusParaEstadisticas.js";
 import anadirEmpresaService from "./anadirEmpresa.js";
 import asignarFechaIngresoPorCalificacionesService from "./asignarFechaIngresoPorCalificaciones.js";
+import obtenerNumeroAlumnosService from "./obtenerNumeroAlumnos.js";
 
 export const anadirEmpresa = async (req, res) => {
   try {
@@ -63,6 +64,16 @@ export const obtenerBarraStatusParaEstadisticas = async (req, res) => {
     res.status(201).json({ success: true, data: response });
   } catch (error) {
     console.error("Error al obtener datos del alumno:", error.message);
+    return res.status(500).json({ success: false, message: error });
+  }
+};
+
+export const obtenerNumeroAlumnos = async (req, res) => {
+  try {
+    const response = await obtenerNumeroAlumnosService(req);
+    res.status(201).json({ success: true, data: response });
+  } catch (error) {
+    console.error("Error al obtener numero de alumnos:", error.message);
     return res.status(500).json({ success: false, message: error });
   }
 };

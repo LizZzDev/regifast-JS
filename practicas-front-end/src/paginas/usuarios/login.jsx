@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../componentes/header.jsx";
 import { iniciarSesion } from "../../api/usuarios/index.js";
-import "./styles.css";
+import "./login.css";
 
 const Login = ({ onLogin }) => {
   const [correo, setCorreo] = useState("");
@@ -20,7 +20,7 @@ const Login = ({ onLogin }) => {
 
         const usuario = await iniciarSesion({ correo, contrasena: password }); // llamada al backend
         onLogin?.(usuario); 
-        if (usuario?.rol === "alumno") {
+         if (usuario?.rol === "alumno") {
           navigate("/alumno/principal");
         } else if (usuario?.rol === "empresa") {
           navigate("/empresa/principal");

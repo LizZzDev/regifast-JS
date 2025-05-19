@@ -17,7 +17,8 @@ export async function anadirEmpresa(data) {
 
 export async function asignarFechaIngresoPorCalificacion(data) {
   try {
-    const response = await api.post(
+    console.log (data)
+    const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.ASIGNAR_FECHA_INGRESO_POR_CALIFICACIONES,
       data,
     );
@@ -53,10 +54,19 @@ export async function obtenerAlumnos() {
   }
 }
 
-export async function obtenerAlumno() {
+export async function obtenerAlumno({ pagina = 1, limite = 20, validada = null, vacantes = false } = {}) {
   try {
+     const params = {
+      pagina,
+      limite,
+      ...(validada !== null && { validada }), 
+      ...(vacantes && { vacantes: true })
+    };
+
+    console.log (params)
     const response = await api.get(
        router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNO,
+      { params }
     );
     return response.data.data;;
   } catch (error) {
@@ -65,10 +75,29 @@ export async function obtenerAlumno() {
   }
 }
 
-export async function obtenerBarraStatusParaEstadisticas() {
+export async function obtenerBarraStatusParaEstadisticas(carrera=null) {
   try {
     const response = await api.get(
        router.COORDINADOR + endpoints.COORDINADOR.OBTENER_BARRA_STATUS_PARA_ESTADISTICAS,
+        { params: 
+          {
+            carrera: carrera,
+          }
+       }
+    );
+    return response.data.data;;
+  } catch (error) {
+    console.error("Error en obtener barra status para estadisticas", error);
+    throw error;
+  }
+}
+
+export async function obtenerNumeroAlumnos({carrera=null}) {
+  try {
+
+    const response = await api.get(
+       router.COORDINADOR + endpoints.COORDINADOR.OBTENER_NUMERO_ALUMNOS,
+        { params: { carrera } } 
     );
     return response.data.data;;
   } catch (error) {

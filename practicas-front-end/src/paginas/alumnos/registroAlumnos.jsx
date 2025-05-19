@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './registroAlumnos.css';
-import { anadirDatosDelAlumno } from '../../api/alumnos';
+import { anadirDatosDelAlumno, obtenerBarraStatus } from '../../api/alumnos';
 import Header from '../../componentes/alumnos/header';
 
 const RegistroAlumnos = () => {
@@ -33,31 +33,28 @@ const RegistroAlumnos = () => {
     NombrePadre: '',
     TelefonoPadre: '',
     NombreMadre: '',
-    TelefonoMadre: '',
-
-    Token: ''
-
+    TelefonoMadre: ''
   });
-
-  //esto es para los botones del token
-    const handleEnviarToken = () => {
-    console.log('Token enviado:', formData.Token);
-    // Aquí podrías hacer una llamada al backend para enviar el token
-  };
-
-  const handleVerificarToken = () => {
-    // Lógica de verificación del token
-    if (formData.Token === '123456') {
-      alert('Token verificado correctamente.');
-    } else {
-      alert('Token incorrecto.');
-    }
-  };
-
 
   // Estado para mensajes de error
   const [errors, setErrors] = useState({});
   const [submitAttempted, setSubmitAttempted] = useState(false);
+
+  useEffect(() => {
+    const salir = async () => {
+      try {
+        const datos = await obtenerBarraStatus();
+        if (datos >= 2) {
+          alert("Tu registro de datos ya fue enviado.");
+          window.location.href = '/alumno/principal';
+        }
+      } catch (error) {
+        console.error('Error al verificar etapa del alumno:', error);
+      }
+    };
+
+    salir(); 
+  }, []);
 
   // Manejar cambios en los inputs
   const handleChange = (e) => {
@@ -157,10 +154,7 @@ const handleSubmit = async (e) => {
    } else {
         console.log('Errores en el formulario:', errors);
    }
-   
 };
-
-
 
   return (
     <div>
@@ -304,6 +298,7 @@ const handleSubmit = async (e) => {
                 name: 'correo', 
                 placeholder: 'Correo electrónico', 
                 type: 'email',
+                disabled: true,
                 error: errors.correo
               },
               { 
@@ -371,30 +366,6 @@ const handleSubmit = async (e) => {
               </div>
             ))}
           </fieldset>
-          <fieldset>
-            <legend>Verificación</legend>
-
-            <input
-              type="text"
-              name="Token"
-              placeholder="Token de verificación"
-              value={formData.Token || ''}
-              onChange={handleChange}
-              className={errors.Token ? 'error' : ''}
-              required
-            />
-            {errors.Token && <span className="error-message">{errors.Token}</span>}
-
-            <div className="token-buttons">
-              <button type="button" onClick={handleEnviarToken}>
-                Enviar Token
-              </button>
-              <button type="button" onClick={handleVerificarToken}>
-                Verificar Token
-              </button>
-            </div>
-          </fieldset>
-
 
           <button type="submit" id="MandarInformacion">
             Guardar
