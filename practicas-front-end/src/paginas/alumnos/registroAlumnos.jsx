@@ -36,26 +36,10 @@ const RegistroAlumnos = () => {
     TelefonoMadre: ''
   });
 
-    //para el token
-    const handleEnviarToken = () => {
-      console.log('Token enviado:', formData.Token);
-      // Aquí podrías hacer una llamada al backend para enviar el token
-    };
-
-    const handleVerificarToken = () => {
-      // Lógica de verificación del token
-      if (formData.Token === '123456') {
-        alert('Token verificado correctamente.');
-      } else {
-        alert('Token incorrecto.');
-      }
-    };
-
-
   // Estado para mensajes de error
   const [errors, setErrors] = useState({});
   const [submitAttempted, setSubmitAttempted] = useState(false);
-
+  
   useEffect(() => {
     const salir = async () => {
       try {
@@ -381,26 +365,6 @@ const handleSubmit = async (e) => {
                 {errors[field.name] && <span className="error-message">{errors[field.name]}</span>}
               </div>
             ))}
-          </fieldset>
-
-          <fieldset>
-            <legend>Verificación</legend>
-
-            <input
-              type="text"
-              name="Token"
-              placeholder="Token de verificación"
-              value={formData.Token || ''}
-              onChange={handleChange}
-              className={errors.Token ? 'error' : ''}
-              required
-            />
-            {errors.Token && <span className="error-message">{errors.Token}</span>}
-
-            <div className="token-buttons">
-              <button type="button" onClick={handleEnviarToken}>Enviar Token</button>
-              <button type="button" onClick={handleVerificarToken}>Verificar Token</button>
-            </div>
           </fieldset>
 
           <button type="submit" id="MandarInformacion">
