@@ -15,8 +15,6 @@ const iniciarSesion = async (req) => {
     throw new Error("Usuario o contraseña incorrectos");
   }
 
-  console.log ("ok");
-
   return {
     id: user.IdUsuario,
     nombre: user.Nombre,

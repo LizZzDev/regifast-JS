@@ -11,7 +11,7 @@ const RutasAlumnos = () => (
     <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/calificar" element={<Calificar />} />
-        <Route path="/ver-calificaciones-empresa" element={<VerCalificaciones />} />
+        <Route path="/consultar/ver-calificaciones-empresa/:idEmpresa" element={<VerCalificaciones />} />
         <Route path="/consultar" element={<Consultar />} />
         <Route path="/principal" element={<Principal />} />
         <Route path="/registro" element={<Registro />} />

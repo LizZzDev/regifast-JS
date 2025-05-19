@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import './calificacionSoloEmpresa.css';
 import { obtenerCalificacionesEmpresa, obtenerEmpresaParaUsuario } from '../../api/alumnos';
 import Header from '../../componentes/alumnos/header';
 
 const CalificacionEmpresa = () => {
+  const { idEmpresa } = useParams();
    const [empresa, setEmpresa] = useState([]);
    const [datosCalificacion, setDatosCalificacion] = useState({
     calificacionFinal: 0,
@@ -14,7 +16,7 @@ const CalificacionEmpresa = () => {
   useEffect(() => {
       const cargarEmpresa = async () => {
         try {
-          const datos = await obtenerEmpresaParaUsuario(2);
+          const datos = await obtenerEmpresaParaUsuario(idEmpresa);
           setEmpresa(datos);
         } catch (error) {
           console.error('Error al cargar empresas:', error);
@@ -27,7 +29,7 @@ const CalificacionEmpresa = () => {
   useEffect(() => {
       const cargarOpiniones = async () => {
         try {
-          const datos = await obtenerCalificacionesEmpresa(2);
+          const datos = await obtenerCalificacionesEmpresa(idEmpresa);
           setDatosCalificacion(datos);
           console.log (datos);
         } catch (error) {

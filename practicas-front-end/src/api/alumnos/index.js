@@ -22,7 +22,7 @@
         router.ALUMNOS + endpoints.ALUMNOS.CALIFICAR_EMPRESA,
         data,
       );
-      return response.data.data;;
+      return response.data.data;
     } catch (error) {
       console.error("Error en calificar empresa:", error);
       throw error;
@@ -86,6 +86,34 @@
     }
   }
 
+  export async function obtenerEmpresasParaUsuario({ pagina = 1, limite = 20, validada = null, vacantes = false } = {}) {
+    try {
+      const params = {
+        pagina,
+        limite,
+        ...(validada !== null && { validada }), 
+        ...(vacantes && { vacantes: true })
+      };
+
+      const response = await api.get(
+        router.ALUMNOS + endpoints.ALUMNOS.OBTENER_EMPRESAS_PARA_USUARIO,
+        { params }
+      );
+
+      console.log (response)
+      return response.data.data;; 
+    } catch (error) {
+      console.log (error)
+      if (error.status == 409) {
+        alert("No tienes acceso a este apartado");
+        window.location.href = '/alumno/principal';
+      }
+
+      console.error("Error al obtener empresas:", error);
+      throw error;
+    }
+  }
+
     export async function obtenerEmpresaParaUsuario (id=null) {
     try {
       const response = await api.get(
@@ -103,14 +131,18 @@
     }
   }
 
-  export async function postularOfertaEmpresa(data) {
+  export async function postularOfertaEmpresa(IdEmpresa) {
     try {
       const response = await api.put(
         router.ALUMNOS + endpoints.ALUMNOS.POSTULAR_OFERTA_EMPRESA,
-        data,
+        {IdEmpresa: IdEmpresa},
       );
       return response.data.data;;
     } catch (error) {
+      if (error.response && error.response.data) {
+        throw new Error(error.response.data.message);
+      }
+
       console.error("Error en postular oferta empresa:", error);
       throw error;
     }

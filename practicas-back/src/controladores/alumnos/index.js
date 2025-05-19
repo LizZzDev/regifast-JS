@@ -43,8 +43,10 @@ export const postularOfertaEmpresa = async (req, res) => {
     const data = await postularOfertaEmpresaService(req);
     res.status(201).json({ success: true, data });
   } catch (error) {
-    console.error("Error al realizar la postulación:", error.message);
-    res.status(500).json({ success: false, message: "Error al realizar la postulación" });
+   console.error("Error al realizar la postulación:", error.message);
+    res
+      .status(error.statusCode || 500)
+      .json({ success: false, message: error.message });
   }
 };
 

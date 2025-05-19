@@ -15,6 +15,7 @@ export const endpoints = {
       OBTENER_BARRA_STATUS: '/obtenerBarraStatus',
       OBTENER_CALIFICACIONES_DE_LA_EMPRESA: '/obtenerCalificarEmpresa',
       OBTENER_EMPRESA_PARA_USUARIO: '/obtenerEmpresaParaUsuario',
+      OBTENER_EMPRESAS_PARA_USUARIO: '/obtenerEmpresasAlumnos',
       POSTULAR_OFERTA_EMPRESA: '/postularOfertaEmpresa',
     },
 

@@ -16,7 +16,6 @@ const LoginAlumnos = ({ onLogin }) => {
 
     if (correo && password) {
       try {
-      console.log (correo, password);
 
         const usuario = await iniciarSesion({ correo, contrasena: password }); // llamada al backend
         onLogin?.(usuario); 
