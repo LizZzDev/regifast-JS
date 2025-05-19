@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import './registro_empresa.css';
+import './agregarEmpresas.css';
+import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
+import { anadirEmpresa } from '../../api/coordinador';
 
 function RegistroEmpresaCoord() {
   const [formData, setFormData] = useState({
@@ -10,8 +12,6 @@ function RegistroEmpresaCoord() {
     rfc: '',
     actividades: '',
     vacantes: '',
-    password: '',
-    confirm_password: '',
     calle: '',
     numero: '',
     colonia: '',
@@ -32,14 +32,40 @@ function RegistroEmpresaCoord() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const data = {
+    Nombre: formData.nombre,
+    Descripcion: formData.descripcion,
+    Correo: formData.correo,
+    Telefono: formData.telefono,
+    RFC: formData.rfc,
+    Actividades: formData.actividades,
+    Vacantes: formData.vacantes,
+    Calle: formData.calle,
+    Numero: formData.numero,
+    Colonia: formData.colonia,
+    CodigoPostal: formData.codigo_postal,
+    Estado: formData.estado,
+    Municipio: formData.municipio,
+    imagen: null,
+    Carrera: formData.carrera,
+    PracticasExtraordinarias: formData.tipo_empresa,
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-  };
+    try {
+        await anadirEmpresa(data);
+        alert('Empresa registrada exitosamente.');
+      } catch (error) {
+        console.error('Error al registrar empresa:', error);
+        alert('Error al registrar empresa.');
+      };
+     };
 
   return (
     <div className="registro-container">
-      <h2 id="titulo-formulario">Registro de Empresa (Coordinador)</h2>
+      <HeaderCoordinador/>
+      <h2 id="titulo-formulario">Añadir empresa</h2>
       <form onSubmit={handleSubmit} className="formulario">
         <input id="input-nombre" type="text" name="nombre" placeholder="Nombre de la empresa" onChange={handleChange} />
         <textarea id="input-descripcion" name="descripcion" placeholder="Descripción" onChange={handleChange}></textarea>
@@ -48,8 +74,6 @@ function RegistroEmpresaCoord() {
         <input id="input-rfc" type="text" name="rfc" placeholder="RFC" onChange={handleChange} />
         <input id="input-actividades" type="text" name="actividades" placeholder="Actividades principales" onChange={handleChange} />
         <input id="input-vacantes" type="number" name="vacantes" placeholder="Vacantes disponibles" onChange={handleChange} />
-        <input id="input-password" type="password" name="password" placeholder="Contraseña" onChange={handleChange} />
-        <input id="input-confirm-password" type="password" name="confirm_password" placeholder="Confirmar contraseña" onChange={handleChange} />
         <input id="input-calle" type="text" name="calle" placeholder="Calle" onChange={handleChange} />
         <input id="input-numero" type="text" name="numero" placeholder="Número" onChange={handleChange} />
         <input id="input-colonia" type="text" name="colonia" placeholder="Colonia" onChange={handleChange} />
@@ -60,10 +84,15 @@ function RegistroEmpresaCoord() {
 
         <select id="select-carrera" name="carrera" onChange={handleChange}>
           <option value="">Selecciona carrera preferida</option>
-          <option value="TI">Tecnologías de la Información</option>
-          <option value="ADM">Administración</option>
-          <option value="MKT">Marketing</option>
-          <option value="IND">Ingeniería Industrial</option>
+           <option value="TPSI">TPSI</option>
+                <option value="TPAL">TPAL</option>
+                <option value="TPEI">TPEI</option>
+                <option value="TPPQ">TPPQ</option>
+                <option value="TPMF">TPMF</option>
+                <option value="TPMI">TPMI</option>
+                <option value="TPPL">TPPL</option>
+                <option value="BTDC">BTDC</option>
+                <option value="BTQM">BTQM</option>
         </select>
 
         <select id="select-tipo-empresa" name="tipo_empresa" onChange={handleChange}>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import { Chart } from 'chart.js/auto';
+ import { Chart } from 'chart.js/auto';
 import './grafica.css';
 
 import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';

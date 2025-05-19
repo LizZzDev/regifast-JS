@@ -9,6 +9,7 @@ function CrearNuevoAdmin() {
     nombre: "",
     correoAdmin: "",
     passwordDepto: "",
+    carrera: ""
   });
 
   const handleChange = (e) => {
@@ -26,11 +27,21 @@ function CrearNuevoAdmin() {
         correo: formData.correoAdmin,
         contrasena: formData.passwordDepto,
         nombre: formData.nombre,
+        datosJefeDepartamento: {carrera: formData.carrera},
         rol: 'coordinador'
-      } )
+      } );
+
+      alert("Usuario creado exitosamente");
+
+      setFormData({
+        nombre: "",
+        correoAdmin: "",
+        passwordDepto: "",
+        carrera: ""
+      });
       
     } catch (error) {
-      
+        alert("Error al crear el usuario: " + error.message);
     }
   };
 
@@ -40,7 +51,7 @@ function CrearNuevoAdmin() {
 
       <main>
         <section id="titleA">
-          <h2>Crear Nuevo Coordinador</h2>
+          <h2>Crear Jefe de Departamento</h2>
         </section>
 
         <form onSubmit={handleSubmit}>
@@ -78,6 +89,29 @@ function CrearNuevoAdmin() {
               onChange={handleChange}
               required
             />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="nombre">Carrera:</label>
+            <select
+              type="text"
+              id="carrera"
+              name="carrera"
+              value={formData.carrera}
+              onChange={handleChange}
+              required
+            >
+             <option value="">Selecciona tu carrera</option>
+                <option value="TPSI">TPSI</option>
+                <option value="TPAL">TPAL</option>
+                <option value="TPEI">TPEI</option>
+                <option value="TPPQ">TPPQ</option>
+                <option value="TPMF">TPMF</option>
+                <option value="TPMI">TPMI</option>
+                <option value="TPPL">TPPL</option>
+                <option value="BTDC">BTDC</option>
+                <option value="BTQM">BTQM</option>
+              </select>
           </div>
 
           <div className="form-group center">

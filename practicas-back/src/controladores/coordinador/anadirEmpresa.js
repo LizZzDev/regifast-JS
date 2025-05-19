@@ -3,11 +3,12 @@ import Empresa from "../../modelos/modeloEmpresa.js";
 
 const anadirDatosDeLaEmpresa = async (req, res) => {
   const { datos } = req.body; 
+  const { Correo } = datos; 
   const connection = null; 
   const idUsuario = null; 
 
   try {
-    const resultado = await Empresa.agregarNuevaEmpresa(connection, datos, idUsuario); 
+    const resultado = await Empresa.agregarNuevaEmpresa(connection, datos, idUsuario, Correo); 
 
     return resultado;
   } catch (error) {
