@@ -8,6 +8,7 @@ body {
     background-color: #f4f4f9;
     color: #242424;
     line-height: 1.6;
+    font-size: 1rem !important;
 }
 
 
@@ -22,8 +23,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.253);
 }
 
-#loginForm h1 {
-    text-align: center;
+h1 {
+    text-align: center !important;
     margin-bottom: 20px;
     color: #12448C;
     font-size: 24px;
