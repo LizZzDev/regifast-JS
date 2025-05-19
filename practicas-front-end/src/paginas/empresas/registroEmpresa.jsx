@@ -116,7 +116,7 @@ const RegistroEmpresa = () => {
  };
 
   return (
-    <div className="registro-container">
+    <div>
       <Header />
       <h2>Registro de Empresa</h2>
       <form onSubmit={handleSubmit} id="Formulario">
