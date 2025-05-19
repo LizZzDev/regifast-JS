@@ -19,6 +19,7 @@ header {
     flex-wrap: wrap;
     flex-direction: column; /* Apila elementos verticalmente */
     gap: 20px; /* Espacio entre elementos */
+    margin-bottom: 3%;
 }
 
 header #nomUDG {
@@ -102,16 +103,20 @@ img{
 
 /* Formulario */
 #Formulario {
-    width: 80%;
-    margin: auto;
-    padding: 2rem 0;
+    width: 95%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 2rem;
     text-align: center;
 }
 form {
+    width: 100%;
+    margin: 0 auto;
     background-color: white;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 fieldset {
     border: 2px solid #103E7E;
@@ -128,12 +133,15 @@ legend {
 input[type="text"],
 input[type="email"],
 input[type="password"],
+input[type="number"],
 input[type="file"] {
-    width: calc(100% - 40px);
+    width: 100%;
     margin: 10px auto;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 1rem !important;  /* Fuerza el tamaño */
+    font-family: "Montserrat", sans-serif;  /* Asegura la fuente */
 }
 #SubirImagen {
     border-color: #12448c;
@@ -145,20 +153,47 @@ input[type="file"] {
 #MandarInformacion {
     background-color: #12448c;
     color: white;
-    padding: 10px 20px;
+    padding: 5px 15px;
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     font-size: 1rem;
     cursor: pointer;
     margin-top: 1rem;
+
+    display: block;
+    width: 11%;
 }
+
 #MandarInformacion:hover {
-    background-color: #103E7E;
+    background-color: #890831;
 }
 select[name="carreras"]{
-    width: calc(100% - 40px);
+    width: 100%;
     margin: 10px auto;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 1rem !important;
+    font-family: "Montserrat", sans-serif;
+}
+
+.fuerza-password {
+    font-size: .85rem !important;
+    font-family: "Montserrat", sans-serif;
+    font-weight:lighter;
+    color: #12448c;
+    margin-top: 0.05rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+textarea {
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: "Montserrat", sans-serif;
+    resize: vertical;
 }

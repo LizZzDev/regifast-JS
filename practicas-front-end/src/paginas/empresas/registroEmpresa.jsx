@@ -119,7 +119,7 @@ const RegistroEmpresa = () => {
     <div className="registro-container">
       <Header />
       <h2>Registro de Empresa</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="Formulario">
         <input type="text" name="nombre" placeholder="Nombre de la empresa" value={formData.nombre} onChange={handleChange} required />
         <textarea name="descripcion" placeholder="Descripción (máx. 150 palabras)" value={formData.descripcion} onChange={handleChange} required />
 
@@ -128,6 +128,9 @@ const RegistroEmpresa = () => {
         <input type="text" name="rfc" placeholder="RFC" value={formData.rfc} onChange={handleChange} required />
         <input type="text" name="actividades" placeholder="Actividades" value={formData.actividades} onChange={handleChange} required />
         <input type="number" name="vacantes" placeholder="Vacantes" value={formData.vacantes} onChange={handleChange} required />
+
+        <input type="text" name="responsable" placeholder="Responsable"></input>
+        <input type="text" name="cargo" placeholder="Cargo"></input>
 
         <select name="carreras" required>
           <option value="">Seleccionar preferencia de carrera</option>
@@ -144,7 +147,7 @@ const RegistroEmpresa = () => {
 
         <input type="password" name="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} required />
         <input type="password" name="confirm_password" placeholder="Confirmar contraseña" value={formData.confirm_password} onChange={handleChange} required />
-        <div>Fuerza: {fuerza}</div>
+        <div className="fuerza-password">Fuerza: {fuerza}</div>
 
         <input type="text" name="calle" placeholder="Calle" value={formData.calle} onChange={handleChange} required />
         <input type="text" name="numero" placeholder="Número exterior" value={formData.numero} onChange={handleChange} />
@@ -155,7 +158,7 @@ const RegistroEmpresa = () => {
 
         <input type="file" name="imagen" accept="image/png, image/jpeg" onChange={handleChange} required />
 
-        <button type="submit">Registrar Empresa</button>
+        <button type="submit" id="MandarInformacion">Registrar Empresa</button>
       </form>
       {mensaje && <p>{mensaje}</p>}
     </div>
