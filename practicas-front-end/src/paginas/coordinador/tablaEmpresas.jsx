@@ -20,7 +20,7 @@ const TablaEmpresas = () => {
     };
 
     cargarEmpresas();
-  }, []); // <--- TE FALTABA ESTE CORCHETE CERRANDO EL useEffect
+  }, []);
 
   const enviarOpiniones = (idEmpresa, logoEmpresa) => {
     navigate(`/opiniones?idEmpresa=${idEmpresa}&logoEmpresa=${encodeURIComponent(logoEmpresa)}`);
