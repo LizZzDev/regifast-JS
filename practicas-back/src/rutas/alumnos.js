@@ -26,7 +26,7 @@ router.get('/generarCartaAsignacion', verificarSesion, soloAlumno, generarCartaA
 router.get('/obtenerEmpresaParaUsuario', verificarSesion, soloAlumno, obtenerEmpresaParaUsuario);
 router.post('/calificarEmpresa', verificarSesion, soloAlumno, calificarEmpresa);
 router.post('/anadirDatosDelAlumno', verificarSesion, soloAlumno, anadirDatosDelAlumno);
-router.put('/postularOfertaEmpresa', verificarSesion,  soloAlumno, postularOfertaEmpresa);
+router.put('/postularOfertaEmpresa', verificarSesion,  soloAlumno, accesoPorCalificacion, postularOfertaEmpresa);
 
 
 export default router;

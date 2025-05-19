@@ -15,7 +15,9 @@ const descargarCartaAsignacion = async (req, res) => {
         
         const datos = {
             fecha: anio,
-            empresa:  empresa[0].Nombre,
+            empresa:  empresa.Nombre,
+            responsable: empresa.Responsable,
+            cargo: empresa.Cargo,
             nombre: alumno.NombreCompleto,
             codigo: alumno.Codigo,
             carrera: alumno.Carrera,

@@ -9,10 +9,10 @@ const verificarAccesoEmpresas = async (req, res, next) => {
     const idUsuario = req.session.ID;
     const alumno = await Alumno.obtenerAlumno(idUsuario);
 
-      if (!alumno) {
+    if (!alumno) {
       return res.status(404).json({ success: false, message: "Alumno no encontrado" });
     }
-
+    console.log ("here");
     const calificacion = alumno.Calificacion;
     const ordinario = alumno.Ordinario;
 
@@ -26,10 +26,10 @@ const verificarAccesoEmpresas = async (req, res, next) => {
       hoy <= new Date(f.FechaFin)
     );
 
-    if (!rango) {
-      return res.status(403).json({
+    if (!rango || alumno.IdEmpresa != null) {
+      return res.status(409).json({
         success: false,
-        message: "Actualmente no tienes acceso para ver las empresas según tu calificación.",
+        message: "No tienes acceso a este apartado.",
       });
     }
 
