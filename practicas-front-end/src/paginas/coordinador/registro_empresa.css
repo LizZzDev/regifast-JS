@@ -1,0 +1,68 @@
+#registroEmpresaSeccion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+#registroEmpresaContenedor {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#logoRegistroEmpresa {
+  width: 80px;
+  margin: 0 auto;
+  display: block;
+}
+
+#tituloRegistroEmpresa {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.inputBox label {
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.inputBox input,
+.inputBox textarea,
+.inputBox select {
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.inputBox textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+#btnRegistroEmpresaCoordinador {
+  width: 100%;
+  background-color: #0057b7;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#btnRegistroEmpresaCoordinador:hover {
+  background-color: #003f87;
+}

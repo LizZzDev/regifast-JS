@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './registroAlumnos.css';
+import './RegistroAlumnos.css';
 import { anadirDatosDelAlumno, obtenerBarraStatus } from '../../api/alumnos';
 import Header from '../../componentes/alumnos/header';
 
 const RegistroAlumnos = () => {
-  // Estado para los datos del formulario
   const [formData, setFormData] = useState({
     // Datos Escolares
     Codigo: '',
@@ -36,7 +35,6 @@ const RegistroAlumnos = () => {
     TelefonoMadre: ''
   });
 
-  // Estado para mensajes de error
   const [errors, setErrors] = useState({});
   const [submitAttempted, setSubmitAttempted] = useState(false);
   
@@ -56,7 +54,6 @@ const RegistroAlumnos = () => {
     salir(); 
   }, []);
 
-  // Manejar cambios en los inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -64,7 +61,6 @@ const RegistroAlumnos = () => {
       [name]: value
     }));
     
-    // Limpiar error cuando el usuario corrige
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -73,12 +69,10 @@ const RegistroAlumnos = () => {
     }
   };
 
-  // Validación del formulario
   const validateForm = async () => {
     const newErrors = {};
     let isValid = true;
 
-    // Validación de campos requeridos
     const requiredFields = [
       'Codigo', 'NombreCompleto', 'Carrera', 'Grado', 'Grupo', 'Turno',
       'Domicilio', 'Colonia', 'Municipio', 'Edad', 'NSS', 'Movil',
@@ -93,9 +87,8 @@ const RegistroAlumnos = () => {
       }
     });
 
-    // Validaciones específicas
-    if (formData.edad && (parseInt(formData.edad) < 18 || parseInt(formData.edad) > 25)) {
-      newErrors.edad = 'La edad debe estar entre 18 y 25 años';
+    if (formData.Edad && (parseInt(formData.Edad) < 18 || parseInt(formData.Edad) > 25)) {
+      newErrors.Edad = 'La edad debe estar entre 18 y 25 años';
       isValid = false;
     }
 
@@ -104,7 +97,7 @@ const RegistroAlumnos = () => {
       isValid = false;
     }
 
-    const telefonos = ['Movil', 'telefono', 'emergencia', 'telPadre', 'telMadre'];
+    const telefonos = ['Movil', 'Telefono', 'TelefonoEmergencia', 'TelefonoPadre', 'TelefonoMadre'];
     telefonos.forEach(tel => {
       if (formData[tel] && !/^\d{10}$/.test(formData[tel])) {
         newErrors[tel] = 'Debe tener 10 dígitos';
@@ -112,13 +105,13 @@ const RegistroAlumnos = () => {
       }
     });
 
-    if (formData.cp && !/^\d{5}$/.test(formData.cp)) {
-      newErrors.cp = 'El código postal debe tener 5 dígitos';
+    if (formData.CodigoPostal && !/^\d{5}$/.test(formData.CodigoPostal)) {
+      newErrors.CodigoPostal = 'El código postal debe tener 5 dígitos';
       isValid = false;
     }
 
-    if (formData.numero && parseInt(formData.numero) <= 0) {
-      newErrors.numero = 'Debe ser un número válido';
+    if (formData.NumeroCasa && parseInt(formData.NumeroCasa) <= 0) {
+      newErrors.NumeroCasa = 'Debe ser un número válido';
       isValid = false;
     }
 
@@ -127,133 +120,136 @@ const RegistroAlumnos = () => {
       isValid = false;
     }
 
-      console.log (newErrors);
-
     setErrors(newErrors);
     return isValid;
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitAttempted(true);
 
-  // Manejar envío del formulario
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setSubmitAttempted(true);
-
-   if (validateForm()) {
+    if (validateForm()) {
       if (window.confirm('¿Estás seguro de que deseas mandar la información? Una vez realizado no se puede modificar.')) {
         try {
           console.log("Enviando datos:", formData);
           await anadirDatosDelAlumno(formData);
           alert("Registro exitoso.");
-          // Aquí podrías limpiar el formulario o redirigir, si deseas
         } catch (error) {
           console.error('Error al registrar alumno:', error);
           alert("Error al registrar.");
         }
       }
-   } else {
-        console.log('Errores en el formulario:', errors);
-   }
-};
+    } else {
+      console.log('Errores en el formulario:', errors);
+    }
+  };
 
   return (
-    <div>
+    <div className="registro-alumno-container">
       <Header/>
 
-      <article id="Formulario">
-        <section id="Titulo">
+      <article className="formulario-container">
+        <section className="titulo-seccion">
           <h1>PRACTICAS PROFESIONALES 2024-B</h1>
         </section>
         
-        <form id="registroAlumnoForm" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="formulario-registro">
           {/* Datos Escolares */}
-          <fieldset>
+          <fieldset className="grupo-campos">
             <legend>Datos Escolares</legend>
             
-            <input
-              type="text"
-              name="Codigo"
-              placeholder="Código"
-              value={formData.Codigo}
-              onChange={handleChange}
-              className={errors.Codigo ? 'error' : ''}
-              required
-            />
-            {errors.Codigo && <span className="error-message">{errors.Codigo}</span>}
+            <div className="campo-formulario">
+              <input
+                type="text"
+                name="Codigo"
+                placeholder="Código"
+                value={formData.Codigo}
+                onChange={handleChange}
+                className={errors.Codigo ? 'error' : ''}
+              />
+              {errors.Codigo && <span className="mensaje-error">{errors.Codigo}</span>}
+            </div>
             
-            <input
-              type="text"
-              name="NombreCompleto"
-              placeholder="Nombre completo"
-              value={formData.NombreCompleto}
-              onChange={handleChange}
-              className={errors.NombreCompleto ? 'error' : ''}
-              required
-            />
-            {errors.NombreCompleto && <span className="error-message">{errors.NombreCompleto}</span>}
+            <div className="campo-formulario">
+              <input
+                type="text"
+                name="NombreCompleto"
+                placeholder="Nombre completo"
+                value={formData.NombreCompleto}
+                onChange={handleChange}
+                className={errors.NombreCompleto ? 'error' : ''}
+              />
+              {errors.NombreCompleto && <span className="mensaje-error">{errors.NombreCompleto}</span>}
+            </div>
             
-            <select
-              name="Carrera"
-              value={formData.Carrera}
-              onChange={handleChange}
-              className={errors.Carrera ? 'error' : ''}
-              required
-            >
-              <option value="">Selecciona tu carrera</option>
-              <option value="TPSI">TPSI</option>
-              <option value="TPAL">TPAL</option>
-              <option value="TPEI">TPEI</option>
-              <option value="TPPQ">TPPQ</option>
-              <option value="TPMF">TPMF</option>
-              <option value="TPMI">TPMI</option>
-              <option value="TPPL">TPPL</option>
-              <option value="BTDC">BTDC</option>
-              <option value="BTQM">BTQM</option>
-            </select>
-            {errors.Carrera && <span className="error-message">{errors.Carrera}</span>}
+            <div className="campo-formulario">
+              <select
+                name="Carrera"
+                value={formData.Carrera}
+                onChange={handleChange}
+                className={errors.Carrera ? 'error' : ''}
+              >
+                <option value="">Selecciona tu carrera</option>
+                <option value="TPSI">TPSI</option>
+                <option value="TPAL">TPAL</option>
+                <option value="TPEI">TPEI</option>
+                <option value="TPPQ">TPPQ</option>
+                <option value="TPMF">TPMF</option>
+                <option value="TPMI">TPMI</option>
+                <option value="TPPL">TPPL</option>
+                <option value="BTDC">BTDC</option>
+                <option value="BTQM">BTQM</option>
+              </select>
+              {errors.Carrera && <span className="mensaje-error">{errors.Carrera}</span>}
+            </div>
             
-            <select
-              name="Grado"
-              value={formData.Grado}
-              onChange={handleChange}
-              className={errors.Grado ? 'error' : ''}
-              required
-            >
-              <option value="">Selecciona tu grado</option>
-              <option value="8vo">8°</option>
-              <option value="6to">6°</option>
-            </select>
-            {errors.Grado && <span className="error-message">{errors.Grado}</span>}
-            
-            <select
-              name="Grupo"
-              value={formData.Grupo}
-              onChange={handleChange}
-              className={errors.Grupo ? 'error' : ''}
-              required
-            >
-              <option value="">Selecciona tu grupo</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-            </select>
-            {errors.Grupo && <span className="error-message">{errors.Grupo}</span>}
-            
-            <select
-              name="Turno"
-              value={formData.Turno}
-              onChange={handleChange}
-              className={errors.Turno ? 'error' : ''}
-              required
-            >
-              <option value="">Selecciona tu turno</option>
-              <option value="Matutino">Matutino</option>
-              <option value="Vespertino">Vespertino</option>
-            </select>
-            {errors.Turno && <span className="error-message">{errors.Turno}</span>}
+            <div className="grupo-seleccionables">
+              <div className="campo-formulario seleccion-corta">
+                <select
+                  name="Grado"
+                  value={formData.Grado}
+                  onChange={handleChange}
+                  className={errors.Grado ? 'error' : ''}
+                >
+                  <option value="">Grado</option>
+                  <option value="8vo">8°</option>
+                  <option value="6to">6°</option>
+                </select>
+                {errors.Grado && <span className="mensaje-error">{errors.Grado}</span>}
+              </div>
+              
+              <div className="campo-formulario seleccion-corta">
+                <select
+                  name="Grupo"
+                  value={formData.Grupo}
+                  onChange={handleChange}
+                  className={errors.Grupo ? 'error' : ''}
+                >
+                  <option value="">Grupo</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                </select>
+                {errors.Grupo && <span className="mensaje-error">{errors.Grupo}</span>}
+              </div>
+              
+              <div className="campo-formulario seleccion-corta">
+                <select
+                  name="Turno"
+                  value={formData.Turno}
+                  onChange={handleChange}
+                  className={errors.Turno ? 'error' : ''}
+                >
+                  <option value="">Turno</option>
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                </select>
+                {errors.Turno && <span className="mensaje-error">{errors.Turno}</span>}
+              </div>
+            </div>
           </fieldset>
 
           {/* Datos Generales */}
-          <fieldset>
+          <fieldset className="grupo-campos">
             <legend>Datos Generales</legend>
             
             {[
@@ -265,32 +261,27 @@ const handleSubmit = async (e) => {
                 placeholder: 'Edad', 
                 type: 'number',
                 min: 18,
-                max: 25,
-                error: errors.edad
+                max: 25
               },
               { 
                 name: 'NSS', 
                 placeholder: 'NSS', 
-                type: 'number',
-                error: errors.NSS
+                type: 'number'
               },
               { 
                 name: 'Movil', 
                 placeholder: 'Móvil', 
-                type: 'number',
-                error: errors.movil
+                type: 'number'
               },
               { 
                 name: 'NumeroCasa', 
                 placeholder: 'Número exterior', 
-                type: 'number',
-                error: errors.numero
+                type: 'number'
               },
               { 
                 name: 'CodigoPostal', 
                 placeholder: 'Código Postal', 
-                type: 'number',
-                error: errors.cp
+                type: 'number'
               },
               { name: 'Estado', placeholder: 'Estado', type: 'text' },
               { name: 'Nacionalidad', placeholder: 'Nacionalidad', type: 'text' },
@@ -298,23 +289,20 @@ const handleSubmit = async (e) => {
                 name: 'correo', 
                 placeholder: 'Correo electrónico', 
                 type: 'email',
-                disabled: true,
-                error: errors.correo
+                disabled: true
               },
               { 
                 name: 'Telefono', 
                 placeholder: 'Teléfono fijo', 
-                type: 'number',
-                error: errors.telefono
+                type: 'number'
               },
               { 
                 name: 'TelefonoEmergencia', 
                 placeholder: 'Teléfono de emergencia', 
-                type: 'number',
-                error: errors.emergencia
+                type: 'number'
               }
             ].map((field, index) => (
-              <div key={index}>
+              <div className="campo-formulario" key={index}>
                 <input
                   type={field.type}
                   name={field.name}
@@ -322,18 +310,17 @@ const handleSubmit = async (e) => {
                   value={formData[field.name]}
                   onChange={handleChange}
                   className={errors[field.name] ? 'error' : ''}
-                  required={!field.disabled}
                   disabled={field.disabled || false}
                   min={field.min}
                   max={field.max}
                 />
-                {errors[field.name] && <span className="error-message">{errors[field.name]}</span>}
+                {errors[field.name] && <span className="mensaje-error">{errors[field.name]}</span>}
               </div>
             ))}
           </fieldset>
 
           {/* Datos Familiares */}
-          <fieldset>
+          <fieldset className="grupo-campos">
             <legend>Datos Familiares</legend>
             
             {[
@@ -341,18 +328,16 @@ const handleSubmit = async (e) => {
               { 
                 name: 'TelefonoPadre', 
                 placeholder: 'Teléfono del padre', 
-                type: 'number',
-                error: errors.telPadre
+                type: 'number'
               },
               { name: 'NombreMadre', placeholder: 'Nombre de la madre', type: 'text' },
               { 
                 name: 'TelefonoMadre', 
                 placeholder: 'Teléfono de la madre', 
-                type: 'number',
-                error: errors.telMadre
+                type: 'number'
               }
             ].map((field, index) => (
-              <div key={index}>
+              <div className="campo-formulario" key={index}>
                 <input
                   type={field.type}
                   name={field.name}
@@ -360,14 +345,13 @@ const handleSubmit = async (e) => {
                   value={formData[field.name]}
                   onChange={handleChange}
                   className={errors[field.name] ? 'error' : ''}
-                  required
                 />
-                {errors[field.name] && <span className="error-message">{errors[field.name]}</span>}
+                {errors[field.name] && <span className="mensaje-error">{errors[field.name]}</span>}
               </div>
             ))}
           </fieldset>
 
-          <button type="submit" id="MandarInformacion">
+          <button type="submit" className="boton-enviar">
             Guardar
           </button>
         </form>
