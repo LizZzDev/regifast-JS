@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { iniciarSesion } from "../../api/usuarios/index.js";
-import "./styles.css";
+import "../empresas/styles.css";
 
 import HeaderJefeDepto from "../../componentes/jefeDepto/header_jefeDepto.jsx";
 
 
-const Login = ({ onLogin }) => {
+const LoginCJ = ({ onLogin }) => {
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
   const [mensaje, setMensaje] = useState("");
