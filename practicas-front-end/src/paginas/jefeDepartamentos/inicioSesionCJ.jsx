@@ -20,7 +20,7 @@ const Login = ({ onLogin }) => {
       try {
       console.log (correo, password);
 
-        const usuario = await iniciarSesion({ correo, contrasena: password }); // llamada al backend
+        const usuario = await iniciarSesion({ correo, contrasena: password }); 
         onLogin?.(usuario); 
         if (usuario?.rol === "empresa") {
           navigate("/empresa/principal");

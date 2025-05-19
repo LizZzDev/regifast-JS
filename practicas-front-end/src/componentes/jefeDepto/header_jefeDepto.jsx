@@ -3,7 +3,6 @@ import "./header_jefeDepto.css";
 import { useNavigate } from 'react-router-dom';
 import { cerrarSesion } from '../../api/usuarios';
 
-import logoUDG from "./img/Logo_UDG_horiz_blanco-01.svg";
 
 const HeaderJefeDepto = () => {
     const navigate = useNavigate();
@@ -21,7 +20,7 @@ const HeaderJefeDepto = () => {
   return (
     <header>
       <section id="nomUDG">
-        <img src={logoUDG} alt="Logo UDG" />
+        <img src="/img/udg_white.png" alt="Logo UDG" />
       </section>
       <nav className="menu">
         <ul>

@@ -3,7 +3,6 @@ import "./header_coordinador.css";
 import { useNavigate } from 'react-router-dom';
 import { cerrarSesion } from '../../api/usuarios';
 
-import logoUDG from "./img/Logo_UDG_horiz_blanco-01.svg";
 
 const HeaderCoordinador = () => {
     const navigate = useNavigate();
@@ -21,7 +20,7 @@ const HeaderCoordinador = () => {
   return (
     <header>
       <section id="nomUDG">
-        <img src={logoUDG} alt="Logo UDG" />
+        <img src="./img/udg_white" alt="Logo UDG" />
       </section>
       <nav className="menu">
         <ul>
