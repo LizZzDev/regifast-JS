@@ -1,15 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './consultarOferta.css';
 import Header from "../../componentes/alumnos/header.jsx";
+import { obtenerEmpresasParaUsuario, postularOfertaEmpresa } from '../../api/alumnos';
 
 const ConsultarOferta = () => {
-  const handleOpiniones = (empresa, logo) => {
-    console.log(`Ver opiniones de ${empresa} (logo: ${logo})`);
+    const [empresas, setEmpresas] = useState([]);
+    const navigate = useNavigate();
+  
+   useEffect(() => {
+      const cargarEmpresas = async () => {
+        try {
+          const validada = true;
+          const vacantes = true;
+          const datos = await obtenerEmpresasParaUsuario({validada, vacantes});
+          setEmpresas(datos.empresas);
+        } catch (error) {
+          console.error('Error al cargar empresas:', error);
+        }
+      };
+  
+      cargarEmpresas();
+    }, []);
+
+  const handleOpiniones = (idEmpresa) => {
+      navigate(`ver-calificaciones-empresa/${idEmpresa}`);
   };
 
-  const handlePostular = (empresa) => {
-    console.log(`Postular a ${empresa}`);
-  };
+  const handlePostular = async (idEmpresa) => {
+     if (window.confirm('¿Estás seguro de querer seleccionar esta empresa? Una vez hecho esto de ninguna manera es reversible.')) {
+        try {
+          await postularOfertaEmpresa(idEmpresa);
+
+            navigate('/alumno/principal');
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+};
 
   return (
     <div className="montserrat">
@@ -30,60 +58,25 @@ const ConsultarOferta = () => {
               </tr>
             </thead>
             <tbody>
-              {/* Empresa 1 */}
+              {empresas.map(empresa => (
               <tr>
-                <td>Tech Solutions S.A.</td>
-                <td>Empresa dedicada al desarrollo de software empresarial</td>
-                <td>Desarrollo de aplicaciones, pruebas de software, documentación</td>
-                <td>Av. Tecnológico 1234, Guadalajara</td>
-                <td>5</td>
+                <td>{empresa.Nombre}</td>
+                <td>{empresa.Descripcion}</td>
+                <td>{empresa.Actividades}</td>
+                <td>{empresa.DomicilioFiscal}</td>
+                <td>{empresa.Vacantes}</td>
                 <td>
-                  <button onClick={() => handleOpiniones("Tech Solutions S.A.", "tech_solutions.png")} className="form-button">
+                  <button onClick={() => handleOpiniones(empresa.IdEmpresa)} className="form-button">
                     Opiniones
                   </button>
                 </td>
                 <td>
-                  <button onClick={() => handlePostular("Tech Solutions S.A.")} className="form-button">
+                  <button onClick={() => handlePostular(empresa.IdEmpresa)} className="form-button">
                     Postular
                   </button>
                 </td>
               </tr>
-              {/* Empresa 2 */}
-              <tr>
-                <td>Marketing Digital MX</td>
-                <td>Agencia de marketing digital y redes sociales</td>
-                <td>Creación de contenido, análisis de métricas, campañas publicitarias</td>
-                <td>Calle Marketing 456, Zapopan</td>
-                <td>3</td>
-                <td>
-                  <button onClick={() => handleOpiniones("Marketing Digital MX", "marketing_digital.png")} className="form-button">
-                    Opiniones
-                  </button>
-                </td>
-                <td>
-                  <button onClick={() => handlePostular("Marketing Digital MX")} className="form-button" disabled>
-                    Postular
-                  </button>
-                </td>
-              </tr>
-              {/* Empresa 3 */}
-              <tr>
-                <td>Consultoría Financiera ABC</td>
-                <td>Consultoría especializada en finanzas corporativas</td>
-                <td>Análisis financiero, reportes, asesoría a clientes</td>
-                <td>Blvd. Financiero 789, Tlaquepaque</td>
-                <td>2</td>
-                <td>
-                  <button onClick={() => handleOpiniones("Consultoría Financiera ABC", "consultoria_financiera.png")} className="form-button">
-                    Opiniones
-                  </button>
-                </td>
-                <td>
-                  <button onClick={() => handlePostular("Consultoría Financiera ABC")} className="form-button">
-                    Postular
-                  </button>
-                </td>
-              </tr>
+              ))}
             </tbody>
           </table>
         </section>

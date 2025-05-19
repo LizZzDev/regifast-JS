@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../componentes/header.jsx";
 import { iniciarSesion } from "../../api/usuarios/index.js";
-import "./styles.css";  
+import "../empresas/styles.css";
 
-const LoginAlumnos = ({ onLogin }) => {
+import HeaderJefeDepto from "../../componentes/jefeDepto/header_jefeDepto.jsx";
+
+
+const LoginCJ = ({ onLogin }) => {
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
   const [mensaje, setMensaje] = useState("");
@@ -16,15 +18,12 @@ const LoginAlumnos = ({ onLogin }) => {
 
     if (correo && password) {
       try {
+      console.log (correo, password);
 
-        const usuario = await iniciarSesion({ correo, contrasena: password }); // llamada al backend
+        const usuario = await iniciarSesion({ correo, contrasena: password }); 
         onLogin?.(usuario); 
-        if (usuario?.rol === "alumno") {
-          navigate("/alumno/principal");
-        } else if (usuario?.rol === "empresa") {
+        if (usuario?.rol === "empresa") {
           navigate("/empresa/principal");
-        } else if (usuario?.rol === "coordinador") {
-          navigate("/coordinador/principal");
         } else {
           navigate("/no-autorizado"); 
         }
@@ -36,10 +35,10 @@ const LoginAlumnos = ({ onLogin }) => {
       setMensaje("Por favor llena todos los campos.");
     }
   };
+
   return (
     <div>
-      <Header />
-
+      <HeaderJefeDepto />
       <section id="loginForm">
         <h1>Inicio de Sesión</h1>
         <form onSubmit={handleSubmit}>
@@ -69,11 +68,12 @@ const LoginAlumnos = ({ onLogin }) => {
             <input type="submit" value="Iniciar Sesión" />
           </div>
         </form>
-        <p>¿No tienes una cuenta? <a href="/alumno/crear-cuenta">Regístrate aquí</a></p>
+        <p>¿No tienes una cuenta? <a href="empresa/registro">Regístrate aquí</a></p>
 
         {mensaje && <p className="mensaje">{mensaje}</p>}
       </section>
     </div>
   );
-}
-  export default LoginAlumnos;
+};
+
+export default LoginCJ;

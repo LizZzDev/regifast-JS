@@ -11,7 +11,7 @@ api.interceptors.response.use(
     const status = error?.response?.status;
 
     if (status === 401) {
-      window.location.href = '/login';
+      window.location.href = '/';
     } else if (status === 403) {
       window.location.href = '/no-autorizado';
     }

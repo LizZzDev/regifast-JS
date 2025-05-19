@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './registroAlumnos.css';
-import { anadirDatosDelAlumno } from '../../api/alumnos';
+import { anadirDatosDelAlumno, obtenerBarraStatus } from '../../api/alumnos';
 import Header from '../../componentes/alumnos/header';
 
 const RegistroAlumnos = () => {
@@ -39,6 +39,22 @@ const RegistroAlumnos = () => {
   // Estado para mensajes de error
   const [errors, setErrors] = useState({});
   const [submitAttempted, setSubmitAttempted] = useState(false);
+  
+  useEffect(() => {
+    const salir = async () => {
+      try {
+        const datos = await obtenerBarraStatus();
+        if (datos >= 2) {
+          alert("Tu registro de datos ya fue enviado.");
+          window.location.href = '/alumno/principal';
+        }
+      } catch (error) {
+        console.error('Error al verificar etapa del alumno:', error);
+      }
+    };
+
+    salir(); 
+  }, []);
 
   // Manejar cambios en los inputs
   const handleChange = (e) => {

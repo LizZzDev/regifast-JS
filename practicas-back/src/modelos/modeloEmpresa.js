@@ -5,9 +5,6 @@ const Empresa = {
       if (!connection) {
         connection = await pool.getConnection();
       }
-
-      console.log (datos);
-
       const { 
         Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
         CodigoPostal, Municipio, Descripcion, imagen, Actividades, Vacantes, Validada, PracticasExtraordinarias

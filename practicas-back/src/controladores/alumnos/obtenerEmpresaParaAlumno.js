@@ -1,15 +1,28 @@
+import express from 'express';
 import Empresas from "../../modelos/modeloEmpresa.js";
 
-const obtenerEmpresa = async (req, res) => {
-    const id = req.query.id;
-    try { 
-        const empresa = await Empresas.obtenerEmpresaPorId(id);
+const obtenerEmpresa = async (req) => {
+  const pagina = parseInt(req.query.pagina) || 1;
+  const limite = parseInt(req.query.limite) || 20;
+  const validada = req.query.validada === 'true' ? 1 
+                 : req.query.validada === 'false' ? 0
+                 : null;
+  const soloConVacantes = req.query.vacantes === 'true';
 
-        return empresa;
-    } catch (error) {
-        console.error("Error al mostrar empresa seleccionada:", error);
-        throw error;
-    }
-}
+  try {
+    const empresas = await Empresas.obtenerEmpresasFiltradas(
+      {
+        pagina: pagina, 
+        limite: limite, 
+        validada: validada, 
+        soloConVacantes: soloConVacantes
+      }
+    );
+    return empresas;
+  } catch (error) {
+    console.error("Error al obtener todas las empresas:", error);
+    throw error;
+  }
+};
 
 export default obtenerEmpresa;

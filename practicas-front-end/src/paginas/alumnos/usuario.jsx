@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../componentes/header.jsx";
 import { crearUsuario } from "../../api/usuarios/index.js";
+import { generarToken } from "../../api/usuarios/index.js";
 import "./usuarios.css";
 
 const RegistroUsuario = () => {
@@ -111,11 +112,12 @@ const RegistroUsuario = () => {
                                      await generarToken({ correo });
                                      setMensaje("Token enviado al correo.");
                                  } catch (error) {
-                                      setMensaje("Error al generar token.");
+                                      setMensaje("error al generar el token.");
+                                     console.error("Error al generar token:", error);
                                  }
-                             } else {
-                                 setMensaje("Ingresa tu correo para generar el token.");
-                             }
+                            } else {
+                                setMensaje("Ingresa tu correo para generar el token.");
+                            }
                          }}
                      >
                          Generar Token
@@ -123,7 +125,7 @@ const RegistroUsuario = () => {
 
                      <button
                         type="submit"
-                        disabled={!token}
+                        // disabled={!token}
                      >
                         Iniciar Sesión
                      </button>
@@ -133,3 +135,5 @@ const RegistroUsuario = () => {
         </div>
     );
 };
+
+export default RegistroUsuario;

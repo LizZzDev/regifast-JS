@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './calificarEmpresa.css';
 import Header from '../../componentes/alumnos/header';
+import { useNavigate } from 'react-router-dom';
+import { calificarEmpresa, mostrarEmpresaSeleccionada } from '../../api/alumnos';
 
 const CalificarEmpresa = () => {
-  // Datos de ejemplo que reemplazan los valores PHP
-  const [empresaData, setEmpresaData] = useState({
-    nombre: "Tech Solutions S.A.", // Reemplaza $_SESSION['empresa']
-    descripcion: "Empresa dedicada al desarrollo de software empresarial con más de 10 años en el mercado.", // Reemplaza $descripcion
-    logo: "/img/user.png" // Ruta del logo
-  });
-
+  const [empresa, setEmpresa] = useState({});
   const [rating, setRating] = useState(0);
   const [opinion, setOpinion] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+        const cargarEmpresa = async () => {
+          try {
+            const datos = await mostrarEmpresaSeleccionada();
+            setEmpresa(datos);
+          } catch (error) {
+            console.error('Error al cargar empresa:', error);
+          }
+        };
+    
+        cargarEmpresa();
+      }, []);
+    
 
   const handleRatingChange = (value) => {
     setRating(value);
@@ -21,16 +32,27 @@ const CalificarEmpresa = () => {
     setOpinion(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí iría la lógica para enviar los datos al servidor
-    console.log({
-      empresa: empresaData.nombre,
-      rating,
-      opinion
-    });
-    // Simulación de envío a "7mandarcalificacion.php"
-    alert(`Calificación enviada para ${empresaData.nombre}`);
+    try {
+      if (rating === 0) {
+        alert("Por favor, selecciona una calificación.");
+        return;
+      }
+
+      const data = {
+        Opinion: opinion,
+        Calificacion: rating
+      }
+      await calificarEmpresa (data);
+      alert("Opinión enviada exitosamente.");
+      navigate('/alumno/principal');
+
+    } catch (error) {
+        console.error('Error al registrar alumno:', error);
+        alert("Error al registrar la opinion.");
+    }
+    
   };
 
   return (
@@ -40,15 +62,15 @@ const CalificarEmpresa = () => {
       <main>
         <article className="InformacionEmpresa">
           <section id='ContenedorNombreEmpresa'>
-            <h1>{empresaData.nombre}</h1>
+            <h1>{empresa.Nombre}</h1>
           </section>
 
           <section id='ContenedorLogoEmpresa'>
-            <img id="imglogoempresa" src={empresaData.logo} alt="LogoEmpresa" />
+            <img id="imglogoempresa" src={`http://localhost:3000/logos/${empresa.Logo}`} alt="LogoEmpresa" />
           </section>
 
           <section id='ContenedorDescripcionEmpresa'>
-            <p>{empresaData.descripcion}</p>
+            <p>{empresa.Descripcion}</p>
           </section>
         </article>
 

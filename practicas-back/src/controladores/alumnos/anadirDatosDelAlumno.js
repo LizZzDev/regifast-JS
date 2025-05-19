@@ -6,9 +6,6 @@ const anadirDatosDelAlumno = async (req, res) => {
   const idUsuario = req.session.ID;
 
   try {
-
-    console.log (req);
-
     const datos = {
       ...req.body,
       CorreoInstitucional: correo,

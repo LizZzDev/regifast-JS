@@ -4,6 +4,12 @@ const validarAlumno = async (req, res) => {
     const { idUsuario } = req.body;
 
     try { 
+        const alumno = await Alumno.obtenerAlumno (idUsuario);
+
+        if (alumno.Revision == 1) {
+            throw new Error ("Alumno ya validado");
+        }
+
         const validar = await Alumno.validarAlumno(idUsuario);
         const aumentarBarraStatus = await Alumno.aumentarEnUnoBarraStatus(idUsuario);
 

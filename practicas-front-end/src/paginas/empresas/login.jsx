@@ -20,8 +20,12 @@ const Login = ({ onLogin }) => {
 
         const usuario = await iniciarSesion({ correo, contrasena: password }); // llamada al backend
         onLogin?.(usuario); 
-        if (usuario?.rol === "empresa") {
+        if (usuario?.rol === "alumno") {
+          navigate("/alumno/principal");
+        } else if (usuario?.rol === "empresa") {
           navigate("/empresa/principal");
+        } else if (usuario?.rol === "coordinador") {
+          navigate("/coordinador/principal");
         } else {
           navigate("/no-autorizado"); 
         }

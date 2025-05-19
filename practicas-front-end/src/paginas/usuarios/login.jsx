@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../componentes/header.jsx";
 import { iniciarSesion } from "../../api/usuarios/index.js";
-import "./styles.css";  
+import "./login.css";
 
-const LoginAlumnos = ({ onLogin }) => {
+const Login = ({ onLogin }) => {
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
   const [mensaje, setMensaje] = useState("");
@@ -16,10 +16,11 @@ const LoginAlumnos = ({ onLogin }) => {
 
     if (correo && password) {
       try {
+      console.log (correo, password);
 
         const usuario = await iniciarSesion({ correo, contrasena: password }); // llamada al backend
         onLogin?.(usuario); 
-        if (usuario?.rol === "alumno") {
+         if (usuario?.rol === "alumno") {
           navigate("/alumno/principal");
         } else if (usuario?.rol === "empresa") {
           navigate("/empresa/principal");
@@ -36,10 +37,10 @@ const LoginAlumnos = ({ onLogin }) => {
       setMensaje("Por favor llena todos los campos.");
     }
   };
+
   return (
     <div>
       <Header />
-
       <section id="loginForm">
         <h1>Inicio de Sesión</h1>
         <form onSubmit={handleSubmit}>
@@ -69,11 +70,12 @@ const LoginAlumnos = ({ onLogin }) => {
             <input type="submit" value="Iniciar Sesión" />
           </div>
         </form>
-        <p>¿No tienes una cuenta? <a href="/alumno/crear-cuenta">Regístrate aquí</a></p>
+        <p>¿No tienes una cuenta? <a href="empresa/registro">Regístrate aquí</a></p>
 
         {mensaje && <p className="mensaje">{mensaje}</p>}
       </section>
     </div>
   );
-}
-  export default LoginAlumnos;
+};
+
+export default Login;

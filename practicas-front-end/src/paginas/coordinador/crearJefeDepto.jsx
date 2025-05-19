@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./crearJefeDepto.css";
-import Header from "../../componentes/header.jsx";
+
+import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
+
 
 function CrearNuevoAdmin() {
   const [formData, setFormData] = useState({
@@ -41,32 +43,7 @@ function CrearNuevoAdmin() {
 
   return (
     <div className="page">
-      <header>
-        <section id="nomUDG">
-          <img src="./img/udg_white.png" alt="Logo UDG" />
-        </section>
-        <nav className="menu">
-          <ul>
-            <li><a href="#">INICIO</a></li>
-            <li><a href="#">ALUMNOS</a></li>
-            <li className="dropdown">
-              <a href="#">EMPRESAS</a>
-              <div className="submenu2">
-                <a href="#" className="opcion">Verificadas</a>
-                <a href="#" className="opcion">Sin verificar</a>
-              </div>
-            </li>
-            <li className="dropdown">
-              <a href="#">OPCIONES</a>
-              <div className="submenu2">
-                <a href="#">Crear nuevo admin</a>
-                <a href="#">Crear jefe de departamento</a>
-                <a href="#">Cerrar sesión</a>
-              </div>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <HeaderCoordinador/>
 
       <main>
         <section id="titleA">

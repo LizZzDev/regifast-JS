@@ -8,9 +8,19 @@ const postularOfertaEmpresa = async (req, res) => {
     try { 
         const vacantes = await Empresas.obtenerVacantesPorId(IdEmpresa);
 
-        if (vacantes <= 0) {
-           throw new Error("No hay vacantes disponibles para esta empresa.");
+        const alumno = await Alumnos.obtenerAlumno (idUsuario)
+
+        if (alumno.IdEmpresa != null ) {
+            const error = new Error("El alumno ya tiene empresa seleccionada");
+            error.statusCode = 400;
+            throw error;        
         }
+
+        if (vacantes <= 0) {
+            const error = new Error("No hay vacantes disponibles para esta empresa");
+            error.statusCode = 400;
+            throw error;
+            }
 
         await Alumnos.aumentarEnUnoBarraStatus(idUsuario);
         await Alumnos.modificarDatosAlumno({ IdEmpresa: IdEmpresa }, idUsuario);

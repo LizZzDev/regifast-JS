@@ -6,17 +6,19 @@ import Consultar from '../paginas/alumnos/consultarOferta';
 import Login from '../paginas/alumnos/loginAlumnos';
 import Principal from '../paginas/alumnos/principalAlumno';
 import Registro from '../paginas/alumnos/registroAlumnos';
-import RegistroUsuario from '../paginas/alumnos/usuario';
+import Documentos from '../paginas/alumnos/documentos';
+import RegustroUsuarios from '../paginas/alumnos/usuario';
 
 const RutasAlumnos = () => (
     <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/calificar" element={<Calificar />} />
-        <Route path="/ver-calificaciones-empresa" element={<VerCalificaciones />} />
+        <Route path="/consultar/ver-calificaciones-empresa/:idEmpresa" element={<VerCalificaciones />} />
         <Route path="/consultar" element={<Consultar />} />
         <Route path="/principal" element={<Principal />} />
         <Route path="/registro" element={<Registro />} />
-        <Route path="/registro-usuario" element={<RegistroUsuario />} />
+        <Route path="/documentos" element={<Documentos />} />
+        <Route path="/registro-usuarios" element={<RegustroUsuarios />} />
     </Routes>
 );
 

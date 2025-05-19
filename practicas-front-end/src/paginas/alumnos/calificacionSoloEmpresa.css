@@ -28,6 +28,35 @@ main{
     color:rgba(2, 1, 1, 0.877)
 }
 
+/* Nav */
+.menu {
+  width: 100%;
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+}
+
+.menu ul {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  padding: 10px 0;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: 0.3s ease;
+}
+
+.menu li a:hover {
+  background-color: white;
+  color: #103E7E;
+  border-radius: 5px;
+}
+
 /* Primer articule: informacion referente a las calificaciones de la empresa*/
 #TituloNombreEmpresa{
     margin-left: 5%;

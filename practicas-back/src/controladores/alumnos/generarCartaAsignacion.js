@@ -15,7 +15,9 @@ const descargarCartaAsignacion = async (req, res) => {
         
         const datos = {
             fecha: anio,
-            empresa:  empresa[0].Nombre,
+            empresa:  empresa.Nombre,
+            responsable: empresa.Responsable,
+            cargo: empresa.Cargo,
             nombre: alumno.NombreCompleto,
             codigo: alumno.Codigo,
             carrera: alumno.Carrera,
@@ -42,6 +44,8 @@ const descargarCartaAsignacion = async (req, res) => {
 
         const rutaTemplate = path.join('src', 'templates', 'carta_asignacion_template.docx');
         const documentoBuffer = await generarDocumentoDesdeTemplate(rutaTemplate, datos);
+
+        await Alumnos.aumentarEnUnoBarraStatus(idUsuario);
 
         return documentoBuffer;
     } catch (error) {
