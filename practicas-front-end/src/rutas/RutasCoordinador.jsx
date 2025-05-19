@@ -7,9 +7,11 @@ import CrearAdmin from '../paginas/coordinador/crearAdmin'
 import CrearJefeDepto from '../paginas/coordinador/crearJefeDepto';
 import Principal from '../paginas/coordinador/pantallaPrincipalCoordinador';
 import ModificarAlumno from '../paginas/coordinador/modificarAlumno';
+import Login from '../paginas/jefeDepartamentos/inicioSesionCJ';
 
 const RutasCoordinador = () => (
     <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/empresas" element={<TablaEmpresas />} />
         <Route path="/alumnos" element={<AlumnosValidar />} />
         <Route path="/fechas" element={<AsignarFecha />} />
