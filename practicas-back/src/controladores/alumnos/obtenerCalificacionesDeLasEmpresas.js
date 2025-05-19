@@ -2,12 +2,12 @@ import Alumnos from "../../modelos/modeloAlumno.js";
 import Opinion from "../../modelos/modeloOpiniones.js";
 
 const obtenerCalificacionesDeLasEmpresas = async (req, res) => {    
-    const { idEmpresa } = req.params;
+    const { id } = req.query
     
     try { 
-        const opiniones = await Opinion.obtenerOpinionesPorId(idEmpresa);
-        const numeroDeOpiniones = await Opinion.obtenerNumeroDeOpinionesPorId(idEmpresa);
-        const sumaDeCalificaciones = await Opinion.obtenerSumaDeCalificacionesAEmpresasPorId(idEmpresa);
+        const opiniones = await Opinion.obtenerOpinionesPorId(id);
+        const numeroDeOpiniones = await Opinion.obtenerNumeroDeOpinionesPorId(id);
+        const sumaDeCalificaciones = await Opinion.obtenerSumaDeCalificacionesAEmpresasPorId(id);
 
         const totalOpiniones = numeroDeOpiniones[0]['COUNT(*)'];
         const totalCalificaciones = parseFloat(sumaDeCalificaciones[0].total_calificaciones);

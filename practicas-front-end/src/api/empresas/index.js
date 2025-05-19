@@ -40,6 +40,7 @@ export async function obtenerEmpresas({ pagina = 1, limite = 20, validada = null
 
 export async function obtenerEmpresa(id=null) {
   try {
+    console.log (id)
     const response = await api.get(
       router.EMPRESAS + endpoints.EMPRESAS.OBTENER_EMPRESA,
        {
@@ -48,7 +49,6 @@ export async function obtenerEmpresa(id=null) {
         }
       }
     );
-
     console.log (response)
     return response.data.data;; 
   } catch (error) {

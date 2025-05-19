@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import './calificacionSoloEmpresa.css';
-import { obtenerEmpresa } from '../../api/empresas';
-import { obtenerCalificacionesEmpresa } from '../../api/alumnos';
+import { obtenerCalificacionesEmpresa, obtenerEmpresaParaUsuario } from '../../api/alumnos';
 import Header from '../../componentes/alumnos/header';
 
 const CalificacionEmpresa = () => {
    const [empresa, setEmpresa] = useState([]);
-    const [datosCalificacion, setDatosCalificacion] = useState([]);
+   const [datosCalificacion, setDatosCalificacion] = useState({
+    calificacionFinal: 0,
+    totalOpiniones: 0,
+    opiniones: []
+  });
 
   useEffect(() => {
       const cargarEmpresa = async () => {
         try {
-          const datos = await obtenerEmpresa();
-          setEmpresa(datos.empresa);
+          const datos = await obtenerEmpresaParaUsuario(2);
+          setEmpresa(datos);
         } catch (error) {
           console.error('Error al cargar empresas:', error);
         }
@@ -24,8 +27,9 @@ const CalificacionEmpresa = () => {
   useEffect(() => {
       const cargarOpiniones = async () => {
         try {
-          const datos = await obtenerCalificacionesEmpresa();
-          setDatosCalificacion(datos.datosCalificacion);
+          const datos = await obtenerCalificacionesEmpresa(2);
+          setDatosCalificacion(datos);
+          console.log (datos);
         } catch (error) {
           console.error('Error al cargar empresas:', error);
         }
@@ -54,35 +58,24 @@ const CalificacionEmpresa = () => {
   return (
     <div>
       <Header/>
-
-<<<<<<< HEAD
-      <body>
-        <Header />
-          <nav className="menu">
-            <ul>
-              <li><a href="/principalAlumno">INICIO</a></li>
-            </ul>
-          </nav>
-=======
       <main>
         <article id="TituloNombreEmpresa">
-          <h1>Opiniones y calificación de {empresa.nombre}</h1>
+          <h1 className='colorLetra'>Opiniones y calificación de {empresa.Nombre}</h1>
         </article>
 
         <article className="InformacionCalificacionEmpresa">
           <section className="LogoDeLaEmpresa">
-            <img id="logoempresa" src={empresa.logo} alt="Logo de la empresa" />
+            <img id="logoempresa" src={`http://localhost:3000/logos/${empresa.Logo}`} alt="Logo de la empresa" />
           </section>
->>>>>>> ccbf776f6d20ec0686198a457f08eb75e197c493
 
           <section className="Calificacion">
             <section className="Barras">
               {/* Aquí puedes implementar barras de calificación si lo deseas */}
             </section>
             <section className="NuCalificacionMasEstrellas">
-              <p className="CalificacionNumero">{datosCalificacion.calificacion}</p>
-              <RatingStars rating={Math.round(datosCalificacion.calificacion)} />
-              <p className="NumeroOpinones">{datosCalificacion.opinionesTotal} opiniones</p>
+              <p className="CalificacionNumero">{datosCalificacion.calificacionFinal}</p>
+              <RatingStars rating={Math.round(datosCalificacion.calificacionFinal)} />
+              <p className="colorLetra" id='NumeroOpinones'>{datosCalificacion.totalOpiniones} opiniones</p>
             </section>
           </section>
         </article>
@@ -91,9 +84,9 @@ const CalificacionEmpresa = () => {
           <section>
             {datosCalificacion.opiniones.map((opinion, index) => (
               <section key={index} className="EspacioOpinionUsuarios">
-                <p className="NombreUsuarioOpinion">{opinion.usuario}</p>
+                <p className="colorLetra" id='NombreUsuarioOpinion'>{opinion.NombreUsuario}</p>
                 <RatingStars rating={opinion.Calificacion} />
-                <p className="OpinionUsuarioTexto">{opinion.texto}</p>
+                <p className="OpinionUsuarioTexto, colorLetra">{opinion.Opinion}</p>
               </section>
             ))}
           </section>

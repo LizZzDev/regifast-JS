@@ -6,6 +6,7 @@ import mostrarEmpresaSeleccionadaService from "./mostrarEmpresaSeleccionada.js";
 import obtenerCalificarEmpresaSerive from "./obtenerCalificacionesDeLasEmpresas.js";
 import descargarCartaAsignacionService from "./generarCartaAsignacion.js";
 import obtenerEmpresasAlumnosService from "./obtenerEmpresasAlumnos.js";
+import obtenerEmpresaParaUsuarioService from "./obtenerEmpresaParaAlumno.js";
 
 export const anadirDatosDelAlumno = async (req, res) => {
   try {
@@ -64,6 +65,16 @@ export const obtenerCalificacionesDeLasEmpresas = async (req, res) => {
   } catch (error) {
     console.error("Error al obtener calificaciones:", error.message);
     res.status(500).json({ success: false, message: "Error al obtener calificaciones" });
+  }
+};
+
+export const obtenerEmpresaParaUsuario = async (req, res) => {
+  try {
+    const data = await obtenerEmpresaParaUsuarioService(req);
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    console.error("Error al obtener empresa:", error.message);
+    res.status(500).json({ success: false, message: "Error al obtener empresa" });
   }
 };
 

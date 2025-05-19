@@ -5,7 +5,6 @@ header {
     justify-content: center; /* Centrado horizontal */
     align-items: center;
     background-color: #103E7E;
-    padding: 0 0 0 0;
     color: white;
     flex-wrap: wrap;
     flex-direction: column; 

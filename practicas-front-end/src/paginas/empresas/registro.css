@@ -14,7 +14,6 @@ header {
     display: flex;
     justify-content: center; /* Centrado horizontal */
     align-items: center;
-    padding: 20px 5%;
     background-color: #103E7E;
     color: white;
     flex-wrap: wrap;
