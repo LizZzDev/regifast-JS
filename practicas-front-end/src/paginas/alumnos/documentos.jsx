@@ -4,13 +4,11 @@ import Header from "../../componentes/alumnos/header.jsx";
 import { generarCartaAsignacion } from '../../api/alumnos';
 
 const DocumentosAlumno = () => {
-  // Estado para controlar el progreso y la empresa asignada
   const [estado, setEstado] = useState({
-    progreso: 1, // Valor inicial (debería venir de tu API)
-    empresaAsignada: null // Datos de la empresa (null si no tiene)
+    progreso: 1,
+    empresaAsignada: null
   });
 
-  // Estado para los documentos
   const [documentos, setDocumentos] = useState([
     {
       id: 1,
@@ -22,14 +20,11 @@ const DocumentosAlumno = () => {
     }
   ]);
 
-  // Efecto para simular la carga de datos (reemplazar con tu API real)
   useEffect(() => {
-    // Simulamos una llamada a la API
     const cargarDatos = async () => {
-      // Datos de ejemplo - en una app real esto vendría de tu backend
       const datosEjemplo = {
-        progreso: 3, // Cambia este valor para probar diferentes estados
-        empresa: { nombre: "Empresa Ejemplo S.A." } // o null para probar cuando no hay empresa
+        progreso: 3,
+        empresa: { nombre: "Empresa Ejemplo S.A." }
       };
 
       setEstado({
@@ -41,7 +36,6 @@ const DocumentosAlumno = () => {
     cargarDatos();
   }, []);
 
-  // Efecto para actualizar disponibilidad de documentos
   useEffect(() => {
     const documentosActualizados = documentos.map(doc => {
       const disponible = estado.progreso > 2 && estado.empresaAsignada !== null;
@@ -57,16 +51,15 @@ const DocumentosAlumno = () => {
     setDocumentos(documentosActualizados);
   }, [estado.progreso, estado.empresaAsignada]);
 
-  // Manejar la descarga de documentos
   const manejarDescarga = async (accion) => {
     if (accion === 'generarDocumentoAsignacion') {
       await generarCartaAsignacion();
     }
-};
+  };
 
   return (
-    <div className="montserrat">
-      <Header/>
+    <div className="app-container">  {/* Se agregó esta clase para controlar la disposición global */}
+      <Header />
 
       <main className="main-container">
         <section className="documents-section">

@@ -1,72 +1,84 @@
-*{
-    margin: 0%;
-    padding: 0%;
-    box-sizing: border-box;
-}
-html, body{
+html, body {
     height: 100%;
-}
-
-.montserrat{
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 900;
-    font-style: normal;
-}
-
-.montserratChiquita{
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-}
-
-#palNav{
-    width: 100%;
-}
-
-.montserrat{
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 900;
-    font-style: normal;
-}
-.montserratChiquita{
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
     background-color: #f0f4f8;
     color: #333;
+    min-height: 100vh;
 }
 
+/* Contenedor general de la app */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
+/* Header y nav ocupan su espacio arriba */
+header {
+    background-color: #12448C;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    width: 100%;
+}
 
+nav {
+    background-color: #1a202c;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    width: 100%;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav li a {
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    transition: 0.3s ease;
+}
+
+nav li a:hover {
+    background-color: #2d3748;
+    border-radius: 5px;
+}
+
+/* Main crece para llenar el espacio restante */
 .main-container {
+    flex: 1;
     max-width: 1000px;
-    margin: auto;
+    margin: 0 auto;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.documents-section {
+/* Secciones dentro del main */
+.documents-section, .info-section {
     background: white;
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
+    text-align: center;
+    width: 100%;
 }
 
-.documents-section h2 {
-    color: #12448C;
-    margin-bottom: 1rem;
-    text-align: center;
-}
 
 .documents {
     display: grid;
@@ -100,118 +112,49 @@ body {
 }
 
 .btn-download {
+    margin: 1rem auto 0 auto;  /* top auto bottom auto -> centra horizontalmente */
+    padding: 0.5rem 1rem;
+    background-color: #ccc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: not-allowed;
+    display: block; /* <<< IMPORTANTE para que funcione el margin auto */
+}
+
+
+/* .btn-download {
     margin-top: 1rem;
     padding: 0.5rem 1rem;
     background-color: #ccc;
     color: white;
     border: none;
     border-radius: 5px;
-    cursor:not-allowed;
-}
+    cursor: not-allowed;
+} */
+
 
 .downloadBtn {
     cursor: pointer;
     background-color: #12448C;
 }
-.downloadBtn:hover{
-    cursor: pointer;
+
+.downloadBtn:hover {
     background-color: #061c3a;
 }
 
-.info-section {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
 
-.info-section h2 {
-    color: #12448C;
-    margin-bottom: 1rem;
-}
-
-.info-section p {
-    color: #555;
-    font-size: 1rem;
-    line-height: 1.5;
-}
-
-/*-------RESPONSIVE------*/
-
+/* Responsivo */
 @media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
 
-  header {
-    font-size: 14px;
-    height: auto;
-    padding: 1rem 0;
-  }
+    nav {
+        flex-direction: column;
+    }
 
-  img {
-    width: 50%;
-    height: auto;
-    padding-top: 0;
-  }
-
-/* Nav */
-.menu {
-  width: 100%;
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: center;
-}
-
-.menu ul {
-  display: flex;
-  list-style: none;
-  gap: 40px;
-  padding: 10px 0;
-}
-
-.menu li a {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  padding: 10px 20px;
-  transition: 0.3s ease;
-}
-
-.menu li a:hover {
-  background-color: white;
-  color: #103E7E;
-  border-radius: 5px;
-}
-
-  .iconUser {
-    width: auto;
-    float: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-  }
-
-  .iconUser a {
-    margin: 0;
-  }
-
-  .main-container {
-    padding: 1rem;
-  }
-
-  .documents {
-    grid-template-columns: 1fr; /* una sola columna en móviles */
-  }
-
-  .documents-section, .info-section {
-    padding: 1rem;
-  }
-
-  .btn-download {
-    width: 100%;
-  }
-
-  .document-card {
-    padding: 1rem;
-  }
+    .documents {
+        grid-template-columns: 1fr;
+    }
 }
