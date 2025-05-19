@@ -21,6 +21,10 @@ const LoginAlumnos = ({ onLogin }) => {
         onLogin?.(usuario); 
         if (usuario?.rol === "alumno") {
           navigate("/alumno/principal");
+        } else if (usuario?.rol === "empresa") {
+          navigate("/empresa/principal");
+        } else if (usuario?.rol === "coordinador") {
+          navigate("/coordinador/principal");
         } else {
           navigate("/no-autorizado"); 
         }
@@ -65,7 +69,7 @@ const LoginAlumnos = ({ onLogin }) => {
             <input type="submit" value="Iniciar Sesión" />
           </div>
         </form>
-        <p>¿No tienes una cuenta? <a href="alumno/registro">Regístrate aquí</a></p>
+        <p>¿No tienes una cuenta? <a href="/alumno/crear-cuenta">Regístrate aquí</a></p>
 
         {mensaje && <p className="mensaje">{mensaje}</p>}
       </section>

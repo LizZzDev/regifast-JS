@@ -38,10 +38,18 @@
           responseType: 'blob', 
         }
       );
-      return response.data; 
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'CartaAsignacion.docx');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
     } catch (error) {
       console.error("Error en generar carta de asignación:", error);
-      throw error;
+      alert("Hubo un error al generar el documento.");
     }
   }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './documentos.css';
-import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+import Header from "../../componentes/alumnos/header.jsx";
+import { generarCartaAsignacion } from '../../api/alumnos';
 
 const DocumentosAlumno = () => {
   // Estado para controlar el progreso y la empresa asignada
@@ -18,14 +19,6 @@ const DocumentosAlumno = () => {
       estatus: 'Pendiente',
       claseEstatus: 'pending',
       accion: 'generarDocumentoAsignacion'
-    },
-    {
-      id: 2,
-      nombre: 'Carta Compromiso',
-      disponible: false,
-      estatus: 'No Disponible',
-      claseEstatus: 'unavailable',
-      accion: null
     }
   ]);
 
@@ -65,31 +58,15 @@ const DocumentosAlumno = () => {
   }, [estado.progreso, estado.empresaAsignada]);
 
   // Manejar la descarga de documentos
-  const manejarDescarga = (accion) => {
-    if (!accion) return;
-    
-    // Aquí iría la lógica para generar/descargar el documento
-    console.log(`Generando documento: ${accion}`);
-    
-    // Ejemplo con React Router:
-    // navigate(`/${accion}`, { state: { empresa: estado.empresaAsignada } });
-    
-    // Ejemplo para descarga directa:
-    // window.location.href = `/${accion}.html`;
-  };
+  const manejarDescarga = async (accion) => {
+    if (accion === 'generarDocumentoAsignacion') {
+      await generarCartaAsignacion();
+    }
+};
 
   return (
     <div className="montserrat">
-      <header id="palNav">
-        <article id="nomUDG">
-          <img src="../img/udg_white.png" id="logo" alt="Logo UDG" />
-        </article>
-        <nav className="menu">
-          <ul>
-            <li><a href="/principal-alumno">INICIO</a></li>
-          </ul>
-        </nav>
-      </header>
+      <Header/>
 
       <main className="main-container">
         <section className="documents-section">
