@@ -3,11 +3,12 @@ import { Routes, Route } from 'react-router-dom';
 import TablaEmpresas from '../paginas/coordinador/tablaEmpresas';
 import AlumnosValidar from '../paginas/coordinador/alumnos_validar'
 import AsignarFecha from '../paginas/coordinador/asignar_fechas'
-import CrearNuevoAdmin from '../paginas/coordinador/crearAdmin'
+import CrearAdmin from '../paginas/coordinador/crearAdmin'
 import CrearJefeDepto from '../paginas/coordinador/crearJefeDepto';
 import Principal from '../paginas/coordinador/pantallaPrincipalCoordinador';
 import ModificarAlumno from '../paginas/coordinador/modificarAlumno';
 import Login from '../paginas/jefeDepartamentos/inicioSesionCJ';
+import AgregarEmpresa from '../paginas/coordinador/agregarEmpresa';
 
 const RutasCoordinador = () => (
     <Routes>
@@ -19,7 +20,7 @@ const RutasCoordinador = () => (
         <Route path="/modificar-alumno" element={<ModificarAlumno />} />
         <Route path="/crear-jefe" element={<CrearJefeDepto />} />
         <Route path="/principal" element={<Principal />} />
-
+        <Route path="/agregar-empresa" element={<AgregarEmpresa />} />
     </Routes>
 );
 

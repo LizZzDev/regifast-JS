@@ -6,7 +6,8 @@ import HeaderCoordinador from '../../componentes/coordinador/header_coordinador'
 
 const ValidacionAlumnos = () => {
   const [alumnos, setAlumnos] = useState([]);
-  
+  const [validandoIds, setValidandoIds] = useState([]);
+
   // Estados para los filtros
   const [filtros, setFiltros] = useState({
     busqueda: '',
@@ -38,7 +39,7 @@ const ValidacionAlumnos = () => {
     };
 
     cargarAlumnos();
-  }, []);
+  }, [filtros]);
 
   // Aplicar filtros cuando cambien los filtros o la lista de alumnos
   useEffect(() => {
@@ -72,6 +73,8 @@ const ValidacionAlumnos = () => {
   };
 
   const validarAlumnoConst = async (IdUsuario) => {
+  setValidandoIds(prev => [...prev, IdUsuario]);
+
     try {
       await validarAlumno(IdUsuario);
       alert("Validacion exitosa");
@@ -88,7 +91,9 @@ const ValidacionAlumnos = () => {
     setAlumnos(response.alumnos);
     } catch (error) {
       console.error('Error al enviar datos de validación:', error);
-    }
+    } finally {
+      setValidandoIds(prev => prev.filter(id => id !== IdUsuario));
+  }
   };
 
   return (
@@ -175,8 +180,10 @@ const ValidacionAlumnos = () => {
                       <button
                         className="confirmar-btn"
                         onClick={() => validarAlumnoConst(alumno.IdUsuario)}
+                        disabled={validandoIds.includes(alumno.IdUsuario)}
+
                       >
-                        Validar
+                        {validandoIds.includes(alumno.IdUsuario) ? 'Validando...' : 'Validar'}
                       </button>
                     )}
                   </td>

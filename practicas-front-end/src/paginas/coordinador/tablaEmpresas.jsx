@@ -1,56 +1,64 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { obtenerEmpresas } from '../../api/empresas';
 import './validarAlumnos.css';
-
+import {validarEmpresa} from '../../api/coordinador';
+import {obtenerEmpresas} from '../../api/empresas';
 import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
 
 const TablaEmpresas = () => {
   const [empresas, setEmpresas] = useState([]);
+  const [validandoIds, setValidandoIds] = useState([]);
   const [totalEmpresas, setTotalEmpresas] = useState(0);
   const [filtros, setFiltros] = useState({
     busqueda: '',
-    revision: '',
+    validada: '',
     tipoEmpresa: ''
   });
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const cargarEmpresas = async () => {
-      try {
-        const validada = true;
-        const datos = await obtenerEmpresas({ validada });
-        setEmpresas(datos.empresas);
-      } catch (error) {
-        console.error('Error al cargar empresas:', error);
-      }
-    };
+ useEffect(() => {
+  const cargarEmpresas = async () => {
+    try {
+      const datos = await obtenerEmpresas({
+        pagina: 1,
+        limite: 1000,
+        busqueda: filtros.busqueda || null,
+        validada:
+          filtros.validada === 'validada' ? 1 :
+          filtros.validada === 'no-validada' ? 0 :
+          null
+      });
+      setEmpresas(datos.empresas);
+    } catch (error) {
+      console.error('Error al cargar empresas:', error);
+    }
+  };
 
-    cargarEmpresas();
-  }, []);
+  cargarEmpresas();
+}, [filtros.busqueda, filtros.validada]); 
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFiltros(prev => ({ ...prev, [name]: value }));
   };
 
-  const empresasFiltradas = empresas.filter(emp => {
+  const empresasFiltradas = empresas.filter(empresa => {
     const coincideBusqueda =
-      emp.nombre.toLowerCase().includes(filtros.busqueda.toLowerCase()) ||
-      emp.rfc.toLowerCase().includes(filtros.busqueda.toLowerCase());
+      empresa.Nombre.toLowerCase().includes(filtros.busqueda.toLowerCase()) ||
+      empresa.RFC.toLowerCase().includes(filtros.busqueda.toLowerCase());
 
     const coincideRevision =
-      filtros.revision === ''
-        || (filtros.revision === 'revisado' && emp.revisado)
-        || (filtros.revision === 'no-revisado' && !emp.revisado);
+      filtros.validada === ''
+        || (filtros.validada === 'validada' && empresa.Validada === 1)
+        || (filtros.validada === 'no-validada' && empresa.Validada === 0);
 
-    const coincideTipo =
+    const coincideOrdinario =
       filtros.tipoEmpresa === ''
-        || (filtros.tipoEmpresa === 'ordinaria' && emp.ordinaria)
-        || (filtros.tipoEmpresa === 'no-ordinaria' && !emp.ordinaria);
+        || (filtros.tipoEmpresa === "ordinario" && empresa.Ordinaria === 1)
+        || (filtros.tipoEmpresa === "extraordinario" && empresa.Ordinaria === 0);
 
-    return coincideBusqueda && coincideRevision && coincideTipo;
+    return coincideBusqueda && coincideRevision && coincideOrdinario;
   });
 
   useEffect(() => {
@@ -61,9 +69,29 @@ const TablaEmpresas = () => {
     navigate(`/opiniones?idEmpresa=${idEmpresa}&logoEmpresa=${encodeURIComponent(logoEmpresa)}`);
   };
 
-  const handleValidar = (rfc) => {
-    // Aquí tu lógica para validar la empresa
-    console.log("Validar empresa con RFC:", rfc);
+  const validarEmpresaConst = async (IdUsuario) => {
+    setValidandoIds(prev => [...prev, IdUsuario]);
+
+    try {
+      await validarEmpresa(IdUsuario);
+      alert("Validación exitosa");
+
+      const datos = await obtenerEmpresas({
+        pagina: 1,
+        limite: 1000,
+        busqueda: filtros.busqueda || null,
+        validada:
+          filtros.validada === 'validada' ? 1 :
+          filtros.validada === 'no-validada' ? 0 :
+          null
+      });
+      setEmpresas(datos.empresas);
+    } catch (error) {
+      alert("Error al validar");
+      console.error('Error al enviar datos de validación:', error);
+    } finally {
+      setValidandoIds(prev => prev.filter(id => id !== IdUsuario));
+    }
   };
 
   return (
@@ -88,13 +116,13 @@ const TablaEmpresas = () => {
 
           <select
             className="filtro-select"
-            name="revision"
-            value={filtros.revision}
+            name="validada"
+            value={filtros.validada}
             onChange={handleFilterChange}
           >
             <option value="">Todas</option>
-            <option value="revisado">Revisadas</option>
-            <option value="no-revisado">No Revisadas</option>
+            <option value="validada">Validadad</option>
+            <option value="no-validada">Sin validar</option>
           </select>
 
           <select
@@ -116,30 +144,51 @@ const TablaEmpresas = () => {
           <table>
             <thead>
               <tr>
-                <th>RFC</th>
-                <th>Nombre de la empresa</th>
-                <th>Correo</th>
+                <th>Nombre</th>
                 <th>Teléfono</th>
-                <th>Etapa del proceso</th>
-                <th>Acción</th>
+                <th>Correo</th>
+                <th>RFC</th>
+                <th>Descripción</th>
+                <th>Actividades</th>
+                <th>Domicilio</th>
+                <th>Vacantes</th>
+                <th>Opiniones</th>
+                <th>Validar</th>
               </tr>
             </thead>
             <tbody>
               {empresasFiltradas.map(empresa => (
-                <tr key={empresa.rfc}>
-                  <td>{empresa.rfc}</td>
-                  <td>{empresa.nombre}</td>
-                  <td>{empresa.correo}</td>
-                  <td>{empresa.telefono}</td>
-                  <td>{empresa.etapa}</td>
+                  <tr key={empresa.IdEmpresa}>
+                  <td>{empresa.Nombre}</td>
+                  <td>{empresa.Telefono}</td>
+                  <td>{empresa.Correo}</td>
+                  <td>{empresa.RFC}</td>
+                  <td>{empresa.Descripcion}</td>
+                  <td>{empresa.Actividades}</td>
+                  <td>{empresa.DomicilioFiscal}</td>
+                  <td>{empresa.Vacantes}</td>
                   <td>
                     <button
-                      className="confirmar-btn"
-                      onClick={() => handleValidar(empresa.rfc)}
-                      disabled={empresa.etapa !== 'Revisión'}
+                      id="Opiniones"
+                      onClick={() => enviarOpiniones(empresa.IdEmpresa, empresa.LogoEmpresa)}
                     >
-                      {empresa.etapa === 'Revisión' ? 'Validar' : 'Validada'}
+                      Opiniones
                     </button>
+                 </td>
+                 <td>
+                    {empresa.Validada === 1 ? (
+                      <span style={{ color: "green", fontWeight: "bold" }}>
+                        Validado
+                      </span>
+                    ) : (
+                      <button
+                        className="confirmar-btn"
+                        onClick={() => validarEmpresaConst(empresa.IdUsuario)}
+                        disabled={validandoIds.includes(empresa.IdUsuario)}
+                      >
+                        {validandoIds.includes(empresa.IdUsuario) ? 'Validando...' : 'Validar'}
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
