@@ -101,6 +101,7 @@ nav li a:hover {
 
 .status {
     font-weight: bold;
+    color: rgb(40, 172, 0);
 }
 
 .status.pending {
@@ -113,25 +114,17 @@ nav li a:hover {
 
 .btn-download {
     margin: 1rem auto 0 auto;  /* top auto bottom auto -> centra horizontalmente */
-    padding: 0.5rem 1rem;
     background-color: #ccc;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: not-allowed;
-    display: block; /* <<< IMPORTANTE para que funcione el margin auto */
+    display: block; 
+    float: left;
+    margin-left: 44%;
 }
 
 
-/* .btn-download {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: #ccc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: not-allowed;
-} */
 
 
 .downloadBtn {
@@ -157,4 +150,11 @@ nav li a:hover {
     .documents {
         grid-template-columns: 1fr;
     }
+}
+
+#avisoImportante  {
+    color: #333;
+}
+#estatus{
+    color: black;
 }
