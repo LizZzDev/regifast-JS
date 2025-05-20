@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Editar from '../paginas/empresas/editar';
 import Principal from '../paginas/empresas/principal';
 import Registro from '../paginas/empresas/registroEmpresa';
-// import Login from '../paginas/empresas/login';
+import Login from '../paginas/empresas/login';
 
 const RutasEmpresas = () => (
     <Routes>

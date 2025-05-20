@@ -5,7 +5,9 @@ const Header = () => {
   return (
     <header>
       <section id="nomUDG">
-        <img src="/img/udg_white.png" alt="Logo UDG" />
+        <a href="https://www.udg.mx/es">
+          <img src="ruta/de/tu/imagen.png" alt="Descripción" />
+        </a>
       </section>
     </header>
   );

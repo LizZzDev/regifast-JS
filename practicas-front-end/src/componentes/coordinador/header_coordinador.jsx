@@ -19,7 +19,9 @@ const HeaderCoordinador = () => {
     return (
         <header id="header-coordinador-principal"> {/* ID único añadido aquí */}
             <section id="header-coordinador-nomUDG">
-                <img src="../../img/udg_white.png" alt="Logo UDG" />
+                <a href="https://www.udg.mx/es">
+                    <img src="/img/udg_white.png" alt="Descripción" />
+                </a>
             </section>
             <nav className="menu-coordinador">
                 <ul>

@@ -23,33 +23,34 @@ function RegistroEmpresaCoord() {
     tipo_empresa: '',
   });
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === 'imagen') {
-      setFormData({ ...formData, imagen: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
+ const handleChange = (e) => {
+  const { name, value, files } = e.target;
 
-  const data = {
-    Nombre: formData.nombre,
-    Descripcion: formData.descripcion,
-    Correo: formData.correo,
-    Telefono: formData.telefono,
-    RFC: formData.rfc,
-    Actividades: formData.actividades,
-    Vacantes: formData.vacantes,
-    Calle: formData.calle,
-    Numero: formData.numero,
-    Colonia: formData.colonia,
-    CodigoPostal: formData.codigo_postal,
-    Estado: formData.estado,
-    Municipio: formData.municipio,
-    imagen: null,
-    Carrera: formData.carrera,
-    PracticasExtraordinarias: formData.tipo_empresa,
+  if (name === 'imagen') {
+    setFormData({ ...formData, imagen: files[0] });
+  } else if (name === 'tipo_empresa') {
+    if (value === 'extraordinaria') {
+      setFormData(prev => ({
+        ...prev,
+        rfc: 'XXX',
+        calle: 'Calz. Revolución',
+        numero: '1500',
+        colonia: 'Olímpica',
+        codigo_postal: '44420 ',
+        estado: 'Jalisco',
+        municipio: 'Guadalajara',
+        tipo_empresa: value,
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        tipo_empresa: value
+      }));
+    }
+  } else {
+    setFormData({ ...formData, [name]: value });
   }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,6 +87,17 @@ function RegistroEmpresaCoord() {
       <HeaderCoordinador/>
       <h2 id="titulo-formulario">Añadir empresa</h2>
       <form onSubmit={handleSubmit} className="formulario">
+        <select
+          id="select-tipo-empresa"
+          name="tipo_empresa"
+          value={formData.tipo_empresa}
+          onChange={handleChange}
+        >
+          <option value="">Tipo de empresa</option>
+          <option value="ordinaria">Ordinaria</option>
+          <option value="extraordinaria">Extraordinaria</option>
+        </select>
+
         <input
           id="input-nombre"
           type="text"
@@ -212,17 +224,6 @@ function RegistroEmpresaCoord() {
           <option value="TPPL">TPPL</option>
           <option value="BTDC">BTDC</option>
           <option value="BTQM">BTQM</option>
-        </select>
-
-        <select
-          id="select-tipo-empresa"
-          name="tipo_empresa"
-          value={formData.tipo_empresa}
-          onChange={handleChange}
-        >
-          <option value="">Tipo de empresa</option>
-          <option value="ordinaria">Ordinaria</option>
-          <option value="extraordinaria">Extraordinaria</option>
         </select>
 
         <button id="btn-registrar" type="submit">

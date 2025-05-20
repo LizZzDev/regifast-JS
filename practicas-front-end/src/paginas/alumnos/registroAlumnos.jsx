@@ -87,8 +87,24 @@ const RegistroAlumnos = () => {
       }
     });
 
-    if (formData.Edad && (parseInt(formData.Edad) < 18 || parseInt(formData.Edad) > 25)) {
-      newErrors.Edad = 'La edad debe estar entre 18 y 25 años';
+    if (formData.Carrera && formData.Grado) {
+      const carrerasBT = ['BTDC', 'BTQM'];
+
+      if (carrerasBT.includes(formData.Carrera)) {
+        if (formData.Grado !== '6to') {
+          newErrors.Grado = 'Para BTDC y BTQM el grado debe ser 6°';
+          isValid = false;
+        }
+      } else {
+        if (formData.Grado !== '8vo') {
+          newErrors.Grado = 'Para esta carrera el grado debe ser 8°';
+          isValid = false;
+        }
+      }
+    }
+
+    if (formData.Edad && (parseInt(formData.Edad) < 17 || parseInt(formData.Edad) > 25)) {
+      newErrors.Edad = 'La edad debe estar entre 17 y 25 años';
       isValid = false;
     }
 

@@ -22,7 +22,7 @@ function TablaAlumnos() {
     const cargarAlumnos = async () => {
       try {
         const response = await obtenerAlumnos();
-        const alumnosConEstado = response.map(alumno => ({
+        const alumnosConEstado = response.alumnos.map(alumno => ({
           ...alumno,
           estado: mapEstadoDeDB(alumno.Ordinario),
           calificacion: alumno.Calificacion || ''
@@ -59,7 +59,7 @@ function TablaAlumnos() {
       alert("La información se modificó correctamente");
 
       const response = await obtenerAlumnos();
-      const alumnosConEstado = response.map(alumno => ({
+      const alumnosConEstado = response.alumnos.map(alumno => ({
         ...alumno,
         estado: mapEstadoDeDB(alumno.Ordinario),
         calificacion: alumno.Calificacion || ''

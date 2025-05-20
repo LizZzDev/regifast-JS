@@ -45,7 +45,9 @@ const Header = () => {
 return (
   <header id="header-alumnos"> {/* ID único añadido aquí */}
     <section id="header-alumnos-nomUDG"> {/* ID único para esta sección */}
-      <img src="../../img/udg_white.png" alt="Logo UDG" />
+      <a href="https://www.udg.mx/es">
+        <img src="/img/udg_white.png" alt="Descripción" />
+      </a>
     </section>
     <nav className="menu"> 
       <ul>
@@ -57,19 +59,18 @@ return (
           <li><a href="/alumno/consultar">CONSULTAR OFERTA</a></li>
         )}
 
-
-        <li>
-          <a href='############'>
-            <img src='../../img/usuario.png' alt="perfil_alumno"></img>
-          </a>
-        </li>
-
-
         <li><a href="/alumno/documentos">DOCUMENTOS</a></li>
-        {etapa !== null && etapa > 3 && (
+        {etapa !== null && etapa == 3 && (
           <li><a href="/alumno/calificar">OPINION</a></li>
         )}
-        <li><a href="#" onClick={manejarCerrarSesion}>SALIR</a></li>
+
+        <li className="dropdown">
+          <img src="../../img/usuario.png" alt="perfil_alumno" />
+          <div className="dropdown-content">
+            <a href="/alumno/ver-datos">Ver perfil</a>
+            <a href="#" onClick={manejarCerrarSesion}>Salir</a>
+          </div>
+        </li>
       </ul>
     </nav>
   </header>

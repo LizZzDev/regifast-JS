@@ -20,7 +20,9 @@ const HeaderJefeDepto = () => {
   return (
     <header>
       <section id="nomUDG">
-        <img src="/img/udg_white.png" alt="Logo UDG" />
+        <a href="https://www.udg.mx/es">
+          <img src="/img/udg_white.png" alt="Descripción" />
+        </a>
       </section>
       <nav className="menu">
         <ul>
