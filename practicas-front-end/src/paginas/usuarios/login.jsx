@@ -41,7 +41,7 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div>
+    <div className="full-container">
       <Header />
       <section id="loginForm">
         <h1>Inicio de Sesión</h1>

@@ -1,25 +1,25 @@
-body {
-    height: 100%;
-    margin: 0;
+* {
     padding: 0;
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-    color: #242424;
-    line-height: 1.6;
+    box-sizing: border-box;
 }
 
+.full-container {
+    margin-top: 0;
+    padding: 0;
+}
 
 /* Login styles */
 #loginForm {
     width: 90%;
     max-width: 400px;
-    margin: 100px auto; 
+    /* margin: 0 auto; */
     background: white;
-    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.253);
+
+    margin: 0 auto 0 auto;
+
 }
 
 #loginForm h1 {
