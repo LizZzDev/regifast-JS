@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './validarAlumnos.css';
 import { validarAlumno, obtenerAlumnos } from '../../api/coordinador';
+import { useNavigate } from 'react-router-dom';
 
 import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
 
@@ -17,6 +18,7 @@ const ValidacionAlumnos = () => {
   
   const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
   const [totalAlumnos, setTotalAlumnos] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const cargarAlumnos = async () => {
@@ -70,6 +72,10 @@ const ValidacionAlumnos = () => {
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleAlumno = (idAlumno) => {
+      navigate(`editar-alumno/${idAlumno}`);
   };
 
   const validarAlumnoConst = async (IdUsuario) => {
@@ -165,7 +171,10 @@ const ValidacionAlumnos = () => {
             </thead>
             <tbody>
               {alumnosFiltrados.map((alumno) => (
-                <tr key={alumno.Codigo}>
+                <tr key={alumno.Codigo}
+                    onClick={() => handleAlumno(alumno.idAlumno)}
+
+                >
                   <td>{alumno.Codigo}</td>
                   <td>{alumno.NombreCompleto}</td>
                   <td>{alumno.Carrera}</td>

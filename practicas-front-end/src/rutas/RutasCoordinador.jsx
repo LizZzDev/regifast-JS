@@ -20,7 +20,7 @@ const RutasCoordinador = () => (
         <Route path="/crear-jefe" element={<CrearJefeDepto />} />
         <Route path="/principal" element={<Principal />} />
         <Route path="/agregar-empresa" element={<AgregarEmpresa />} />
-        <Route path="/editar-alumno" element={<EditarAlumno />} />
+        <Route path="/alumnos/editar-alumno/:idAlumno" element={<EditarAlumno />} />
     </Routes>
 );
 
