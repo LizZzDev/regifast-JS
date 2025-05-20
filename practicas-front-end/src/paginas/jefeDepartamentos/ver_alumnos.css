@@ -30,34 +30,6 @@ img {
   padding-top: 1.55%;
 }
 
-/* Nav */
-.menu {
-  width: 100%;
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: center;
-}
-
-.menu ul {
-  display: flex;
-  list-style: none;
-  gap: 40px;
-  padding: 10px 0;
-}
-
-.menu li a {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  padding: 10px 20px;
-  transition: 0.3s ease;
-}
-
-.menu li a:hover {
-  background-color: white;
-  color: #103E7E;
-  border-radius: 5px;
-}
 
 /* Main */
 main {
@@ -69,7 +41,7 @@ main {
   color: black;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 /* Tabla */
@@ -131,4 +103,26 @@ th {
   border-radius: 5px;
   text-align: center;
   font-size: 14px;
+}
+
+
+
+
+/* === Ancho personalizado por columna === */
+.col-carrera,
+.col-grado,
+.col-grupo {
+  width: 6%;
+}
+
+.col-codigo,
+.col-turno,
+.col-calificacion,
+.col-estado {
+  width: 10%;
+}
+
+.col-nombre,
+.col-correo {
+  width: 20%;
 }

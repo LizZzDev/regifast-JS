@@ -89,30 +89,30 @@ function TablaAlumnos() {
         <table>
           <thead>
             <tr>
-              <th>Código</th>
-              <th>Nombre completo</th>
-              <th>Carrera</th>
-              <th>Grado</th>
-              <th>Grupo</th>
-              <th>Turno</th>
-              <th>Correo institucional</th>
-              <th>Calificación</th>
-              <th>Estado</th>
+              <th className="col-codigo">Código</th>
+              <th className="col-nombre">Nombre completo</th>
+              <th className="col-carrera">Carrera</th>
+              <th className="col-grado">Grado</th>
+              <th className="col-grupo">Grupo</th>
+              <th className="col-turno">Turno</th>
+              <th className="col-correo">Correo institucional</th>
+              <th className="col-calificacion">Calificación</th>
+              <th className="col-estado">Estado</th>
             </tr>
           </thead>
           <tbody>
             {alumnos.map((alumno, index) => (
               <tr key={alumno.Codigo}>
-                <td>{alumno.Codigo}</td>
-                <td>{alumno.NombreCompleto}</td>
-                <td>{alumno.Carrera}</td>
-                <td>{alumno.Grado}</td>
-                <td>{alumno.Grupo}</td>
-                <td>{alumno.Turno}</td>
-                <td>{alumno.CorreoInstitucional}</td>
+                <td className="col-codigo">{alumno.Codigo}</td>
+                <td className="col-nombre">{alumno.NombreCompleto}</td>
+                <td className="col-carrera">{alumno.Carrera}</td>
+                <td className="col-grado">{alumno.Grado}</td>
+                <td className="col-grupo">{alumno.Grupo}</td>
+                <td className="col-turno">{alumno.Turno}</td>
+                <td className="col-correo">{alumno.CorreoInstitucional}</td>
 
                 {/* CALIFICACIÓN */}
-                <td>
+                <td className="col-calificacion">
                   {alumno.Calificacion ? (
                     <span>{alumno.Calificacion}</span>
                   ) : (
