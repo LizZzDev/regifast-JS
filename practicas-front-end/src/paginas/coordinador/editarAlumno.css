@@ -1,0 +1,75 @@
+#editar-alumno-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#editar-alumno-titulo {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.editar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.editar-campo {
+  display: flex;
+  flex-direction: column;
+}
+
+.editar-label {
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+.editar-input {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+#boton-guardar-alumno {
+  display: block;
+  margin: 0 auto;
+
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#boton-guardar-alumno:hover {
+  background-color: #218838;
+}
+
+.mensaje-error {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #contenedor-editar-alumno {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  
+  .grid-formulario-alumno {
+    grid-template-columns: 1fr;
+  }
+  
+  .grupo-campos {
+    padding: 1rem;
+  }
+}

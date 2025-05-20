@@ -9,6 +9,7 @@ import Principal from '../paginas/coordinador/pantallaPrincipalCoordinador';
 import ModificarAlumno from '../paginas/coordinador/modificarAlumno';
 import Login from '../paginas/jefeDepartamentos/inicioSesionCJ';
 import AgregarEmpresa from '../paginas/coordinador/agregarEmpresa';
+import EditarAlumno from '../paginas/coordinador/editarAlumno';
 
 const RutasCoordinador = () => (
     <Routes>
@@ -21,6 +22,7 @@ const RutasCoordinador = () => (
         <Route path="/crear-jefe" element={<CrearJefeDepto />} />
         <Route path="/principal" element={<Principal />} />
         <Route path="/agregar-empresa" element={<AgregarEmpresa />} />
+        <Route path="/editar-alumno" element={<EditarAlumno />} />
     </Routes>
 );
 

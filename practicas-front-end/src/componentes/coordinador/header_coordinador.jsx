@@ -6,48 +6,48 @@ import { cerrarSesion } from '../../api/usuarios';
 const HeaderCoordinador = () => {
     const navigate = useNavigate();
     
-      const manejarCerrarSesion = async (e) => {
+    const manejarCerrarSesion = async (e) => {
         e.preventDefault(); 
-
         try {
-              await cerrarSesion(); 
-              navigate('/coordinador/'); 
-            } catch (error) {
-              console.error("Error al cerrar sesión", error);
-            }
-        };
-  return (
-    <header>
-      <section id="nomUDG">
-        <img src="../../img/udg_white.png" alt="Logo UDG" />
-      </section>
-      <nav className="menu">
-        <ul>
-          <li><a href="principal">INICIO</a></li>
-          <li><a href="alumnos">ALUMNOS</a></li>
+            await cerrarSesion(); 
+            navigate('/coordinador/'); 
+        } catch (error) {
+            console.error("Error al cerrar sesión", error);
+        }
+    };
 
-          <li className="dropdown">
-            <a href="#">EMPRESAS</a>
-            <div className="submenu2">
-              <a href="empresas" className="opcion">Empresas</a>
-              <a href="agregar-empresa" className="opcion">Añadir empresa</a>
-            </div>
-          </li>
+    return (
+        <header id="header-coordinador-principal"> {/* ID único añadido aquí */}
+            <section id="header-coordinador-nomUDG">
+                <img src="../../img/udg_white.png" alt="Logo UDG" />
+            </section>
+            <nav className="menu-coordinador">
+                <ul>
+                    <li><a href="principal">INICIO</a></li>
+                    <li><a href="alumnos">ALUMNOS</a></li>
 
-          <li><a href="fechas">FECHAS</a></li>
+                    <li className="dropdown-coordinador">
+                        <a href="#">EMPRESAS</a>
+                        <div className="submenu-coordinador">
+                            <a href="empresas" className="opcion-submenu">Empresas</a>
+                            <a href="agregar-empresa" className="opcion-submenu">Añadir empresa</a>
+                        </div>
+                    </li>
 
-          <li className="dropdown">
-            <a href="#">OPCIONES</a>
-            <div className="submenu2">
-              <a href="crear-coordinador" className="opcion">Crear nuevo coordinador</a>
-              <a href="crear-jefe" className="opcion">Crear jefe de departamento</a>
-                <li><a href="#" onClick={manejarCerrarSesion}>Cerrar sesion</a></li>
-            </div>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  );
+                    <li><a href="fechas">FECHAS</a></li>
+
+                    <li className="dropdown-coordinador">
+                        <a href="#">OPCIONES</a>
+                        <div className="submenu-coordinador">
+                            <a href="crear-coordinador" className="opcion-submenu">Crear nuevo coordinador</a>
+                            <a href="crear-jefe" className="opcion-submenu">Crear jefe de departamento</a>
+                            <li><a href="#" onClick={manejarCerrarSesion}>Cerrar sesión</a></li>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    );
 };
 
 export default HeaderCoordinador;
