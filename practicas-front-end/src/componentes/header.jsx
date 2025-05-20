@@ -6,7 +6,7 @@ const Header = () => {
     <header>
       <section id="nomUDG">
         <a href="https://www.udg.mx/es">
-          <img src="ruta/de/tu/imagen.png" alt="Descripción" />
+          <img src="../img/udg_white.png" alt="Descripción" />
         </a>
       </section>
     </header>
