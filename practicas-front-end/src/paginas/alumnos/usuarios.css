@@ -121,3 +121,29 @@ h1 {
     }
 }
 
+
+#token {
+  margin-bottom: 20px;
+}
+
+.token-row {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* espacio entre input y botones */
+}
+
+#token label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#token input {
+  width: 200px;
+  padding: 6px;
+}
+
+.tokenBoton {
+  padding: 6px 12px;
+  cursor: pointer;
+  margin: 0 0 0 0;
+}
