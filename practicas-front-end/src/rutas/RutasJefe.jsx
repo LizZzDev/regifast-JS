@@ -7,8 +7,8 @@ import Login from '../paginas/jefeDepartamentos/inicioSesionCJ';
 const RutasJefe = () => (
     <Routes>
         <Route path="/principal" element={<PrincipalJefe />} />
-        <Route path="/" element={<Login />} />
         <Route path="/tabla-alumnos" element={<TablaAlumnos />} />
+        <Route path="/" element={<Login />} />
     </Routes>
 );
 
