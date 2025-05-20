@@ -11,74 +11,18 @@ html, body {
   background-color: #f5f5f5;
 }
 
-/* Header */
-header {
+.big-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2vh 5%;
-  background-color: #103E7E;
-  color: white;
-  flex-wrap: wrap;
-  flex-direction: column;
-  gap: 2vh;
+  flex-direction: column;  /* Esto asegura que los elementos (gráfico y tabla) se apilen verticalmente */
+  align-items: center;     /* Centra los elementos horizontalmente */
+  gap: 30px;
 }
 
-header #nomUDG {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-header #nomUDG img {
-  max-height: 15vh;
-  max-width: 100%;
-  object-fit: contain;
-}
-
-.montserrat {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 900;
-}
-
-.montserratChiquita {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-}
-
-.menu {
-  width: 100%;
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: center;
-}
-
-.menu ul {
-  display: flex;
-  list-style: none;
-  gap: 3vw;
-  padding: 1vh 0;
-  flex-wrap: wrap;
-}
-
-.menu li a {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  padding: 1vh 2vw;
-  transition: 0.3s ease;
-}
-
-.menu li a:hover {
-  background-color: white;
-  color: #103E7E;
-  border-radius: 0.5rem;
-}
 
 /* Filtro de carrera */
 #filtros {
   text-align: center;
-  margin: 20px 0;
+  margin: 5px 0;
 }
 
 #filtros label {
@@ -100,23 +44,44 @@ header #nomUDG img {
   background-color: #e6e6e6;
 }
 
+/* Contenedor del contenido3 */
+#contenido3 {
+  width: 100%;  /* Puedes aumentar este valor según lo que necesites */
+  max-width: 1050px;  /* Este es el valor máximo de ancho que puede tener la tabla */
+  margin: 10px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+}
+
 /* Contenedor de gráfica */
+
 .chart-container {
-  width: 80%;
-  max-width: 700px;
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
   margin: 30px auto;
   background: #fff;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+  border: 2px solid #103E7E; /* Agrega este borde para depurar */
+
 }
 
 /* Sección de estadísticas */
 #estadisticas {
   text-align: center;
   margin: 40px auto;
-  width: 90%;
-  max-width: 600px;
+  width: 100%;
+  max-width: 800px;
+
+  overflow-y: auto;      /* Añade scroll si la tabla excede el tamaño */
+  position: relative;    /* Asegúrate de que la tabla esté en el flujo normal del layout */
+  overflow: visible;     /* Asegúrate de que la tabla no esté oculta por el overflow */
+
+  min-height: 150px; /* Para asegurar que el contenedor tenga un tamaño mínimo */
 }
 
 #estadisticas h2 {
@@ -131,7 +96,7 @@ header #nomUDG img {
   border-collapse: collapse;
   font-size: 16px;
   border-radius: 10px;
-  overflow: hidden;
+  /* overflow: hidden; */
   box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
   background-color: white;
 }

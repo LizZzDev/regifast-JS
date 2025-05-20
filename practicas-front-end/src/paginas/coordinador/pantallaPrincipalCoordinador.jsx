@@ -127,7 +127,7 @@ useEffect(() => {
     <div>
       <HeaderCoordinador/>
 
-      <main>
+      <main className="big-container">
         <section id="filtros">
           <label htmlFor="carreraSelect">Carrera:</label>
           <select 
@@ -166,9 +166,9 @@ useEffect(() => {
             </thead>
             <tbody>
               <tr>
-                <td>{estadisticas.revisados}</td>
-                <td>{estadisticas.noRevisados}</td>
-                <td>{estadisticas.total}</td>
+                <td>{estadisticas.revisados || 'Cargando...'}</td>
+                <td>{estadisticas.noRevisados || 'Cargando...'}</td>
+                <td>{estadisticas.total || 'Cargando...'}</td>
               </tr>
             </tbody>
           </table>
