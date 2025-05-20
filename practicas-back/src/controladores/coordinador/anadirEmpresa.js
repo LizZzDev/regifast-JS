@@ -8,6 +8,7 @@ const anadirDatosDeLaEmpresa = async (req, res) => {
   const idUsuario = null; 
 
   try {
+    console.log (Correo)
     const resultado = await Empresa.agregarNuevaEmpresa(connection, datos, idUsuario, Correo); 
 
     return resultado;
