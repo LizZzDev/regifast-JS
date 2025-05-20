@@ -1,7 +1,7 @@
 import Empresas from "../../modelos/modeloEmpresa.js";
 
 const obtenerEmpresa = async (req, res) => {
-    const idUsuario = req.session.ID;
+    const idUsuario = req.session.ID || req.query.idUsuario;
 
     console.log (idUsuario);
     try { 
