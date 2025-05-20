@@ -19,9 +19,7 @@ function PrincipalEmpresa() {
     cargarEmpresa();
   }, []);
 
-    if (!empresa) {
-    return <div>Cargando empresa...</div>;
-  }
+    
   // Función para renderizar las estrellas de calificación
   const renderEstrellas = () => {
     const estrellas = [];

@@ -2,6 +2,8 @@ import Empresas from "../../modelos/modeloEmpresa.js";
 
 const obtenerEmpresa = async (req, res) => {
     const idUsuario = req.session.ID;
+
+    console.log (idUsuario);
     try { 
         const empresa = await Empresas.obtenerEmpresaPorIdUsuario(idUsuario);
 
