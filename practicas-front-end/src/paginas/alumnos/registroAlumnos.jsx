@@ -286,12 +286,6 @@ const RegistroAlumnos = () => {
               { name: 'Estado', placeholder: 'Estado', type: 'text' },
               { name: 'Nacionalidad', placeholder: 'Nacionalidad', type: 'text' },
               { 
-                name: 'correo', 
-                placeholder: 'Correo electrónico', 
-                type: 'email',
-                disabled: true
-              },
-              { 
                 name: 'Telefono', 
                 placeholder: 'Teléfono fijo', 
                 type: 'number'
