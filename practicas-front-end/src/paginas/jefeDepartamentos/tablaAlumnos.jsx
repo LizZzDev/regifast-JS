@@ -1,24 +1,39 @@
 import React, { useEffect, useState } from "react";
 import "./ver_alumnos.css";
-
+import { modificarDatosAlumno, obtenerAlumnos } from '../../api/coordinador';
 import HeaderJefeDepto from "../../componentes/jefeDepto/header_jefeDepto.jsx";
-
 
 function TablaAlumnos() {
   const [alumnos, setAlumnos] = useState([]);
-  const [loading, setLoading] = useState(true);
+
+  const mapEstadoDeDB = (valor) => {
+    if (valor === 1) return "ordinario";
+    if (valor === 0) return "extraordinario";
+    return "";
+  };
+
+  const mapEstadoParaDB = (valor) => {
+    if (valor === "ordinario") return 1;
+    if (valor === "extraordinario") return 0;
+    return null;
+  };
 
   useEffect(() => {
-    fetch("http://localhost:3001/alumnos")
-      .then((res) => res.json())
-      .then((data) => {
-        setAlumnos(data);
-        setLoading(false);
-      })
-      .catch((error) => {
+    const cargarAlumnos = async () => {
+      try {
+        const response = await obtenerAlumnos();
+        const alumnosConEstado = response.alumnos.map(alumno => ({
+          ...alumno,
+          estado: mapEstadoDeDB(alumno.Ordinario),
+          calificacion: alumno.Calificacion || ''
+        }));
+        setAlumnos(alumnosConEstado);
+      } catch (error) {
         console.error("Error al obtener alumnos:", error);
-        setLoading(false);
-      });
+      }
+    };
+
+    cargarAlumnos();
   }, []);
 
   const handleEstadoChange = (index, nuevoEstado) => {
@@ -33,30 +48,38 @@ function TablaAlumnos() {
     setAlumnos(nuevos);
   };
 
-  const confirmarDatos = (codigo, estado, calificacion) => {
-    fetch("http://localhost:3001/alumnos/actualizar", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ codigo, estado, calificacion })
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert(`Datos actualizados:\nEstado: ${estado.toUpperCase()}\nCalificación: ${calificacion}`);
-      })
-      .catch((err) => {
-        console.error("Error al actualizar datos:", err);
-      });
+  const confirmarDatos = async (idUsuario, alumno) => {
+    const data = {
+      Ordinario: mapEstadoParaDB(alumno.estado),
+      Calificacion: alumno.calificacion
+    };
+
+    try {
+      await modificarDatosAlumno(data, idUsuario);
+      alert("La información se modificó correctamente");
+
+      const response = await obtenerAlumnos();
+      const alumnosConEstado = response.alumnos.map(alumno => ({
+        ...alumno,
+        estado: mapEstadoDeDB(alumno.Ordinario),
+        calificacion: alumno.Calificacion || ''
+      }));
+      setAlumnos(alumnosConEstado);
+    } catch (error) {
+      alert("Error al modificar los datos");
+      console.log("Error:", error);
+    }
   };
 
   const getEstadoColor = (estado) => {
-    return estado === "regular" ? "#c8f7c5" : "#f7c5c5";
+    if (estado === "ordinario") return "#c8f7c5";
+    if (estado === "extraordinario") return "#f7c5c5";
+    return "transparent";
   };
-
-  if (loading) return <p>Cargando alumnos...</p>;
 
   return (
     <div className="page">
-      <HeaderJefeDepto/>
+      <HeaderJefeDepto />
 
       <main>
         <section id="titleA">
@@ -79,50 +102,62 @@ function TablaAlumnos() {
           </thead>
           <tbody>
             {alumnos.map((alumno, index) => (
-              <tr key={alumno.codigo}>
-                <td>{alumno.codigo}</td>
-                <td>{alumno.nombre}</td>
-                <td>{alumno.carrera}</td>
-                <td>{alumno.grado}</td>
-                <td>{alumno.grupo}</td>
-                <td>{alumno.turno}</td>
-                <td>{alumno.correo}</td>
+              <tr key={alumno.Codigo}>
+                <td>{alumno.Codigo}</td>
+                <td>{alumno.NombreCompleto}</td>
+                <td>{alumno.Carrera}</td>
+                <td>{alumno.Grado}</td>
+                <td>{alumno.Grupo}</td>
+                <td>{alumno.Turno}</td>
+                <td>{alumno.CorreoInstitucional}</td>
 
+                {/* CALIFICACIÓN */}
                 <td>
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={alumno.calificacion || ""}
-                    onChange={(e) =>
-                      handleCalificacionChange(index, e.target.value)
-                    }
-                    className="calificacion-input"
-                  />
+                  {alumno.Calificacion ? (
+                    <span>{alumno.Calificacion}</span>
+                  ) : (
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={alumno.calificacion || ''}
+                      onChange={(e) => handleCalificacionChange(index, e.target.value)}
+                      className="calificacion-input"
+                    />
+                  )}
                 </td>
 
+                {/* ESTADO + CONFIRMAR */}
                 <td className="estado-selector">
-                  <select
-                    className="estado-dropdown"
-                    style={{ backgroundColor: getEstadoColor(alumno.estado) }}
-                    value={alumno.estado}
-                    onChange={(e) => handleEstadoChange(index, e.target.value)}
-                  >
-                    <option value="regular">Regular</option>
-                    <option value="irregular">Irregular</option>
-                  </select>
-                  <button
-                    className="confirmar-btn"
-                    onClick={() =>
-                      confirmarDatos(
-                        alumno.codigo,
-                        alumno.estado,
-                        alumno.calificacion || ""
-                      )
-                    }
-                  >
-                    Confirmar
-                  </button>
+                  {alumno.Ordinario === 0 || alumno.Ordinario === 1 ? (
+                    <span
+                      className="estado-etiqueta"
+                      style={{ backgroundColor: getEstadoColor(alumno.estado) }}
+                    >
+                      {alumno.Ordinario === 1 ? "Regular" : "Irregular"}
+                    </span>
+                  ) : (
+                    <>
+                      <select
+                        className="estado-dropdown"
+                        value={alumno.estado || ''}
+                        style={{ backgroundColor: getEstadoColor(alumno.estado) }}
+                        onChange={(e) => handleEstadoChange(index, e.target.value)}
+                      >
+                        <option value="">Selecciona estado</option>
+                        <option value="ordinario">Regular</option>
+                        <option value="extraordinario">Irregular</option>
+                      </select>
+
+                      <button
+                        className="confirmar-btn"
+                        onClick={() => confirmarDatos(alumno.IdUsuario, alumno)}
+                        disabled={(alumno.Ordinario === 1 || alumno.Ordinario === 0) || alumno.Calificacion}
+                      >
+                        Confirmar
+                      </button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}

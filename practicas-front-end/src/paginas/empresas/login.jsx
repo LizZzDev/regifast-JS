@@ -26,6 +26,8 @@ const Login = ({ onLogin }) => {
           navigate("/empresa/principal");
         } else if (usuario?.rol === "coordinador") {
           navigate("/coordinador/principal");
+        } else if (usuario?.rol === "jefeDepartamento") {
+          navigate("/jefe/principal");
         } else {
           navigate("/no-autorizado"); 
         }

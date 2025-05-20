@@ -36,7 +36,7 @@ function CrearNuevoAdmin() {
     alert("Usuario creado exitosamente");
 
     } catch (error) {
-      alert("Error al crear usuario");
+      alert("Error al crear usuario",error);
     }
   };
 

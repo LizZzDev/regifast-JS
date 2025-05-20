@@ -31,6 +31,7 @@ const crearUsuario = async (req) => {
   
     const hashedPassword = await bcrypt.hash(contrasena, 10);
  
+    console.log (rol)
     const idUsuario = await Usuario.agregarNuevoUsuario(connection, {
       correo,
       hashedPassword,
@@ -39,7 +40,7 @@ const crearUsuario = async (req) => {
     });
 
     if (rol === 'jefeDepartamento') {
-      await JefeDepartamento.crearJefeDepartamento(connection, datosJefeDepartamento, idUsuario);
+      await JefeDepartamento.crearJefeDeDepartamento(connection, datosJefeDepartamento, idUsuario);
     }
 
     await connection.commit(); 

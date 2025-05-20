@@ -1,16 +1,24 @@
 import express from 'express';
 import Alumnos from "../../modelos/modeloAlumno.js";
+import Jefe from "../../modelos/modeloJefeDepartamento.js";
 
 const obtenerAlumnosFiltrados = async (req) => {
   const pagina = parseInt(req.query.pagina) || 1;
   const limite = parseInt(req.query.limite) || 20;
-  const carrera = req.query.carrera;
+  let carrera = req.query.carrera;
   const busqueda = req.query.busqueda;
   const validada = req.query.validada === 'true' ? 1 
                  : req.query.validada === 'false' ? 0
                  : null;
   console.log (busqueda, validada, carrera)
   try {
+    console.log (req);
+    if (req.session.rol === "jefeDepartamento") {
+        const carreraJefe = await Jefe.obtenerJefe(req.session.ID);
+        console.log (carreraJefe)
+        carrera = carreraJefe?.Carrera;
+    }
+
     const alumnos = await Alumnos.obtenerAlumnos(
       {
         pagina: pagina, 

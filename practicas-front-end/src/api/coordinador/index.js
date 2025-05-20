@@ -29,11 +29,12 @@ export async function asignarFechaIngresoPorCalificacion(data) {
   }
 }
 
-export async function modificarDatosAlumno(data) {
+export async function modificarDatosAlumno(data, idUsuario) {
   try {
     const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.MODIFICAR_DATOS_ALUMNO,
-      data,
+      { datos: data,
+        idUsuario: idUsuario}
     );
     return response.data.data;;
   } catch (error) {

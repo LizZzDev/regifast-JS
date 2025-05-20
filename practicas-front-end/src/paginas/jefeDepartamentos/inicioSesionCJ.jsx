@@ -22,11 +22,13 @@ const LoginCJ = ({ onLogin }) => {
 
         const usuario = await iniciarSesion({ correo, contrasena: password }); 
         if (usuario?.rol === "alumno") {
-          navigate("/alumno/principal");
+              navigate("/alumno/principal");
         } else if (usuario?.rol === "empresa") {
           navigate("/empresa/principal");
         } else if (usuario?.rol === "coordinador") {
           navigate("/coordinador/principal");
+        } else if (usuario?.rol === "jefeDepartamento") {
+          navigate("/jefe/principal");
         } else {
           navigate("/no-autorizado"); 
         }

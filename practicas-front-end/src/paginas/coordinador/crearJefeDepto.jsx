@@ -27,8 +27,8 @@ function CrearNuevoAdmin() {
         correo: formData.correoAdmin,
         contrasena: formData.passwordDepto,
         nombre: formData.nombre,
-        datosJefeDepartamento: {carrera: formData.carrera},
-        rol: 'coordinador'
+        datosJefeDepartamento: {Carrera: formData.carrera},
+        rol: 'jefeDepartamento'
       } );
 
       alert("Usuario creado exitosamente");
