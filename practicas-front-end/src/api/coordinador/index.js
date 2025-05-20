@@ -43,25 +43,27 @@ export async function modificarDatosAlumno(data, idUsuario) {
   }
 }
 
-export async function obtenerAlumnos() {
+export async function obtenerAlumno(idUsuario) {
   try {
     const response = await api.get(
-       router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNOS,
+       router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNO,
+      { params: { idUsuario } }
     );
     return response.data.data;;
   } catch (error) {
-    console.error("Error en obtener alumnos:", error);
+    console.error("Error en obtener alumno:", error);
     throw error;
   }
 }
 
-export async function obtenerAlumno({ pagina = 1, limite = 20, validada = null, vacantes = false } = {}) {
+export async function obtenerAlumnos({ pagina = 1, limite = 20, busqueda = null, carrera = null, validada = null } = {}) {
   try {
      const params = {
       pagina,
       limite,
-      ...(validada !== null && { validada }), 
-      ...(vacantes && { vacantes: true })
+      ...(carrera && { carrera }),
+      ...(busqueda && { busqueda }),
+      ...(validada !== null && { validada }),
     };
 
     console.log (params)

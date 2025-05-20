@@ -1,33 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import './EditarAlumno.css';
 import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
+import { modificarDatosAlumno, obtenerAlumno } from '../../api/coordinador';
 
 const EditarAlumno = () => {
-  const [formData, setFormData] = useState({
-    Codigo: '',
-    NombreCompleto: '',
-    Carrera: '',
-    Grado: '',
-    Grupo: '',
-    Turno: '',
-    Domicilio: '',
-    Colonia: '',
-    Municipio: '',
-    Edad: '',
-    NSS: '',
-    Movil: '',
-    NumeroCasa: '',
-    CodigoPostal: '',
-    Estado: '',
-    Nacionalidad: '',
-    correo: '',
-    Telefono: '',
-    TelefonoEmergencia: '',
-    NombrePadre: '',
-    TelefonoPadre: '',
-    NombreMadre: '',
-    TelefonoMadre: ''
-  });
+  const { idAlumno } = useParams();
+  const [alumno, setAlumno] = useState(null);
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    const CargarAlumno = async () => {
+      try {
+        const response = await obtenerAlumno(idAlumno);
+        setAlumno(response);
+      } catch (error) {
+        alert("No se pudo obtener el alumno");
+      }
+    };
+    CargarAlumno();
+  }, [idAlumno]);
+
+  useEffect(() => {
+    if (alumno) {
+      setFormData({
+        Codigo: alumno.Codigo || '',
+        NombreCompleto: alumno.NombreCompleto || '',
+        Carrera: alumno.Carrera || '',
+        Grado: alumno.Grado || '',
+        Grupo: alumno.Grupo || '',
+        Turno: alumno.Turno || '',
+        Domicilio: alumno.Domicilio || '',
+        Colonia: alumno.Colonia || '',
+        Municipio: alumno.Municipio || '',
+        Edad: alumno.Edad || '',
+        NSS: alumno.NSS || '',
+        Movil: alumno.Movil || '',
+        NumeroCasa: alumno.NumeroCasa || '',
+        CodigoPostal: alumno.CodigoPostal || '',
+        Estado: alumno.Estado || '',
+        Nacionalidad: alumno.Nacionalidad || '',
+        correo: alumno.CorreoInstitucional || '',
+        Telefono: alumno.Telefono || '',
+        TelefonoEmergencia: alumno.TelefonoEmergencia || '',
+        NombrePadre: alumno.NombrePadre || '',
+        TelefonoPadre: alumno.TelefonoPadre || '',
+        NombreMadre: alumno.NombreMadre || '',
+        TelefonoMadre: alumno.TelefonoMadre || ''
+      });
+    }
+  }, [alumno]);
 
   const [errores, setErrores] = useState({});
 
@@ -68,13 +90,31 @@ const EditarAlumno = () => {
     return Object.keys(nuevosErrores).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validarCampos()) {
-      console.log('Datos listos para enviar:', formData);
-      // Aquí se conectaría al backend
+      if (!validarCampos()) return;
+
+    const cambios = {};
+    for (const key in formData) {
+      if (formData[key] !== alumno[key]) {
+        cambios[key] = formData[key];
+      }
     }
-  };
+
+    if (Object.keys(cambios).length === 0) {
+      alert("No se hicieron cambios.");
+      return;
+    }
+
+    try {
+        await modificarDatosAlumno(cambios, alumno.idUsuario);
+        alert("La información se modificó correctamente");
+
+    } catch (error) {
+        alert("No se pudo realizar la modificacion:", error.response?.data?.message)
+    }
+
+    }
 
   return (
     <>
