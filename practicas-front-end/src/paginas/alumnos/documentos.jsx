@@ -68,13 +68,13 @@ const DocumentosAlumno = () => {
             {documentos.map((doc) => (
               <div key={doc.id} className="document-card">
                 <h3>{doc.nombre}</h3>
-                <p>
+                <p id="estatus">
                   Estatus: 
                   <span className={`status ${doc.claseEstatus}`}>
                     {doc.estatus}
                   </span>
                 </p>
-                <button
+                <button 
                   className={`btn-download ${doc.disponible ? 'downloadBtn' : ''}`}
                   onClick={() => manejarDescarga(doc.accion)}
                   disabled={!doc.disponible}
@@ -88,7 +88,7 @@ const DocumentosAlumno = () => {
 
         <section className="info-section">
           <h2>Información Importante</h2>
-          <p>
+          <p id="avisoImportante">
             Recuerda que los documentos estarán disponibles conforme avances en tu proceso. 
             Si tienes alguna duda, contacta al departamento de prácticas profesionales.
           </p>

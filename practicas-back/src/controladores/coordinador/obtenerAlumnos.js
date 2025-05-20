@@ -28,6 +28,8 @@ const obtenerAlumnosFiltrados = async (req) => {
         validado: validada
       }
     );
+        console.log ("alumno", alumnos)
+
     return alumnos;
   } catch (error) {
     console.error("Error al obtener todos los alumnos:", error);

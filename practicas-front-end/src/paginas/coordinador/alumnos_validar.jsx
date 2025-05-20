@@ -34,7 +34,7 @@ const ValidacionAlumnos = () => {
             null
         });
         console.log (response);
-        setAlumnos(response);
+        setAlumnos(response.alumnos);
       } catch (error) {
         console.error("Error al obtener alumnos:", error);
       }
