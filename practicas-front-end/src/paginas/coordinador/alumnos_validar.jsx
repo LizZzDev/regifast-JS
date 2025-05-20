@@ -33,8 +33,8 @@ const ValidacionAlumnos = () => {
             filtros.revision === 'no-revisado' ? 0 :
             null
         });
-        console.log (response.alumnos)
-        setAlumnos(response.alumnos);
+        console.log (response);
+        setAlumnos(response);
       } catch (error) {
         console.error("Error al obtener alumnos:", error);
       }

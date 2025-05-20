@@ -45,9 +45,14 @@ export async function modificarDatosAlumno(data, idUsuario) {
 
 export async function obtenerAlumno(idUsuario) {
   try {
+     const params = {};
+    if (idUsuario !== undefined && idUsuario !== null) {
+      params.idUsuario = idUsuario;
+    }
+    
     const response = await api.get(
        router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNO,
-      { params: { idUsuario } }
+      { params}
     );
     return response.data.data;;
   } catch (error) {
