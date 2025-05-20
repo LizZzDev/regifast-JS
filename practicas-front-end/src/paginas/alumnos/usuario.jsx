@@ -103,100 +103,125 @@ const RegistroUsuario = () => {
             setMensaje(error.response?.data?.message || 'Error en el registro');
         }
     };
-
     return (
-        <div className="usuario-container">
-            <Header />
-            
-            <section className="auth-section">
-                <div className="loginForm">
-                    <h1>Crear Cuenta</h1>
-                    <form onSubmit={handleRegistro}>
-                        <div className="form-group">
-                            <label>Nombre Completo:</label>
-                            <input
-                                type="text"
-                                name="nombre"
-                                value={formData.nombre}
-                                onChange={handleChange}
-                                placeholder="Tu nombre completo"
-                                required
-                            />
-                        </div>
-                        
-                        <div className="form-group">
-                            <label>Correo Electrónico:</label>
-                            <input
-                                type="email"
-                                name="correo"
-                                value={formData.correo}
-                                onChange={handleChange}
-                                placeholder="tu@correo.com"
-                                required
-                            />
-                             {correoValidado && formData.correo !== correoValidado && (
-                                <p className="mensaje advertencia">
-                                Correo cambiado. Por favor, valida el token nuevamente.
-                                </p>
+        <>
+            <Header /> {/* Fuera del contenedor principal */}
+            <div id="registro-usuario-div-container" className="usuario-container">
+
+                <section id="registro-usuario-section-auth" className="auth-section">
+                    <div id="registro-usuario-div-formulario" className="loginForm">
+                        <h1 id="registro-usuario-h1-titulo">Crear Cuenta</h1>
+
+                        <form id="registro-usuario-form" onSubmit={handleRegistro}>
+                            <div id="registro-usuario-div-nombre" className="form-group">
+                                <label id="registro-usuario-label-nombre" htmlFor="registro-usuario-input-nombre">
+                                    Nombre Completo:
+                                </label>
+                                <input
+                                    id="registro-usuario-input-nombre"
+                                    type="text"
+                                    name="nombre"
+                                    value={formData.nombre}
+                                    onChange={handleChange}
+                                    placeholder="Tu nombre completo"
+                                    required
+                                />
+                            </div>
+
+                            <div id="registro-usuario-div-correo" className="form-group">
+                                <label id="registro-usuario-label-correo" htmlFor="registro-usuario-input-correo">
+                                    Correo Electrónico:
+                                </label>
+                                <input
+                                    id="registro-usuario-input-correo"
+                                    type="email"
+                                    name="correo"
+                                    value={formData.correo}
+                                    onChange={handleChange}
+                                    placeholder="tu@correo.com"
+                                    required
+                                />
+                                {correoValidado && formData.correo !== correoValidado && (
+                                    <p
+                                        id="registro-usuario-mensaje-correo-cambiado"
+                                        className="mensaje advertencia"
+                                    >
+                                        Correo cambiado. Por favor, valida el token nuevamente.
+                                    </p>
+                                )}
+                            </div>
+
+                            <div id="registro-usuario-div-password" className="form-group">
+                                <label id="registro-usuario-label-password" htmlFor="registro-usuario-input-password">
+                                    Contraseña:
+                                </label>
+                                <input
+                                    id="registro-usuario-input-password"
+                                    type="password"
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    placeholder="Mínimo 6 caracteres"
+                                    required
+                                />
+                            </div>
+
+                            <div id="registro-usuario-div-token" className="form-group">
+                                <label id="registro-usuario-label-token" htmlFor="registro-usuario-input-token">
+                                    Token:
+                                </label>
+                                <div className="token-row">
+                                    <input
+                                        id="registro-usuario-input-token"
+                                        type="text"
+                                        name="token"
+                                        value={token}
+                                        onChange={(e) => setToken(e.target.value)}
+                                        placeholder=""
+                                        required
+                                    />
+
+                                    <button
+                                        id="registro-usuario-btn-generar-token"
+                                        className="tokenBoton"
+                                        type="button"
+                                        onClick={generarTokenConst}
+                                    >
+                                        Generar Token
+                                    </button>
+
+                                    <button
+                                        id="registro-usuario-btn-validar-token"
+                                        className="tokenBoton"
+                                        type="button"
+                                        onClick={validarTokenConst}
+                                    >
+                                        Validar Token
+                                    </button>
+                                </div>
+                            </div>
+
+                            {mensaje && (
+                                <div
+                                    id="registro-usuario-div-mensaje"
+                                    className={`mensaje ${mensaje.includes('éxito') ? 'exito' : 'error'}`}
+                                >
+                                    {mensaje}
+                                </div>
                             )}
-                        </div>
-                        
-                        <div className="form-group">
-                            <label>Contraseña:</label>
-                            <input
-                                type="password"
-                                name="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                placeholder="Mínimo 6 caracteres"
-                                required
-                            />
-                        </div>
 
-                        <div id="token">
-                            <label>Token:</label>
-                            <input
-                                type="text"
-                                name="token"
-                                value={token}
-                                onChange={(e) => setToken(e.target.value)}
-                                placeholder=""
-                                required
-                            />
-
-                            <button
-                                className="tokenBoton"
-                                type="button"
-                                onClick={generarTokenConst}
+                            <button 
+                                id="registro-usuario-btn-submit"
+                                type="submit"
+                                disabled={!tokenValidado}
                             >
-                                Generar Token
+                                Registrar
                             </button>
-
-                            <button
-                                className="tokenBoton"
-                                type="button"
-                                onClick={validarTokenConst}
-                            >
-                                Validar Token
-                            </button>
-                        </div>
-                        
-                        {mensaje && <div className={`mensaje ${mensaje.includes('éxito') ? 'exito' : 'error'}`}>
-                            {mensaje}
-                        </div>}
-                        
-
-                     <button
-                        type="submit"
-                         disabled={!tokenValidado}
-                     >
-                        Registrarse
-                     </button>
-                    </form>
-                </div>
-            </section>
-        </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </>
     );
-};
-
+}
 export default RegistroUsuario;
