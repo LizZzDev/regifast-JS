@@ -188,7 +188,10 @@ const ValidacionAlumnos = () => {
                     ) : (
                       <button
                         className="confirmar-btn"
-                        onClick={() => validarAlumnoConst(alumno.IdUsuario)}
+                       onClick={(e) => {
+                          e.stopPropagation();
+                          validarAlumnoConst(alumno.IdUsuario);
+                        }}
                         disabled={validandoIds.includes(alumno.IdUsuario)}
 
                       >
