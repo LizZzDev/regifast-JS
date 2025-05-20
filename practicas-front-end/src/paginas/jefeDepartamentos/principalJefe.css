@@ -10,7 +10,28 @@ html, body {
     background-color: #f5f5f5;
 }
 
-/* ---------------------- HEADER ---------------------- */
+/*  --------------------------------- MAIN ------------------------------  */ 
+main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+#titleA {
+    font-size: 24px;
+    color: #12448c;
+    font-weight: bold;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#SaludoUsuario{
+    color: #12448c;
+    width: 100%;
+}
+
+/* ---------------------- HEADER ---------------------- 
 
 header {
     width: 100%;
@@ -32,9 +53,9 @@ img {
     width: 21%;
     height: 70%;
     padding-top: 1.55%;
-}
+}*/
 
-/* ---------------------- NAV ---------------------- */
+/* ---------------------- NAV ---------------------- 
 
 .menu {
     width: 100%;
@@ -62,22 +83,6 @@ img {
     background-color: white;
     color: #103E7E;
     border-radius: 5px;
-}
+}*/
 
 
-/*  --------------------------------- MAIN ------------------------------ */
-main {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 40px;
-}
-
-#titleA {
-    font-size: 24px;
-    color: #12448c;
-    font-weight: bold;
-    margin: 0 auto;
-    text-align: center;
-}

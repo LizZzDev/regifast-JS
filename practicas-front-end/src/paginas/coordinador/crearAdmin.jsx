@@ -27,10 +27,16 @@ function CrearNuevoAdmin() {
         contrasena: formData.passwordDepto,
         nombre: formData.nombre,
         rol: 'coordinador'
-      } )
-      
+      } );
+      setFormData({
+        nombre: "",
+        correoAdmin: "",
+        passwordDepto: "",
+    });
+    alert("Usuario creado exitosamente");
+
     } catch (error) {
-      
+      alert("Error al crear usuario");
     }
   };
 
@@ -40,7 +46,7 @@ function CrearNuevoAdmin() {
 
       <main>
         <section id="titleA">
-          <h2>Crear Nuevo Coordinador</h2>
+          <h2>Crear Nuevo Cordinador</h2>
         </section>
 
         <form onSubmit={handleSubmit}>

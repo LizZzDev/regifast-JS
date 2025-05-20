@@ -6,7 +6,7 @@ export async function anadirEmpresa(data) {
   try {
     const response = await api.post(
       router.COORDINADOR + endpoints.COORDINADOR.ANADIR_EMPRESA,
-      data,
+      { datos: data },
     );
     return response.data.data;;
   } catch (error) {
