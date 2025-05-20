@@ -41,7 +41,7 @@ main {
   color: black;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 /* Tabla */
@@ -69,6 +69,7 @@ th {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .estado-dropdown {
@@ -107,6 +108,12 @@ th {
 
 
 
+.estado-etiqueta{
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  margin: 0 auto;
+}
+
 
 /* === Ancho personalizado por columna === */
 .col-carrera,
@@ -117,8 +124,7 @@ th {
 
 .col-codigo,
 .col-turno,
-.col-calificacion,
-.col-estado {
+.col-calificacion{
   width: 10%;
 }
 
