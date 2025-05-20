@@ -2,57 +2,102 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../componentes/header.jsx";
-import { crearUsuario } from "../../api/usuarios/index.js";
+import { crearUsuario, validarToken } from "../../api/usuarios/index.js";
 import { generarToken } from "../../api/usuarios/index.js";
 import "./usuarios.css";
 
 const RegistroUsuario = () => {
     // Estados para registro
-    const [nombre, setNombre] = useState("");
-    const [correo, setCorreo] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+     const [formData, setFormData] = useState({
+        nombre: "",
+        correo: "",
+        password: "",
+      });
+
+    const [token, setToken] = useState("");
+    const [tokenValidado, setTokenValidado] = useState(false);
+    const [correoValidado, setCorreoValidado] = useState("");
     const [mensaje, setMensaje] = useState("");
     const navigate = useNavigate();
 
-    // Manejar registro
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+          if (name === "correo" && value !== correoValidado) {
+            setTokenValidado(false);
+            setCorreoValidado(""); // resetear
+        }
+
+        setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+        }));
+    };
+
+    const generarTokenConst = async () => {
+        if (!formData.correo.endsWith("@alumnos.udg.mx")) {
+            setMensaje("Solo se permiten correos @alumnos.udg.mx");
+            return;
+        }
+
+        if (formData.correo) {
+            try {
+                await generarToken(formData.correo);
+                setMensaje("Token enviado al correo.");
+            } catch (error) {
+                setMensaje(error.response?.data?.message || "error al generar el token.");
+                console.error("Error al generar token:", error);
+            }
+        } else {
+            setMensaje("Ingresa tu correo para generar el token.");
+            }
+    };
+
+    
+    const validarTokenConst = async () => {
+        if (formData.correo && token) {
+            try {
+                await validarToken(formData.correo, token);
+                setMensaje("Token validado.");
+                setCorreoValidado(formData.correo);
+                setTokenValidado(true);
+            } catch (error) {
+                setMensaje(error.response?.data?.message || "error al validar el token.");
+                console.error("Error al validar token:", error);
+            }
+        } else {
+            setMensaje("Ingresa un token primero.");
+            }
+    };
+
     const handleRegistro = async (e) => {
         e.preventDefault();
         
         // Validaciones
-        if (!nombre || !correo || !password || !confirmPassword) {
+        if (!formData.correo.endsWith("@alumnos.udg.mx")) {
+            setMensaje("Solo se permiten correos @alumnos.udg.mx");
+            return;
+        }
+
+        if (!formData.nombre || !formData.correo || !formData.password) {
             setMensaje("Todos los campos son obligatorios");
             return;
         }
 
-        if (password !== confirmPassword) {
-            setMensaje("Las contraseñas no coinciden");
+        if (!tokenValidado) {
+            setMensaje("Primero debes validar tu token.");
             return;
         }
-
-        if (password.length < 6) {
-            setMensaje("La contraseña debe tener al menos 6 caracteres");
-            return;
-        }
-
-        const form = new FormData();
-        form.append('correo', correo);
-        form.append('contrasena', password);
-        form.append('nombre', nombre);
-        form.append('rol', 'alumno');
-
-        const datosUsuario = {
-            correo: correo,
-            Contrasena: password,
-            nombre: nombre,
-        };
-
-        form.append('datosUsuario', JSON.stringify(datosUsuario));
 
         try {
-            await crearUsuario(form);
+              await crearUsuario ( {
+                    correo: formData.correo,
+                    contrasena: formData.password,
+                    nombre: formData.nombre,
+                    rol: 'alumno'
+                  } );
             setMensaje('Registro exitoso. Redirigiendo...');
-            setTimeout(() => navigate("/principalAlumno"), 1500);
+            setTimeout(() => navigate("/alumnos/principal"), 1500);
         } catch (error) {
             console.error('Error:', error);
             setMensaje(error.response?.data?.message || 'Error en el registro');
@@ -71,8 +116,9 @@ const RegistroUsuario = () => {
                             <label>Nombre Completo:</label>
                             <input
                                 type="text"
-                                value={nombre}
-                                onChange={(e) => setNombre(e.target.value)}
+                                name="nombre"
+                                value={formData.nombre}
+                                onChange={handleChange}
                                 placeholder="Tu nombre completo"
                                 required
                             />
@@ -82,52 +128,69 @@ const RegistroUsuario = () => {
                             <label>Correo Electrónico:</label>
                             <input
                                 type="email"
-                                value={correo}
-                                onChange={(e) => setCorreo(e.target.value)}
+                                name="correo"
+                                value={formData.correo}
+                                onChange={handleChange}
                                 placeholder="tu@correo.com"
                                 required
                             />
+                             {correoValidado && formData.correo !== correoValidado && (
+                                <p className="mensaje advertencia">
+                                Correo cambiado. Por favor, valida el token nuevamente.
+                                </p>
+                            )}
                         </div>
                         
                         <div className="form-group">
                             <label>Contraseña:</label>
                             <input
                                 type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
                                 placeholder="Mínimo 6 caracteres"
                                 required
                             />
+                        </div>
+
+                        <div id="token">
+                            <label>Token:</label>
+                            <input
+                                type="text"
+                                name="token"
+                                value={token}
+                                onChange={(e) => setToken(e.target.value)}
+                                placeholder=""
+                                required
+                            />
+
+                            <button
+                                className="tokenBoton"
+                                type="button"
+                                onClick={generarTokenConst}
+                            >
+                                Generar Token
+                            </button>
+
+                            <button
+                                className="tokenBoton"
+                                type="button"
+                                onClick={validarTokenConst}
+                            >
+                                Validar Token
+                            </button>
                         </div>
                         
                         {mensaje && <div className={`mensaje ${mensaje.includes('éxito') ? 'exito' : 'error'}`}>
                             {mensaje}
                         </div>}
                         
-                         <button
-                         type="button"
-                         onClick={async () => {
-                             if (correo) {
-                                 try {
-                                     await generarToken({ correo });
-                                     setMensaje("Token enviado al correo.");
-                                 } catch (error) {
-                                      setMensaje("error al generar el token.");
-                                     console.error("Error al generar token:", error);
-                                 }
-                            } else {
-                                setMensaje("Ingresa tu correo para generar el token.");
-                            }
-                         }}
-                     >
-                         Generar Token
-                     </button>
 
                      <button
                         type="submit"
-                        // disabled={!token}
+                         disabled={!tokenValidado}
                      >
-                        Iniciar Sesión
+                        Registrarse
                      </button>
                     </form>
                 </div>

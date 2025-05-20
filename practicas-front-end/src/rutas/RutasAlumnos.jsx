@@ -9,6 +9,7 @@ import Registro from '../paginas/alumnos/registroAlumnos';
 import Documentos from '../paginas/alumnos/documentos';
 import RegistroUsuario from '../paginas/alumnos/usuario';
 import PerfilAlumno from '../paginas/alumnos/verDatos';
+import CrearCuenta from '../paginas/alumnos/usuario';
 
 const RutasAlumnos = () => (
     <Routes>
@@ -21,6 +22,7 @@ const RutasAlumnos = () => (
         <Route path="/documentos" element={<Documentos />} />
         <Route path="/registro-usuarios" element={<RegistroUsuario />} />
         <Route path="/ver-datos" element={<PerfilAlumno />} />
+        <Route path="/crear-cuenta" element={<CrearCuenta />} />
     </Routes>
 );
 

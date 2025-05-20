@@ -72,8 +72,6 @@ const Login = ({ onLogin }) => {
             <input type="submit" value="Iniciar Sesión" />
           </div>
         </form>
-        <p>¿No tienes una cuenta? <a href="empresa/registro">Regístrate aquí</a></p>
-
         {mensaje && <p className="mensaje">{mensaje}</p>}
       </section>
     </div>
