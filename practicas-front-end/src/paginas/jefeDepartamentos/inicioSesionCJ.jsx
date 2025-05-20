@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { iniciarSesion } from "../../api/usuarios/index.js";
 import "../empresas/styles.css";
 
-import HeaderJefeDepto from "../../componentes/jefeDepto/header_jefeDepto.jsx";
+import Header from "../../componentes/header.jsx";
 
 
 const LoginCJ = ({ onLogin }) => {
@@ -21,9 +21,12 @@ const LoginCJ = ({ onLogin }) => {
       console.log (correo, password);
 
         const usuario = await iniciarSesion({ correo, contrasena: password }); 
-        onLogin?.(usuario); 
-        if (usuario?.rol === "empresa") {
+        if (usuario?.rol === "alumno") {
+          navigate("/alumno/principal");
+        } else if (usuario?.rol === "empresa") {
           navigate("/empresa/principal");
+        } else if (usuario?.rol === "coordinador") {
+          navigate("/coordinador/principal");
         } else {
           navigate("/no-autorizado"); 
         }
@@ -38,7 +41,7 @@ const LoginCJ = ({ onLogin }) => {
 
   return (
     <div>
-      <HeaderJefeDepto />
+      <Header />
       <section id="loginForm">
         <h1>Inicio de Sesión</h1>
         <form onSubmit={handleSubmit}>
@@ -68,8 +71,6 @@ const LoginCJ = ({ onLogin }) => {
             <input type="submit" value="Iniciar Sesión" />
           </div>
         </form>
-        <p>¿No tienes una cuenta? <a href="empresa/registro">Regístrate aquí</a></p>
-
         {mensaje && <p className="mensaje">{mensaje}</p>}
       </section>
     </div>
