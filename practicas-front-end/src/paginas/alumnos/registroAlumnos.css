@@ -5,56 +5,37 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
+    height: 100%;
+    width: 100%;
     font-family: "Montserrat", sans-serif;
     background-color: rgb(249, 249, 249);
 }
 
 .registro-alumno-container {
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
+    /* max-width: 1200px; */
+    min-height: 100vh;
+    margin: 0 auto; 
+    /*padding: 20px;*/
 
-/* Header */
-header {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 5%;
-    background-color: #103E7E;
-    color: white;
-    flex-wrap: wrap;
     flex-direction: column;
-    gap: 20px;
-}
-
-header #nomUDG {
-    display: flex;
-    justify-content: center; 
-    width: 100%;
-}
-
-header #nomUDG img {
-    height: auto;
-    width: auto;
-    max-height: 100px; 
-    max-width: 100%; 
-    object-fit: contain;
 }
 
 /* Formulario */
 .formulario-container {
     width: 90%;
-    margin: 2rem auto;
+    margin: 0.1rem auto;
     padding: 2rem 0;
     text-align: center;
+
+    flex-grow: 1; /* permite que este contenedor crezca para ocupar el espacio restante */
 }
 
 .titulo-seccion h1 {
     color: #103E7E;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     font-size: 1.8rem;
 }
 
@@ -63,6 +44,7 @@ header #nomUDG img {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1050px;
 }
 
 .grupo-campos {
@@ -85,7 +67,7 @@ header #nomUDG img {
 }
 
 .campo-formulario input,
-.campo-formulario select {
+.campo-formulario select{
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -98,7 +80,7 @@ header #nomUDG img {
 .campo-formulario input[type="email"],
 .campo-formulario input[type="number"],
 .campo-formulario input[type="password"] {
-    width: calc(100% - 24px);
+    width: 100%
 }
 
 .campo-formulario select {
@@ -139,6 +121,8 @@ header #nomUDG img {
     cursor: pointer;
     margin-top: 1rem;
     transition: background-color 0.3s;
+    width: 15%;
+    margin: 0 auto;
 }
 
 .boton-enviar:hover {
