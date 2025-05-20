@@ -13,8 +13,8 @@ html, body {
 
 .big-container {
   display: flex;
-  flex-direction: column;  /* Esto asegura que los elementos (gráfico y tabla) se apilen verticalmente */
-  align-items: center;     /* Centra los elementos horizontalmente */
+  flex-direction: column;
+  align-items: center;
   gap: 30px;
 }
 
@@ -46,8 +46,8 @@ html, body {
 
 /* Contenedor del contenido3 */
 #contenido3 {
-  width: 100%;  /* Puedes aumentar este valor según lo que necesites */
-  max-width: 1050px;  /* Este es el valor máximo de ancho que puede tener la tabla */
+  width: 100%;
+  max-width: 1050px;
   margin: 10px auto;
   padding: 20px;
   background: #fff;
@@ -77,11 +77,11 @@ html, body {
   width: 100%;
   max-width: 800px;
 
-  overflow-y: auto;      /* Añade scroll si la tabla excede el tamaño */
-  position: relative;    /* Asegúrate de que la tabla esté en el flujo normal del layout */
-  overflow: visible;     /* Asegúrate de que la tabla no esté oculta por el overflow */
+  overflow-y: auto;
+  position: relative;
+  overflow: visible;
 
-  min-height: 150px; /* Para asegurar que el contenedor tenga un tamaño mínimo */
+  min-height: 150px;
 }
 
 #estadisticas h2 {

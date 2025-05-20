@@ -56,6 +56,15 @@ return (
         {etapa !== null && etapa < 4 && puedeConsultarOferta && (
           <li><a href="/alumno/consultar">CONSULTAR OFERTA</a></li>
         )}
+
+
+        <li>
+          <a href='############'>
+            <img src='../../img/usuario.png' alt="perfil_alumno"></img>
+          </a>
+        </li>
+
+
         <li><a href="/alumno/documentos">DOCUMENTOS</a></li>
         {etapa !== null && etapa > 3 && (
           <li><a href="/alumno/calificar">OPINION</a></li>

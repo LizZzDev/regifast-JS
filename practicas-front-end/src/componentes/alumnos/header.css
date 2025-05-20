@@ -83,6 +83,14 @@ html, body {
   color: #103E7E;
 }
 
+.menu img {
+  width: 32px;     /* Ajusta según el tamaño que necesites */
+  height: 32px;
+  border-radius: 90%; /* Si quieres que se vea redonda como un avatar */
+  object-fit: cover;
+  cursor: pointer;
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
   #header-alumnos .menu ul {
