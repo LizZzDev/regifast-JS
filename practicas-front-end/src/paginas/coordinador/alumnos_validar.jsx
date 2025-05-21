@@ -116,15 +116,15 @@ const ValidacionAlumnos = () => {
           <div className="filtros-centrados">
             <input
               type="text"
-              placeholder="Buscar por nombre o código"
-              className="filtro-input"
+              placeholder="Buscar por código"
+              id="filtro-input"
               name="busqueda"
               value={filtros.busqueda}
               onChange={handleFilterChange}
             />
 
             <select
-              className="filtro-select"
+              id="filtro-select"
               name="carrera"
               value={filtros.carrera}
               onChange={handleFilterChange}
@@ -142,7 +142,7 @@ const ValidacionAlumnos = () => {
             </select>
 
             <select
-              className="filtro-select"
+              id="filtro-select"
               name="revision"
               value={filtros.revision}
               onChange={handleFilterChange}
@@ -152,9 +152,10 @@ const ValidacionAlumnos = () => {
               <option value="no-revisado">No Validados</option>
             </select>
           </div>
-
-          <div className="contador-total">Total: {totalAlumnos} alumnos</div>
         </section>
+        <div className="contador-total">Total: {totalAlumnos} alumnos
+          <p id='avisoCoordinador'>NOTA: Puede ingresar al alumno clickeando alguna celda con sus datos</p>
+        </div>
 
         {/* Tabla de alumnos */}
         <div className="table-responsive">
@@ -175,12 +176,12 @@ const ValidacionAlumnos = () => {
                     onClick={() => handleAlumno(alumno.IdUsuario)}
 
                 >
-                  <td>{alumno.Codigo}</td>
-                  <td>{alumno.NombreCompleto}</td>
-                  <td>{alumno.Carrera}</td>
-                  <td>{alumno.CorreoInstitucional}</td>
-                  <td>{alumno.BarraStatus}</td>
-                  <td>
+                  <td id="tdUno">{alumno.Codigo}</td>
+                  <td id="tdDos">{alumno.NombreCompleto}</td>
+                  <td id="tdTres">{alumno.Carrera}</td>
+                  <td id="tdCuatro">{alumno.CorreoInstitucional}</td>
+                  <td id="tdCinco">{alumno.BarraStatus}</td>
+                  <td id="tdSeis">
                     {alumno.Revision === 1 ? (
                       <span style={{ color: "green", fontWeight: "bold" }}>
                         Validado

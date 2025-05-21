@@ -3,7 +3,6 @@ import "./crearAdmin.css";
 import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
 import { crearUsuario } from "../../api/usuarios";
 
-
 function CrearNuevoAdmin() {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -101,7 +100,7 @@ function CrearNuevoAdmin() {
               onChange={handleChange}
               required
             >
-             <option value="">Selecciona tu carrera</option>
+             <option value="carreras">Selecciona tu carrera</option>
                 <option value="TPSI">TPSI</option>
                 <option value="TPAL">TPAL</option>
                 <option value="TPEI">TPEI</option>

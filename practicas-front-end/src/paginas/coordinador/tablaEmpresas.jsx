@@ -53,12 +53,7 @@ const TablaEmpresas = () => {
         || (filtros.validada === 'validada' && empresa.Validada === 1)
         || (filtros.validada === 'no-validada' && empresa.Validada === 0);
 
-    const coincideOrdinario =
-      filtros.tipoEmpresa === ''
-        || (filtros.tipoEmpresa === "ordinario" && empresa.Ordinaria === 1)
-        || (filtros.tipoEmpresa === "extraordinario" && empresa.Ordinaria === 0);
-
-    return coincideBusqueda && coincideRevision && coincideOrdinario;
+    return coincideBusqueda && coincideRevision;
   });
 
   useEffect(() => {
@@ -103,38 +98,30 @@ const TablaEmpresas = () => {
           <h2>Lista de empresas</h2>
         </section>
 
-        {/* Filtros centrados lado a lado */}
-        <section className="filtros">
-          <input
-            type="text"
-            placeholder="Buscar por nombre o RFC"
-            className="filtro-input"
-            name="busqueda"
-            value={filtros.busqueda}
-            onChange={handleFilterChange}
-          />
+        {/* Filtros */}
+        <section className="filtros-container">
+          <div className="filtros-centrados">
+            <input
+              type="text"
+              placeholder="Buscar por nombre o RFC"
+              id="filtro-input"
+              name="busqueda"
+              value={filtros.busqueda}
+              onChange={handleFilterChange}
+            />
 
-          <select
-            className="filtro-select"
-            name="validada"
-            value={filtros.validada}
-            onChange={handleFilterChange}
-          >
-            <option value="">Todas</option>
-            <option value="validada">Validadad</option>
-            <option value="no-validada">Sin validar</option>
-          </select>
+            <select
+              id="filtro-select"
+              name="validada"
+              value={filtros.validada}
+              onChange={handleFilterChange}
+            >
+              <option value="">Todas</option>
+              <option value="validada">Validadas</option>
+              <option value="no-validada">Sin validar</option>
+            </select>
 
-          <select
-            className="filtro-select"
-            name="tipoEmpresa"
-            value={filtros.tipoEmpresa}
-            onChange={handleFilterChange}
-          >
-            <option value="">Todas</option>
-            <option value="ordinaria">Ordinarias</option>
-            <option value="no-ordinaria">No Ordinarias</option>
-          </select>
+          </div>
         </section>
 
         <div className="contador-total">Total: {totalEmpresas} empresas</div>

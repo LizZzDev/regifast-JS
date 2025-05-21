@@ -92,7 +92,7 @@ input[type="password"] {
 
 #crear {
     color: white;
-    background-color: #12448c;
+    background-color: #8C7A64ff;
     border-radius: 20px;
     font-weight: bold;
     font-size: 1em;
@@ -105,10 +105,19 @@ input[type="password"] {
 }
 
 #crear:hover {
-    background-color: #0d336a;
+    background-color: rgb(87, 75, 62);
 }
 
 #nombreCoordinador {
     font-size: 1em;
     margin: 0;
+}
+select[name="carrera"]{
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem !important;
+    font-family: "Montserrat", sans-serif;
 }

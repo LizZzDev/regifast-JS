@@ -90,7 +90,7 @@ const AsignarFechas = () => {
               </td>
               <td>
                 <button 
-                  className="confirmar-btn"
+                  id="confirmarBotonFecha"
                   onClick={() => handleSubmitRango(rango.idRango)}
                 >
                   Confirmar

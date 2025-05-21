@@ -7,32 +7,7 @@
 html, body {
   height: 100%;
   font-family: "Montserrat", sans-serif;
-  background-color: #f5f5f5;
-}
-
-/* Header */
-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2vh 5%;
-  background-color: #103E7E;
-  color: white;
-  flex-wrap: wrap;
-  flex-direction: column;
-  gap: 2vh;
-}
-
-header #nomUDG {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-header #nomUDG img {
-  max-height: 15vh;
-  max-width: 100%;
-  object-fit: contain;
+  background-color: #000000;
 }
 
 .montserrat {
@@ -45,34 +20,6 @@ header #nomUDG img {
   font-weight: 400;
 }
 
-.menu {
-  width: 100%;
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: center;
-}
-
-.menu ul {
-  display: flex;
-  list-style: none;
-  gap: 3vw;
-  padding: 1vh 0;
-  flex-wrap: wrap;
-}
-
-.menu li a {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  padding: 1vh 2vw;
-  transition: 0.3s ease;
-}
-
-.menu li a:hover {
-  background-color: white;
-  color: #103E7E;
-  border-radius: 0.5rem;
-}
 
 main {
   padding: 3vw;
@@ -84,6 +31,10 @@ h2 {
   font-weight: bold;
   text-align: center;
   margin-bottom: 2rem;
+}
+
+h3{
+  color: black;
 }
 
 /* Tabla */
@@ -115,8 +66,8 @@ input[type="date"] {
   width: 100%;
 }
 
-.confirmar-btn {
-  background-color: #12448c;
+#confirmarBotonFecha {
+  background-color: #D6B179ff;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -125,11 +76,11 @@ input[type="date"] {
   font-size: 1rem;
   font-weight: bold;
   transition: background-color 0.3s ease;
-  margin-left: 40%;
+  margin-left: 40% !important;
 }
 
-.confirmar-btn:hover {
-  background-color: #0d376f;
+#confirmarBotonFecha:hover {
+  background-color: #8C7A64ff;
 }
 
 /* Responsivo */
