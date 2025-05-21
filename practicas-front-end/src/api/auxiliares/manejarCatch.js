@@ -10,10 +10,8 @@ api.interceptors.response.use(
   error => {
     const status = error?.response?.status;
 
-    if (status === 401) {
+    if (status === 403) {
       window.location.href = '/';
-    } else if (status === 403) {
-      window.location.href = '/no-autorizado';
     }
 
     return Promise.reject(error);

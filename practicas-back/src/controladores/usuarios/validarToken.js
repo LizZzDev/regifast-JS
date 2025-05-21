@@ -17,10 +17,6 @@ const validarToken = async (req) => {
             throw new Error("El token ha expirado.");
         }
 
-        if (tokenGuardado.Intentos >= 3) {
-            throw new Error("Se ha excedido el número máximo de intentos.");
-        }
-
         if (tokenGuardado.Token !== token) {
             await Token.aumentarIntentosToken(correo); // Sumas 1 intento
             throw new Error("Token incorrecto.");

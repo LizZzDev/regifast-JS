@@ -15,6 +15,7 @@ const RegistroUsuario = () => {
       });
 
     const [token, setToken] = useState("");
+    const [tokenGenerado, setTokenGenerado] = useState(false);
     const [tokenValidado, setTokenValidado] = useState(false);
     const [correoValidado, setCorreoValidado] = useState("");
     const [mensaje, setMensaje] = useState("");
@@ -25,7 +26,9 @@ const RegistroUsuario = () => {
 
           if (name === "correo" && value !== correoValidado) {
             setTokenValidado(false);
-            setCorreoValidado(""); // resetear
+            setCorreoValidado(""); 
+            setTokenGenerado(false); 
+            setToken("");
         }
 
         setFormData((prevData) => ({
@@ -44,6 +47,7 @@ const RegistroUsuario = () => {
             try {
                 await generarToken(formData.correo);
                 setMensaje("Token enviado al correo.");
+                setTokenGenerado(true);
             } catch (error) {
                 setMensaje(error.response?.data?.message || "error al generar el token.");
                 console.error("Error al generar token:", error);
@@ -97,7 +101,7 @@ const RegistroUsuario = () => {
                     rol: 'alumno'
                   } );
             setMensaje('Registro exitoso. Redirigiendo...');
-            setTimeout(() => navigate("/alumno/principal"), 1500);
+            setTimeout(() => navigate("/alumno/"), 1500);
         } catch (error) {
             console.error('Error:', error);
             setMensaje(error.response?.data?.message || 'Error en el registro');
@@ -186,6 +190,7 @@ const RegistroUsuario = () => {
                                         className="tokenBoton"
                                         type="button"
                                         onClick={generarTokenConst}
+                                        disabled={tokenGenerado}
                                     >
                                         Generar Token
                                     </button>
@@ -195,6 +200,7 @@ const RegistroUsuario = () => {
                                         className="tokenBoton"
                                         type="button"
                                         onClick={validarTokenConst}
+                                        disabled={!tokenGenerado || tokenValidado}
                                     >
                                         Validar Token
                                     </button>

@@ -59,7 +59,9 @@ return (
           <li><a href="/alumno/consultar">CONSULTAR OFERTA</a></li>
         )}
 
-        <li><a href="/alumno/documentos">DOCUMENTOS</a></li>
+        {etapa !== null && etapa > 3 && (
+          <li><a href="/alumno/documentos">DOCUMENTOS</a></li>
+        )}
         {etapa !== null && etapa == 3 && (
           <li><a href="/alumno/calificar">OPINION</a></li>
         )}

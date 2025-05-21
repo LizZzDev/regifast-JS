@@ -44,7 +44,7 @@ const LoginAlumnos = ({ onLogin }) => {
 
       <section id="loginForm">
         <h1>Inicio de Sesión</h1>
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className="form-group">
             <label htmlFor="correo">Correo Electrónico:</label>
             <input
@@ -68,7 +68,7 @@ const LoginAlumnos = ({ onLogin }) => {
             />
           </div>
           <div className="form-actions">
-            <input type="submit" value="Iniciar Sesión" />
+            <button type="button" onClick={handleSubmit}>Iniciar Sesión</button>
           </div>
         </form>
         <p>¿No tienes una cuenta? <a href="/alumno/crear-cuenta">Regístrate aquí</a></p>
