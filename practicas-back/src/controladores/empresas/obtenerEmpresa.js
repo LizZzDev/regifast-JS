@@ -7,7 +7,6 @@ const obtenerEmpresa = async (req, res) => {
             let idUsuario = req.query.idEmpresa;
         }
         const empresa = await Empresas.obtenerEmpresaPorIdUsuario(idUsuario);
-
         return empresa;
     } catch (error) {
         console.error("Error al mostrar empresa seleccionada:", error);

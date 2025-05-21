@@ -16,12 +16,10 @@ export const iniciarSesion = async (req, res) => {
     req.session.correo = response.correo;
     req.session.rol = response.rol;
 
-    console.log (response);
     return res.status(200).json({
       data: response,
     });
   } catch (error) {
-    console.log (error)
     console.error("Error al iniciar sesión:", error.message);
     return res.status(401).json({ success: false, message: error.message });
   }

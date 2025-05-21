@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `alumnos` (
   UNIQUE KEY `Codigo` (`Codigo`),
   KEY `IdUsuario` (`IdUsuario`),
   KEY `IdEmpresa` (`IdEmpresa`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Estructura de tabla para la tabla `empresas`
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `empresas` (
   PRIMARY KEY (`IdEmpresa`),
   UNIQUE KEY `RFC` (`RFC`),
   KEY `IdUsuario` (`IdUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `token` (
   `Correo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Intentos` int NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `Rol` enum('coordinador','alumno','empresa','jefe de departamento') NOT NULL,
   PRIMARY KEY (`IdUsuario`),
   UNIQUE KEY `Correo` (`Correo`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Restricciones para tablas volcadas

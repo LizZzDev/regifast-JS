@@ -38,6 +38,7 @@ export async function obtenerEmpresas({ pagina = 1, limite = 20, validada = null
 
 export async function obtenerEmpresa(idEmpresa) {
   try {
+    console.log (idEmpresa)
      const params = {};
     if (idEmpresa !== undefined && idEmpresa !== null) {
       params.idEmpresa = idEmpresa;
@@ -47,7 +48,8 @@ export async function obtenerEmpresa(idEmpresa) {
       router.EMPRESAS + endpoints.EMPRESAS.OBTENER_EMPRESA,
       { params}    
     );
-    return response.data.data;; 
+    console.log (response)
+    return response.data.data;
   } catch (error) {
     console.error("Error al obtener empresa:", error);
     throw error;

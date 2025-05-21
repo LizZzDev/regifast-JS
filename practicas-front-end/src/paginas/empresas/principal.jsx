@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { obtenerEmpresa } from '../../api/empresas';
 import './principal.css';
+import { useNavigate } from 'react-router-dom';
 
 function PrincipalEmpresa() {
-  const [empresa, setEmpresa] = useState(null);
+  console.log ("shi")
+  const [empresa, setEmpresa] = useState({});
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const cargarEmpresa = async () => {
+
       try {
         const datos = await obtenerEmpresa();
         console.log (datos);
@@ -19,24 +24,8 @@ function PrincipalEmpresa() {
     cargarEmpresa();
   }, []);
 
-    
-  // Función para renderizar las estrellas de calificación
-  const renderEstrellas = () => {
-    const estrellas = [];
-    const estrellasLlenas = Math.floor(empresa.calificacion);
-    const tieneMedia = empresa.calificacion % 1 >= 0.5;
-    
-    for (let i = 1; i <= 5; i++) {
-      if (i <= estrellasLlenas) {
-        estrellas.push(<i key={i} className="fas fa-star EstrellitasCalificacion"></i>);
-      } else if (i === estrellasLlenas + 1 && tieneMedia) {
-        estrellas.push(<i key={i} className="fas fa-star-half-alt EstrellitasCalificacion"></i>);
-      } else {
-        estrellas.push(<i key={i} className="far fa-star EstrellitasCalificacion"></i>);
-      }
-    }
-    
-    return estrellas;
+    const handleOpiniones = (idEmpresa) => {
+      navigate(`ver-calificaciones-empresa/${idEmpresa}`);
   };
 
   return (
@@ -55,14 +44,11 @@ function PrincipalEmpresa() {
           </article>
           
           <article id="calificacionPrincipal">
-            <a href="17calificacionSoloEmpresa.html" id="aOpiniones">
+            <a href="#" onClick={() => handleOpiniones(empresa.IdEmpresa)} id="aOpiniones">
               <h4 id="opiniones">Calificación</h4>
             </a>
             <hr /><br />
-            <div className="estrellas">
-              {renderEstrellas()}
-              <span className="calificacionPromedio">{empresa.calificacion}/5</span>
-            </div>
+           
           </article>
           
           <article id="articleDatos">
@@ -85,7 +71,7 @@ function PrincipalEmpresa() {
           <article id="articleDescripcion">
             <h4>Descripción</h4>
             <p className="montserratChiquita">
-              {empresa.descripcion}
+              {empresa.Descripcion}
             </p>
           </article>
           
@@ -100,13 +86,6 @@ function PrincipalEmpresa() {
             <section className="infoCard">
               <h3><i className="fas fa-briefcase"></i> Vacantes disponibles</h3>
               <p className="montserratChiquita">{empresa.Vacantes}</p>
-            </section>
-
-            {/* Botón editar */}
-            <section id="sectionEditar">
-              <button type="button" onClick={() => window.location.href = 'editar'}>
-                EDITAR
-              </button>
             </section>
           </article>
         </article>

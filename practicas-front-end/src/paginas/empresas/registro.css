@@ -197,3 +197,7 @@ textarea {
     font-family: "Montserrat", sans-serif;
     resize: vertical;
 }
+
+#mensaje {
+    color:#890831;
+}

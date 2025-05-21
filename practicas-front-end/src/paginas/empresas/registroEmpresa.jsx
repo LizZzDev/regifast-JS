@@ -15,6 +15,9 @@ const RegistroEmpresa = () => {
     vacantes: '',
     password: '',
     confirm_password: '',
+    responsable: '',
+    carrera: '',
+    cargo: '',
     calle: '',
     numero: '',
     colonia: '',
@@ -87,13 +90,15 @@ const RegistroEmpresa = () => {
     RFC: formData.rfc,
     Actividades: formData.actividades,
     Vacantes: formData.vacantes,
-    Responsable: formData.Vacantes;
+    Responsable: formData.responsable,
+    Cargo: formData.cargo,
     Calle: formData.calle,
     Numero: formData.numero,
     Colonia: formData.colonia,
     CodigoPostal: formData.codigo_postal,
     Estado: formData.estado,
     Municipio: formData.municipio,
+    CarreraPreferida: formData.carrera,
     Validada: 0,
     PracticasExtraordinarias: 0
   };
@@ -108,10 +113,10 @@ const RegistroEmpresa = () => {
     await crearEmpresa(form);
     setMensaje('Empresa registrada exitosamente.');
     setTimeout(() => {
-      navigate("/login");
+      navigate("/empresa");
   }, 1000);
   } catch (error) {
-    console.error('Error al registrar empresa:', error);
+    console.error('Error al registrar empresa:', error.response.data.message);
     setMensaje('Error al registrar empresa.');
   };
  };
@@ -130,10 +135,10 @@ const RegistroEmpresa = () => {
         <input type="text" name="actividades" placeholder="Actividades" value={formData.actividades} onChange={handleChange} required />
         <input type="number" name="vacantes" placeholder="Vacantes" value={formData.vacantes} onChange={handleChange} required />
 
-        <input type="text" name="responsable" placeholder="Responsable"></input>
-        <input type="text" name="cargo" placeholder="Cargo"></input>
+        <input type="text" name="responsable" placeholder="Responsable"value={formData.responsable} onChange={handleChange} required></input>
+        <input type="text" name="cargo" placeholder="Cargo" value={formData.cargo} onChange={handleChange} required></input>
 
-        <select name="carreras" required>
+        <select name="carrera" value={formData.carrera} onChange={handleChange} required>
           <option value="">Seleccionar preferencia de carrera</option>
           <option value="TPSI">TPSI</option>
           <option value="TPAL">TPAL</option>
@@ -160,8 +165,8 @@ const RegistroEmpresa = () => {
         <input type="file" name="imagen" accept="image/png, image/jpeg" onChange={handleChange} required />
 
         <button type="submit" id="MandarInformacion">Registrar Empresa</button>
+        {mensaje && <p id="mensaje">{mensaje}</p>}
       </form>
-      {mensaje && <p>{mensaje}</p>}
     </div>
   );
 };

@@ -76,7 +76,7 @@ function RegistroEmpresaCoord() {
           Estado: formData.estado,
           Municipio: formData.municipio,
           Validada: 0,
-          PracticasExtraordinarias: 0
+          PracticasExtraordinarias: formData.tipo_empresa
         };
 
     form.append('datosEmpresa', JSON.stringify(datos));
@@ -127,8 +127,8 @@ function RegistroEmpresaCoord() {
           onChange={handleChange}
         >
           <option value="">Tipo de empresa</option>
-          <option value="ordinaria">Ordinaria</option>
-          <option value="extraordinaria">Interna</option>
+          <option value="1">Ordinaria</option>
+          <option value="0">Interna</option>
         </select>
 
         <input

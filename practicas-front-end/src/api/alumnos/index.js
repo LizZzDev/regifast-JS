@@ -79,6 +79,7 @@
 
   export async function obtenerCalificacionesEmpresa (id=null) {
     try {
+      console.log (id);
       const response = await api.get(
         router.ALUMNOS + endpoints.ALUMNOS.OBTENER_CALIFICACIONES_DE_LA_EMPRESA,
         {

@@ -3,8 +3,8 @@ import pool from '../configuracion/db.js';
 const Empresa = {
     agregarNuevaEmpresa: async (connection, datos, idUsuario, correo) => {
       const { 
-        Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado,
-        CodigoPostal, Municipio, Descripcion, imagen, Actividades, Vacantes, Responsable, Cargo, Validada, PracticasExtraordinarias
+        Nombre, RFC, Telefono, Calle, Colonia, Numero, Estado, CodigoPostal, Municipio, 
+        Descripcion, imagen, Actividades, Vacantes, Responsable, Cargo, CarreraPreferida, Validada, PracticasExtraordinarias
        } = datos;
 
       const DomicilioFiscal = `${Calle} ${Numero}, ${Colonia}, ${CodigoPostal}, ${Municipio}, ${Estado}`;
@@ -13,9 +13,9 @@ const Empresa = {
         const [result] = await connection.query(
           `INSERT INTO empresas (
             IdUsuario, Nombre, RFC, Telefono, Correo, DomicilioFiscal, Descripcion, Logo,
-            Actividades, Vacantes, Responsable, Cargo, Validada, PracticasExtraordinarias
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          [idUsuario, Nombre, RFC, Telefono, correo, DomicilioFiscal, Descripcion, imagen, Actividades, Vacantes,Responsable, Cargo, Validada, PracticasExtraordinarias]
+            Actividades, Vacantes, Responsable, Cargo, CarreraPreferida, Validada, PracticasExtraordinarias
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [idUsuario, Nombre, RFC, Telefono, correo, DomicilioFiscal, Descripcion, imagen, Actividades, Vacantes, Responsable, Cargo, CarreraPreferida, Validada, PracticasExtraordinarias]
         );
         return result;
       } catch (error) {
@@ -102,7 +102,7 @@ const Empresa = {
           [id]
         );
 
-        console.log ("x", rows)
+        console.log ("x", rows[0])
         return rows[0]; 
       } catch (error) {
         console.error("Error al obtener la empresa:", error);

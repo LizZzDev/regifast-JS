@@ -6,7 +6,6 @@ const obtenerAlumnoPorId = async (req, res) => {
     try { 
         const alumno = await Alumno.obtenerAlumno(idUsuario);
 
-        console.log (alumno);
         return {
             alumno
         };

@@ -3,7 +3,6 @@ import Empresa from "../../modelos/modeloEmpresa.js";
 
 const anadirDatosDeLaEmpresa = async (req, res) => {
     const { file } = req;
-    console.log (req.body)
 
     let datos;
     try {
