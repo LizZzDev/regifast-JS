@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './EditarAlumno.css';
 import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
 import { modificarDatosAlumno, obtenerAlumno } from '../../api/coordinador';
+
 
 const EditarAlumno = () => {
   const { idAlumno } = useParams();
@@ -91,6 +93,8 @@ const EditarAlumno = () => {
     return Object.keys(nuevosErrores).length === 0;
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
       if (!validarCampos()) return;
@@ -110,6 +114,7 @@ const EditarAlumno = () => {
     try {
         await modificarDatosAlumno(cambios, alumno.IdUsuario);
         alert("La información se modificó correctamente");
+        navigate('/coordinador/alumnos');
 
     } catch (error) {
         alert("No se pudo realizar la modificacion:", error.response?.data?.message)
@@ -164,33 +169,46 @@ const EditarAlumno = () => {
 
               <div className="campo-formulario">
                 <label htmlFor="input-grado">Grado</label>
-                <input
+                <select
                   id="input-grado"
                   name="Grado"
                   value={formData.Grado}
                   onChange={handleChange}
-                />
+                >
+                  <option value="">Seleccione un grado</option>
+                  <option value="6">6</option>
+                  <option value="8">8</option>
+                </select>
               </div>
 
               <div className="campo-formulario">
                 <label htmlFor="input-grupo">Grupo</label>
-                <input
+                <select
                   id="input-grupo"
                   name="Grupo"
                   value={formData.Grupo}
                   onChange={handleChange}
-                />
+                >
+                  <option value="">Seleccione el grupo</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                </select>
               </div>
 
               <div className="campo-formulario">
                 <label htmlFor="input-turno">Turno</label>
-                <input
+                <select
                   id="input-turno"
                   name="Turno"
                   value={formData.Turno}
                   onChange={handleChange}
-                />
+                >
+                  <option value="">Seleccione un turno</option>
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                </select>
               </div>
+
             </div>
 
             {/* Sección Personal */}

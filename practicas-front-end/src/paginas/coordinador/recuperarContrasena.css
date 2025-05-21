@@ -1,0 +1,42 @@
+#recuperar-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: white;
+}
+
+#recuperar-titulo {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+#recuperar-formulario {
+  display: flex;
+  flex-direction: column;
+}
+
+#recuperar-label {
+  margin-bottom: 0.5rem;
+}
+
+#recuperar-correo {
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#recuperar-boton {
+  padding: 0.7rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#recuperar-boton:hover {
+  background-color: #0056b3;
+}

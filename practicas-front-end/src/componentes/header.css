@@ -3,7 +3,7 @@ header {
     display: flex;
     justify-content: center; /* Centrado horizontal */
     align-items: center;
-    background-color: #103E7E;
+    background-color: #B12028ff;
     color: white;
     flex-wrap: wrap;
     flex-direction: column; /* Apila elementos verticalmente */

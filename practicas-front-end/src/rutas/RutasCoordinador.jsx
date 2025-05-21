@@ -9,6 +9,7 @@ import Principal from '../paginas/coordinador/pantallaPrincipalCoordinador';
 import Login from '../paginas/jefeDepartamentos/inicioSesionCJ';
 import AgregarEmpresa from '../paginas/coordinador/agregarEmpresa';
 import EditarAlumno from '../paginas/coordinador/editarAlumno';
+import RecuperarContrasena from '../paginas/coordinador/recuperarContrasena'
 
 const RutasCoordinador = () => (
     <Routes>
@@ -21,6 +22,7 @@ const RutasCoordinador = () => (
         <Route path="/principal" element={<Principal />} />
         <Route path="/agregar-empresa" element={<AgregarEmpresa />} />
         <Route path="/alumnos/editar-alumno/:idAlumno" element={<EditarAlumno />} />
+        <Route path="/recuperar-contrasena" element={<RecuperarContrasena />} />
     </Routes>
 );
 
