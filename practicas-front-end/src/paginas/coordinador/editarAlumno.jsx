@@ -13,7 +13,8 @@ const EditarAlumno = () => {
     const CargarAlumno = async () => {
       try {
         const response = await obtenerAlumno(idAlumno);
-        setAlumno(response);
+        console.log(response);
+        setAlumno(response.alumno);
       } catch (error) {
         alert("No se pudo obtener el alumno");
       }
@@ -40,7 +41,7 @@ const EditarAlumno = () => {
         CodigoPostal: alumno.CodigoPostal || '',
         Estado: alumno.Estado || '',
         Nacionalidad: alumno.Nacionalidad || '',
-        correo: alumno.CorreoInstitucional || '',
+        CorreoInstitucional: alumno.CorreoInstitucional || '',
         Telefono: alumno.Telefono || '',
         TelefonoEmergencia: alumno.TelefonoEmergencia || '',
         NombrePadre: alumno.NombrePadre || '',
@@ -77,8 +78,8 @@ const EditarAlumno = () => {
     
     // Validaciones de formato
     if (formData.Edad && isNaN(formData.Edad)) nuevosErrores.Edad = 'Debe ser número';
-    if (formData.correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.correo)) {
-      nuevosErrores.correo = 'Correo inválido';
+    if (formData.CorreoInstitucional && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.CorreoInstitucional)) {
+      nuevosErrores.CorreoInstitucional = 'Correo inválido';
     }
     if (formData.Movil && !/^\d{10}$/.test(formData.Movil)) nuevosErrores.Movil = '10 dígitos';
     if (formData.Telefono && !/^\d{10}$/.test(formData.Telefono)) nuevosErrores.Telefono = '10 dígitos';
@@ -107,7 +108,7 @@ const EditarAlumno = () => {
     }
 
     try {
-        await modificarDatosAlumno(cambios, alumno.idUsuario);
+        await modificarDatosAlumno(cambios, alumno.IdUsuario);
         alert("La información se modificó correctamente");
 
     } catch (error) {
@@ -296,9 +297,9 @@ const EditarAlumno = () => {
                 <label htmlFor="input-correo">Correo Electrónico</label>
                 <input
                   id="input-correo"
-                  name="correo"
+                  name="CorreoInstitucional"
                   type="email"
-                  value={formData.correo}
+                  value={formData.CorreoInstitucional}
                   onChange={handleChange}
                 />
                 {errores.correo && <span className="mensaje-error">{errores.correo}</span>}

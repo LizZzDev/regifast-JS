@@ -172,7 +172,7 @@ const ValidacionAlumnos = () => {
             <tbody>
               {alumnosFiltrados.map((alumno) => (
                 <tr key={alumno.Codigo}
-                    onClick={() => handleAlumno(alumno.idAlumno)}
+                    onClick={() => handleAlumno(alumno.IdUsuario)}
 
                 >
                   <td>{alumno.Codigo}</td>

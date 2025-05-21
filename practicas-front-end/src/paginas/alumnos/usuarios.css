@@ -81,6 +81,13 @@ h1 {
     text-decoration: underline;
 }
 
+#registro-usuario-div-mensaje {
+    margin-top: 3%;
+    margin-left: 2%;
+    text-align: left;
+    color: red!important;
+}
+
 /* Media Queries para Responsive */
 @media (max-width: 768px) {
     

@@ -125,6 +125,7 @@ input[type="date"] {
   font-size: 1rem;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  margin-left: 40%;
 }
 
 .confirmar-btn:hover {

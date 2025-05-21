@@ -31,6 +31,7 @@ export async function asignarFechaIngresoPorCalificacion(data) {
 
 export async function modificarDatosAlumno(data, idUsuario) {
   try {
+    console.log (data, idUsuario)
     const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.MODIFICAR_DATOS_ALUMNO,
       { datos: data,
@@ -54,6 +55,7 @@ export async function obtenerAlumno(idUsuario) {
        router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNO,
       { params}
     );
+    console.log (response)
     return response.data.data;;
   } catch (error) {
     console.error("Error en obtener alumno:", error);
@@ -73,9 +75,11 @@ export async function obtenerAlumnos({ pagina = 1, limite = 20, busqueda = null,
 
     console.log (params)
     const response = await api.get(
-       router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNO,
+       router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNOS,
       { params }
     );
+
+    console.log (response)
     return response.data.data;;
   } catch (error) {
     console.error("Error en obtener alumno:", error);
