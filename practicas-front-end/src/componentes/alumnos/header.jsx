@@ -52,26 +52,24 @@ return (
     <nav className="menu"> 
       <ul>
         <li><a href="/alumno/principal">INICIO</a></li>
-        {(etapa === null) && (
+        {(etapa === 0) && (
           <li><a href="/alumno/registro">REGISTRO DE DATOS</a></li>
         )}
-        {etapa !== null && etapa < 4 && puedeConsultarOferta && (
+        {etapa !== 0 && etapa < 4 && puedeConsultarOferta && (
           <li><a href="/alumno/consultar">CONSULTAR OFERTA</a></li>
         )}
 
-        {etapa !== null && etapa > 3 && (
+        {etapa !== 0 && etapa > 3 && (
           <li><a href="/alumno/documentos">DOCUMENTOS</a></li>
         )}
-        {etapa !== null && etapa == 3 && (
+        {etapa !== 0 && etapa == 3 && (
           <li><a href="/alumno/calificar">OPINION</a></li>
         )}
 
         <li className="dropdown">
           <img src="../../img/usuario.png" alt="perfil_alumno" />
           <div className="dropdown-content">
-            {etapa !== null && etapa > 1 && (
-              <a href="/alumno/ver-datos">Ver perfil</a>
-            )}
+            <a href="/alumno/ver-datos">Ver perfil</a>
             <a href="#" onClick={manejarCerrarSesion}>Salir</a>
           </div>
         </li>
