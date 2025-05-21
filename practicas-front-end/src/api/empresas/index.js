@@ -42,6 +42,7 @@ export async function obtenerEmpresa(idEmpresa) {
     if (idEmpresa !== undefined && idEmpresa !== null) {
       params.idEmpresa = idEmpresa;
     }
+
     const response = await api.get(
       router.EMPRESAS + endpoints.EMPRESAS.OBTENER_EMPRESA,
       { params}    

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import './RegistroAlumnos.css';
 import { anadirDatosDelAlumno, obtenerBarraStatus } from '../../api/alumnos';
 import Header from '../../componentes/alumnos/header';
@@ -36,6 +37,7 @@ const RegistroAlumnos = () => {
 
   const [errors, setErrors] = useState({});
   const [submitAttempted, setSubmitAttempted] = useState(false);
+  const navigate = useNavigate();
   
   useEffect(() => {
     const salir = async () => {
@@ -125,6 +127,11 @@ const RegistroAlumnos = () => {
       isValid = false;
     }
 
+    if (formData.Codigo && !/^\d{9}$/.test(formData.Codigo)) {
+      newErrors.Codigo = 'El codigo debe tener 9 dígitos';
+      isValid = false;
+    }
+
     if (formData.NumeroCasa && parseInt(formData.NumeroCasa) <= 0) {
       newErrors.NumeroCasa = 'Debe ser un número válido';
       isValid = false;
@@ -149,9 +156,13 @@ const RegistroAlumnos = () => {
           console.log("Enviando datos:", formData);
           await anadirDatosDelAlumno(formData);
           alert("Registro exitoso.");
+          navigate("/alumno/principal");
         } catch (error) {
+          let mensajeError =
+            error.response?.data?.message ||
+            "Ocurrio un error al registrar.";
           console.error('Error al registrar alumno:', error);
-          alert("Error al registrar.");
+          alert(mensajeError);
         }
       }
     } else {

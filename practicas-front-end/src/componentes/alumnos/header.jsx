@@ -59,7 +59,7 @@ return (
           <li><a href="/alumno/consultar">CONSULTAR OFERTA</a></li>
         )}
 
-        {etapa !== 0 && etapa > 3 && (
+        {etapa !== 0 && etapa > 2 && (
           <li><a href="/alumno/documentos">DOCUMENTOS</a></li>
         )}
         {etapa !== 0 && etapa == 3 && (
@@ -69,7 +69,9 @@ return (
         <li className="dropdown">
           <img src="../../img/usuario.png" alt="perfil_alumno" />
           <div className="dropdown-content">
-            <a href="/alumno/ver-datos">Ver perfil</a>
+            {etapa !== 0 && etapa >= 1 && (
+              <a href="/alumno/ver-datos">Ver perfil</a>
+            )}
             <a href="#" onClick={manejarCerrarSesion}>Salir</a>
           </div>
         </li>

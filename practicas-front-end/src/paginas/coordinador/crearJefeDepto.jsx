@@ -41,7 +41,7 @@ function CrearNuevoAdmin() {
       });
       
     } catch (error) {
-        alert("Error al crear el usuario: " + error.message);
+        alert("Error al crear el usuario: " + error.response?.data?.message);
     }
   };
 

@@ -6,7 +6,6 @@ const validarToken = async (req) => {
         const { correo, token } = req;
 
         const tokenGuardado = await Token.obtenerTokenPorcorreo(correo);
-        console.log (tokenGuardado);
 
         if (!tokenGuardado) {
             throw new Error("No se encontró un token para este correo.");
