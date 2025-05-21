@@ -9,11 +9,9 @@ import Principal from '../paginas/coordinador/pantallaPrincipalCoordinador';
 import Login from '../paginas/jefeDepartamentos/inicioSesionCJ';
 import AgregarEmpresa from '../paginas/coordinador/agregarEmpresa';
 import EditarAlumno from '../paginas/coordinador/editarAlumno';
-<<<<<<< HEAD
 import RecuperarContrasena from '../paginas/coordinador/recuperarContrasena'
-=======
 import VerCalificaciones from '../paginas/coordinador/calificacionSoloEmpresa';
->>>>>>> 2678c09526ce35ecc8ea09edbe94bdebd1407ed8
+
 
 const RutasCoordinador = () => (
     <Routes>
