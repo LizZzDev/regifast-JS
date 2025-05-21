@@ -25,8 +25,8 @@ const HeaderCoordinador = () => {
             </section>
             <nav className="menu-coordinador">
                 <ul>
-                    <li><a href="/coordinador/principal">INICIO</a></li>
-                    <li><a href="/coordinador/alumnos">ALUMNOS</a></li>
+                   {/* <li><a href="/coordinador/principal">INICIO</a></li> */}
+                    <li><a href="/coordinador/principal">ALUMNOS</a></li>
 
                     <li className="dropdown-coordinador">
                         <a href="#">EMPRESAS</a>

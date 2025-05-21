@@ -76,9 +76,9 @@ const BarraStatus = () => {
       <Header/>
 
       <main>
-        <article id="BienvenidoUsuario">
+        {/* <article id="BienvenidoUsuario">
           <p id="SaludoUsuario">¡Hola, Usuario!</p>
-        </article>
+        </article> */}
 
         <article id="ContenedorBarraProgreso">
           <section id="BarraProgeso">

@@ -26,8 +26,8 @@ const HeaderJefeDepto = () => {
       </section>
       <nav className="menu">
         <ul>
-          <li><a href="principal">INICIO</a></li>
-          <li><a href="tabla-alumnos">ALUMNOS</a></li>        
+          {/*<li><a href="principal">INICIO</a></li>*/}
+          <li><a href="principal">ALUMNOS</a></li>        
           <li><a href="#" onClick={manejarCerrarSesion}>SALIR</a></li>
         </ul>
       </nav>
