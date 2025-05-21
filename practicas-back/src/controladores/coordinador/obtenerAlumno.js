@@ -1,9 +1,13 @@
 import Alumno from "../../modelos/modeloAlumno.js";
 
 const obtenerAlumnoPorId = async (req, res) => {
-    const idUsuario = req.session.ID || req.query.idUsuario;
+    let idUsuario = req.session.ID;
 
     try { 
+        if (req.session.rol == 'coordinador') {
+            let idUsuario = req.query.idUsuario;
+        }
+
         const alumno = await Alumno.obtenerAlumno(idUsuario);
 
         return {
