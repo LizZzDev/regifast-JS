@@ -87,6 +87,7 @@ const RegistroEmpresa = () => {
     RFC: formData.rfc,
     Actividades: formData.actividades,
     Vacantes: formData.vacantes,
+    Responsable: formData.Vacantes;
     Calle: formData.calle,
     Numero: formData.numero,
     Colonia: formData.colonia,

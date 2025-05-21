@@ -9,12 +9,17 @@ import Principal from '../paginas/coordinador/pantallaPrincipalCoordinador';
 import Login from '../paginas/jefeDepartamentos/inicioSesionCJ';
 import AgregarEmpresa from '../paginas/coordinador/agregarEmpresa';
 import EditarAlumno from '../paginas/coordinador/editarAlumno';
+<<<<<<< HEAD
 import RecuperarContrasena from '../paginas/coordinador/recuperarContrasena'
+=======
+import VerCalificaciones from '../paginas/coordinador/calificacionSoloEmpresa';
+>>>>>>> 2678c09526ce35ecc8ea09edbe94bdebd1407ed8
 
 const RutasCoordinador = () => (
     <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/empresas" element={<TablaEmpresas />} />
+        <Route path="/empresas/ver-calificaciones-empresa/:idEmpresa" element={<VerCalificaciones />} />
         <Route path="/alumnos" element={<AlumnosValidar />} />
         <Route path="/fechas" element={<AsignarFecha />} />
         <Route path="/crear-coordinador" element={<CrearAdmin />} />

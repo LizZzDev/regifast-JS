@@ -84,7 +84,7 @@ th {
 
 /* Botones */
 button, input[type="submit"] {
-    background-color: #12448C;
+    background-color: #D6B179ff;
     color: white;
     border: none;
     padding: 8px 15px;
@@ -100,7 +100,7 @@ button, input[type="submit"] {
 }
 
 button:hover, input[type="submit"]:hover {
-    background-color: #890831;
+    background-color: #8C7A64ff;
 }
 
 input[type="submit"][disabled] {

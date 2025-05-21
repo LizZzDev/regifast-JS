@@ -14,6 +14,7 @@ const EditarAlumno = () => {
   useEffect(() => {
     const CargarAlumno = async () => {
       try {
+        console.log (idAlumno);
         const response = await obtenerAlumno(idAlumno);
         console.log(response);
         setAlumno(response.alumno);
@@ -128,7 +129,7 @@ const EditarAlumno = () => {
       <div id="contenedor-editar-alumno">
         <h2 id="titulo-editar-alumno">Editar Datos del Alumno</h2>
         
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id="form-editar-alumno">
           <div className="grid-formulario-alumno">
             {/* Sección Académica */}
             <div className="grupo-campos">

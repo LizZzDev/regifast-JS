@@ -149,6 +149,16 @@ h1 {
   padding: 6px 12px;
   cursor: pointer;
   margin: 0 0 0 0;
+  background-color: #D6B179ff;
+}
+
+#registro-usuario-btn-submit{
+    background-color: #D6B179ff;
+}
+
+.tokenBoton, 
+#registro-usuario-btn-submit:hover {
+  background-color: #8C7A64ff;
 }
 
 .tokenBoton:disabled,

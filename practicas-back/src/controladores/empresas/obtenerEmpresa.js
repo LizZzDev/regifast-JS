@@ -3,8 +3,8 @@ import Empresas from "../../modelos/modeloEmpresa.js";
 const obtenerEmpresa = async (req, res) => {
     let idUsuario = req.session.ID;
     try { 
-          if (req.session.rol == 'alumno') {
-            let idUsuario = req.query.idUsuario;
+          if (req.session.rol == 'coordinador') {
+            let idUsuario = req.query.idEmpresa;
         }
         const empresa = await Empresas.obtenerEmpresaPorIdUsuario(idUsuario);
 

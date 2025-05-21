@@ -2,12 +2,16 @@ import { router } from '../constantes/router.js';
 import { endpoints } from '../constantes/endpoints.js';
 import api from '../auxiliares/manejarCatch.js';
 
-export async function anadirEmpresa(data) {
+export async function anadirEmpresa(formData,) {
   try {
     const response = await api.post(
       router.COORDINADOR + endpoints.COORDINADOR.ANADIR_EMPRESA,
-      { datos: data },
-    );
+      formData,
+      {headers: {
+      'Content-Type': 'multipart/form-data',}
+    }
+    )
+    
     return response.data.data;;
   } catch (error) {
     console.error("Error en añadir empresa:", error);
