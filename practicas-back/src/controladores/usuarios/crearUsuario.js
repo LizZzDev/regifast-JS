@@ -31,7 +31,6 @@ const crearUsuario = async (req) => {
   
     const hashedPassword = await bcrypt.hash(contrasena, 10);
  
-    console.log (rol)
     const idUsuario = await Usuario.agregarNuevoUsuario(connection, {
       correo,
       hashedPassword,

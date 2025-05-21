@@ -9,6 +9,7 @@ export async function iniciarSesion({ correo, contrasena }) {
         correo, 
         contrasena },
     );
+    console.log (response)
     return response.data.data;; 
   } catch (error) {
     console.error("Error en iniciarSesion:", error);

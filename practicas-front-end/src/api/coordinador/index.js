@@ -50,12 +50,10 @@ export async function obtenerAlumno(idUsuario) {
     if (idUsuario !== undefined && idUsuario !== null) {
       params.idUsuario = idUsuario;
     }
-    
     const response = await api.get(
        router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNO,
       { params}
     );
-    console.log (response)
     return response.data.data;;
   } catch (error) {
     console.error("Error en obtener alumno:", error);

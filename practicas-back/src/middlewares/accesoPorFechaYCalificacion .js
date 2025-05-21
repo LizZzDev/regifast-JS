@@ -12,7 +12,6 @@ const verificarAccesoEmpresas = async (req, res, next) => {
     if (!alumno) {
       return res.status(404).json({ success: false, message: "Alumno no encontrado" });
     }
-    console.log ("here");
     const calificacion = alumno.Calificacion;
     const ordinario = alumno.Ordinario;
 

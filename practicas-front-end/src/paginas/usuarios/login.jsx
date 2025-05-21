@@ -32,8 +32,11 @@ const Login = ({ onLogin }) => {
           navigate("/no-autorizado"); 
         }
       } catch (error) {
-         console.error("Error al iniciar sesión:", error);
-         setMensaje("Error al iniciar sesión. Verifica tus credenciales.");
+          const mensajeError = error.response?.data?.message || "Error al iniciar sesión. Verifica tus credenciales.";
+          setMensaje(mensajeError);
+          console.log (mensajeError);
+          console.log("Respuesta del servidor:", error.response?.data);
+
       }
     } else {
       setMensaje("Por favor llena todos los campos.");

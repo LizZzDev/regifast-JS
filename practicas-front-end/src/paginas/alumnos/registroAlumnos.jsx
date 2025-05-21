@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import './RegistroAlumnos.css';
 import { anadirDatosDelAlumno, obtenerBarraStatus } from '../../api/alumnos';
 import Header from '../../componentes/alumnos/header';
@@ -24,7 +25,6 @@ const RegistroAlumnos = () => {
     CodigoPostal: '',
     Estado: '',
     Nacionalidad: '',
-    correo: '',
     Telefono: '',
     TelefonoEmergencia: '',
     
@@ -37,6 +37,7 @@ const RegistroAlumnos = () => {
 
   const [errors, setErrors] = useState({});
   const [submitAttempted, setSubmitAttempted] = useState(false);
+  const navigate = useNavigate();
   
   useEffect(() => {
     const salir = async () => {
@@ -126,6 +127,11 @@ const RegistroAlumnos = () => {
       isValid = false;
     }
 
+    if (formData.Codigo && !/^\d{9}$/.test(formData.Codigo)) {
+      newErrors.Codigo = 'El codigo debe tener 9 dígitos';
+      isValid = false;
+    }
+
     if (formData.NumeroCasa && parseInt(formData.NumeroCasa) <= 0) {
       newErrors.NumeroCasa = 'Debe ser un número válido';
       isValid = false;
@@ -143,16 +149,20 @@ const RegistroAlumnos = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitAttempted(true);
-
-    if (validateForm()) {
+    const isValid = await validateForm();
+    if (isValid) {
       if (window.confirm('¿Estás seguro de que deseas mandar la información? Una vez realizado no se puede modificar.')) {
         try {
           console.log("Enviando datos:", formData);
           await anadirDatosDelAlumno(formData);
           alert("Registro exitoso.");
+          navigate("/alumno/principal");
         } catch (error) {
+          let mensajeError =
+            error.response?.data?.message ||
+            "Ocurrio un error al registrar.";
           console.error('Error al registrar alumno:', error);
-          alert("Error al registrar.");
+          alert(mensajeError);
         }
       }
     } else {
@@ -181,6 +191,7 @@ const RegistroAlumnos = () => {
                 placeholder="Código"
                 value={formData.Codigo}
                 onChange={handleChange}
+                required
                 className={errors.Codigo ? 'error' : ''}
               />
               {errors.Codigo && <span className="mensaje-error">{errors.Codigo}</span>}
@@ -193,6 +204,7 @@ const RegistroAlumnos = () => {
                 placeholder="Nombre completo"
                 value={formData.NombreCompleto}
                 onChange={handleChange}
+                required
                 className={errors.NombreCompleto ? 'error' : ''}
               />
               {errors.NombreCompleto && <span className="mensaje-error">{errors.NombreCompleto}</span>}
@@ -203,6 +215,7 @@ const RegistroAlumnos = () => {
                 name="Carrera"
                 value={formData.Carrera}
                 onChange={handleChange}
+                required
                 className={errors.Carrera ? 'error' : ''}
               >
                 <option value="">Selecciona tu carrera</option>
@@ -225,6 +238,7 @@ const RegistroAlumnos = () => {
                   name="Grado"
                   value={formData.Grado}
                   onChange={handleChange}
+                  required
                   className={errors.Grado ? 'error' : ''}
                 >
                   <option value="">Grado</option>
@@ -239,6 +253,7 @@ const RegistroAlumnos = () => {
                   name="Grupo"
                   value={formData.Grupo}
                   onChange={handleChange}
+                  required
                   className={errors.Grupo ? 'error' : ''}
                 >
                   <option value="">Grupo</option>
@@ -253,6 +268,7 @@ const RegistroAlumnos = () => {
                   name="Turno"
                   value={formData.Turno}
                   onChange={handleChange}
+                  required
                   className={errors.Turno ? 'error' : ''}
                 >
                   <option value="">Turno</option>
@@ -276,7 +292,7 @@ const RegistroAlumnos = () => {
                 name: 'Edad', 
                 placeholder: 'Edad', 
                 type: 'number',
-                min: 18,
+                min: 17,
                 max: 25
               },
               { 
@@ -319,8 +335,8 @@ const RegistroAlumnos = () => {
                   placeholder={field.placeholder}
                   value={formData[field.name]}
                   onChange={handleChange}
+                  required
                   className={errors[field.name] ? 'error' : ''}
-                  disabled={field.disabled || false}
                   min={field.min}
                   max={field.max}
                 />
@@ -354,6 +370,7 @@ const RegistroAlumnos = () => {
                   placeholder={field.placeholder}
                   value={formData[field.name]}
                   onChange={handleChange}
+                  required
                   className={errors[field.name] ? 'error' : ''}
                 />
                 {errors[field.name] && <span className="mensaje-error">{errors[field.name]}</span>}

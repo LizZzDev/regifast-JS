@@ -122,14 +122,17 @@
     }
   }
 
-    export async function obtenerEmpresaParaUsuario (id=null) {
+    export async function obtenerEmpresaParaUsuario (idUsuario) {
     try {
+      console.log (idUsuario);
+      const params = {};
+      if (idUsuario !== undefined && idUsuario !== null) {
+        params.idUsuario = idUsuario;
+      }
       const response = await api.get(
         router.ALUMNOS + endpoints.ALUMNOS.OBTENER_EMPRESA_PARA_USUARIO,
         {
-          params: {
-          id: id, 
-        }
+          params 
         }
       );
       return response.data.data;;

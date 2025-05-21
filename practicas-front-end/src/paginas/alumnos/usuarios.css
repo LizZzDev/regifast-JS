@@ -151,6 +151,13 @@ h1 {
   margin: 0 0 0 0;
 }
 
+.tokenBoton:disabled,
+#registro-usuario-btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #ccc; /* o el color gris que prefieras */
+  color: #666;
+}
 
 
 

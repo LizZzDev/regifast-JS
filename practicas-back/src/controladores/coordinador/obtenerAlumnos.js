@@ -10,12 +10,9 @@ const obtenerAlumnosFiltrados = async (req) => {
   const validada = req.query.validada === 'true' ? 1 
                  : req.query.validada === 'false' ? 0
                  : null;
-  console.log (busqueda, validada, carrera)
   try {
-    console.log (req);
     if (req.session.rol === "jefeDepartamento") {
         const carreraJefe = await Jefe.obtenerJefe(req.session.ID);
-        console.log (carreraJefe)
         carrera = carreraJefe?.Carrera;
     }
 
@@ -28,7 +25,6 @@ const obtenerAlumnosFiltrados = async (req) => {
         validado: validada
       }
     );
-        console.log ("alumno", alumnos)
 
     return alumnos;
   } catch (error) {
