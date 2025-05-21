@@ -69,7 +69,9 @@ return (
         <li className="dropdown">
           <img src="../../img/usuario.png" alt="perfil_alumno" />
           <div className="dropdown-content">
-            <a href="/alumno/ver-datos">Ver perfil</a>
+            {etapa !== null && etapa > 1 && (
+              <a href="/alumno/ver-datos">Ver perfil</a>
+            )}
             <a href="#" onClick={manejarCerrarSesion}>Salir</a>
           </div>
         </li>
