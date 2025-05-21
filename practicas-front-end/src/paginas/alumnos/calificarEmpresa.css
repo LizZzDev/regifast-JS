@@ -171,7 +171,7 @@ form{
 }
 
 #EnviarOpinion {
-    background-color: #2b5796;
+    background-color: #D6B179ff;
     color: white;
     float: right;
     width: 36%;
@@ -184,3 +184,6 @@ form{
     cursor: pointer;
 }
 
+#EnviarOpinion:hover{
+    background-color: #8C7A64ff;
+}

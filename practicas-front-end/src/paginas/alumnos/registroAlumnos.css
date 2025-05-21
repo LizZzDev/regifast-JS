@@ -45,7 +45,7 @@ html, body {
 }
 
 .grupo-campos {
-    border: 2px solid #103E7E;
+    border: 2px solid #B12028ff;
     margin-bottom: 1.5rem;
     padding: 1.5rem;
     border-radius: 8px;
@@ -109,7 +109,7 @@ html, body {
 }
 
 .boton-enviar {
-    background-color: #12448c;
+    background-color: #D6B179ff;
     color: white;
     padding: 12px 30px;
     border: none;
@@ -123,7 +123,7 @@ html, body {
 }
 
 .boton-enviar:hover {
-    background-color: #103E7E;
+    background-color: #8C7A64ff;
 }
 
 /* Responsive */
