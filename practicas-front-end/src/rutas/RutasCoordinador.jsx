@@ -9,11 +9,13 @@ import Principal from '../paginas/coordinador/pantallaPrincipalCoordinador';
 import Login from '../paginas/jefeDepartamentos/inicioSesionCJ';
 import AgregarEmpresa from '../paginas/coordinador/agregarEmpresa';
 import EditarAlumno from '../paginas/coordinador/editarAlumno';
+import VerCalificaciones from '../paginas/coordinador/calificacionSoloEmpresa';
 
 const RutasCoordinador = () => (
     <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/empresas" element={<TablaEmpresas />} />
+        <Route path="/empresas/ver-calificaciones-empresa/:idEmpresa" element={<VerCalificaciones />} />
         <Route path="/alumnos" element={<AlumnosValidar />} />
         <Route path="/fechas" element={<AsignarFecha />} />
         <Route path="/crear-coordinador" element={<CrearAdmin />} />

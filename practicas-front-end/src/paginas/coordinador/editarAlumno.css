@@ -73,3 +73,7 @@
     padding: 1rem;
   }
 }
+
+#form-editar-alumno {
+  max-width: 48%;
+}

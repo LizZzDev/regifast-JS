@@ -60,8 +60,8 @@ const TablaEmpresas = () => {
     setTotalEmpresas(empresasFiltradas.length);
   }, [empresasFiltradas]);
 
-  const enviarOpiniones = (idEmpresa, logoEmpresa) => {
-    navigate(`/opiniones?idEmpresa=${idEmpresa}&logoEmpresa=${encodeURIComponent(logoEmpresa)}`);
+  const handleOpiniones = (idEmpresa) => {
+      navigate(`ver-calificaciones-empresa/${idEmpresa}`);
   };
 
   const validarEmpresaConst = async (IdUsuario) => {
@@ -157,7 +157,7 @@ const TablaEmpresas = () => {
                   <td>
                     <button
                       id="Opiniones"
-                      onClick={() => enviarOpiniones(empresa.IdEmpresa, empresa.LogoEmpresa)}
+                      onClick={() => handleOpiniones(empresa.IdEmpresa)}
                     >
                       Opiniones
                     </button>

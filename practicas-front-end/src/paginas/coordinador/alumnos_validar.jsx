@@ -142,7 +142,7 @@ const ValidacionAlumnos = () => {
             </select>
 
             <select
-              id="filtro-select"
+              id="filtro-select-revision"
               name="revision"
               value={filtros.revision}
               onChange={handleFilterChange}

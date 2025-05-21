@@ -4,11 +4,12 @@ import Opinion from "../../modelos/modeloOpiniones.js";
 const calificarEmpresa = async (req, res) => {
     const idUsuario = req.session.ID;
     try { 
-        const empresa = await Alumnos.obtenerAlumno(idUsuario);
-        const idEmpresa = empresa.IdEmpresa;
+        const alumno = await Alumnos.obtenerAlumno(idUsuario);
+        const idEmpresa = alumno.IdEmpresa;
 
         const data = {
             IdUsuario: idUsuario,
+            NombreUsuario: alumno.NombreCompleto,
             Opinion: req.body.Opinion,
             Calificacion: req.body.Calificacion,
             IdEmpresa: idEmpresa

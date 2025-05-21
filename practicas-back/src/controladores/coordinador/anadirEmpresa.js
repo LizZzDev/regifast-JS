@@ -2,20 +2,27 @@ import express from 'express';
 import Empresa from "../../modelos/modeloEmpresa.js";
 
 const anadirDatosDeLaEmpresa = async (req, res) => {
-  const { datos } = req.body; 
-  const { Correo } = datos; 
-  const connection = null; 
-  const idUsuario = null; 
+    const { file } = req;
+    console.log (req.body)
 
-  try {
-    const resultado = await Empresa.agregarNuevaEmpresa(connection, datos, idUsuario, Correo); 
+    let datos;
+    try {
+      datos = JSON.parse(req.body.datosEmpresa); 
+    } catch (error) {
+      throw new Error("Error al parsear datosEmpresa");
+    }
 
+    if (file) {
+      datos.imagen = file.filename;
+    } else {
+      datos.imagen = null;
+    }
+
+    const idUsuario = req.session.ID;
+
+    const resultado = await Empresa.añadirEmpresa(datos, idUsuario);
     return resultado;
-  } catch (error) {
-    console.error("Error al añadir datos de la empresa:", error);
-    throw error;
-  }
-};
+  };
 
 
 export default anadirDatosDeLaEmpresa;

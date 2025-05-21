@@ -26,9 +26,13 @@ function RegistroEmpresaCoord() {
  const handleChange = (e) => {
   const { name, value, files } = e.target;
 
-  if (name === 'imagen') {
-    setFormData({ ...formData, imagen: files[0] });
-  } else if (name === 'tipo_empresa') {
+    if (name === 'imagen') {
+      setFormData({ ...formData, imagen: files[0] }); // Almacenamos solo el nombre del archivo
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  
+  if (name === 'tipo_empresa') {
     if (value === 'extraordinaria') {
       setFormData(prev => ({
         ...prev,
@@ -36,7 +40,7 @@ function RegistroEmpresaCoord() {
         calle: 'Calz. Revolución',
         numero: '1500',
         colonia: 'Olímpica',
-        codigo_postal: '44420 ',
+        codigo_postal: '44420',
         estado: 'Jalisco',
         municipio: 'Guadalajara',
         tipo_empresa: value,
@@ -54,8 +58,35 @@ function RegistroEmpresaCoord() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+     const form = new FormData();
+     const datos = {
+          Nombre: formData.nombre,
+          Descripcion: formData.descripcion,
+          Telefono: formData.telefono,
+          Correo: formData.correo,
+          RFC: formData.rfc,
+          Actividades: formData.actividades,
+          Vacantes: formData.vacantes,
+          Calle: formData.calle,
+          Numero: formData.numero,
+          Colonia: formData.colonia,
+          CodigoPostal: formData.codigo_postal,
+          Responsable: formData.responsable,
+          Cargo: formData.cargo,
+          Estado: formData.estado,
+          Municipio: formData.municipio,
+          Validada: 0,
+          PracticasExtraordinarias: 0
+        };
+
+    form.append('datosEmpresa', JSON.stringify(datos));
+    if (formData.imagen instanceof File) {
+      form.append('imagen', formData.imagen); 
+    }
+
     try {
-        await anadirEmpresa(data);
+       
+        await anadirEmpresa(form);
         alert('Empresa registrada exitosamente.');
         setFormData({
           nombre: '',
@@ -68,6 +99,8 @@ function RegistroEmpresaCoord() {
           calle: '',
           numero: '',
           colonia: '',
+          responsable: '',
+          cargo: '',          
           codigo_postal: '',
           estado: '',
           municipio: '',
@@ -86,7 +119,7 @@ function RegistroEmpresaCoord() {
     <div className="registro-container">
       <HeaderCoordinador/>
       <h2 id="titulo-formulario">Añadir empresa</h2>
-      <form onSubmit={handleSubmit} className="formulario">
+      <form onSubmit={handleSubmit} className="formulario" id="formulario-agregar-empresa">
         <select
           id="select-tipo-empresa"
           name="tipo_empresa"
@@ -95,7 +128,7 @@ function RegistroEmpresaCoord() {
         >
           <option value="">Tipo de empresa</option>
           <option value="ordinaria">Ordinaria</option>
-          <option value="extraordinaria">Extraordinaria</option>
+          <option value="extraordinaria">Interna</option>
         </select>
 
         <input
@@ -151,6 +184,22 @@ function RegistroEmpresaCoord() {
           name="vacantes"
           placeholder="Vacantes disponibles"
           value={formData.vacantes}
+          onChange={handleChange}
+        />
+        <input
+          id="input-responsable"
+          type="text"
+          name="responsable"
+          placeholder="Responsable"
+          value={formData.responsable}
+          onChange={handleChange}
+        />
+        <input
+          id="input-cargo"
+          type="text"
+          name="cargo"
+          placeholder="Cargo laboral"
+          value={formData.cargo}
           onChange={handleChange}
         />
         <input
