@@ -3,7 +3,6 @@ const Alumno = {
   obtenerAlumno: async (id) => {
     try {
       const [rows] = await pool.query('SELECT * FROM alumnos WHERE IdUsuario = ?', [id]);
-      console.log (rows);
       return rows[0];
     } catch (error) {
       console.error("Error en buscar por código al alumno:", error);
@@ -47,7 +46,6 @@ const Alumno = {
       const [rows] = await pool.query(query, params);
       const [countRows] = await pool.query(queryCount, countParams);
       const total = countRows[0].total;
-      console.log ("rows", rows)
       return { 
         alumnos: rows,
         total,

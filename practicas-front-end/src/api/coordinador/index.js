@@ -58,6 +58,7 @@ export async function obtenerAlumno(idUsuario) {
        router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNO,
       { params}
     );
+    console.log (response)
     return response.data.data;;
   } catch (error) {
     console.error("Error en obtener alumno:", error);

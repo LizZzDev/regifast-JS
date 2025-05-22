@@ -77,6 +77,18 @@
     }
   }
 
+    export async function obtenerAlumnos() {
+    try {
+      const response = await api.get(
+        router.ALUMNOS + endpoints.ALUMNOS.OBTENER_ALUMNOS_ID,
+      );
+      return response.data.data;;
+    } catch (error) {
+      console.error("Error en obtener barra status:", error);
+      throw error;
+    }
+  }
+
   export async function obtenerCalificacionesEmpresa (id=null) {
     try {
       console.log (id);

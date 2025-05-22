@@ -79,7 +79,7 @@ const Empresa = {
         const [rows] = await pool.query(query, params);
         const [countRows] = await pool.query(queryCount, countParams);
         const total = countRows[0].total;
-    
+        console.log ("Total de empresas:", rows);
         return { 
           empresas: rows, 
           total,

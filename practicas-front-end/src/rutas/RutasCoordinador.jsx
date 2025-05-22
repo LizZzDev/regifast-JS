@@ -18,11 +18,10 @@ const RutasCoordinador = () => (
         <Route path="/" element={<Login />} />
         <Route path="/empresas" element={<TablaEmpresas />} />
         <Route path="/empresas/ver-calificaciones-empresa/:idEmpresa" element={<VerCalificaciones />} />
-        <Route path="/alumnos" element={<AlumnosValidar />} />
+        <Route path="/principal" element={<AlumnosValidar />} />
         <Route path="/fechas" element={<AsignarFecha />} />
         <Route path="/crear-coordinador" element={<CrearAdmin />} />
         <Route path="/crear-jefe" element={<CrearJefeDepto />} />
-        <Route path="/principal" element={<Principal />} />
         <Route path="/agregar-empresa" element={<AgregarEmpresa />} />
         <Route path="/alumnos/editar-alumno/:idAlumno" element={<EditarAlumno />} />
         <Route path="/recuperar-contrasena" element={<RecuperarContrasena />} />

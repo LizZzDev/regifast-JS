@@ -13,7 +13,8 @@ import {
     mostrarEmpresaSeleccionada,
     generarCartaAsignacion,
     obtenerEmpresasAlumnos,
-    obtenerEmpresaParaUsuario
+    obtenerEmpresaParaUsuario,
+    obtenerAlumnosId
 } from '../controladores/alumnos/index.js';
 
 const router = express.Router();
@@ -25,6 +26,7 @@ router.get('/obtenerEmpresasAlumnos', verificarSesion, soloAlumno, accesoPorCali
 router.get('/generarCartaAsignacion', verificarSesion, soloAlumno, generarCartaAsignacion);
 router.get('/obtenerEmpresaParaUsuario', verificarSesion, obtenerEmpresaParaUsuario);
 router.post('/calificarEmpresa', verificarSesion, soloAlumno, calificarEmpresa);
+router.get('/obtenerAlumnosId', verificarSesion, soloAlumno, obtenerAlumnosId);
 router.post('/anadirDatosDelAlumno', verificarSesion, soloAlumno, anadirDatosDelAlumno);
 router.put('/postularOfertaEmpresa', verificarSesion,  soloAlumno, accesoPorCalificacion, postularOfertaEmpresa);
 

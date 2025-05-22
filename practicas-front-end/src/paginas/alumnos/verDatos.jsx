@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './verDatos.css';
 import Header from '../../componentes/alumnos/header';
-import { obtenerAlumno } from '../../api/coordinador';
+import { obtenerAlumnos } from '../../api/alumnos';
 import { obtenerEmpresaParaUsuario } from '../../api/alumnos';
 
 const PerfilAlumno = () => {
@@ -11,9 +11,10 @@ const PerfilAlumno = () => {
   useEffect(() => {
     const CargarAlumno = async () => {
       try {
-        const response = await obtenerAlumno();
+        const response = await obtenerAlumnos();
+                console.log (response)
+
         setAlumno(response.alumno);
-        console.log (response)
       } catch (error) {
         alert("No se pudo obtener el alumno", error.response.data.message);
       }
@@ -26,7 +27,7 @@ const PerfilAlumno = () => {
       if (alumno.IdEmpresa != null) {
         try {
           const response = await obtenerEmpresaParaUsuario(alumno.IdEmpresa);
-          console.log (response)
+          console.log (response.empresa)
           setEmpresa(response);
         } catch (error) {
           alert("No se pudo obtener la empresa", error.response?.data?.message || error.message);

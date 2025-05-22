@@ -3,8 +3,6 @@ import Alumnos from "../../modelos/modeloAlumno.js";
 const obtenerAlumnosFiltrados = async (req) => {
   const carrera = req.query.carrera || null;
 
-  console.log (req)
-
   try {
     const response = await Alumnos.numeroAlumnos({carrera: carrera});
     return response;

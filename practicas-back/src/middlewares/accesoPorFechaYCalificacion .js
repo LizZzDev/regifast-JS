@@ -1,10 +1,6 @@
 import Alumno from "../modelos/modeloAlumno.js";
 import Fechas from "../modelos/modeloFechaIngreso.js"
 
- const soloFecha = (fecha) => {
-    return new Date(fecha.toISOString().split("T")[0]);
-  };
-
 const verificarAccesoEmpresas = async (req, res, next) => {
     const idUsuario = req.session.ID;
     const alumno = await Alumno.obtenerAlumno(idUsuario);
@@ -16,7 +12,7 @@ const verificarAccesoEmpresas = async (req, res, next) => {
     const ordinario = alumno.Ordinario;
 
     const fechas = await Fechas.obtenerFechas();
-    const hoy = soloFecha(new Date());
+    const hoy = new Date();
 
     const rango = fechas.find(f =>
       calificacion <= f.MaxCalificacion &&

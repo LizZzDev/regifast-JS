@@ -68,7 +68,7 @@ const LoginAlumnos = ({ onLogin }) => {
             />
           </div>
           <div className="form-actions">
-            <button type="button" onClick={handleSubmit}>Iniciar Sesión</button>
+            <button type="button" id="boton-inicio" onClick={handleSubmit}>Iniciar Sesión</button>
           </div>
         </form>
         <p>¿No tienes una cuenta? <a href="/alumno/crear-cuenta">Regístrate aquí</a></p>

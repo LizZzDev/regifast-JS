@@ -18,6 +18,7 @@ const Header = () => {
 
       try {
         await obtenerEmpresasParaUsuario({}, false); 
+        
         setPuedeConsultarOferta(true);
       } catch (error) {
         if (error?.response?.status === 409) {
@@ -55,7 +56,7 @@ return (
         {(etapa === 0) && (
           <li><a href="/alumno/registro">REGISTRO DE DATOS</a></li>
         )}
-        {etapa !== 0 && etapa < 4 && puedeConsultarOferta && (
+        {etapa == 2 && puedeConsultarOferta && (
           <li><a href="/alumno/consultar">CONSULTAR OFERTA</a></li>
         )}
 
@@ -69,9 +70,6 @@ return (
         <li className="dropdown">
           <img src="../../img/usuario.png" alt="perfil_alumno" />
           <div className="dropdown-content">
-            {etapa !== 0 && etapa >= 1 && (
-              <a href="/alumno/ver-datos">Ver perfil</a>
-            )}
             <a href="#" onClick={manejarCerrarSesion}>Salir</a>
           </div>
         </li>
