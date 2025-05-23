@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './documentos.css';
 import Header from "../../componentes/alumnos/header.jsx";
-import { generarCartaAsignacion, obtenerBarraStatus } from '../../api/alumnos';
+import { generarCartaAsignacion, obtenerAlumno } from '../../api/alumnos';
 
 const DocumentosAlumno = () => {
   const [estado, setEstado] = useState({
@@ -23,7 +23,8 @@ const DocumentosAlumno = () => {
     useEffect(() => {
       const salir = async () => {
         try {
-          const datos = await obtenerBarraStatus();
+          const alumno = await obtenerAlumno();
+          const datos = alumno.BarraStatus;
           if (datos < 3 || datos == null) {
             alert("Tu documento aun no se encuentra disponible.");
             window.location.href = '/alumno/principal';

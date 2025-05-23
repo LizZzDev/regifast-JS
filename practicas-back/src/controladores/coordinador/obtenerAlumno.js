@@ -1,7 +1,7 @@
 import Alumno from "../../modelos/modeloAlumno.js";
 
 const obtenerAlumnoPorId = async (req, res) => {
-    let idUsuario = req.query.idUsuario;
+    const idUsuario = req.query.idUsuario;
 
     try { 
         const alumno = await Alumno.obtenerAlumno(idUsuario);

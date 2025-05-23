@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './verDatos.css';
 import Header from '../../componentes/alumnos/header';
-import { obtenerAlumnos } from '../../api/alumnos';
+import { obtenerAlumno } from '../../api/alumnos';
 import { obtenerEmpresaParaUsuario } from '../../api/alumnos';
 
 const PerfilAlumno = () => {
@@ -11,7 +11,7 @@ const PerfilAlumno = () => {
   useEffect(() => {
     const CargarAlumno = async () => {
       try {
-        const response = await obtenerAlumnos();
+        const response = await obtenerAlumno();
                 console.log (response)
 
         setAlumno(response.alumno);

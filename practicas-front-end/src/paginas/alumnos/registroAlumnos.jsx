@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import './RegistroAlumnos.css';
-import { anadirDatosDelAlumno, obtenerBarraStatus } from '../../api/alumnos';
+import { anadirDatosDelAlumno, obtenerAlumno } from '../../api/alumnos';
 import Header from '../../componentes/alumnos/header';
 
 const RegistroAlumnos = () => {
@@ -42,7 +42,8 @@ const RegistroAlumnos = () => {
   useEffect(() => {
     const salir = async () => {
       try {
-        const datos = await obtenerBarraStatus();
+        const alumno = await obtenerAlumno();
+        const datos = alumno.BarraStatus
         if (datos >= 2) {
           alert("Tu registro de datos ya fue enviado.");
           window.location.href = '/alumno/principal';

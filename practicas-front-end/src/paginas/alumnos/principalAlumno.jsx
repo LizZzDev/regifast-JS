@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './principalAlumno.css';
 import Header from '../../componentes/alumnos/header';
-import { obtenerBarraStatus } from '../../api/alumnos';
+import { obtenerAlumno } from '../../api/alumnos';
 
 const BarraStatus = () => {
   // Estado para el progreso (simulando el valor que vendría de PHP)
@@ -43,7 +43,8 @@ const BarraStatus = () => {
   useEffect(() => {
       const cargarBarraStatus = async () => {
         try {
-          const datos = await obtenerBarraStatus();
+          const alumno = await obtenerAlumno();
+          const datos = alumno.BarraStatus;
           setProgreso(datos);
         } catch (error) {
           console.error('Error al cargar empresas:', error);

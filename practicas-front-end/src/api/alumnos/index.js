@@ -65,19 +65,7 @@
     }
   }
 
-  export async function obtenerBarraStatus() {
-    try {
-      const response = await api.get(
-        router.ALUMNOS + endpoints.ALUMNOS.OBTENER_BARRA_STATUS,
-      );
-      return response.data.data;;
-    } catch (error) {
-      console.error("Error en obtener barra status:", error);
-      throw error;
-    }
-  }
-
-    export async function obtenerAlumnos() {
+    export async function obtenerAlumno() {
     try {
       const response = await api.get(
         router.ALUMNOS + endpoints.ALUMNOS.OBTENER_ALUMNOS_ID,
@@ -134,7 +122,7 @@
       throw error;
     }
   }
-
+  
     export async function obtenerEmpresaParaUsuario (idUsuario) {
     try {
       console.log (idUsuario);

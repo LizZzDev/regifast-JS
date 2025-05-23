@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './header.css'; 
 import { useNavigate } from 'react-router-dom';
 import { cerrarSesion } from '../../api/usuarios';
-import { obtenerBarraStatus, obtenerEmpresasParaUsuario } from '../../api/alumnos';
+import { obtenerAlumno, obtenerEmpresasParaUsuario } from '../../api/alumnos';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -13,7 +13,8 @@ const Header = () => {
  useEffect(() => {
   const verificarAccesos = async () => {
     try {
-      const etapaActual = await obtenerBarraStatus();
+      const Alumno = await obtenerAlumno();
+      const etapaActual = Alumno.BarraStatus;
       setEtapa(etapaActual);
 
       try {
@@ -70,6 +71,9 @@ return (
         <li className="dropdown">
           <img src="../../img/usuario.png" alt="perfil_alumno" />
           <div className="dropdown-content">
+            {etapa !== 0 && etapa > 1 && (
+              <a href="/alumno/ver-datos">Ver perfi</a>
+            )}
             <a href="#" onClick={manejarCerrarSesion}>Salir</a>
           </div>
         </li>
