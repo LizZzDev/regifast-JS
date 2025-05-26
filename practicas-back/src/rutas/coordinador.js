@@ -39,7 +39,7 @@ router.post('/anadirEmpresa', verificarSesion, subirArchivo.single('imagen'), an
 router.put('/modificarDatosEmpresa', modificarDatosEmpresa);
 router.put('/validarEmpresa', verificarSesion, validarEmpresa);
 router.put('/revertirValidacionEmpresa', verificarSesion, soloCoordinador, revertirValidacionEmpresa);
-router.delete('/empresa', verificarSesion, soloCoordinador, eliminarEmpresa);
+router.delete('/eliminarEmpresa', verificarSesion, soloCoordinador, eliminarEmpresa);
 
 
 export default router;

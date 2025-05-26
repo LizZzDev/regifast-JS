@@ -31,6 +31,9 @@ export const endpoints = {
         VALIDAR_EMPRESA: '/validarEmpresa',
         ELIMINAR_ALUMNO: '/eliminarAlumno',
         REVERTIR_VALIDACION: '/revertirValidacionAlumno',
+        MODIFICAR_DATOS_EMPRESA: '/modificarDatosEmpresa',
+        ELIMINAR_EMPRESA: '/eliminarEmpresa',
+        REVERTIR_VALIDACION_EMPRESA: '/revertirValidacionEmpresa',
         OBTENER_NUMERO_ALUMNOS: '/obtenerNumeroAlumnos'
     },
   
