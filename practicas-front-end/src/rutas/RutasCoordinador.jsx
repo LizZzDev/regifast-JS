@@ -11,21 +11,26 @@ import AgregarEmpresa from '../paginas/coordinador/empresas_nav/agregarEmpresa';
 import EditarAlumno from '../paginas/coordinador/alumnos_nav/editarAlumno';
 import EditarEmpresa from '../paginas/coordinador/empresas_nav/editarEmpresa';
 import VerCalificaciones from '../paginas/coordinador/empresas_nav/calificacionSoloEmpresa';
-
+import VerEmpresa from '../paginas/coordinador/empresas_nav/ver_empresas';
 
 const RutasCoordinador = () => (
     <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/principal" element={<Principal />} />
+        
+        <Route path="/alumnos" element={<AlumnosValidar />} />
+        <Route path="/alumnos/editar-alumno/:idAlumno" element={<EditarAlumno />} />
+
+        <Route path="/agregar-empresa" element={<AgregarEmpresa />} />
         <Route path="/empresas" element={<TablaEmpresas />} />
         <Route path="/empresas/ver-calificaciones-empresa/:idEmpresa" element={<VerCalificaciones />} />
-        <Route path="/alumnos" element={<AlumnosValidar />} />
+        <Route path="/empresas/editar-empresa/:idUsuario" element={<EditarEmpresa />} />
+        <Route path="/empresas/ver-empresas/:idUsuario" element={<VerEmpresa />} />
+
         <Route path="/fechas" element={<AsignarFecha />} />
+        
         <Route path="/crear-coordinador" element={<CrearAdmin />} />
         <Route path="/crear-jefe" element={<CrearJefeDepto />} />
-        <Route path="/agregar-empresa" element={<AgregarEmpresa />} />
-        <Route path="/alumnos/editar-alumno/:idAlumno" element={<EditarAlumno />} />
-        <Route path="/empresas/editar-empresa/:idUsuario" element={<EditarEmpresa />} />
     </Routes>
 );
 

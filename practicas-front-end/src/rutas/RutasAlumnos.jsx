@@ -13,14 +13,17 @@ import VerDatos from '../paginas/alumnos/alumnos_files/verDatos';
 const RutasAlumnos = () => (
     <Routes>
         <Route path="/" element={<Login />} />
+
+        <Route path="/crear-cuenta" element={<CrearCuenta />} />
+        <Route path="/registro" element={<Registro />} />
+
+        <Route path="/principal" element={<Principal />} />
+        <Route path="/documentos" element={<Documentos />} />
+        <Route path="/ver-perfil" element={<VerDatos />} />
+
         <Route path="/calificar" element={<Calificar />} />
         <Route path="/consultar/ver-calificaciones-empresa/:idEmpresa" element={<VerCalificaciones />} />
         <Route path="/consultar" element={<Consultar />} />
-        <Route path="/principal" element={<Principal />} />
-        <Route path="/registro" element={<Registro />} />
-        <Route path="/documentos" element={<Documentos />} />
-        <Route path="/crear-cuenta" element={<CrearCuenta />} />
-        <Route path="/ver-perfil" element={<VerDatos />} />
     </Routes>
 );
 

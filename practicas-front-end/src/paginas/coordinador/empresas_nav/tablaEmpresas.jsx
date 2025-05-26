@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './ver_empresas.css';
+import './tabla_empresas.css';
 import {validarEmpresa} from '../../../api/coordinador';
 import {obtenerEmpresas} from '../../../api/empresas';
 import HeaderCoordinador from '../../../componentes/coordinador/header_coordinador';
@@ -19,8 +19,12 @@ const TablaEmpresas = () => {
 
   const navigate = useNavigate();
 
-  const handleEmpresa = (idUsuario) => {
+  const EditarEmpresa = (idUsuario) => {
       navigate(`editar-empresa/${idUsuario}`);
+  };
+
+  const VerEmpresa = (idUsuario) => {
+      navigate(`ver-empresa/${idUsuario}`);
   };
 
  useEffect(() => {
@@ -67,6 +71,8 @@ const TablaEmpresas = () => {
    const coincideEditable =
       filtros.editable === ''
         || (filtros.editable === 'editable' && empresa.IdUsuario === null)
+        || (filtros.editable === 'no-editable' && empresa.IdUsuario)
+
 
     return coincideBusqueda && coincideRevision && coincideOrdinario && coincideEditable;
   });
@@ -156,6 +162,7 @@ const TablaEmpresas = () => {
             >
               <option value="">Todas las empresas</option>
               <option value="editable">Editable</option>
+              <option value="no-editable">No editable</option>
             </select>            
 
           </div>
@@ -171,14 +178,11 @@ const TablaEmpresas = () => {
                 <th>Nombre</th>
                 <th>Teléfono</th>
                 <th>Correo</th>
-                <th>RFC</th>
-                <th>Descripción</th>
-                <th>Actividades</th>
                 <th>Domicilio</th>
-                <th>Vacantes</th>
                 <th>Opiniones</th>
                 <th>Validar</th>
                 {filtros.editable === 'editable' && <th>Editar</th>}
+                {filtros.editable === 'no-editable' && <th>Ver</th>}
               </tr>
             </thead>
             <tbody>
@@ -187,11 +191,7 @@ const TablaEmpresas = () => {
                   <td>{empresa.Nombre}</td>
                   <td>{empresa.Telefono}</td>
                   <td>{empresa.Correo}</td>
-                  <td>{empresa.RFC}</td>
-                  <td>{empresa.Descripcion}</td>
-                  <td>{empresa.Actividades}</td>
                   <td>{empresa.DomicilioFiscal}</td>
-                  <td>{empresa.Vacantes}</td>
                   <td>
                     <button
                       id="Opiniones"
@@ -218,12 +218,21 @@ const TablaEmpresas = () => {
                   {filtros.editable === 'editable' && empresa.IdUsuario === null ?  (
                        <button
                         className="confirmar-btn"
-                        onClick={() => handleEmpresa(empresa.IdEmpresa)}
+                        onClick={() => EditarEmpresa(empresa.IdEmpresa)}
                       >
                         Editar
                       </button>
                   ) : null
                   }
+                  {filtros.editable === 'no-editable' && empresa.IdUsuario ?  (
+                       <button
+                        className="confirmar-btn"
+                        onClick={() => VerEmpresa(empresa.IdEmpresa)}
+                      >
+                        Ver
+                      </button>
+                  ) : null
+                  }                  
                 </tr>
               ))}
             </tbody>
