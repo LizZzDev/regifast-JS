@@ -215,7 +215,7 @@ const TablaEmpresas = () => {
                       </button>
                     )}
                   </td>
-                  { empresa.IdUsuario === null ? (
+                  {filtros.editable === 'editable' && empresa.IdUsuario === null ?  (
                        <button
                         className="confirmar-btn"
                         onClick={() => handleEmpresa(empresa.IdEmpresa)}
