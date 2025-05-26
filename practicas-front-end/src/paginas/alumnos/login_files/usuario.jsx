@@ -21,6 +21,12 @@ const RegistroUsuario = () => {
     const [mensaje, setMensaje] = useState("");
     const navigate = useNavigate();
 
+    function capitalizarTexto(texto) {
+    return texto
+        .toLowerCase()
+        .replace(/\b\w/g, (letra) => letra.toUpperCase());
+    }
+
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -33,7 +39,7 @@ const RegistroUsuario = () => {
 
         setFormData((prevData) => ({
         ...prevData,
-        [name]: value,
+        [name]: name === "nombre" ? capitalizarTexto(value) : value,
         }));
     };
 
@@ -95,7 +101,7 @@ const RegistroUsuario = () => {
 
         try {
               await crearUsuario ( {
-                    correo: formData.correo,
+                    correo: formData.correo.trim().toLocaleLowerCase(),
                     contrasena: formData.password,
                     nombre: formData.nombre,
                     rol: 'alumno'

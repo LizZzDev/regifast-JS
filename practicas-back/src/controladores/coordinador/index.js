@@ -9,16 +9,9 @@ import anadirEmpresaService from "./anadirEmpresa.js";
 import asignarFechaIngresoPorCalificacionesService from "./asignarFechaIngresoPorCalificaciones.js";
 import obtenerNumeroAlumnosService from "./obtenerNumeroAlumnos.js";
 import eliminarAlumnoService from "./eliminarAlumno.js";
-
-export const anadirEmpresa = async (req, res) => {
-  try {
-    const response = await anadirEmpresaService(req);
-    res.status(201).json({ success: true, data: response });
-  } catch (error) {
-    console.error("Error al añadir empresa:", error.message);
-    return res.status(500).json({ success: false, message: error });
-  }
-};
+import modificarDatosEmpresaService from './modificarDatosEmpresa.js'
+import eliminarEmpresaService from './eliminarEmpresa.js';
+import revertirValidacionEmpresaService from "./revertirValidacionEmpresa.js";
 
 export const asignarFechaIngresoPorCalificaciones = async (req, res) => {
   try {
@@ -100,15 +93,6 @@ export const revertirValidacionAlumno = async (req, res) => {
   }
 };
 
-export const validarEmpresa = async (req, res) => {
-    try {
-      const response = await validarEmpresaService(req);
-      res.status(201).json({ success: true, data: response });
-    } catch (error) {
-      console.error("Error al validar empresa:", error.message);
-      return res.status(500).json({ success: false, message: error });
-    }
-  };
 
   export const eliminarAlumno = async (req, res) => {
     try {
@@ -120,5 +104,53 @@ export const validarEmpresa = async (req, res) => {
     }
   };
 
-
   
+  export const anadirEmpresa = async (req, res) => {
+  try {
+    const response = await anadirEmpresaService(req);
+    res.status(201).json({ success: true, data: response });
+  } catch (error) {
+    console.error("Error al añadir empresa:", error.message);
+    return res.status(500).json({ success: false, message: error });
+  }
+};
+
+  export const validarEmpresa = async (req, res) => {
+    try {
+      const response = await validarEmpresaService(req);
+      res.status(201).json({ success: true, data: response });
+    } catch (error) {
+      console.error("Error al validar empresa:", error.message);
+      return res.status(500).json({ success: false, message: error });
+    }
+  };
+
+  export const revertirValidacionEmpresa = async (req, res) => {
+  try {
+    const response = await revertirValidacionEmpresaService(req);
+    res.status(201).json({ success: true, data: response });
+  } catch (error) {
+    console.error("Error al revertir la validacion de la empresa:", error.message);
+    return res.status(500).json({ success: false, message: error });
+  }
+};
+
+    export const eliminarEmpresa = async (req, res) => {
+    try {
+      const response = await eliminarEmpresaService(req);
+      res.status(201).json({ data: response });
+    } catch (error) {
+      console.error("Error al eliminar empresa:", error.message);
+      return res.status(500).json({ success: false, message: error });
+    }
+  };
+
+export const modificarDatosEmpresa = async (req, res) => {
+  try {
+    const response = await modificarDatosEmpresaService(req);
+    res.status(201).json({ success: true, data: response });
+  } catch (error) {
+    console.error("Error al modificar datos de la empresa:", error.message);
+    return res.status(500).json({ success: false, message: error });
+  }
+};

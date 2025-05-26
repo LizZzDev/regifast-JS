@@ -176,6 +176,26 @@ const Empresa = {
         throw error;
       }
     },
+
+  eliminarPorIdUsuario: async (connection, id) => {
+    try {
+      const [result] = await connection.query('DELETE FROM empresas WHERE IdUsuario = ?', [id]);
+      return result;
+    } catch (error) {
+      console.error("Error en eliminar empresa por id usuario:", error);
+      throw error;
+    }
+  },
+
+   eliminarPorIdAlumno: async (id) => {
+    try {
+      const [result] = await connection.query('DELETE FROM empresas WHERE IdAAlumno = ?', [id]);
+      return result;
+    } catch (error) {
+      console.error("Error en eliminar empresa por id alumno:", error);
+      throw error;
+    }
+  }  
   
   };
   
