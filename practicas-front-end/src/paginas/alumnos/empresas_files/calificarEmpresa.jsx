@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './calificarEmpresa.css';
-import Header from '../../componentes/alumnos/header';
+import Header from '../../../componentes/alumnos/header';
 import { useNavigate } from 'react-router-dom';
-import { calificarEmpresa, mostrarEmpresaSeleccionada } from '../../api/alumnos';
+import { calificarEmpresa, mostrarEmpresaSeleccionada } from '../../../api/alumnos';
 
 const CalificarEmpresa = () => {
   const [empresa, setEmpresa] = useState({});

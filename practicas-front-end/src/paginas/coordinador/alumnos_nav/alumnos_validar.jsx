@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './validarAlumnos.css';
-import { validarAlumno, obtenerAlumnos } from '../../api/coordinador';
+import { validarAlumno, obtenerAlumnos } from '../../../api/coordinador';
 import { useNavigate } from 'react-router-dom';
 
-import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
+import HeaderCoordinador from '../../../componentes/coordinador/header_coordinador';
 
 const ValidacionAlumnos = () => {
   const [alumnos, setAlumnos] = useState([]);

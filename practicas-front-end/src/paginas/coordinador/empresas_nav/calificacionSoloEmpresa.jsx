@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './calificacionSoloEmpresa.css';
-import { obtenerCalificacionesEmpresa, obtenerEmpresaParaUsuario } from '../../api/alumnos';
-import Header from '../../componentes/alumnos/header';
+import { obtenerCalificacionesEmpresa, obtenerEmpresaParaUsuario } from '../../../api/alumnos';
+import Header from '../../../componentes/coordinador/header_coordinador';
 
 const CalificacionEmpresa = () => {
   const { idEmpresa } = useParams();

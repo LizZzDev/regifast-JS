@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './documentos.css';
-import Header from "../../componentes/alumnos/header.jsx";
-import { generarCartaAsignacion, obtenerAlumno } from '../../api/alumnos';
+import Header from "../../../componentes/alumnos/header.jsx";
+import { generarCartaAsignacion, obtenerAlumno } from '../../../api/alumnos/index.js';
 
 const DocumentosAlumno = () => {
   const [estado, setEstado] = useState({

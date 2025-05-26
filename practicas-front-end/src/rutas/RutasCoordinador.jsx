@@ -1,17 +1,16 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import TablaEmpresas from '../paginas/coordinador/tablaEmpresas';
-import AlumnosValidar from '../paginas/coordinador/alumnos_validar'
-import AsignarFecha from '../paginas/coordinador/asignar_fechas'
-import CrearAdmin from '../paginas/coordinador/crearAdmin'
-import CrearJefeDepto from '../paginas/coordinador/crearJefeDepto';
-import Principal from '../paginas/coordinador/pantallaPrincipalCoordinador';
+import TablaEmpresas from '../paginas/coordinador/empresas_nav/tablaEmpresas';
+import AlumnosValidar from '../paginas/coordinador/alumnos_nav/alumnos_validar'
+import AsignarFecha from '../paginas/coordinador/coordinador_files/asignar_fechas'
+import CrearAdmin from '../paginas/coordinador/opciones_añadir_jefes_nav/crearAdmin'
+import CrearJefeDepto from '../paginas/coordinador/opciones_añadir_jefes_nav/crearJefeDepto';
+import Principal from '../paginas/coordinador/coordinador_files/pantallaPrincipalCoordinador';
 import Login from '../paginas/jefeDepartamentos/inicioSesionCJ';
-import AgregarEmpresa from '../paginas/coordinador/agregarEmpresa';
-import EditarAlumno from '../paginas/coordinador/editarAlumno';
-import EditarEmpresa from '../paginas/coordinador/editarEmpresa';
-import RecuperarContrasena from '../paginas/coordinador/recuperarContrasena'
-import VerCalificaciones from '../paginas/coordinador/calificacionSoloEmpresa';
+import AgregarEmpresa from '../paginas/coordinador/empresas_nav/agregarEmpresa';
+import EditarAlumno from '../paginas/coordinador/alumnos_nav/editarAlumno';
+import EditarEmpresa from '../paginas/coordinador/empresas_nav/editarEmpresa';
+import VerCalificaciones from '../paginas/coordinador/empresas_nav/calificacionSoloEmpresa';
 
 
 const RutasCoordinador = () => (
@@ -27,7 +26,6 @@ const RutasCoordinador = () => (
         <Route path="/agregar-empresa" element={<AgregarEmpresa />} />
         <Route path="/alumnos/editar-alumno/:idAlumno" element={<EditarAlumno />} />
         <Route path="/empresas/editar-empresa/:idUsuario" element={<EditarEmpresa />} />
-        <Route path="/recuperar-contrasena" element={<RecuperarContrasena />} />
     </Routes>
 );
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './agregarEmpresas.css';
-import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
-import { anadirEmpresa } from '../../api/coordinador';
+import HeaderCoordinador from '../../../componentes/coordinador/header_coordinador';
+import { anadirEmpresa } from '../../../api/coordinador';
 
 function RegistroEmpresaCoord() {
   const [formData, setFormData] = useState({

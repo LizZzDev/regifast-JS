@@ -1,9 +1,9 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../componentes/header.jsx";
-import { crearUsuario, validarToken } from "../../api/usuarios/index.js";
-import { generarToken } from "../../api/usuarios/index.js";
+import Header from "../../../componentes/header.jsx";
+import { crearUsuario, validarToken } from "../../../api/usuarios/index.js";
+import { generarToken } from "../../../api/usuarios/index.js";
 import "./usuarios.css";
 
 const RegistroUsuario = () => {

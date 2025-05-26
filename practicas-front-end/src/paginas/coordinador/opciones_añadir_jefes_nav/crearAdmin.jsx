@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./crearAdmin.css";
-import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
-import { crearUsuario } from "../../api/usuarios";
+import HeaderCoordinador from '../../../componentes/coordinador/header_coordinador';
+import { crearUsuario } from "../../../api/usuarios";
 
 
 function CrearNuevoAdmin() {

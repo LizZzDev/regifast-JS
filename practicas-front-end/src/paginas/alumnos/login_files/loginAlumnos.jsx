@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../componentes/header.jsx";
-import { iniciarSesion } from "../../api/usuarios/index.js";
+import Header from "../../../componentes/header.jsx";
+import { iniciarSesion } from "../../../api/usuarios/index.js";
 import "./styles.css";  
 
 const LoginAlumnos = ({ onLogin }) => {

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './consultarOferta.css';
-import Header from "../../componentes/alumnos/header.jsx";
-import { obtenerEmpresasParaUsuario, postularOfertaEmpresa } from '../../api/alumnos';
+import Header from "../../../componentes/alumnos/header.jsx";
+import { obtenerEmpresasParaUsuario, postularOfertaEmpresa } from '../../../api/alumnos/index.js';
 
 const ConsultarOferta = () => {
     const [empresas, setEmpresas] = useState([]);

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ver_empresas.css';
-import {validarEmpresa} from '../../api/coordinador';
-import {obtenerEmpresas} from '../../api/empresas';
-import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
+import {validarEmpresa} from '../../../api/coordinador';
+import {obtenerEmpresas} from '../../../api/empresas';
+import HeaderCoordinador from '../../../componentes/coordinador/header_coordinador';
 
 const TablaEmpresas = () => {
   const [empresas, setEmpresas] = useState([]);

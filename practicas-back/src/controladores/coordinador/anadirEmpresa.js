@@ -17,7 +17,7 @@ const anadirDatosDeLaEmpresa = async (req, res) => {
       datos.imagen = null;
     }
 
-    const idUsuario = req.session.ID;
+    const idUsuario = null;
 
     const resultado = await Empresa.añadirEmpresa(datos, idUsuario);
     return resultado;

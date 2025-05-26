@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './verDatos.css';
-import Header from '../../componentes/alumnos/header';
-import { obtenerAlumno } from '../../api/alumnos';
-import { obtenerEmpresaParaUsuario } from '../../api/alumnos';
+import Header from '../../../componentes/alumnos/header';
+import { obtenerAlumno } from '../../../api/alumnos';
+import { obtenerEmpresaParaUsuario } from '../../../api/alumnos';
 
 const PerfilAlumno = () => {
   const [alumno, setAlumno] = useState({});

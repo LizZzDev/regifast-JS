@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import './EditarAlumno.css';
-import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
-import { eliminarAlumno, modificarDatosAlumno, obtenerAlumno, revertirValidacionAlumno, validarAlumno } from '../../api/coordinador';
+import '../alumnos_nav/editarAlumno.css';
+import HeaderCoordinador from '../../../componentes/coordinador/header_coordinador';
+import { eliminarAlumno, modificarDatosAlumno, obtenerAlumno, revertirValidacionAlumno, validarAlumno } from '../../../api/coordinador';
 
 
 const EditarAlumno = () => {

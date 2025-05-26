@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import './RegistroAlumnos.css';
-import { anadirDatosDelAlumno, obtenerAlumno } from '../../api/alumnos';
-import Header from '../../componentes/alumnos/header';
+import { anadirDatosDelAlumno, obtenerAlumno } from '../../../api/alumnos';
+import Header from '../../../componentes/alumnos/header';
 
 const RegistroAlumnos = () => {
   const [formData, setFormData] = useState({

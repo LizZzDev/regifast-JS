@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './EditarAlumno.css';
-import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
-import { eliminarAlumno, modificarDatosAlumno, obtenerAlumno, revertirValidacionAlumno, validarAlumno } from '../../api/coordinador';
+import HeaderCoordinador from '../../../componentes/coordinador/header_coordinador';
+import { eliminarAlumno, modificarDatosAlumno, obtenerAlumno, revertirValidacionAlumno, validarAlumno } from '../../../api/coordinador';
 
 
 const EditarAlumno = () => {
@@ -36,6 +36,8 @@ const EditarAlumno = () => {
         Grado: alumno.Grado || '',
         Grupo: alumno.Grupo || '',
         Turno: alumno.Turno || '',
+        Calificacion: alumno.Calificacion || '',
+        Ordinario: alumno.Ordinario || '',
         Domicilio: alumno.Domicilio || '',
         Colonia: alumno.Colonia || '',
         Municipio: alumno.Municipio || '',
@@ -86,6 +88,7 @@ const EditarAlumno = () => {
     if (formData.CorreoInstitucional && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.CorreoInstitucional)) {
       nuevosErrores.CorreoInstitucional = 'Correo inválido';
     }
+    if (formData.Calificacion && !/^\d{3}$/.test(formData.Movil)) nuevosErrores.Movil = 'La calificacion solo puede estar entre 0 y 100';
     if (formData.Movil && !/^\d{10}$/.test(formData.Movil)) nuevosErrores.Movil = '10 dígitos';
     if (formData.Telefono && !/^\d{10}$/.test(formData.Telefono)) nuevosErrores.Telefono = '10 dígitos';
     if (formData.TelefonoEmergencia && !/^\d{10}$/.test(formData.TelefonoEmergencia)) {
@@ -268,6 +271,36 @@ const EditarAlumno = () => {
                   <option value="Vespertino">Vespertino</option>
                 </select>
               </div>
+
+              {alumno.Calificacion ? (
+              <div className="campo-formulario">
+                <label htmlFor="input-calificacion">Calificacion</label>
+                <input
+                  className={campoModificado("Calificacion") ? "modificado" : ""}    
+                  id="input-calificacion"
+                  name="Calificacion"
+                  value={formData.Calificacion}
+                  onChange={handleChange}
+                />
+                {errores.Calificacion && <span className="mensaje-error">{errores.Calificacion}</span>}
+              </div>
+              ) : null}
+
+              {alumno.Ordinario ? (
+              <div className="campo-formulario">
+                <label htmlFor="input-ordinario">Estado</label>
+                <select
+                  id="input-ordinario"
+                  name="Ordinario"
+                  value={formData.Ordinario}
+                  onChange={handleChange}
+                >
+                  <option value="">Seleccione estado del alumno</option>
+                  <option value="1">Ordinario</option>
+                  <option value="0">Irregular</option>
+                </select>
+              </div>
+              ) : null}
 
             </div>
 
