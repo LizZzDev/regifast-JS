@@ -6,7 +6,6 @@ import accesoPorCalificacion from '../middlewares/accesoPorFechaYCalificacion .j
 
 import { 
     anadirDatosDelAlumno,
-    obtenerBarraStatus,
     postularOfertaEmpresa,
     calificarEmpresa,
     obtenerCalificacionesDeLasEmpresas,
@@ -14,12 +13,11 @@ import {
     generarCartaAsignacion,
     obtenerEmpresasAlumnos,
     obtenerEmpresaParaUsuario,
-    obtenerAlumnosId
+    obtenerAlumnosId,
 } from '../controladores/alumnos/index.js';
 
 const router = express.Router();
 
-router.get('/obtenerBarraStatus', verificarSesion, soloAlumno, obtenerBarraStatus);
 router.get('/mostrarEmpresaSeleccionada', mostrarEmpresaSeleccionada);
 router.get('/obtenerCalificarEmpresa', obtenerCalificacionesDeLasEmpresas);
 router.get('/obtenerEmpresasAlumnos', verificarSesion, soloAlumno, accesoPorCalificacion, obtenerEmpresasAlumnos);

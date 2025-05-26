@@ -14,7 +14,7 @@ const Header = () => {
   const verificarAccesos = async () => {
     try {
       const Alumno = await obtenerAlumno();
-      const etapaActual = Alumno.BarraStatus;
+      const etapaActual = Alumno.alumno.BarraStatus;
       setEtapa(etapaActual);
 
       try {
@@ -71,8 +71,8 @@ return (
         <li className="dropdown">
           <img src="../../img/usuario.png" alt="perfil_alumno" />
           <div className="dropdown-content">
-            {etapa !== 0 && etapa > 1 && (
-              <a href="/alumno/ver-datos">Ver perfi</a>
+             {etapa !== 0 && etapa > 0 && (
+              <a href="/alumno/ver-perfil">Perfil</a>
             )}
             <a href="#" onClick={manejarCerrarSesion}>Salir</a>
           </div>

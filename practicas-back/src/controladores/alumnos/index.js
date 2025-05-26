@@ -1,5 +1,4 @@
 import anadirDatosDelAlumnoService from "./anadirDatosDelAlumno.js";
-import obtenerBarraStatusService from "./obtenerBarraStatus.js";
 import postularOfertaEmpresaService from "./postularOfertaEmpresa.js";
 import calificarEmpresaSerive from "./calificarEmpresa.js";
 import mostrarEmpresaSeleccionadaService from "./mostrarEmpresaSeleccionada.js";
@@ -31,17 +30,8 @@ export const obtenerEmpresasAlumnos = async (req, res) => {
 
 export const obtenerAlumnosId = async (req, res) => {
   try {
+    console.log ("req", req.session.ID);
     const data = await obtenerAlumnosIdServicio(req);
-    res.status(200).json({ success: true, data });
-  } catch (error) {
-    console.error("Error al obtener barra status:", error.message);
-    res.status(500).json({ success: false, message: "Error al obtener barra status" });
-  }
-};
-
-export const obtenerBarraStatus = async (req, res) => {
-  try {
-    const data = await obtenerBarraStatusService(req);
     res.status(200).json({ success: true, data });
   } catch (error) {
     console.error("Error al obtener barra status:", error.message);

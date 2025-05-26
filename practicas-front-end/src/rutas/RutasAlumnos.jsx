@@ -20,7 +20,7 @@ const RutasAlumnos = () => (
         <Route path="/registro" element={<Registro />} />
         <Route path="/documentos" element={<Documentos />} />
         <Route path="/crear-cuenta" element={<CrearCuenta />} />
-        <Route path="/ver-datos" element={<VerDatos />} />
+        <Route path="/ver-perfil" element={<VerDatos />} />
     </Routes>
 );
 

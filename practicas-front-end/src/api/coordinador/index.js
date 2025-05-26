@@ -54,11 +54,11 @@ export async function obtenerAlumno(idUsuario) {
     if (idUsuario !== undefined && idUsuario !== null) {
       params.idUsuario = idUsuario;
     }
+    console.log (idUsuario);
     const response = await api.get(
        router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNO,
       { params}
     );
-    console.log (response)
     return response.data.data;;
   } catch (error) {
     console.error("Error en obtener alumno:", error);
@@ -76,13 +76,11 @@ export async function obtenerAlumnos({ pagina = 1, limite = 20, busqueda = null,
       ...(validada !== null && { validada }),
     };
 
-    console.log (params)
     const response = await api.get(
        router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNOS,
       { params }
     );
 
-    console.log (response)
     return response.data.data;;
   } catch (error) {
     console.error("Error en obtener alumno:", error);
@@ -145,6 +143,36 @@ export async function validarEmpresa(idUsuario) {
     return response.data.data;;
   } catch (error) {
     console.error("Error en validar empresa:", error);
+    throw error;
+  }
+}
+
+export async function revertirValidacionAlumno(idUsuario) {
+  try {
+    const response = await api.put(
+       router.COORDINADOR + endpoints.COORDINADOR.REVERTIR_VALIDACION,
+      { idUsuario: idUsuario }
+    );
+
+    console.log (idUsuario, response)
+    return response.data.data;;
+  } catch (error) {
+    console.error("Error en revertir validacion del alumno:", error);
+    throw error;
+  }
+}
+
+export async function eliminarAlumno(idUsuario) {
+  try {
+    const response = await api.post(
+       router.COORDINADOR + endpoints.COORDINADOR.ELIMINAR_ALUMNO,
+      { idUsuario: idUsuario }
+    );
+
+    console.log (idUsuario, response)
+    return response.data.data;;
+  } catch (error) {
+    console.error("Error en eliminar alumno:", error);
     throw error;
   }
 }

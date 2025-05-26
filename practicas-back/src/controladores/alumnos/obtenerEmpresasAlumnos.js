@@ -19,7 +19,6 @@ const obtenerEmpresasAlumnos = async (req) => {
       }
     );
 
-    console.log ("Empresas obtenidas:", empresas);
     return empresas;
   } catch (error) {
     console.error("Error al obtener todas las empresas para los alumnos:", error);

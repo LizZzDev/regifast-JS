@@ -68,21 +68,25 @@ main {
 
 
 
-#filtro-input {
-  padding: 15px !important;
-  font-size: 14px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  width: 70% !important;
-  margin-left: -40% !important;
-}
-#filtro-select, #filtro-btn{
-  font-size: 14px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  width: 50% !important;
+.filtros-container{
+  width: 100%;
+  height: 20%;
 }
 
+#filtro-input-alumnos {
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin: 0;
+  width: 23% !important;
+}
+.filtro-select-alumnos, #filtro-btn{
+  font-size: 1rem;
+  border-radius: 5px;
+  margin: 0 !important;
+  border: 1px solid #ccc;
+  width: 10% !important;
+}
 
 /* Tabla */
 .table-responsive {

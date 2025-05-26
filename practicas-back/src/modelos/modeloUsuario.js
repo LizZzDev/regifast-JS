@@ -35,9 +35,9 @@ const Usuario = {
     }
   },
 
-  eliminarPorId: async (id) => {
+  eliminarPorId: async (connection, id) => {
     try {
-      const [result] = await pool.query('DELETE FROM usuarios WHERE IdUsuario = ?', [id]);
+      const [result] = await connection.query('DELETE FROM usuarios WHERE IdUsuario = ?', [id]);
       return result;
     } catch (error) {
       console.error("Error en eliminar por id:", error);

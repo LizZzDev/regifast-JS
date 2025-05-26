@@ -13,7 +13,8 @@ const ValidacionAlumnos = () => {
   const [filtros, setFiltros] = useState({
     busqueda: '',
     carrera: '',
-    revision: ''
+    revision: '',
+    ordinario: ''
   });
   
   const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
@@ -58,7 +59,14 @@ const ValidacionAlumnos = () => {
         (filtros.revision === "revisado" && alumno.Revision === 1) ||
         (filtros.revision === "no-revisado" && alumno.Revision === 0);
 
-      return coincideBusqueda && coincideCarrera && coincideRevision;
+      const coincideOrdinario =
+        !filtros.ordinario ||
+        (filtros.ordinario === "ordinario" && alumno.Ordinario === 1) ||
+        (filtros.ordinario === "no-ordinario" && alumno.Ordinario === 0);
+
+        console.log (alumno.Ordinario)
+
+      return coincideBusqueda && coincideCarrera && coincideRevision && coincideOrdinario;
     });
 
     setAlumnosFiltrados(filtered);
@@ -117,14 +125,14 @@ const ValidacionAlumnos = () => {
             <input
               type="text"
               placeholder="Buscar por código"
-              id="filtro-input"
+              id="filtro-input-alumnos"
               name="busqueda"
               value={filtros.busqueda}
               onChange={handleFilterChange}
             />
 
             <select
-              id="filtro-select"
+              class="filtro-select-alumnos"
               name="carrera"
               value={filtros.carrera}
               onChange={handleFilterChange}
@@ -142,14 +150,25 @@ const ValidacionAlumnos = () => {
             </select>
 
             <select
-              id="filtro-select-revision"
+              class="filtro-select-alumnos"
               name="revision"
               value={filtros.revision}
               onChange={handleFilterChange}
             >
-              <option value="">Todos</option>
+              <option value="">Todos los alumnos</option>
               <option value="revisado">Validados</option>
               <option value="no-revisado">No Validados</option>
+            </select>
+
+               <select
+              class="filtro-select-alumnos"
+              name="ordinario"
+              value={filtros.ordinario}
+              onChange={handleFilterChange}
+            >
+              <option value="">Todos los alumnos</option>
+              <option value="ordinario">Ordinarios</option>
+              <option value="no-ordinario">No ordinarios</option>
             </select>
           </div>
         </section>

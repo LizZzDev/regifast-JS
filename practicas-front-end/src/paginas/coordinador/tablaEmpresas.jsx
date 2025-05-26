@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './validarAlumnos.css';
+import './ver_empresas.css';
 import {validarEmpresa} from '../../api/coordinador';
 import {obtenerEmpresas} from '../../api/empresas';
 import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
@@ -12,10 +12,16 @@ const TablaEmpresas = () => {
   const [filtros, setFiltros] = useState({
     busqueda: '',
     validada: '',
-    tipoEmpresa: ''
+    tipoEmpresa: '',
+    editable: '',
+    ordinaria: ''
   });
 
   const navigate = useNavigate();
+
+  const handleEmpresa = (idUsuario) => {
+      navigate(`editar-empresa/${idUsuario}`);
+  };
 
  useEffect(() => {
   const cargarEmpresas = async () => {
@@ -53,7 +59,16 @@ const TablaEmpresas = () => {
         || (filtros.validada === 'validada' && empresa.Validada === 1)
         || (filtros.validada === 'no-validada' && empresa.Validada === 0);
 
-    return coincideBusqueda && coincideRevision;
+    const coincideOrdinario =
+      filtros.ordinaria === ''
+        || (filtros.ordinaria === 'ordinaria' && empresa.PracticasExtraordinarias === 1)
+        || (filtros.ordinaria === 'interna' && empresa.PracticasExtraordinarias === 0);
+
+   const coincideEditable =
+      filtros.editable === ''
+        || (filtros.editable === 'editable' && empresa.IdUsuario === null)
+
+    return coincideBusqueda && coincideRevision && coincideOrdinario && coincideEditable;
   });
 
   useEffect(() => {
@@ -104,22 +119,44 @@ const TablaEmpresas = () => {
             <input
               type="text"
               placeholder="Buscar por nombre o RFC"
-              id="filtro-input"
+              id="filtro-input-empresas"
               name="busqueda"
               value={filtros.busqueda}
               onChange={handleFilterChange}
             />
 
             <select
-              id="filtro-select"
+              className="filtro-select-empresas"
               name="validada"
               value={filtros.validada}
               onChange={handleFilterChange}
             >
-              <option value="">Todas</option>
+              <option value="">Todas las empresas</option>
               <option value="validada">Validadas</option>
               <option value="no-validada">Sin validar</option>
             </select>
+
+            <select
+              className="filtro-select-empresas"
+              name="ordinaria"
+              value={filtros.ordinaria}
+              onChange={handleFilterChange}
+            >
+              <option value="">Todas las empresas</option>
+              <option value="ordinaria">Ordinarias</option>
+              <option value="interna">Internas</option>
+
+            </select>             
+
+            <select
+              className="filtro-select-empresas"
+              name="editable"
+              value={filtros.editable}
+              onChange={handleFilterChange}
+            >
+              <option value="">Todas las empresas</option>
+              <option value="editable">Editable</option>
+            </select>            
 
           </div>
         </section>
@@ -141,6 +178,7 @@ const TablaEmpresas = () => {
                 <th>Vacantes</th>
                 <th>Opiniones</th>
                 <th>Validar</th>
+                {filtros.editable === 'editable' && <th>Editar</th>}
               </tr>
             </thead>
             <tbody>
@@ -177,6 +215,15 @@ const TablaEmpresas = () => {
                       </button>
                     )}
                   </td>
+                  { empresa.IdUsuario === null ? (
+                       <button
+                        className="confirmar-btn"
+                        onClick={() => handleEmpresa(empresa.IdEmpresa)}
+                      >
+                        Editar
+                      </button>
+                  ) : null
+                  }
                 </tr>
               ))}
             </tbody>

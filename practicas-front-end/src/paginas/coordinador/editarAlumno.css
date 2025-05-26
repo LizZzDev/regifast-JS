@@ -36,17 +36,50 @@
   font-size: 1rem;
 }
 
-#boton-guardar-alumno {
+.boton-guardar-alumno {
   display: block;
-  margin: 0 auto;
+  margin: 0;
+  float: left;
 
-  background-color: #28a745;
+  background-color: #4ea362;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
 }
+
+#boton-validar-alumno {
+  float: right;
+  background-color: #3c8f41;
+}
+
+#boton-revertir-validacion-alumno:hover {
+  background-color: #5c616c; 
+}
+
+#boton-revertir-validacion-alumno {
+  float: right;
+  background-color: #6e7480;
+}
+
+#boton-validar-alumno:hover {
+  background-color: #256328; 
+}
+
+.boton-alumno {
+  display: block;
+  margin-left: 2%;
+  margin-top: 0;
+  float: left;
+  background-color: #bb4141;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
 
 #boton-guardar-alumno:hover {
   background-color: #218838;
@@ -76,4 +109,9 @@
 
 #form-editar-alumno {
   max-width: 48%;
+}
+
+.modificado {
+  border: 2px solid rgb(52, 63, 12)!important;
+  background-color: #c6e6d2;
 }

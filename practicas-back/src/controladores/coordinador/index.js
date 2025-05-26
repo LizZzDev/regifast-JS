@@ -3,10 +3,12 @@ import obtenerAlumnosService from "./obtenerAlumnos.js";
 import obtenerAlumnoService from "./obtenerAlumno.js";
 import validarAlumnoService from "./validarAlumno.js";
 import validarEmpresaService from "./validarEmpresa.js";
+import revertirValidacionAlumnoService from "./revertirValidacionAlumno.js";
 import obtenerBarraStatusParaEstadisticasService from "./obtenerBarraStatusParaEstadisticas.js";
 import anadirEmpresaService from "./anadirEmpresa.js";
 import asignarFechaIngresoPorCalificacionesService from "./asignarFechaIngresoPorCalificaciones.js";
 import obtenerNumeroAlumnosService from "./obtenerNumeroAlumnos.js";
+import eliminarAlumnoService from "./eliminarAlumno.js";
 
 export const anadirEmpresa = async (req, res) => {
   try {
@@ -88,12 +90,32 @@ export const validarAlumno = async (req, res) => {
   }
 };
 
+export const revertirValidacionAlumno = async (req, res) => {
+  try {
+    const response = await revertirValidacionAlumnoService(req);
+    res.status(201).json({ success: true, data: response });
+  } catch (error) {
+    console.error("Error al revertir la validacion del alumno:", error.message);
+    return res.status(500).json({ success: false, message: error });
+  }
+};
+
 export const validarEmpresa = async (req, res) => {
     try {
       const response = await validarEmpresaService(req);
       res.status(201).json({ success: true, data: response });
     } catch (error) {
       console.error("Error al validar empresa:", error.message);
+      return res.status(500).json({ success: false, message: error });
+    }
+  };
+
+  export const eliminarAlumno = async (req, res) => {
+    try {
+      const response = await eliminarAlumnoService(req);
+      res.status(201).json({ data: response });
+    } catch (error) {
+      console.error("Error al eliminar alumno:", error.message);
       return res.status(500).json({ success: false, message: error });
     }
   };

@@ -7,7 +7,7 @@ import { eliminarAlumno, modificarDatosAlumno, obtenerAlumno, revertirValidacion
 
 
 const EditarAlumno = () => {
-  const { idAlumno } = useParams();
+  const { idUsuario } = useParams();
   const [alumno, setAlumno] = useState({});
   const [formData, setFormData] = useState({});
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ const EditarAlumno = () => {
 
   const cargarAlumno = async () => {
     try {
-      const response = await obtenerAlumno(idAlumno);
+      const response = await obtenerAlumno(idUsuario);
       console.log (response);
       setAlumno(response.alumno);
     } catch (error) {
@@ -25,7 +25,7 @@ const EditarAlumno = () => {
 
   useEffect(() => {
     cargarAlumno();
-  }, [idAlumno]);
+  }, [idUsuario]);
 
   useEffect(() => {
     if (alumno) {
@@ -464,12 +464,12 @@ const EditarAlumno = () => {
             </button>
             
             <button type="button" onClick={() => eliminarAlumnoConst(alumno.IdUsuario)} className="boton-alumno">
-              Eliminar alumno
+              Eliminar empresa
             </button>
 
             {alumno.Revision === 0 ? (
                <button type="button" onClick={() => validarAlumnoConst(alumno.IdUsuario)}  className="boton-alumno" id="boton-validar-alumno">
-                  Validar alumno
+                  Validar empresa
                 </button>
             ) : (
               <button type="button" onClick={() => revertirValidarAlumno(alumno.IdUsuario)} className="boton-alumno"  id="boton-revertir-validacion-alumno">

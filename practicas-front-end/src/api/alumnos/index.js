@@ -70,6 +70,7 @@
       const response = await api.get(
         router.ALUMNOS + endpoints.ALUMNOS.OBTENER_ALUMNOS_ID,
       );
+      console.log (response.data.data);
       return response.data.data;;
     } catch (error) {
       console.error("Error en obtener barra status:", error);

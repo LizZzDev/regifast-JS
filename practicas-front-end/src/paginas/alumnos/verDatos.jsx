@@ -82,7 +82,7 @@ const PerfilAlumno = () => {
         {/* Sección: Empresa asignada */}
         <section id="seccion-empresa-asignada">
           <h3 id="subtitulo-empresa-asignada">Empresa Asignada</h3>
-          {empresa ? (
+          {!empresa ? (
             <div className="contenedor-grid-empresa">
               <label id="etiqueta-nombre-empresa">Nombre: {empresa?.Nombre}</label>
               <label id="etiqueta-correo-empresa">Correo: {empresa?.Correo}</label>

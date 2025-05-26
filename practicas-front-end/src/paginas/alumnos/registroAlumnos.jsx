@@ -43,7 +43,7 @@ const RegistroAlumnos = () => {
     const salir = async () => {
       try {
         const alumno = await obtenerAlumno();
-        const datos = alumno.BarraStatus
+        const datos = alumno.alumno.BarraStatus
         if (datos >= 2) {
           alert("Tu registro de datos ya fue enviado.");
           window.location.href = '/alumno/principal';

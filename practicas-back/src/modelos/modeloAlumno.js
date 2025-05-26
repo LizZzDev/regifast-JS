@@ -189,29 +189,9 @@ const Alumno = {
     }
   },
 
-  validarAlumno: async (id) => {
+  eliminarPorId: async (connection, id) => {
     try {
-      const [result] = await pool.query("UPDATE alumnos SET Revision= '1' WHERE IdUsuario = ?", [id]);
-      return result;
-    } catch (error) {
-      console.error("Error en validar alumno:", error);
-      throw error;
-    }
-  },
-
-  aumentarEnUnoBarraStatus: async (id) => {
-    try {
-      const [result] = await pool.query('UPDATE alumnos SET BarraStatus = BarraStatus + 1 WHERE IdUsuario = ?', [id]);
-      return result;
-    } catch (error) {
-      console.error("Error en aumentar barra status:", error);
-      throw error;
-    }
-  },
-
-  eliminarPorId: async (id) => {
-    try {
-      const [result] = await pool.query('DELETE FROM alumnos WHERE IdUsuario = ?', [id]);
+      const [result] = await connection.query('DELETE FROM alumnos WHERE IdUsuario = ?', [id]);
       return result;
     } catch (error) {
       console.error("Error en eliminar por id:", error);

@@ -33,7 +33,7 @@ function RegistroEmpresaCoord() {
     }
   
   if (name === 'tipo_empresa') {
-    if (value === 'extraordinaria') {
+    if (value === '0') {
       setFormData(prev => ({
         ...prev,
         rfc: 'XXX',

@@ -10,12 +10,11 @@ const validarAlumno = async (req, res) => {
             throw new Error ("Alumno ya validado");
         }
 
-        const validar = await Alumno.validarAlumno(idUsuario);
-        const aumentarBarraStatus = await Alumno.aumentarEnUnoBarraStatus(idUsuario);
+        const validar = await Alumno.modificarDatosAlumno({ Revision: 1, BarraStatus: 2 }, idUsuario);
+
 
         return {
-            validar,
-            aumentarBarraStatus
+            validar
         };
     } catch (error) {
         console.error("Error al validar alumno:", error);
