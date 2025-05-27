@@ -94,7 +94,10 @@ export async function obtenerBarraStatusParaEstadisticas(carrera=null) {
             carrera: carrera,
           }
        }
+
     );
+           console.log (response)
+
     return response.data.data;;
   } catch (error) {
     console.error("Error en obtener barra status para estadisticas", error);

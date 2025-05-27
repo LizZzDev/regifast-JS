@@ -3,21 +3,22 @@ import React, { useState, useEffect, useRef } from 'react';
 import './grafica.css';
 
 import HeaderCoordinador from '../../../componentes/coordinador/header_coordinador';
+import { obtenerBarraStatusParaEstadisticas, obtenerNumeroAlumnos } from '../../../api/coordinador';
 
 
 const Estadisticas = () => {
   // Datos de ejemplo por carrera
   const datosPorCarrera = {
-    todas: { grafica: [1200, 800, 1500, 500], revisados: 1800, noRevisados: 700 },
-    TPSI: { grafica: [500, 200, 600, 100], revisados: 1000, noRevisados: 200 },
-    TPAL: { grafica: [300, 200, 300, 100], revisados: 600, noRevisados: 100 },
-    TPEI: { grafica: [200, 300, 400, 100], revisados: 500, noRevisados: 200 },
-    TPPQ: { grafica: [100, 100, 200, 0], revisados: 200, noRevisados: 100 },
-    TPMF: { grafica: [100, 100, 100, 0], revisados: 100, noRevisados: 100 },
-    TPMI: { grafica: [0, 100, 100, 100], revisados: 100, noRevisados: 0 },
-    TPPL: { grafica: [200, 100, 200, 100], revisados: 300, noRevisados: 100 },
-    BTDC: { grafica: [100, 0, 200, 100], revisados: 200, noRevisados: 0 },
-    BTQM: { grafica: [0, 100, 0, 100], revisados: 100, noRevisados: 0 }
+    todas: { grafica: []},
+    TPSI: { grafica: []},
+    TPAL: { grafica: []},
+    TPEI: { grafica: [] },
+    TPPQ: { grafica: [] },
+    TPMF: { grafica: [] },
+    TPMI: { grafica: [] },
+    TPPL: { grafica: [] },
+    BTDC: { grafica: [] },
+    BTQM: { grafica: [] }
   };
 
   const [carreraSeleccionada, setCarreraSeleccionada] = useState('todas');
@@ -48,6 +49,12 @@ useEffect(() => {
 
 
   useEffect(() => {
+    const cargarBarraStatusParaEstadisticas = async () => {
+    const response = await obtenerBarraStatusParaEstadisticas();
+    console.log (response);
+    }
+
+    cargarBarraStatusParaEstadisticas();
     const datos = datosPorCarrera[carreraSeleccionada];
     
 
@@ -62,7 +69,7 @@ useEffect(() => {
     chartInstance.current = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Revisión', 'Selección de empresa', 'Documentación', 'En prácticas'],
+        labels: ['Sin iniciar', 'Revisión', 'Selección de empresa', 'Documentación', 'En prácticas'],
         datasets: [{
           label: 'Estados de prácticas',
           data: datos.grafica,
@@ -70,13 +77,15 @@ useEffect(() => {
             'rgba(255, 99, 132, 0.4)',
             'rgba(54, 162, 235, 0.4)',
             'rgba(255, 206, 86, 0.4)',
-            'rgba(75, 192, 192, 0.4)'
+            'rgba(75, 192, 192, 0.4)',
+            'rgba(97, 27, 79, 0.4)'
           ],
           borderColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
             'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)'
+            'rgba(75, 192, 192, 1)',
+            'rgb(170, 57, 114)'            
           ],
           borderWidth: 1
         }]

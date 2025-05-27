@@ -34,13 +34,14 @@ const TablaEmpresas = () => {
     try {
       const datos = await obtenerEmpresas({
         pagina: paginaActual,
-        limite: 20,
+        limite: 10,
         busqueda: filtros.busqueda || null,
         validada:
           filtros.validada === 'validada' ? 1 :
           filtros.validada === 'no-validada' ? 0 :
           null
       });
+      setTotalPaginas(datos.totalPaginas)
       setEmpresas(datos.empresas);
     } catch (error) {
       console.error('Error al cargar empresas:', error);

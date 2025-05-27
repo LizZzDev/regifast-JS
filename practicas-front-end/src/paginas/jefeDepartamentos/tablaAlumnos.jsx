@@ -31,7 +31,7 @@ function TablaAlumnos() {
       try {
         const response = await obtenerAlumnos({
             pagina: paginaActual, 
-            limite: 20
+            limite: 10
         });
         const alumnosConEstado = response.alumnos.map(alumno => ({
           ...alumno,
@@ -39,6 +39,7 @@ function TablaAlumnos() {
           calificacion: alumno.Calificacion || ''
         }));
         setAlumnos(alumnosConEstado);
+         setTotalPaginas(response.totalPaginas);
       } catch (error) {
         console.error("Error al obtener alumnos:", error);
       }

@@ -28,7 +28,7 @@ const ValidacionAlumnos = () => {
       try {
        const response = await obtenerAlumnos({
           pagina: paginaActual,
-          limite: 20,
+          limite: 10,
           carrera: filtros.carrera || null,
           busqueda: filtros.busqueda || null,
           validada:
@@ -37,6 +37,7 @@ const ValidacionAlumnos = () => {
             null
         });
         console.log (response);
+        setTotalPaginas(response.totalPaginas);
         setAlumnos(response.alumnos);
       } catch (error) {
         console.error("Error al obtener alumnos:", error);

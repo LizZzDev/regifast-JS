@@ -120,13 +120,13 @@ const Alumno = {
           COUNT(*) AS total,
           SUM(CASE WHEN Revision = 1 THEN 1 ELSE 0 END) AS revisados,
           SUM(CASE WHEN Revision = 0 THEN 1 ELSE 0 END) AS noRevisados
-        FROM alumnos;
+        FROM alumnos
       `;
 
     const values = [];
   
     if (carrera) {
-      query += " AND Carrera = ?";
+      query += " WHERE Carrera = ?";
       values.push(carrera);
     }
 
@@ -154,7 +154,7 @@ const Alumno = {
         SUM(CASE WHEN BarraStatus = 1 THEN 1 ELSE 0 END) AS barraStatus2,
         SUM(CASE WHEN BarraStatus = 2 THEN 1 ELSE 0 END) AS barraStatus3,
         SUM(CASE WHEN BarraStatus = 3 THEN 1 ELSE 0 END) AS barraStatus4,
-        SUM(CASE WHEN BarraStatus = 4 THEN 1 ELSE 0 END) AS barraStatus5
+        SUM(CASE WHEN BarraStatus = 4 OR BarraStatus = 5  THEN 1 ELSE 0 END) AS barraStatus5
       FROM alumnos
       WHERE 1=1
     `;
