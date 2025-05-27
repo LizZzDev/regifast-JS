@@ -118,8 +118,8 @@ const Alumno = {
       let query = `
         SELECT 
           COUNT(*) AS total,
-          SUM(CASE WHEN Revisado = 1 THEN 1 ELSE 0 END) AS revisados,
-          SUM(CASE WHEN Revisado = 0 THEN 1 ELSE 0 END) AS noRevisados
+          SUM(CASE WHEN Revision = 1 THEN 1 ELSE 0 END) AS revisados,
+          SUM(CASE WHEN Revision = 0 THEN 1 ELSE 0 END) AS noRevisados
         FROM alumnos;
       `;
 
