@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './recuperarContrasena.css'
-import HeaderCoordinador from '../../componentes/coordinador/header_coordinador';
 
 const RecuperarContrasena = () => {
   const [correo, setCorreo] = useState('');
@@ -26,7 +25,6 @@ const RecuperarContrasena = () => {
 
   return (
   <>
-    <HeaderCoordinador /> {/* Fuera del contenedor principal */}
     
     <div id="recuperar-container">
       <h2 id="recuperar-titulo">Recuperar Contraseña</h2>

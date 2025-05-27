@@ -5,12 +5,14 @@ import RutasEmpresas from './rutas/RutasEmpresas';
 import RutasCoordinador from './rutas/RutasCoordinador';
 import RutasJefe from './rutas/RutasJefe';
 import Login from './paginas/usuarios/login';
+import RecuperarContrasena from './paginas/usuarios/recuperarContrasena';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/recuperar" element={<RecuperarContrasena />} />
         <Route path="/alumno/*" element={<RutasAlumnos />} />
         <Route path="/empresa/*" element={<RutasEmpresas />} />
         <Route path="/coordinador/*" element={<RutasCoordinador />} />

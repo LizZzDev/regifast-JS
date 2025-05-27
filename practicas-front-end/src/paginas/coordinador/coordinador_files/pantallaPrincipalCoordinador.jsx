@@ -1,67 +1,65 @@
 import React, { useState, useEffect, useRef } from 'react';
- import { Chart } from 'chart.js/auto';
+import { Chart } from 'chart.js/auto';
 import './grafica.css';
 
 import HeaderCoordinador from '../../../componentes/coordinador/header_coordinador';
 import { obtenerBarraStatusParaEstadisticas, obtenerNumeroAlumnos } from '../../../api/coordinador';
 
-
 const Estadisticas = () => {
-  // Datos de ejemplo por carrera
-  const datosPorCarrera = {
-    todas: { grafica: []},
-    TPSI: { grafica: []},
-    TPAL: { grafica: []},
-    TPEI: { grafica: [] },
-    TPPQ: { grafica: [] },
-    TPMF: { grafica: [] },
-    TPMI: { grafica: [] },
-    TPPL: { grafica: [] },
-    BTDC: { grafica: [] },
-    BTQM: { grafica: [] }
-  };
-
   const [carreraSeleccionada, setCarreraSeleccionada] = useState('todas');
   const [estadisticas, setEstadisticas] = useState({
     revisados: 0,
     noRevisados: 0,
     total: 0
   });
-
+  const [estadisticasGrafica, setEstadisticasGraficas] = useState({});
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
-useEffect(() => {
-  const cargarAlumnos = async () => {
-    try {
-      const carrera = carreraSeleccionada === 'todas' ? null : carreraSeleccionada;
-
-      const datos = await obtenerNumeroAlumnos({ carrera: carrera });
-      console.log(datos);
-      setEstadisticas(datos);
-    } catch (error) {
-      console.error('Error al cargar empresas:', error);
-    }
-  };
-
-  cargarAlumnos();
-}, [carreraSeleccionada]);
-
-
+  // Cargar número de alumnos
   useEffect(() => {
-    const cargarBarraStatusParaEstadisticas = async () => {
-    const response = await obtenerBarraStatusParaEstadisticas();
-    console.log (response);
-    }
+    const cargarAlumnos = async () => {
+      try {
+        const carrera = carreraSeleccionada === 'todas' ? null : carreraSeleccionada;
+        const datos = await obtenerNumeroAlumnos({ carrera });
+        setEstadisticas(datos);
+      } catch (error) {
+        console.error('Error al cargar alumnos:', error);
+      }
+    };
 
-    cargarBarraStatusParaEstadisticas();
-    const datos = datosPorCarrera[carreraSeleccionada];
-    
+    cargarAlumnos();
+  }, [carreraSeleccionada]);
 
-    // Configurar gráfico
+  // Cargar datos de gráfica
+  useEffect(() => {
+    const cargarDatosGrafica = async () => {
+      try {
+        const carrera = carreraSeleccionada === 'todas' ? null : carreraSeleccionada;
+        const response = await obtenerBarraStatusParaEstadisticas(carrera);
+        setEstadisticasGraficas(response);
+      } catch (error) {
+        console.error('Error al cargar datos de la gráfica:', error);
+      }
+    };
+
+    cargarDatosGrafica();
+  }, [carreraSeleccionada]);
+
+  // Crear o actualizar el gráfico
+  useEffect(() => {
+    if (!estadisticasGrafica || Object.keys(estadisticasGrafica).length === 0) return;
+
+    const datos = [
+      estadisticasGrafica.barraStatus1,
+      estadisticasGrafica.barraStatus2,
+      estadisticasGrafica.barraStatus3,
+      estadisticasGrafica.barraStatus4,
+      estadisticasGrafica.barraStatus5
+    ];
+
     const ctx = chartRef.current.getContext('2d');
 
-    // Destruir gráfico anterior si existe
     if (chartInstance.current) {
       chartInstance.current.destroy();
     }
@@ -72,7 +70,7 @@ useEffect(() => {
         labels: ['Sin iniciar', 'Revisión', 'Selección de empresa', 'Documentación', 'En prácticas'],
         datasets: [{
           label: 'Estados de prácticas',
-          data: datos.grafica,
+          data: datos,
           backgroundColor: [
             'rgba(255, 99, 132, 0.4)',
             'rgba(54, 162, 235, 0.4)',
@@ -85,7 +83,7 @@ useEffect(() => {
             'rgba(54, 162, 235, 1)',
             'rgba(255, 206, 86, 1)',
             'rgba(75, 192, 192, 1)',
-            'rgb(170, 57, 114)'            
+            'rgb(170, 57, 114)'
           ],
           borderWidth: 1
         }]
@@ -120,13 +118,12 @@ useEffect(() => {
       }
     });
 
-    // Limpieza al desmontar el componente
     return () => {
       if (chartInstance.current) {
         chartInstance.current.destroy();
       }
     };
-  }, [carreraSeleccionada]);
+  }, [estadisticasGrafica]);
 
   const handleCarreraChange = (e) => {
     setCarreraSeleccionada(e.target.value);
@@ -134,12 +131,11 @@ useEffect(() => {
 
   return (
     <div>
-      <HeaderCoordinador/>
-
+      <HeaderCoordinador />
       <main className="big-container">
         <section id="filtros">
           <label htmlFor="carreraSelect">Carrera:</label>
-          <select 
+          <select
             id="carreraSelect"
             value={carreraSeleccionada}
             onChange={handleCarreraChange}
@@ -175,9 +171,9 @@ useEffect(() => {
             </thead>
             <tbody>
               <tr>
-                <td>{estadisticas.revisados || 'Cargando...'}</td>
-                <td>{estadisticas.noRevisados || 'Cargando...'}</td>
-                <td>{estadisticas.total || 'Cargando...'}</td>
+                <td>{estadisticas.revisados ?? 'Cargando...'}</td>
+                <td>{estadisticas.noRevisados ?? 'Cargando...'}</td>
+                <td>{estadisticas.total ?? 'Cargando...'}</td>
               </tr>
             </tbody>
           </table>

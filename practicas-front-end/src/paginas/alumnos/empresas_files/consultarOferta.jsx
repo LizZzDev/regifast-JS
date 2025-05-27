@@ -89,8 +89,6 @@ const ConsultarOferta = () => {
           </table>
 
           <div className="paginacion">
-
-              
             <button 
               className='button-paginacion'
               onClick={() => setPaginaActual(prev => Math.max(prev - 1, 1))}
