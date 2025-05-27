@@ -3,7 +3,7 @@ import Usuario from "../../modelos/modeloUsuario.js";
 import pool from '../../configuracion/db.js';
 
 const eliminarAlumno = async (req) => {
-    const { idUsuario } = req.body;
+    const { idUsuario } = req.query;
     const connection = await pool.getConnection();
 
     try {

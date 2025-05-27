@@ -208,8 +208,8 @@ const TablaEmpresas = () => {
                     ) : (
                       <button
                         className="confirmar-btn"
-                        onClick={() => validarEmpresaConst(empresa.IdUsuario)}
-                        disabled={validandoIds.includes(empresa.IdUsuario)}
+                        onClick={() => validarEmpresaConst(empresa.IdEmpresa)}
+                        disabled={validandoIds.includes(empresa.IdEmpresa)}
                       >
                         {validandoIds.includes(empresa.IdUsuario) ? 'Validando...' : 'Validar'}
                       </button>

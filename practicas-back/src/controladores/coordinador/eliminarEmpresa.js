@@ -3,8 +3,8 @@ import Usuario from "../../modelos/modeloUsuario.js";
 import pool from '../../configuracion/db.js';
 
 const eliminarEmpresa = async (req) => {
-    const idUsuario = req.body.idUsuario || null;
-    const idAlumno = req.body.idAlumno || null;
+    const idUsuario = req.query.idUsuario || null;
+    const idEmpresa = req.query.idEmpresa || null;
     const connection = await pool.getConnection();
 
     try {
@@ -16,7 +16,7 @@ const eliminarEmpresa = async (req) => {
 
             await connection.commit(); 
         } else {
-            await Empresas.eliminarPorIdAlumno(idAlumno)
+            await Empresas.eliminarPorIdAlumno(idEmpresa)
         }
       
 

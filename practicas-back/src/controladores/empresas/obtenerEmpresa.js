@@ -5,6 +5,9 @@ const obtenerEmpresa = async (req, res) => {
     try { 
           if (req.session.rol == 'coordinador') {
             let idUsuario = req.query.idEmpresa;
+            const empresa = await Empresas.obtenerEmpresaPorId(idUsuario);
+            return empresa;
+
         }
         const empresa = await Empresas.obtenerEmpresaPorIdUsuario(idUsuario);
         return empresa;

@@ -30,7 +30,6 @@ export const obtenerEmpresasAlumnos = async (req, res) => {
 
 export const obtenerAlumnosId = async (req, res) => {
   try {
-    console.log ("req", req.session.ID);
     const data = await obtenerAlumnosIdServicio(req);
     res.status(200).json({ success: true, data });
   } catch (error) {

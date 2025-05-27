@@ -21,7 +21,6 @@ export async function anadirEmpresa(formData,) {
 
 export async function asignarFechaIngresoPorCalificacion(data) {
   try {
-    console.log (data)
     const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.ASIGNAR_FECHA_INGRESO_POR_CALIFICACIONES,
       data,
@@ -35,7 +34,6 @@ export async function asignarFechaIngresoPorCalificacion(data) {
 
 export async function modificarDatosAlumno(data, idUsuario) {
   try {
-    console.log (data, idUsuario)
     const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.MODIFICAR_DATOS_ALUMNO,
       { datos: data,
@@ -54,7 +52,6 @@ export async function obtenerAlumno(idUsuario) {
     if (idUsuario !== undefined && idUsuario !== null) {
       params.idUsuario = idUsuario;
     }
-    console.log (idUsuario);
     const response = await api.get(
        router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNO,
       { params}
@@ -134,12 +131,12 @@ export async function validarAlumno(idUsuario) {
 
 export async function validarEmpresa(idUsuario) {
   try {
+    console.log (idUsuario)
     const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.VALIDAR_EMPRESA,
       { idUsuario: idUsuario }
     );
 
-    console.log (idUsuario, response)
     return response.data.data;;
   } catch (error) {
     console.error("Error en validar empresa:", error);
@@ -149,12 +146,12 @@ export async function validarEmpresa(idUsuario) {
 
 export async function revertirValidacionAlumno(idUsuario) {
   try {
+    console.log (idUsuario)
     const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.REVERTIR_VALIDACION,
       { idUsuario: idUsuario }
     );
 
-    console.log (idUsuario, response)
     return response.data.data;;
   } catch (error) {
     console.error("Error en revertir validacion del alumno:", error);
@@ -166,10 +163,13 @@ export async function eliminarAlumno(idUsuario) {
   try {
     const response = await api.post(
        router.COORDINADOR + endpoints.COORDINADOR.ELIMINAR_ALUMNO,
-      { idUsuario: idUsuario }
+        {
+        params: {
+          idUsuario: idUsuario
+        }
+      }
     );
 
-    console.log (idUsuario, response)
     return response.data.data;;
   } catch (error) {
     console.error("Error en eliminar alumno:", error);
@@ -177,3 +177,53 @@ export async function eliminarAlumno(idUsuario) {
   }
 }
 
+export async function revertirValidacionEmpresa(idUsuario) {
+  try {
+    const response = await api.put(
+       router.COORDINADOR + endpoints.COORDINADOR.REVERTIR_VALIDACION_EMPRESA,
+      { idUsuario: idUsuario }
+    );
+
+    return response.data.data;;
+  } catch (error) {
+    console.error("Error en revertir validacion de la empresa:", error);
+    throw error;
+  }
+}
+
+export async function eliminarEmpresa({idUsuario=null, idEmpresa=null}) {
+  try {
+    console.log (idEmpresa);
+    const response = await api.delete(
+       router.COORDINADOR + endpoints.COORDINADOR.ELIMINAR_EMPRESA,      
+             {
+        params: {
+          idUsuario: idUsuario,
+          idEmpresa: idEmpresa
+        }
+      }
+
+    );
+
+    console.log (idUsuario, response)
+    return response.data.data;;
+  } catch (error) {
+    console.error("Error en eliminar empresa:", error);
+    throw error;
+  }
+}
+
+export async function modificarDatosEmpresa({data, idUsuario}) {
+  console.log (data, idUsuario)
+  try {
+    const response = await api.put(
+       router.COORDINADOR + endpoints.COORDINADOR.MODIFICAR_DATOS_EMPRESA,
+      { datos: data,
+        idEmpresa: idUsuario}
+    );
+    return response.data.data;;
+  } catch (error) {
+    console.error("Error en modificar datos de la empresa:", error);
+    throw error;
+  }
+}

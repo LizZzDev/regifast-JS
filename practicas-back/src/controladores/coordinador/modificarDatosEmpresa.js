@@ -1,11 +1,11 @@
-import Empresa from "../../modelos/modeloEmpresa";import express from 'express';
+import Empresa from "../../modelos/modeloEmpresa.js";
 
 const modificarDatosEmpresa = async (req, res) => {
-  const { datos, idUsuario } = req.body;
-  
+  const { datos, idEmpresa } = req.body;
+  console.log (datos, idEmpresa)
 
   try {
-    const resultado = await Empresa.modificarDatosEmpresa(datos, idUsuario);
+    const resultado = await Empresa.modificarDatosEmpresa(datos, idEmpresa);
 
     return resultado;
   } catch (error) {

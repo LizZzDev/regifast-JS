@@ -11,7 +11,7 @@ import AgregarEmpresa from '../paginas/coordinador/empresas_nav/agregarEmpresa';
 import EditarAlumno from '../paginas/coordinador/alumnos_nav/editarAlumno';
 import EditarEmpresa from '../paginas/coordinador/empresas_nav/editarEmpresa';
 import VerCalificaciones from '../paginas/coordinador/empresas_nav/calificacionSoloEmpresa';
-{/*import VerEmpresa from '../paginas/coordinador/empresas_nav/ver_empresas';*/}
+import VerEmpresa from '../paginas/coordinador/empresas_nav/ver_empresas';
 
 const RutasCoordinador = () => (
     <Routes>
@@ -25,7 +25,7 @@ const RutasCoordinador = () => (
         <Route path="/empresas" element={<TablaEmpresas />} />
         <Route path="/empresas/ver-calificaciones-empresa/:idEmpresa" element={<VerCalificaciones />} />
         <Route path="/empresas/editar-empresa/:idUsuario" element={<EditarEmpresa />} />
-        {/*<Route path="/empresas/ver-empresas/:idUsuario" element={<VerEmpresa />} /> */}
+        <Route path="/empresas/ver-empresa/:idUsuario" element={<VerEmpresa />} /> 
 
         <Route path="/fechas" element={<AsignarFecha />} />
         

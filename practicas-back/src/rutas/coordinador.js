@@ -38,7 +38,7 @@ router.delete('/alumno', verificarSesion, soloCoordinador, eliminarAlumno);
 router.post('/anadirEmpresa', verificarSesion, subirArchivo.single('imagen'), anadirEmpresa);
 router.put('/modificarDatosEmpresa', modificarDatosEmpresa);
 router.put('/validarEmpresa', verificarSesion, validarEmpresa);
-router.put('/revertirValidacionEmpresa', verificarSesion, soloCoordinador, revertirValidacionEmpresa);
+router.put('/revertirValidacionEmpresa', revertirValidacionEmpresa);
 router.delete('/eliminarEmpresa', verificarSesion, soloCoordinador, eliminarEmpresa);
 
 

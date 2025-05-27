@@ -137,6 +137,7 @@ export const revertirValidacionAlumno = async (req, res) => {
 
     export const eliminarEmpresa = async (req, res) => {
     try {
+      console.log (req);
       const response = await eliminarEmpresaService(req);
       res.status(201).json({ data: response });
     } catch (error) {

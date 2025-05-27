@@ -8,7 +8,6 @@
         router.ALUMNOS + endpoints.ALUMNOS.AÑADIR_DATOS,
         formData,
       );
-      console.log (formData);
       return response.data.data;;
     } catch (error) {
       console.error("Error en añadir datos del alumno:", error);
@@ -70,7 +69,6 @@
       const response = await api.get(
         router.ALUMNOS + endpoints.ALUMNOS.OBTENER_ALUMNOS_ID,
       );
-      console.log (response.data.data);
       return response.data.data;;
     } catch (error) {
       console.error("Error en obtener barra status:", error);
@@ -80,7 +78,6 @@
 
   export async function obtenerCalificacionesEmpresa (id=null) {
     try {
-      console.log (id);
       const response = await api.get(
         router.ALUMNOS + endpoints.ALUMNOS.OBTENER_CALIFICACIONES_DE_LA_EMPRESA,
         {
@@ -110,10 +107,9 @@
         { params }
       );
 
-      console.log (response)
       return response.data.data;; 
     } catch (error) {
-      console.log (error)
+       (error)
       if (error.response?.status === 409 && redirigirSiError) {
         alert("No tienes acceso a este apartado");
         window.location.href = '/alumno/principal';
@@ -126,7 +122,6 @@
   
     export async function obtenerEmpresaParaUsuario (idUsuario) {
     try {
-      console.log (idUsuario);
       const params = {};
       if (idUsuario !== undefined && idUsuario !== null) {
         params.idUsuario = idUsuario;

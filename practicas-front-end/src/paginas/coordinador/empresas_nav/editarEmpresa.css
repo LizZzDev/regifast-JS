@@ -1,0 +1,58 @@
+#contenedor-editar-empresa {
+    width: 100%;
+}
+
+
+#form-editar-empresa {
+    width: 100%;
+    max-width: 800px;
+}
+
+.boton-guardar-empresa {
+  display: block;
+  margin: 0;
+  float: left;
+
+  background-color: #4ea362;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.boton-empresa {
+  display: block;
+  margin-left: 2%;
+  margin-top: 0;
+  float: left;
+  background-color: #bb4141;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+
+#boton-validar-empresa {
+  float: right;
+  background-color: #3c8f41;
+}
+
+#boton-revertir-validacion-empresa:hover {
+  background-color: #5c616c; 
+}
+
+#boton-revertir-validacion-empresa {
+  float: right;
+  background-color: #6e7480;
+}
+
+#boton-validar-empresa:hover {
+  background-color: #256328; 
+}
+
+.boton-guardar-empresa:hover {
+  background-color: #218838;
+}

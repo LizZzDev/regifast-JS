@@ -110,11 +110,13 @@ const Empresa = {
     },
 
     obtenerEmpresaPorId: async (id) => {
+      console.log (id)
       try {
         const [rows] = await pool.query(
           `SELECT * FROM empresas WHERE IdEmpresa = ?`,
           [id]
         );
+        console.log ("ola", rows)
         return rows[0];
       } catch (error) {
         console.error("Error al obtener la empresa:", error);
@@ -135,7 +137,8 @@ const Empresa = {
       }
     },
 
-    modificarDatosEmpresa: async (data, idUsuario) => {
+    modificarDatosEmpresa: async (data, idEmpresa) => {
+      console.log (data)
       const fields = Object.keys(data); 
       const values = Object.values(data); 
   
@@ -143,8 +146,8 @@ const Empresa = {
   
       try {
         const [result] = await pool.query(
-          `UPDATE empresas SET ${setClause} WHERE IdUsuario = ?`,
-          [...values, idUsuario]
+          `UPDATE empresas SET ${setClause} WHERE idEmpresa = ?`,
+          [...values, idEmpresa]
         );
   
         return result;
@@ -169,7 +172,7 @@ const Empresa = {
 
     validarEmpresa: async (id) => {
       try {
-        const [result] = await pool.query("UPDATE empresas SET Validada= '1' WHERE IdUsuario = ?", [id]);
+        const [result] = await pool.query("UPDATE empresas SET Validada= '1' WHERE IdEmpresa = ?", [id]);
         return result;
       } catch (error) {
         console.error("Error en validar empresa:", error);
@@ -189,7 +192,7 @@ const Empresa = {
 
    eliminarPorIdAlumno: async (id) => {
     try {
-      const [result] = await connection.query('DELETE FROM empresas WHERE IdAAlumno = ?', [id]);
+      const [result] = await pool.query('DELETE FROM empresas WHERE IdEmpresa = ?', [id]);
       return result;
     } catch (error) {
       console.error("Error en eliminar empresa por id alumno:", error);

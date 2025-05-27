@@ -4,10 +4,10 @@ const revertirValidacionEmpresa = async (req, res) => {
     const { idUsuario } = req.body;
 
     try { 
-        const empresa = await Empresas.obtenerEmpresaPorIdUsuario (idUsuario);
-
+        const empresa = await Empresas.obtenerEmpresaPorId (idUsuario);
+        console.log (empresa)
         if (empresa.Validada == 0) {
-            throw new Error ("Alumno no validado");
+            throw new Error ("Empresa no validada");
         }
 
         const revertirValidacion = await Empresas.modificarDatosEmpresa({ Validada: 0}, idUsuario);
