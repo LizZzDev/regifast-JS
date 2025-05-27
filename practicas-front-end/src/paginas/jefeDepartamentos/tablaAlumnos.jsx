@@ -5,7 +5,11 @@ import HeaderJefeDepto from "../../componentes/jefeDepto/header_jefeDepto.jsx";
 
 function TablaAlumnos() {
   const [alumnos, setAlumnos] = useState([]);
-
+  const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [totalPaginas, setTotalPaginas] = useState(1);  
+  const [totalAlumnos, setTotalAlumnos] = useState(0);
+ 
   const mapEstadoDeDB = (valor) => {
     if (valor === 1) return "ordinario";
     if (valor === 0) return "extraordinario";
@@ -18,10 +22,17 @@ function TablaAlumnos() {
     return null;
   };
 
+  const [filtros, setFiltros] = useState({
+    estadoCalificacion: ''
+  });
+
   useEffect(() => {
     const cargarAlumnos = async () => {
       try {
-        const response = await obtenerAlumnos();
+        const response = await obtenerAlumnos({
+            pagina: paginaActual, 
+            limite: 20
+        });
         const alumnosConEstado = response.alumnos.map(alumno => ({
           ...alumno,
           estado: mapEstadoDeDB(alumno.Ordinario),
@@ -34,7 +45,7 @@ function TablaAlumnos() {
     };
 
     cargarAlumnos();
-  }, []);
+    }, [filtros, paginaActual]);
 
   const handleEstadoChange = (index, nuevoEstado) => {
     const nuevos = [...alumnos];
@@ -47,6 +58,38 @@ function TablaAlumnos() {
     nuevos[index].calificacion = nuevaCalificacion;
     setAlumnos(nuevos);
   };
+
+  useEffect(() => {
+    const filtered = alumnos.filter(alumno => {
+      if (filtros.estadoCalificacion === "calificados") {
+        return (
+          (alumno.Ordinario === 0 || alumno.Ordinario === 1) &&
+          alumno.Calificacion != null
+        );
+      }
+
+      if (filtros.estadoCalificacion === "no-calificados") {
+        return (
+          alumno.Ordinario !== 0 && alumno.Ordinario !== 1 &&
+          (alumno.Calificacion == null || alumno.Calificacion === '')
+        );
+      }
+
+      return true; 
+    });
+
+    setAlumnosFiltrados(filtered);
+    setTotalAlumnos(filtered.length);
+  }, [filtros, alumnos]);
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFiltros(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
 
   const confirmarDatos = async (idUsuario, alumno) => {
     const data = {
@@ -80,11 +123,27 @@ function TablaAlumnos() {
   return (
     <div className="page">
       <HeaderJefeDepto />
-
-      <main>
+        <main>
         <section id="titleA">
           <h2>Listado de Alumnos</h2>
         </section>
+
+        <section className="filtros-container">
+          <div className="filtros-centrados">
+            <select
+              className="filtro-select-alumnos"
+              name="estadoCalificacion"
+              value={filtros.estadoCalificacion}
+              onChange={handleFilterChange}
+            >
+              <option value="">Todos los alumnos</option>
+              <option value="calificados">Listos</option>
+              <option value="no-calificados">Sin calificar</option>
+            </select>
+          </div>
+        </section>
+        <div className="contador-total">Total: {totalAlumnos} alumnos
+        </div>
 
         <table>
           <thead>
@@ -101,7 +160,7 @@ function TablaAlumnos() {
             </tr>
           </thead>
           <tbody>
-            {alumnos.map((alumno, index) => (
+            {alumnosFiltrados.map((alumno, index) => (
               <tr key={alumno.Codigo}>
                 <td className="col-codigo">{alumno.Codigo}</td>
                 <td className="col-nombre">{alumno.NombreCompleto}</td>
@@ -163,6 +222,27 @@ function TablaAlumnos() {
             ))}
           </tbody>
         </table>
+        <div className="paginacion">
+
+              
+            <button 
+              className='button-paginacion'
+              onClick={() => setPaginaActual(prev => Math.max(prev - 1, 1))}
+              disabled={paginaActual === 1}
+            >
+              Anterior
+            </button>
+
+            <label id='label-paginacion'>Página {paginaActual} de {totalPaginas}</label>
+
+            <button 
+              className='button-paginacion'
+              onClick={() => setPaginaActual(prev => Math.min(prev + 1, totalPaginas))}
+              disabled={paginaActual === totalPaginas}
+            >
+              Siguiente
+            </button>
+          </div>
       </main>
     </div>
   );

@@ -6,22 +6,30 @@ import { obtenerEmpresasParaUsuario, postularOfertaEmpresa } from '../../../api/
 
 const ConsultarOferta = () => {
     const [empresas, setEmpresas] = useState([]);
+    const [paginaActual, setPaginaActual] = useState(1);
+    const [totalPaginas, setTotalPaginas] = useState(1);
     const navigate = useNavigate();
   
    useEffect(() => {
-      const cargarEmpresas = async () => {
-        try {
-          const validada = true;
-          const vacantes = true;
-          const datos = await obtenerEmpresasParaUsuario({validada, vacantes});
-          setEmpresas(datos.empresas);
-        } catch (error) {
-          console.error('Error al cargar empresas:', error);
-        }
-      };
-  
-      cargarEmpresas();
-    }, []);
+    const cargarEmpresas = async () => {
+      try {
+        const validada = true;
+        const vacantes = true;
+        const datos = await obtenerEmpresasParaUsuario({ 
+          pagina: paginaActual, 
+          limite: 10, 
+          validada, 
+          vacantes 
+        });
+        setEmpresas(datos.empresas);
+        setTotalPaginas(datos.totalPaginas);
+      } catch (error) {
+        console.error('Error al cargar empresas:', error);
+      }
+    };
+
+    cargarEmpresas();
+  }, [paginaActual]);
 
   const handleOpiniones = (idEmpresa) => {
       navigate(`ver-calificaciones-empresa/${idEmpresa}`);
@@ -79,6 +87,29 @@ const ConsultarOferta = () => {
               ))}
             </tbody>
           </table>
+
+          <div className="paginacion">
+
+              
+            <button 
+              className='button-paginacion'
+              onClick={() => setPaginaActual(prev => Math.max(prev - 1, 1))}
+              disabled={paginaActual === 1}
+            >
+              Anterior
+            </button>
+
+            <label id='label-paginacion'>Página {paginaActual} de {totalPaginas}</label>
+
+            <button 
+              className='button-paginacion'
+              onClick={() => setPaginaActual(prev => Math.min(prev + 1, totalPaginas))}
+              disabled={paginaActual === totalPaginas}
+            >
+              Siguiente
+            </button>
+          </div>
+
         </section>
       </main>
     </div>

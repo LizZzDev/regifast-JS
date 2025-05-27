@@ -8,6 +8,8 @@ import HeaderCoordinador from '../../../componentes/coordinador/header_coordinad
 const TablaEmpresas = () => {
   const [empresas, setEmpresas] = useState([]);
   const [validandoIds, setValidandoIds] = useState([]);
+  const [totalPaginas, setTotalPaginas] = useState(1);
+  const [paginaActual, setPaginaActual] = useState(1);
   const [totalEmpresas, setTotalEmpresas] = useState(0);
   const [filtros, setFiltros] = useState({
     busqueda: '',
@@ -31,8 +33,8 @@ const TablaEmpresas = () => {
   const cargarEmpresas = async () => {
     try {
       const datos = await obtenerEmpresas({
-        pagina: 1,
-        limite: 1000,
+        pagina: paginaActual,
+        limite: 20,
         busqueda: filtros.busqueda || null,
         validada:
           filtros.validada === 'validada' ? 1 :
@@ -46,7 +48,7 @@ const TablaEmpresas = () => {
   };
 
   cargarEmpresas();
-}, [filtros.busqueda, filtros.validada]); 
+}, [filtros.busqueda, filtros.validada, paginaActual]); 
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -238,6 +240,25 @@ const TablaEmpresas = () => {
             </tbody>
           </table>
         </div>
+        <div className="paginacion">
+            <button 
+              className='button-paginacion'
+              onClick={() => setPaginaActual(prev => Math.max(prev - 1, 1))}
+              disabled={paginaActual === 1}
+            >
+              Anterior
+            </button>
+
+            <label id='label-paginacion'>Página {paginaActual} de {totalPaginas}</label>
+
+            <button 
+              className='button-paginacion'
+              onClick={() => setPaginaActual(prev => Math.min(prev + 1, totalPaginas))}
+              disabled={paginaActual === totalPaginas}
+            >
+              Siguiente
+            </button>
+          </div>
       </main>
     </div>
   );

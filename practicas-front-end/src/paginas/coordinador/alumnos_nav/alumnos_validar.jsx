@@ -8,7 +8,9 @@ import HeaderCoordinador from '../../../componentes/coordinador/header_coordinad
 const ValidacionAlumnos = () => {
   const [alumnos, setAlumnos] = useState([]);
   const [validandoIds, setValidandoIds] = useState([]);
-
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [totalPaginas, setTotalPaginas] = useState(1);
+    
   // Estados para los filtros
   const [filtros, setFiltros] = useState({
     busqueda: '',
@@ -25,8 +27,8 @@ const ValidacionAlumnos = () => {
     const cargarAlumnos = async () => {
       try {
        const response = await obtenerAlumnos({
-          pagina: 1,
-          limite: 1000, // si quieres traer muchos para filtrar
+          pagina: paginaActual,
+          limite: 20,
           carrera: filtros.carrera || null,
           busqueda: filtros.busqueda || null,
           validada:
@@ -42,7 +44,7 @@ const ValidacionAlumnos = () => {
     };
 
     cargarAlumnos();
-  }, [filtros]);
+  }, [filtros, paginaActual]);
 
   // Aplicar filtros cuando cambien los filtros o la lista de alumnos
   useEffect(() => {
@@ -224,6 +226,25 @@ const ValidacionAlumnos = () => {
             </tbody>
           </table>
         </div>
+          <div className="paginacion">
+            <button 
+              className='button-paginacion'
+              onClick={() => setPaginaActual(prev => Math.max(prev - 1, 1))}
+              disabled={paginaActual === 1}
+            >
+              Anterior
+            </button>
+
+            <label id='label-paginacion'>Página {paginaActual} de {totalPaginas}</label>
+
+            <button 
+              className='button-paginacion'
+              onClick={() => setPaginaActual(prev => Math.min(prev + 1, totalPaginas))}
+              disabled={paginaActual === totalPaginas}
+            >
+              Siguiente
+            </button>
+          </div>
       </main>
     </div>
   );

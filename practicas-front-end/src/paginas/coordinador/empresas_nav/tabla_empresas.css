@@ -179,3 +179,40 @@ th {
   margin-left: 1%;
   height: 2.45vw;
 }
+
+
+/* Paginacion */
+
+.paginacion {
+    width: 100%;
+    margin-top: 3%;
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    gap: 1rem;               
+}
+
+.button-paginacion {
+    padding: 0.5rem 1rem;
+    margin: 0;
+    font-weight: bold;
+    border: none;
+    background-color: #28507a;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button-paginacion:hover {
+    background-color: #14375c;
+}
+
+.paginacion button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+#label-paginacion {
+    font-weight: 500;
+    font-size: 125%;
+}
