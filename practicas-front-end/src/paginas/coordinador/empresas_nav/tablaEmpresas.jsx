@@ -49,7 +49,7 @@ const TablaEmpresas = () => {
   };
 
   cargarEmpresas();
-}, [filtros.busqueda, filtros.validada, paginaActual]); 
+}, [filtros, paginaActual]); 
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -219,23 +219,27 @@ const TablaEmpresas = () => {
                     )}
                   </td>
                   {filtros.editable === 'editable' && empresa.IdUsuario === null ?  (
+                    <td>
                        <button
                         className="confirmar-btn"
                         onClick={() => EditarEmpresa(empresa.IdEmpresa)}
                       >
                         Editar
                       </button>
+                    </td>
                   ) : null
-                  }
+                  } 
                   {filtros.editable === 'no-editable' && empresa.IdUsuario ?  (
+                  <td>
                        <button
                         className="confirmar-btn"
                         onClick={() => VerEmpresa(empresa.IdEmpresa)}
                       >
-                        Ver
+                        Ver empresa
                       </button>
+                    </td>                 
                   ) : null
-                  }                  
+                  } 
                 </tr>
               ))}
             </tbody>

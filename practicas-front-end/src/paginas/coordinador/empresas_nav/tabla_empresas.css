@@ -156,12 +156,19 @@ th {
   }
 }
 
-#Opiniones{
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #D6B179ff; 
+#opinionesTD {
+  justify-content: center;
+  text-align: center;
+  justify-items: center;
 }
-#Opiniones:hover{
+
+#OpinionesEmpresa{
+  display: block;
+  margin-left: 4%;
+  background-color: #D6B179ff;
+}
+
+#OpinionesEmpresa:hover{
   background-color: #8C7A64ff;
 }
 
@@ -215,4 +222,17 @@ th {
 #label-paginacion {
     font-weight: 500;
     font-size: 125%;
+}
+
+.ver-btn{
+  background-color: #D6B179ff !important;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-left: 5px !important;
 }

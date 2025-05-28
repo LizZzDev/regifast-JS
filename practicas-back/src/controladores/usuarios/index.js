@@ -4,6 +4,7 @@ import inicioSesionServicio from './iniciarSesion.js';
 import cerrarSesionServicio from './cerrarSesion.js';
 import generarTokenService from './generarToken.js';
 import validarTokenService from './validarToken.js';
+import generarTokenRecuperarContrasenaService from './generarRecuperarContrasena.js';
 
 export const iniciarSesion = async (req, res) => {
   try {
@@ -33,6 +34,18 @@ export const crearUsuario = async (req, res) => {
     });
   } catch (error) {
     console.error("Error al crear cuenta:", error.message);
+    return res.status(401).json({ success: false, message: error.message });
+  }
+};
+
+export const generarTokenRecuperarContrasena = async (req, res) => {
+  try {
+    const response = await generarTokenRecuperarContrasenaService(req.body);
+    return res.status(201).json({
+      data: response,
+    });
+  } catch (error) {
+    console.error("Error al generar token recuperar contraseña:", error.message);
     return res.status(401).json({ success: false, message: error.message });
   }
 };

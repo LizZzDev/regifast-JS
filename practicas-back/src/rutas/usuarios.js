@@ -5,7 +5,8 @@ import {
     crearUsuario,
     cerrarSesion,
     generarToken, 
-    validarToken
+    validarToken,
+    generarTokenRecuperarContrasena
 } from '../controladores/usuarios/index.js';
 
 const router = express.Router();
@@ -14,6 +15,7 @@ router.post('/iniciarSesion', iniciarSesion);
 router.post('/crearUsuario', crearUsuario);
 router.post('/cerrarSesion', cerrarSesion);
 router.post('/generarToken', generarToken);
+router.post('/generarTokenRecuperarContrasena', generarTokenRecuperarContrasena);
 router.post('/validarToken', validarToken);
 
 

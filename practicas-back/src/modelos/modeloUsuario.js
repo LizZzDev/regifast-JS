@@ -44,6 +44,35 @@ const Usuario = {
       throw error;
     }
   },
+
+    guardarTokenRecuperarContrasena: async (tokenGenerado, fechaExpiracion, correo) => {
+    try {
+      const [result] = await pool.query("UPDATE usuarios SET TokenRecuperacion = ?, Expiracion = ? WHERE Correo = ?", [
+        tokenGenerado,
+        fechaExpiracion,
+        correo,
+    ]);
+      return result;
+    } catch (error) {
+      console.error("Error en guardar token recuperar contrasena:", error);
+      throw error;
+    }
+  },
+
+  restablecerContrasenaPorToken: async (nuevaContrasena, token) => {
+  try {
+    const [result] = await pool.query(
+      `UPDATE usuarios 
+       SET Contrasena = ?, TokenRecuperacion = NULL, Expiracion = NULL 
+       WHERE TokenRecuperacion = ? AND Expiracion > NOW()`,
+      [nuevaContrasena, token]
+    );
+    return result.affectedRows > 0;
+  } catch (error) {
+    console.error("Error al restablecer contraseña:", error);
+    throw error;
+  }
+}
 };
 
 export default Usuario;

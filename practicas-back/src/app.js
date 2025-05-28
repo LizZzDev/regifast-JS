@@ -36,6 +36,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/', rutas);
 
+app.use(express.static(path.join(__dirname, '../../practicas-front-end/dist'))); 
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../practicas-front-end/dist/index.html'));
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
   });
