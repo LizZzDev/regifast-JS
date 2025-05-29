@@ -44,8 +44,12 @@ const BarraStatus = () => {
       const cargarBarraStatus = async () => {
         try {
           const alumno = await obtenerAlumno();
-          const datos = alumno.alumno.BarraStatus;
-          setProgreso(datos);
+          const datos = alumno?.alumno?.BarraStatus;
+          if (datos !== undefined && barraStatus >= 2) {
+            setProgreso(0);
+          } else {
+            setProgreso(datos);
+          }
         } catch (error) {
           console.error('Error al cargar empresas:', error);
         }

@@ -24,8 +24,9 @@ const DocumentosAlumno = () => {
       const salir = async () => {
         try {
           const alumno = await obtenerAlumno();
-          const datos = alumno.alumno.BarraStatus;
-          if (datos < 3 || datos == null) {
+          const datos = alumno?.alumno?.BarraStatus;
+
+          if ( datos == null ||datos < 3) {
             alert("Tu documento aun no se encuentra disponible.");
             window.location.href = '/alumno/principal';
           }

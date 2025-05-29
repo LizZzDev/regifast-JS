@@ -14,8 +14,12 @@ const Header = () => {
   const verificarAccesos = async () => {
     try {
       const Alumno = await obtenerAlumno();
-      const etapaActual = Alumno.alumno.BarraStatus;
-      setEtapa(etapaActual);
+      const etapaActual = Alumno?.alumno?.BarraStatus;
+      if (!etapaActual || etapaActual == undefined) {
+         setEtapa(0) 
+      } else {
+          setEtapa(etapaActual);
+      }
 
       try {
         await obtenerEmpresasParaUsuario({}, false); 
@@ -25,6 +29,7 @@ const Header = () => {
         if (error?.response?.status === 409) {
           setPuedeConsultarOferta(false);
         }
+              navigate('/alumno/principal'); 
       }
 
     } catch (error) {
