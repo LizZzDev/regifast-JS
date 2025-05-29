@@ -22,8 +22,7 @@ const postularOfertaEmpresa = async (req, res) => {
             throw error;
             }
 
-        await Alumnos.aumentarEnUnoBarraStatus(idUsuario);
-        const aumentarBarraStatus = await Alumnos.modificarDatosAlumno({ BarraStatus: 3 }, idUsuario);
+        await Alumnos.modificarDatosAlumno({ BarraStatus: 3, IdEmpresa: IdEmpresa }, idUsuario);
         await Empresas.disminuirVacante(IdEmpresa);
 
         return { mensaje: "Postulación exitosa" };
