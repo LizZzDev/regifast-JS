@@ -5,7 +5,7 @@ import { obtenerAlumno } from '../../../api/alumnos';
 
 const BarraStatus = () => {
   // Estado para el progreso (simulando el valor que vendría de PHP)
-  const [progreso, setProgreso] = useState(); 
+  const [progreso, setProgreso] = useState(0); 
 
   // Datos para la barra de progreso
   const [pasos, setPasos] = useState([
@@ -45,7 +45,7 @@ const BarraStatus = () => {
         try {
           const alumno = await obtenerAlumno();
           const datos = alumno?.alumno?.BarraStatus;
-          if (datos !== undefined && barraStatus >= 2) {
+          if (datos !== undefined && datos >= 2) {
             setProgreso(0);
           } else {
             setProgreso(datos);

@@ -8,7 +8,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const [etapa, setEtapa] = useState(null);
-  const [puedeConsultarOferta, setPuedeConsultarOferta] = useState(true);
+  const [puedeConsultarOferta, setPuedeConsultarOferta] = useState();
 
  useEffect(() => {
   const verificarAccesos = async () => {
@@ -22,16 +22,16 @@ const Header = () => {
       }
 
       try {
-        await obtenerEmpresasParaUsuario({}, false); 
-        
-        setPuedeConsultarOferta(true);
+        const obtener = await obtenerEmpresasParaUsuario({}, false); 
+        if (obtener) {
+          setPuedeConsultarOferta(true);
+        }
       } catch (error) {
         if (error?.response?.status === 409) {
           setPuedeConsultarOferta(false);
         }
               navigate('/alumno/principal'); 
       }
-
     } catch (error) {
       console.error('Error al obtener etapa o acceso a empresas:', error);
     }
@@ -63,13 +63,13 @@ return (
           <li><a href="/alumno/registro">REGISTRO DE DATOS</a></li>
         )}
         {etapa == 2 && puedeConsultarOferta && (
-          <li><a href="/alumno/consultar">CONSULTAR OFERTA</a></li>
+          <li><a href="/alumno/consultar"> CONSULTAR OFERTA</a></li>
         )}
 
         {etapa !== 0 && etapa > 2 && (
           <li><a href="/alumno/documentos">DOCUMENTOS</a></li>
         )}
-        {etapa !== 0 && etapa == 3 && (
+        {etapa !== 0 && etapa > 4 && (
           <li><a href="/alumno/calificar">OPINION</a></li>
         )}
 

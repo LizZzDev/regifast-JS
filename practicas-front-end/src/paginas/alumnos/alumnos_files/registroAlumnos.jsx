@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import './RegistroAlumnos.css';
+import './registroAlumnos.css';
 import { anadirDatosDelAlumno, obtenerAlumno } from '../../../api/alumnos';
 import Header from '../../../componentes/alumnos/header';
 
@@ -43,8 +43,8 @@ const RegistroAlumnos = () => {
     const salir = async () => {
       try {
         const alumno = await obtenerAlumno();
-        const datos = alumno.alumno.BarraStatus
-        if (Number(barraStatus) >= 2) {
+        const datos = alumno.alumno.BarraStatus;
+        if (datos >= 2) {
           alert("Tu registro de datos ya fue enviado.");
           window.location.href = '/alumno/principal';
         }
@@ -167,7 +167,7 @@ const RegistroAlumnos = () => {
         }
       }
     } else {
-      console.log('Errores en el formulario:', errors);
+      alert('Tienes errores en el formulario');
     }
   };
 

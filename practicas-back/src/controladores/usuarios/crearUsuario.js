@@ -3,6 +3,7 @@ import pool from '../../configuracion/db.js';
 import Usuario from '../../modelos/modeloUsuario.js';
 import Empresa from '../../modelos/modeloEmpresa.js';
 import JefeDepartamento from '../../modelos/modeloJefeDepartamento.js';
+import Alumno from '../../modelos/modeloAlumno.js';
 
 const validarCorreoAlumno = (correo) => {
   return correo.endsWith('@alumnos.udg.mx');
@@ -40,6 +41,10 @@ const crearUsuario = async (req) => {
 
     if (rol === 'jefeDepartamento') {
       await JefeDepartamento.crearJefeDeDepartamento(connection, datosJefeDepartamento, idUsuario);
+    }
+
+    if (rol === 'alumno') {
+      await Alumno.agregarNuevoAlumno(connection, correo, idUsuario, nombre);
     }
 
     await connection.commit(); 
