@@ -107,7 +107,7 @@
         { params }
       );
 
-      return response.data.data;; 
+      return response.data.data;
     } catch (error) {
       if (error.response?.status === 409 && redirigirSiError) {
         alert("No tienes acceso a este apartado");

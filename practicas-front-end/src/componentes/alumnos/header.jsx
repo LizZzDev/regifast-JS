@@ -69,7 +69,7 @@ return (
         {etapa !== 0 && etapa > 2 && (
           <li><a href="/alumno/documentos">DOCUMENTOS</a></li>
         )}
-        {etapa !== 0 && etapa > 4 && (
+        {etapa !== 0 && etapa == 4 && (
           <li><a href="/alumno/calificar">OPINION</a></li>
         )}
 

@@ -10,7 +10,9 @@ const Alumno = {
     }
   },
 
-  obtenerAlumnos: async ({ pagina, limite, carrera, busqueda, validado }) => {
+  obtenerAlumnos: async ({ pagina, limite, carrera, busqueda, validado, ordinario }) => {
+console.log (ordinario);
+   
     try {
       const offset = (pagina - 1) * limite;
   
@@ -33,11 +35,18 @@ const Alumno = {
         countParams.push(`%${busqueda}%`);
       }
   
-      if (validado) {
-        query += ` AND Revisado = ?`;
-        queryCount += ` AND Revisado = ?`;
+      if (validado !== null) {
+        query += ` AND Revision = ?`;
+        queryCount += ` AND Revision = ?`;
         params.push(validado);
         countParams.push(validado);
+      }
+
+      if (ordinario !== null) {
+        query += ` AND Ordinario = ?`;
+        queryCount += ` AND Ordinario = ?`;
+        params.push(ordinario);
+        countParams.push(ordinario);
       }
   
       query += ` ORDER BY NombreCompleto ASC LIMIT ? OFFSET ?`;

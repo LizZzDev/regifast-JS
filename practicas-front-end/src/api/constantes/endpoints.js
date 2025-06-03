@@ -4,6 +4,7 @@ export const endpoints = {
       INICIAR_SESION: '/iniciarSesion',
       GENERAR_TOKEN: '/generarToken',
       VALIDAR_TOKEN: '/validarToken',
+      VERIFICAR_SESION: '/verificarSesion',
       CERRAR_SESION: '/cerrarSesion',
     },
 

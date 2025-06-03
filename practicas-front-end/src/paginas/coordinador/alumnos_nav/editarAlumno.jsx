@@ -88,7 +88,12 @@ const EditarAlumno = () => {
     if (formData.CorreoInstitucional && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.CorreoInstitucional)) {
       nuevosErrores.CorreoInstitucional = 'Correo inválido';
     }
-    if (formData.Calificacion && !/^\d{3}$/.test(formData.Movil)) nuevosErrores.Movil = 'La calificacion solo puede estar entre 0 y 100';
+    if (formData.Calificacion) {
+    const calif = Number(formData.Calificacion);
+    if (isNaN(calif) || calif < 0 || calif > 100) {
+      nuevosErrores.Calificacion = 'La calificación solo puede estar entre 0 y 100';
+    }
+}
     if (formData.Movil && !/^\d{10}$/.test(formData.Movil)) nuevosErrores.Movil = '10 dígitos';
     if (formData.Telefono && !/^\d{10}$/.test(formData.Telefono)) nuevosErrores.Telefono = '10 dígitos';
     if (formData.TelefonoEmergencia && !/^\d{10}$/.test(formData.TelefonoEmergencia)) {

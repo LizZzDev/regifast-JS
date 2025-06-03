@@ -6,7 +6,7 @@ import "../empresas/styles.css";
 import Header from "../../componentes/header.jsx";
 
 
-const LoginCJ = ({ onLogin }) => {
+const LoginCJ = () => {
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
   const [mensaje, setMensaje] = useState("");

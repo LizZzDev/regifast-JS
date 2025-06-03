@@ -63,14 +63,16 @@ export async function obtenerAlumno(idUsuario) {
   }
 }
 
-export async function obtenerAlumnos({ pagina = 1, limite = 20, busqueda = null, carrera = null, validada = null } = {}) {
+export async function obtenerAlumnos({ pagina = 1, limite = 20, busqueda = null, carrera = null, validado = null, ordinario = null } = {}) {
   try {
+    console.log (validado, ordinario)
      const params = {
       pagina,
       limite,
       ...(carrera && { carrera }),
       ...(busqueda && { busqueda }),
-      ...(validada !== null && { validada }),
+      ...(validado !== null && { validado }),
+      ...(ordinario !== null && { ordinario })
     };
 
     const response = await api.get(
@@ -164,7 +166,7 @@ export async function revertirValidacionAlumno(idUsuario) {
 
 export async function eliminarAlumno(idUsuario) {
   try {
-    const response = await api.post(
+    const response = await api.delete(
        router.COORDINADOR + endpoints.COORDINADOR.ELIMINAR_ALUMNO,
         {
         params: {

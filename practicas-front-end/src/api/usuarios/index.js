@@ -63,6 +63,24 @@ export async function validarToken(correo, token ) {
   }
 }
 
+export async function verificarSesion (rolEsperado) {
+  try {
+    const response = await api.get(
+       router.USUARIOS + endpoints.USUARIOS.VERIFICAR_SESION,
+        { params: 
+          {
+            rolEsperado: rolEsperado,
+          }
+       }
+
+    );
+    return response.data.data;
+  } catch (error) {
+        console.error('Error al verificar sesion', error);
+        throw error;
+    }
+}
+
 export async function cerrarSesion() {
   try {
     const response = await api.post(router.USUARIOS + endpoints.USUARIOS.CERRAR_SESION);
