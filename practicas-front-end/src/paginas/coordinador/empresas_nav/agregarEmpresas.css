@@ -116,8 +116,9 @@ div {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-left: 70%;
 }
 
 #btn-registrar:hover {
-  background-color: #45a049;
+  background-color: #347a38;
 }

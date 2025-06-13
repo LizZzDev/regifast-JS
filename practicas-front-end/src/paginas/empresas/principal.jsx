@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { obtenerEmpresa } from '../../api/empresas';
 import './principal.css';
 import { useNavigate } from 'react-router-dom';
+import Header from '../../../src/componentes/header';
 
 function PrincipalEmpresa() {
   console.log ("shi")
@@ -30,11 +31,7 @@ function PrincipalEmpresa() {
 
   return (
     <div className="montserrat">
-      <header>
-        <article id="nomUDG">
-          <img src="/img/udg_white.png" alt="UDG Logo" />
-        </article>
-      </header>
+      <Header/>
       
       <section id="generalPrincipal">
         {/* Columna izquierda */}

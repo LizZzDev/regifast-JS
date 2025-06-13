@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #recuperar-root {
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+
+#recuperar-header {
+  width: 100%;
+  background-color: #890831ff;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+#recuperar-logo-container {
+  width: 100%;
+  background-color: #890831ff;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+#recuperar-logo {
+  width: 20%;
+  height: auto;
+}
+
+#recuperar-nav {
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+}
+
+#recuperar-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  padding: 10px 0;
+}
+
+#recuperar-nav li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: 0.3s ease;
+}
+
+#recuperar-nav li a:hover {
+  background-color: white;
+  color: #103E7E;
+  border-radius: 5px;
+}
+
+/* Recuperar contraseña */
+
+#recuperar-container {
+  width: 90%;
+  max-width: 40rem;
+  margin: 10vh auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+#recuperar-form {
+  width: 100%;
+  background-color: #d9d9d9;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.3);
+}
+
+#recuperar-title {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #000000;
+}
+
+#recuperar-description {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #2f3131;
+}
+
+#recuperar-input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 0.625rem;
+  background-color: #f1faee;
+  color: #1d3557;
+  font-size: 1rem;
+}
+
+#recuperar-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #e63946;
+  color: #f1faee;
+  border: none;
+  border-radius: 0.625rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#recuperar-button:hover {
+  background-color: #d62828;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  #recuperar-logo {
+    width: 40%;
+  }
+
+  #recuperar-nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #recuperar-form {
+    padding: 1.5rem;
+  }
+
+  #recuperar-title {
+    font-size: 1.25rem;
+  }
+
+  #recuperar-description {
+    font-size: 0.95rem;
+  }
+}

@@ -7,32 +7,6 @@
 html, body{
     height: 100%;
 }
-/* Header */
-
-header {
-    display: flex;
-    justify-content: center; /* Centrado horizontal */
-    align-items: center;
-    background-color: #103E7E;
-    color: white;
-    flex-wrap: wrap;
-    flex-direction: column; /* Apila elementos verticalmente */
-    gap: 20px; /* Espacio entre elementos */
-}
-
-header #nomUDG {
-    display: flex;
-    justify-content: center; 
-    width: 100%;
-}
-
-header #nomUDG img {
-    height: auto;
-    width: auto;
-    max-height: 100px; 
-    max-width: 100%; 
-    object-fit: contain; 
-}
 
 .montserrat{
 
@@ -304,13 +278,6 @@ th{
 }
 
 @media (max-width: 600px) {
-    header {
-        padding: 20px 2%;
-    }
-
-    #nomUDG img {
-        max-height: 70px;
-    }
 
     #h1empresa {
         font-size: 1.5em;
