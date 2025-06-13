@@ -2,7 +2,7 @@ import express from 'express';
 import validarCampos from '../middlewares/validarCampos.js';
 import { verificarSesion } from '../middlewares/verificarSesion.js';
 import { soloAlumno } from '../middlewares/verificarRol.js';
-import accesoPorCalificacion from '../middlewares/accesoPorFechaYCalificacion .js';
+import accesoPorCalificacion from '../middlewares/accesoPorFechaYCalificacion.js';
 
 import { 
     anadirDatosDelAlumno,

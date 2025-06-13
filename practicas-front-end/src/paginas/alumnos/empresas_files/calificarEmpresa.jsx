@@ -88,7 +88,7 @@ const CalificarEmpresa = () => {
                   checked={rating === 1}
                   onChange={() => handleRatingChange(1)}
                 />
-                <label htmlFor="stars1" title="1 estrella">★</label>
+                <label htmlFor="stars1" title="5 estrella">★</label>
             
                 <input 
                   type="radio" 
@@ -98,7 +98,7 @@ const CalificarEmpresa = () => {
                   checked={rating === 2}
                   onChange={() => handleRatingChange(2)}
                 />
-                <label htmlFor="stars2" title="2 estrellas">★</label>
+                <label htmlFor="stars2" title="4 estrellas">★</label>
             
                 <input 
                   type="radio" 
@@ -118,7 +118,7 @@ const CalificarEmpresa = () => {
                   checked={rating === 4}
                   onChange={() => handleRatingChange(4)}
                 />
-                <label htmlFor="stars4" title="4 estrellas">★</label>
+                <label htmlFor="stars4" title="2 estrellas">★</label>
             
                 <input 
                   type="radio" 
@@ -128,7 +128,7 @@ const CalificarEmpresa = () => {
                   checked={rating === 5}
                   onChange={() => handleRatingChange(5)}
                 />
-                <label htmlFor="stars5" title="5 estrellas">★</label>
+                <label htmlFor="stars5" title="1 estrellas">★</label>
               </fieldset>
             </section>
 

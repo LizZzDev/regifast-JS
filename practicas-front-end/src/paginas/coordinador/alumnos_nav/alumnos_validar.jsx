@@ -25,19 +25,25 @@ const ValidacionAlumnos = () => {
 
   useEffect(() => {
     const cargarAlumnos = async () => {
+      console.log (filtros.ordinario)
       try {
        const response = await obtenerAlumnos({
           pagina: paginaActual,
           limite: 10,
           carrera: filtros.carrera || null,
           busqueda: filtros.busqueda || null,
-          validada:
+          ordinario: filtros.ordinario === 'ordinario' ? 1 :
+           filtros.ordinario === 'no-ordinario' ? 0 :
+           null,
+          validado:
             filtros.revision === 'revisado' ? 1 :
             filtros.revision === 'no-revisado' ? 0 :
             null
         });
-        console.log (response);
-        setTotalPaginas(response.totalPaginas);
+        console.log ("a", filtros, "a", response);
+        const paginas = response.totalPaginas;
+        setTotalPaginas(paginas < 1 ? 1 : paginas);
+        setTotalAlumnos(response.total)
         setAlumnos(response.alumnos);
       } catch (error) {
         console.error("Error al obtener alumnos:", error);
@@ -52,7 +58,7 @@ const ValidacionAlumnos = () => {
     const filtered = alumnos.filter(alumno => {
       const coincideBusqueda = 
         alumno.NombreCompleto.toLowerCase().includes(filtros.busqueda.toLowerCase()) ||
-        alumno.Codigo.toLowerCase().includes(filtros.busqueda.toLowerCase());
+        alumno.Codigo.includes(filtros.busqueda);
       
       const coincideCarrera = 
         !filtros.carrera || alumno.Carrera === filtros.carrera;
@@ -67,13 +73,10 @@ const ValidacionAlumnos = () => {
         (filtros.ordinario === "ordinario" && alumno.Ordinario === 1) ||
         (filtros.ordinario === "no-ordinario" && alumno.Ordinario === 0);
 
-        console.log (alumno.Ordinario)
-
       return coincideBusqueda && coincideCarrera && coincideRevision && coincideOrdinario;
     });
 
     setAlumnosFiltrados(filtered);
-    setTotalAlumnos(filtered.length);
 }, [filtros, alumnos]);
 
 
@@ -96,15 +99,18 @@ const ValidacionAlumnos = () => {
       await validarAlumno(IdUsuario);
       alert("Validacion exitosa");
       const response = await obtenerAlumnos({
-      pagina: 1,
-      limite: 1000,
-      carrera: filtros.carrera || null,
-      busqueda: filtros.busqueda || null,
-      validada:
-        filtros.revision === 'revisado' ? 1 :
-        filtros.revision === 'no-revisado' ? 0 :
-        null
-    });
+          pagina: paginaActual,
+          limite: 10,
+          carrera: filtros.carrera || null,
+          busqueda: filtros.busqueda || null,
+          ordinario: filtros.ordinario === 'ordinario' ? 1 :
+           filtros.ordinario === 'no-ordinario' ? 0 :
+           null,
+          validado:
+            filtros.revision === 'revisado' ? 1 :
+            filtros.revision === 'no-revisado' ? 0 :
+            null
+        });
     setAlumnos(response.alumnos);
     } catch (error) {
       console.error('Error al enviar datos de validación:', error);

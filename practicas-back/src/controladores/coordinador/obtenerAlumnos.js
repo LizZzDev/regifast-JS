@@ -6,11 +6,15 @@ const obtenerAlumnosFiltrados = async (req) => {
   const pagina = parseInt(req.query.pagina) || 1;
   const limite = parseInt(req.query.limite) || 20;
   let carrera = req.query.carrera;
+  const ordinario = req.query.ordinario === '1' ? 1 
+                 : req.query.ordinario === '0' ? 0
+                 : null;
   const busqueda = req.query.busqueda;
-  const validada = req.query.validada === 'true' ? 1 
-                 : req.query.validada === 'false' ? 0
+  const validada = req.query.validado === '1' ? 1 
+                 : req.query.validado === '0' ? 0
                  : null;
   try {
+    console.log (req.query)
     if (req.session.rol === "jefeDepartamento") {
         const carreraJefe = await Jefe.obtenerJefe(req.session.ID);
         carrera = carreraJefe?.Carrera;
@@ -22,7 +26,8 @@ const obtenerAlumnosFiltrados = async (req) => {
         limite: limite, 
         carrera: carrera, 
         busqueda: busqueda, 
-        validado: validada
+        validado: validada,
+        ordinario: ordinario
       }
     );
 

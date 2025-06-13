@@ -14,6 +14,8 @@ const calificarEmpresa = async (req, res) => {
             Calificacion: req.body.Calificacion,
             IdEmpresa: idEmpresa
         };
+
+        const aumentarBarraStatus = await Alumnos.modificarDatosAlumno({ BarraStatus: 5 }, idUsuario);
         
         const resultado = await Opinion.agregarOpinion(data);
         return resultado;

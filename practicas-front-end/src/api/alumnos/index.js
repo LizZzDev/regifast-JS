@@ -107,16 +107,18 @@
         { params }
       );
 
-      return response.data.data;; 
+      return response.data.data;
     } catch (error) {
-       (error)
       if (error.response?.status === 409 && redirigirSiError) {
         alert("No tienes acceso a este apartado");
         window.location.href = '/alumno/principal';
-    }
-
-      console.error("Error al obtener empresas:", error);
-      throw error;
+      } else if (error.response?.status === 409) {
+        console.warn ("Aun no tienes acceso a este apartado");
+      }
+      else{
+        console.error('Error al obtener etapa o acceso a empresas:', error);
+        throw error;
+      }
     }
   }
   

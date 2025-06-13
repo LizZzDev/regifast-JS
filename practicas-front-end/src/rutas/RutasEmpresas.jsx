@@ -5,14 +5,38 @@ import Principal from '../paginas/empresas/principal';
 import Registro from '../paginas/empresas/registroEmpresa';
 import Login from '../paginas/empresas/login';
 import VerCalificaciones from '../paginas/empresas/calificacionSoloEmpresa';
+import RutaProtegida from '../componentes/rutas/rutaProtegida';
 
 const RutasEmpresas = () => (
     <Routes>
-        <Route path="/editar" element={<Editar />} />
-        <Route path="/principal" element={<Principal />} />
-        <Route path="/registro" element={<Registro />} />
         <Route path="/" element={<Login />} />
-        <Route path="/principal/ver-calificaciones-empresa/:idEmpresa" element={<VerCalificaciones />} />
+
+        <Route path="/editar" 
+        element={
+             <RutaProtegida rolEsperado="empresa">
+                <Editar />
+            </RutaProtegida>
+        } />
+
+        <Route path="/principal" 
+        element={  
+            <RutaProtegida rolEsperado="empresa">
+                <Principal />
+            </RutaProtegida>
+        } />
+
+        <Route path="/registro" 
+        element={
+            <RutaProtegida rolEsperado="empresa">
+                <Registro />
+            </RutaProtegida>
+        } />
+        <Route path="/principal/ver-calificaciones-empresa/:idEmpresa" 
+        element={
+            <RutaProtegida rolEsperado="empresa">
+                    <VerCalificaciones />
+                </RutaProtegida>
+            } />
     </Routes>
 );
 

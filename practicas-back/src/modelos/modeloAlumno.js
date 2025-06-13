@@ -10,7 +10,9 @@ const Alumno = {
     }
   },
 
-  obtenerAlumnos: async ({ pagina, limite, carrera, busqueda, validado }) => {
+  obtenerAlumnos: async ({ pagina, limite, carrera, busqueda, validado, ordinario }) => {
+console.log (ordinario);
+   
     try {
       const offset = (pagina - 1) * limite;
   
@@ -33,11 +35,18 @@ const Alumno = {
         countParams.push(`%${busqueda}%`);
       }
   
-      if (validado) {
-        query += ` AND Revisado = ?`;
-        queryCount += ` AND Revisado = ?`;
+      if (validado !== null) {
+        query += ` AND Revision = ?`;
+        queryCount += ` AND Revision = ?`;
         params.push(validado);
         countParams.push(validado);
+      }
+
+      if (ordinario !== null) {
+        query += ` AND Ordinario = ?`;
+        queryCount += ` AND Ordinario = ?`;
+        params.push(ordinario);
+        countParams.push(ordinario);
       }
   
       query += ` ORDER BY NombreCompleto ASC LIMIT ? OFFSET ?`;
@@ -60,30 +69,14 @@ const Alumno = {
     }
   },
 
-  agregarNuevoAlumno: async (data) => {
-      const {
-        IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
-        Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
-        Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
-        Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-        Movil
-      } = data;
-
+  agregarNuevoAlumno: async (connection, correo, idUsuario, nombre) => {
       try {
-        const [result] = await pool.query(
+        const [result] = await connection.query(
           `INSERT INTO alumnos (
-            IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
-            Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
-            Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
-            Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-            Movil, BarraStatus
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            IdUsuario, NombreCompleto, CorreoInstitucional, BarraStatus
+          ) VALUES (?, ?, ?, ?)`,
           [
-            IdUsuario, Codigo, NombreCompleto, Carrera, Grado, Grupo, Turno,
-            Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
-            Telefono, TelefonoEmergencia, CorreoInstitucional, NSS, Edad,
-            Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
-            Movil, 1
+            idUsuario, nombre, correo, 0
           ]
         );
 
@@ -93,6 +86,41 @@ const Alumno = {
         throw error;
       }
   },
+
+  añadirDatosAlumnoModificando: async (data, idUsuario) => {
+  const {
+    Codigo, Carrera, Grado, Grupo, Turno,
+    Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
+    Telefono, TelefonoEmergencia, NSS, Edad,
+    Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
+    Movil, BarraStatus
+  } = data;
+
+  try {
+    const [result] = await pool.query(
+      `UPDATE alumnos SET
+        Codigo = ?, Carrera = ?, Grado = ?, Grupo = ?, Turno = ?,
+        Domicilio = ?, NumeroCasa = ?, Colonia = ?, CodigoPostal = ?, Municipio = ?, Estado = ?,
+        Telefono = ?, TelefonoEmergencia = ?, NSS = ?, Edad = ?,
+        Nacionalidad = ?, NombrePadre = ?, TelefonoPadre = ?, NombreMadre = ?, TelefonoMadre = ?,
+        Movil = ?, BarraStatus = ?
+        WHERE IdUsuario = ?`,
+      [
+        Codigo, Carrera, Grado, Grupo, Turno,
+        Domicilio, NumeroCasa, Colonia, CodigoPostal, Municipio, Estado,
+        Telefono, TelefonoEmergencia, NSS, Edad,
+        Nacionalidad, NombrePadre, TelefonoPadre, NombreMadre, TelefonoMadre,
+        Movil, BarraStatus,
+        idUsuario
+      ]
+    );
+
+    return result;
+  } catch (error) {
+    console.error("Error al actualizar datos del alumno:", error);
+    throw error;
+  }
+},
 
   modificarDatosAlumno: async (data, idUsuario) => {
     const fields = Object.keys(data); 

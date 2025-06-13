@@ -3,12 +3,25 @@ import { Routes, Route } from 'react-router-dom';
 import PrincipalJefe from '../paginas/jefeDepartamentos/principalJefe';
 import TablaAlumnos from '../paginas/jefeDepartamentos/tablaAlumnos';
 import Login from '../paginas/jefeDepartamentos/inicioSesionCJ';
+import RutaProtegida from '../componentes/rutas/rutaProtegida';
 
 const RutasJefe = () => (
     <Routes>
-        <Route path="/prinipal" element={<PrincipalJefe />} />
-        <Route path="/principal" element={<TablaAlumnos />} />
         <Route path="/" element={<Login />} />
+
+        <Route path="/prinipal" 
+        element={
+         <RutaProtegida rolEsperado="jefeDepartamento">
+                <PrincipalJefe />
+            </RutaProtegida>
+        }/>
+
+        <Route path="/alumnos" 
+        element={
+         <RutaProtegida rolEsperado="jefeDepartamento">
+                <TablaAlumnos />
+            </RutaProtegida>
+        }/>
     </Routes>
 );
 

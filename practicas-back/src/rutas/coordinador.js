@@ -32,7 +32,7 @@ router.put('/modificarDatosAlumno', modificarDatosDelAlumno);
 router.put('/asignarFechaIngresoPorCalificaciones', verificarSesion, soloCoordinador, asignarFechaIngresoPorCalificaciones);
 router.put('/validarAlumno', verificarSesion, soloCoordinador, validarAlumno);
 router.put('/revertirValidacionAlumno', verificarSesion, soloCoordinador, revertirValidacionAlumno);
-router.delete('/alumno', verificarSesion, soloCoordinador, eliminarAlumno);
+router.delete('/eliminarAlumno', verificarSesion, soloCoordinador, eliminarAlumno);
 
 // === RUTAS DE EMPRESAS ===
 router.post('/anadirEmpresa', verificarSesion, subirArchivo.single('imagen'), anadirEmpresa);

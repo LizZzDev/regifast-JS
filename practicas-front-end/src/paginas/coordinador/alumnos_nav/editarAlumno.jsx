@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import './EditarAlumno.css';
+import './editarAlumno.css';
 import HeaderCoordinador from '../../../componentes/coordinador/header_coordinador';
 import { eliminarAlumno, modificarDatosAlumno, obtenerAlumno, revertirValidacionAlumno, validarAlumno } from '../../../api/coordinador';
 
@@ -88,7 +88,12 @@ const EditarAlumno = () => {
     if (formData.CorreoInstitucional && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.CorreoInstitucional)) {
       nuevosErrores.CorreoInstitucional = 'Correo inválido';
     }
-    if (formData.Calificacion && !/^\d{3}$/.test(formData.Movil)) nuevosErrores.Movil = 'La calificacion solo puede estar entre 0 y 100';
+    if (formData.Calificacion) {
+    const calif = Number(formData.Calificacion);
+    if (isNaN(calif) || calif < 0 || calif > 100) {
+      nuevosErrores.Calificacion = 'La calificación solo puede estar entre 0 y 100';
+    }
+}
     if (formData.Movil && !/^\d{10}$/.test(formData.Movil)) nuevosErrores.Movil = '10 dígitos';
     if (formData.Telefono && !/^\d{10}$/.test(formData.Telefono)) nuevosErrores.Telefono = '10 dígitos';
     if (formData.TelefonoEmergencia && !/^\d{10}$/.test(formData.TelefonoEmergencia)) {

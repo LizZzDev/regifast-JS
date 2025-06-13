@@ -66,6 +66,7 @@ const AsignarFechas = () => {
             <th>Fecha Inicio</th>
             <th>Fecha Fin</th>
             <th>Confirmar</th>
+            <th>Ver fechas</th>
           </tr>
         </thead>
         <tbody>
@@ -95,6 +96,9 @@ const AsignarFechas = () => {
                 >
                   Confirmar
                 </button>
+              </td>
+              <td>
+                nomas jala las fechas acá, liz
               </td>
             </tr>
           ))}

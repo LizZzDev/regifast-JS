@@ -5,7 +5,7 @@ import { obtenerAlumno } from '../../../api/alumnos';
 
 const BarraStatus = () => {
   // Estado para el progreso (simulando el valor que vendría de PHP)
-  const [progreso, setProgreso] = useState(); 
+  const [progreso, setProgreso] = useState(0); 
 
   // Datos para la barra de progreso
   const [pasos, setPasos] = useState([
@@ -44,8 +44,12 @@ const BarraStatus = () => {
       const cargarBarraStatus = async () => {
         try {
           const alumno = await obtenerAlumno();
-          const datos = alumno.alumno.BarraStatus;
-          setProgreso(datos);
+          const datos = alumno?.alumno?.BarraStatus;
+          if (datos !== undefined && datos >= 2) {
+            setProgreso(datos);
+          } else {
+            setProgreso(0);
+          }
         } catch (error) {
           console.error('Error al cargar empresas:', error);
         }

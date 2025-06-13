@@ -5,6 +5,7 @@ import cerrarSesionServicio from './cerrarSesion.js';
 import generarTokenService from './generarToken.js';
 import validarTokenService from './validarToken.js';
 import generarTokenRecuperarContrasenaService from './generarRecuperarContrasena.js';
+import verificarSesionService from "./verificarSesion.js";
 
 export const iniciarSesion = async (req, res) => {
   try {
@@ -71,6 +72,18 @@ export const validarToken = async (req, res) => {
   } catch (error) {
     console.error("Error al generar token:", error.message);
     return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const verificarSesion = async (req, res) => {
+  try {
+    const response = await verificarSesionService(req);
+    return res.status(200).json({
+      data: response,
+    });
+  } catch (error) {
+    console.error("Error al verificar sesion:", error.message);
+    res.status(error.status || 500).json({ sesionValida: false, mensaje: error.message });
   }
 };
 
