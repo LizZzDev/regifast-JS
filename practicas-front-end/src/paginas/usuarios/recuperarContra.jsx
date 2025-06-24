@@ -1,6 +1,6 @@
 
 import React from 'react';
-import './RecuperarContrasena.css';
+import './recuperarContra.css';
 
 const RecuperarContrasena = () => {
   return (

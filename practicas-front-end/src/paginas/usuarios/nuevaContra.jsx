@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./NuevaContrasena.css";
+import "./nuevaContra.css";
 
 const NuevaContrasena = () => {
   const [nueva, setNueva] = useState("");

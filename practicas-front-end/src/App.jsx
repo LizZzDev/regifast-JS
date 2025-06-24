@@ -5,12 +5,16 @@ import RutasEmpresas from './rutas/RutasEmpresas';
 import RutasCoordinador from './rutas/RutasCoordinador';
 import RutasJefe from './rutas/RutasJefe';
 import Login from './paginas/usuarios/login';
+import NuevaContra from './paginas/usuarios/nuevaContra';
+import RecuperarContra from './paginas/usuarios/recuperarContra';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/nueva-contra" element={<NuevaContra />} />
+        <Route path="/recuperar-contra" element={<RecuperarContra />} />
         <Route path="/alumno/*" element={<RutasAlumnos />} />
         <Route path="/empresa/*" element={<RutasEmpresas />} />
         <Route path="/coordinador/*" element={<RutasCoordinador />} />
