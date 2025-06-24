@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 const restablecerContrasena = async (req) => {
     const {token, nuevaContrasena} = req.body;
   try {
-    const hash = await bcrypt.hash(nuevaContrasena, 10); // Encripta la nueva contraseña
+    const hash = await bcrypt.hash(nuevaContrasena, 10); 
 
     const fueRestablecida = await Usuario.restablecerContrasenaPorToken(hash, token);
 

@@ -1,5 +1,6 @@
 import Token from '../../modelos/modeloToken.js';
 import crypto from 'crypto';
+import { PORT, RUTA } from './configuracion/constantes.js';
 import enviarCorreo from '../../utils/enviarCorreo.js';
 import Usuario from '../../modelos/modeloUsuario.js';
 
@@ -18,7 +19,7 @@ const generarTokenRecuperarContrasena = async (req) => {
 
         await Usuario.guardarTokenRecuperarContrasena(tokenGenerado, fechaExpiracion, correo);
 
-       const enlace = `http:/localhost:5173/recuperar?token=${tokenGenerado}`;
+       const enlace = `${RUTA}5173/recuperar?token=${tokenGenerado}`;
         
         await enviarCorreo({
             email: correo,

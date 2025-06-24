@@ -4,10 +4,13 @@ import Empresas from "../../modelos/modeloEmpresa.js";
 const obtenerEmpresas = async (req) => {
   const pagina = parseInt(req.query.pagina) || 1;
   const limite = parseInt(req.query.limite) || 20;
-  const validada = req.query.validada === 'true' ? 1 
-                 : req.query.validada === 'false' ? 0
-                 : null;
   const soloConVacantes = req.query.vacantes === 'true';
+  const validada = req.query.validada === 1 ? 1 
+                 : req.query.validada === 0 ? 0
+                 : null;  
+  const practicasExtraordinarias = req.query.validada === 1 ? 1 
+                 : req.query.validada ===  0 ? 0
+                 : null;  
 
   try {
     const empresas = await Empresas.obtenerEmpresasFiltradas(
@@ -15,7 +18,8 @@ const obtenerEmpresas = async (req) => {
         pagina: pagina, 
         limite: limite, 
         validada: validada, 
-        soloConVacantes: soloConVacantes
+        soloConVacantes: soloConVacantes,
+        practicasExtraordinarias: practicasExtraordinarias
       }
     );
     return empresas;
