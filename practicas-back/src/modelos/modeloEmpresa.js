@@ -95,13 +95,11 @@ const Empresa = {
 
     obtenerEmpresaPorIdUsuario: async (id) => {
       try {
-        console.log (id)
         const [rows] = await pool.query(
           `SELECT * FROM empresas WHERE IdUsuario = ?`,
           [id]
         );
 
-        console.log ("x", rows[0])
         return rows[0]; 
       } catch (error) {
         console.error("Error al obtener la empresa:", error);
@@ -110,13 +108,11 @@ const Empresa = {
     },
 
     obtenerEmpresaPorId: async (id) => {
-      console.log (id)
       try {
         const [rows] = await pool.query(
           `SELECT * FROM empresas WHERE IdEmpresa = ?`,
           [id]
         );
-        console.log ("ola", rows)
         return rows[0];
       } catch (error) {
         console.error("Error al obtener la empresa:", error);

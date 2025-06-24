@@ -10,7 +10,7 @@ const Alumno = {
     }
   },
 
-  obtenerAlumnos: async ({ pagina, limite, carrera, busqueda, validado, ordinario }) => {
+  obtenerAlumnos: async ({ pagina, limite, carrera, busqueda, validado, ordinario, calificacion }) => {
 console.log (ordinario);
    
     try {
@@ -40,6 +40,16 @@ console.log (ordinario);
         queryCount += ` AND Revision = ?`;
         params.push(validado);
         countParams.push(validado);
+      }
+
+      if (calificacion === true) {
+        query += ` AND Calificacion IS NOT NULL`;
+        queryCount += ` AND Calificacion IS NOT NULL`;
+      }
+
+      if (calificacion === false) {
+        query += ` AND Calificacion IS NULL`;
+        queryCount += ` AND Calificacion IS NULL`;
       }
 
       if (ordinario !== null) {

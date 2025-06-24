@@ -7,6 +7,7 @@ import { obtenerBarraStatusParaEstadisticas, obtenerNumeroAlumnos } from '../../
 
 const Estadisticas = () => {
   const [carreraSeleccionada, setCarreraSeleccionada] = useState('todas');
+  const [totalAlumno, setTotalAlumno] = useState(0);
   const [estadisticas, setEstadisticas] = useState({
     revisados: 0,
     noRevisados: 0,
@@ -33,90 +34,101 @@ const Estadisticas = () => {
 
   // Cargar datos de gráfica
   useEffect(() => {
-    const cargarDatosGrafica = async () => {
-      try {
-        const carrera = carreraSeleccionada === 'todas' ? null : carreraSeleccionada;
-        const response = await obtenerBarraStatusParaEstadisticas(carrera);
-        setEstadisticasGraficas(response);
-      } catch (error) {
-        console.error('Error al cargar datos de la gráfica:', error);
-      }
-    };
-
-    cargarDatosGrafica();
-  }, [carreraSeleccionada]);
-
-  // Crear o actualizar el gráfico
-  useEffect(() => {
-    if (!estadisticasGrafica || Object.keys(estadisticasGrafica).length === 0) return;
-
-    const datos = [
-      estadisticasGrafica.barraStatus1,
-      estadisticasGrafica.barraStatus2,
-      estadisticasGrafica.barraStatus3,
-      estadisticasGrafica.barraStatus4,
-      estadisticasGrafica.barraStatus5
-    ];
-
-    const ctx = chartRef.current.getContext('2d');
-
-    if (chartInstance.current) {
-      chartInstance.current.destroy();
-    }
-
-    chartInstance.current = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Sin iniciar', 'Revisión', 'Selección de empresa', 'Documentación', 'En prácticas'],
-        datasets: [{
-          label: 'Estados de prácticas',
-          data: datos,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.4)',
-            'rgba(54, 162, 235, 0.4)',
-            'rgba(255, 206, 86, 0.4)',
-            'rgba(75, 192, 192, 0.4)',
-            'rgba(97, 27, 79, 0.4)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgb(170, 57, 114)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: function (value) {
-                return value >= 1000 ? (value / 1000) + 'K' : value;
-              }
-            }
-          }
-        },
-        plugins: {
-          legend: {
-            display: true,
-            position: 'top'
-          },
-          tooltip: {
-            callbacks: {
-              label: function (context) {
-                const value = context.raw;
-                return ` ${value.toLocaleString()} alumnos`;
-              }
-            }
-          }
-        }
-      }
-    });
+     const cargarDatosGrafica = async () => {
+       try {
+         const carrera = carreraSeleccionada === 'todas' ? null : carreraSeleccionada;
+         const response = await obtenerBarraStatusParaEstadisticas(carrera);
+         setTotalAlumno(
+           Number(response.barraStatus1) +
+           Number(response.barraStatus2) +
+           Number(response.barraStatus3) +
+           Number(response.barraStatus4) +
+           Number(response.barraStatus5)
+         );
+         setEstadisticasGraficas(response);
+       } catch (error) {
+         console.error('Error al cargar datos de la gráfica:', error);
+       }
+     };
+ 
+     cargarDatosGrafica();
+   }, [carreraSeleccionada]);
+ 
+   // Crear o actualizar el gráfico
+   useEffect(() => {
+     if (!estadisticasGrafica || Object.keys(estadisticasGrafica).length === 0) return;
+ 
+     // 1. Obtener el total de todos los estados
+     const total = totalAlumno;
+ 
+     // 2. Calcular el % de cada estado (si total es 0, evitar división por 0)
+     const datos = total === 0 ? [0, 0, 0, 0, 0] : [
+       (estadisticasGrafica.barraStatus1 / total) * 100,
+       (estadisticasGrafica.barraStatus2 / total) * 100,
+       (estadisticasGrafica.barraStatus3 / total) * 100,
+       (estadisticasGrafica.barraStatus4 / total) * 100,
+       (estadisticasGrafica.barraStatus5 / total) * 100
+     ];
+ 
+     const ctx = chartRef.current.getContext('2d');
+ 
+     if (chartInstance.current) {
+       chartInstance.current.destroy();
+     }
+ 
+     chartInstance.current = new Chart(ctx, {
+       type: 'bar',
+       data: {
+         labels: ['Sin iniciar', 'Revisión', 'Selección de empresa', 'Documentación', 'En prácticas'],
+         datasets: [{
+           label: 'Estados de prácticas',
+           data: datos,
+           backgroundColor: [
+             'rgba(255, 99, 132, 0.4)',
+             'rgba(54, 162, 235, 0.4)',
+             'rgba(255, 206, 86, 0.4)',
+             'rgba(75, 192, 192, 0.4)',
+             'rgba(97, 27, 79, 0.4)'
+           ],
+           borderColor: [
+             'rgba(255, 99, 132, 1)',
+             'rgba(54, 162, 235, 1)',
+             'rgba(255, 206, 86, 1)',
+             'rgba(75, 192, 192, 1)',
+             'rgb(170, 57, 114)'
+           ],
+           borderWidth: 1
+         }]
+       },
+       options: {
+         responsive: true,
+         maintainAspectRatio: false,
+         scales: {
+           y: {
+             min: 0,
+             max: 100,
+             ticks: {
+               callback: function (value) {
+                 return value + '%';
+               }
+             }
+           }
+         },
+         plugins: {
+           legend: {
+             display: true,
+             position: 'top'
+           },
+           tooltip: {
+             callbacks: {
+               label: function (context) {
+               return `${context.raw.toFixed(1)}%`;
+             }
+             }
+           }
+         }
+       }
+     });
 
     return () => {
       if (chartInstance.current) {

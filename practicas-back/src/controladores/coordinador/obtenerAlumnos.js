@@ -8,13 +8,15 @@ const obtenerAlumnosFiltrados = async (req) => {
   let carrera = req.query.carrera;
   const ordinario = req.query.ordinario === '1' ? 1 
                  : req.query.ordinario === '0' ? 0
-                 : null;
+                 : null;  
   const busqueda = req.query.busqueda;
   const validada = req.query.validado === '1' ? 1 
                  : req.query.validado === '0' ? 0
                  : null;
+  const calificacion = req.query.calificacion === 'true' ? true
+                 : req.query.calificacion === 'false' ? false
+                 : null;
   try {
-    console.log (req.query)
     if (req.session.rol === "jefeDepartamento") {
         const carreraJefe = await Jefe.obtenerJefe(req.session.ID);
         carrera = carreraJefe?.Carrera;
@@ -27,7 +29,8 @@ const obtenerAlumnosFiltrados = async (req) => {
         carrera: carrera, 
         busqueda: busqueda, 
         validado: validada,
-        ordinario: ordinario
+        ordinario: ordinario,
+        calificacion
       }
     );
 
