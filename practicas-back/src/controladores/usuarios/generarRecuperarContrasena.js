@@ -1,6 +1,6 @@
 import Token from '../../modelos/modeloToken.js';
 import crypto from 'crypto';
-import { PORT, RUTA } from './configuracion/constantes.js';
+import { PORT, RUTA } from '../../configuracion/constantes.js';
 import enviarCorreo from '../../utils/enviarCorreo.js';
 import Usuario from '../../modelos/modeloUsuario.js';
 
