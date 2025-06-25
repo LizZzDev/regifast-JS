@@ -1,74 +1,24 @@
-/* Reset y fuentes */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+html, body{
+    height: 100%;
 }
 
-html, body {
-  height: 100%;
-  font-family: "Montserrat", sans-serif;
-  background-color: #f9f9f9;
-}
 
-/* Header */
-#nueva-header {
+
+#recuperar-container, #nueva-container {
   width: 100%;
-  background-color: #890831ff;
-  color: white;
-  text-align: center;
-  padding: 1rem 0;
-}
-
-#nueva-logo-container {
-  width: 100%;
-  height: auto;
-}
-
-#nueva-logo {
-  width: 20%;
-  height: auto;
-  margin: 1rem 0;
-}
-
-#nueva-nav {
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: center;
-}
-
-#nueva-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 40px;
-  padding: 10px 0;
-}
-
-#nueva-nav li a {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  padding: 10px 20px;
-  transition: 0.3s ease;
-}
-
-#nueva-nav li a:hover {
-  background-color: white;
-  color: #103E7E;
-  border-radius: 5px;
-}
-
-/* Contenedor del formulario */
-#nueva-container {
   max-width: 40rem;
-  margin: 10vh auto;
-  padding: 0 1rem;
-  display: flex;
-  flex-direction: column;
+  margin: 10vh auto 0 auto; 
+  justify-content: center;
   align-items: center;
+  min-height: 60vh; 
 }
 
-#nueva-form {
+#recuperar-form, #nueva-form {
   width: 100%;
   background-color: #d9d9d9;
   padding: 2rem;
@@ -76,33 +26,31 @@ html, body {
   box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.3);
 }
 
-/* Título y descripción */
-#nueva-title {
+#recuperar-title, #nueva-title {
   text-align: center;
   margin-bottom: 1rem;
   font-size: 1.5rem;
   color: #000000;
 }
 
-#nueva-description {
+#recuperar-description, #nueva-description {
   text-align: center;
   font-size: 1rem;
   margin-bottom: 1.5rem;
   color: #2f3131;
 }
 
-/* Grupos de contraseña */
 .password-group {
   position: relative;
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
 }
 
 .password-group input {
   width: 100%;
-  padding: 0.75rem;
-  padding-right: 3rem;
+  padding: 12px;
+  padding-right: 45px;
   border: none;
-  border-radius: 0.625rem;
+  border-radius: 10px;
   background-color: #f1faee;
   color: #1d3557;
   font-size: 1rem;
@@ -110,52 +58,37 @@ html, body {
   transition: box-shadow 0.3s ease;
 }
 
+
+
 .password-group input:focus {
   box-shadow: 0 0 0 3px #a8dadc;
 }
 
-/* Icono SVG */
-.toggle-icon {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  height: 24px;
-  width: 24px;
-  fill: #1d3557;
-  pointer-events: all;
-}
 
-/* Botón */
-#nueva-button {
+#recuperar-button, #nueva-button {
   width: 100%;
-  padding: 0.75rem;
+  padding: 12px;
   background-color: #e63946;
   color: #f1faee;
   border: none;
-  border-radius: 0.625rem;
+  border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-left: auto;
 }
 
-#nueva-button:hover {
+#recuperar-button:hover, #nueva-button:hover {
   background-color: #d62828;
 }
 
-/* RESPONSIVE */
-@media screen and (max-width: 768px) {
-  #nueva-logo {
-    width: 40%;
-  }
+.toggle-icon {
+  cursor: pointer;
+  font-size: 1.3rem;
+  margin-left: -30px;
+  transition: transform 0.3s ease;
+}
 
-  #nueva-nav ul {
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  #nueva-form {
-    padding: 1.5rem;
-  }
+.toggle-icon:hover {
+  transform: scale(1.2);
 }

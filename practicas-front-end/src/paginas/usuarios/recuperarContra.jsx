@@ -2,7 +2,7 @@
 import React from 'react';
 import './recuperarContra.css';
 
-const RecuperarContrasena = () => {
+const RecuperarContra = () => {
   return (
     <div id="recuperar-root">
       <header id="recuperar-header">
