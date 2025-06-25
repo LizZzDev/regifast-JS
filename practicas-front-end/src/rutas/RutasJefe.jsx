@@ -9,7 +9,7 @@ const RutasJefe = () => (
     <Routes>
         <Route path="/" element={<Login />} />
 
-        <Route path="/prinipal" 
+        <Route path="/principal" 
         element={
          <RutaProtegida rolEsperado="jefeDepartamento">
                 <PrincipalJefe />

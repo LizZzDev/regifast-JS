@@ -2,7 +2,6 @@ import Empresa from "../../modelos/modeloEmpresa.js";
 
 const modificarDatosEmpresa = async (req, res) => {
   const { datos, idEmpresa } = req.body;
-  console.log (datos, idEmpresa)
 
   try {
     const resultado = await Empresa.modificarDatosEmpresa(datos, idEmpresa);

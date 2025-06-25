@@ -1,7 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import cors from 'cors';
-import { PORT } from './configuracion/constantes.js';
+import { PORT, RUTA } from './configuracion/constantes.js';
 import rutas from './rutas/index.js';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: 'http://localhost:5173', 
+  origin: `${RUTA}5173`, 
   credentials: true
 }));
 
@@ -37,5 +37,5 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', rutas);
 
 app.listen(PORT, () => {
-    console.log(`Servidor escuchando en http://localhost:${PORT}`);
+    console.log(`Servidor escuchando en ${RUTA}${PORT}`);
   });

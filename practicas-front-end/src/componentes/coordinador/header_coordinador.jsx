@@ -43,7 +43,7 @@ const HeaderCoordinador = () => {
                         <div className="submenu-coordinador">
                             <a href="/coordinador/crear-coordinador" className="opcion-submenu">Crear nuevo coordinador</a>
                             <a href="/coordinador/crear-jefe" className="opcion-submenu">Crear jefe de departamento</a>
-                            <li><a href="#" onClick={manejarCerrarSesion}>Cerrar sesión</a></li>
+                            <a href="#" onClick={manejarCerrarSesion}>Cerrar sesión</a>
                         </div>
                     </li>
                 </ul>

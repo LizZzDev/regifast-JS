@@ -5,7 +5,6 @@ import HeaderJefeDepto from "../../componentes/jefeDepto/header_jefeDepto.jsx";
 
 function TablaAlumnos() {
   const [alumnos, setAlumnos] = useState([]);
-  const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1);
   const [totalPaginas, setTotalPaginas] = useState(1);  
   const [totalAlumnos, setTotalAlumnos] = useState(0);
@@ -28,18 +27,30 @@ function TablaAlumnos() {
 
   useEffect(() => {
     const cargarAlumnos = async () => {
+      const estadoNumerico = filtros.estadoCalificacion === "calificados"
+      ? "true"
+      : filtros.estadoCalificacion === "no-calificados"
+        ? "false"
+        : null;
+
+        console.log (estadoNumerico)
       try {
+
         const response = await obtenerAlumnos({
             pagina: paginaActual, 
-            limite: 10
+            limite: 10,
+            calificacion: estadoNumerico
         });
         const alumnosConEstado = response.alumnos.map(alumno => ({
           ...alumno,
           estado: mapEstadoDeDB(alumno.Ordinario),
           calificacion: alumno.Calificacion || ''
         }));
+
+        const paginas = response.totalPaginas;
+        setTotalAlumnos(response.total)
         setAlumnos(alumnosConEstado);
-         setTotalPaginas(response.totalPaginas);
+        setTotalPaginas(paginas < 1 ? 1 : paginas);
       } catch (error) {
         console.error("Error al obtener alumnos:", error);
       }
@@ -60,29 +71,6 @@ function TablaAlumnos() {
     setAlumnos(nuevos);
   };
 
-  useEffect(() => {
-    const filtered = alumnos.filter(alumno => {
-      if (filtros.estadoCalificacion === "calificados") {
-        return (
-          (alumno.Ordinario === 0 || alumno.Ordinario === 1) &&
-          alumno.Calificacion != null
-        );
-      }
-
-      if (filtros.estadoCalificacion === "no-calificados") {
-        return (
-          alumno.Ordinario !== 0 && alumno.Ordinario !== 1 &&
-          (alumno.Calificacion == null || alumno.Calificacion === '')
-        );
-      }
-
-      return true; 
-    });
-
-    setAlumnosFiltrados(filtered);
-    setTotalAlumnos(filtered.length);
-  }, [filtros, alumnos]);
-
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFiltros(prev => ({
@@ -93,6 +81,18 @@ function TablaAlumnos() {
 
 
   const confirmarDatos = async (idUsuario, alumno) => {
+    const calificacion = Number(alumno.calificacion);
+    console.log (alumno)
+    if (alumno.calificacion == '' || alumno.estado == '') {
+      alert("Ingresa calificacion y estado del alumno");
+      return;
+    }
+
+    if (!calificacion || calificacion < 1 || calificacion > 100) {
+      alert("Ingresa una calificación entre 1 y 100");
+      return;
+    }
+
     const data = {
       Ordinario: mapEstadoParaDB(alumno.estado),
       Calificacion: alumno.calificacion
@@ -109,6 +109,7 @@ function TablaAlumnos() {
         calificacion: alumno.Calificacion || ''
       }));
       setAlumnos(alumnosConEstado);
+      setFiltros({ ...filtros });
     } catch (error) {
       alert("Error al modificar los datos");
       console.log("Error:", error);
@@ -161,7 +162,7 @@ function TablaAlumnos() {
             </tr>
           </thead>
           <tbody>
-            {alumnosFiltrados.map((alumno, index) => (
+            {alumnos.map((alumno, index) => (
               <tr key={alumno.Codigo}>
                 <td className="col-codigo">{alumno.Codigo}</td>
                 <td className="col-nombre">{alumno.NombreCompleto}</td>

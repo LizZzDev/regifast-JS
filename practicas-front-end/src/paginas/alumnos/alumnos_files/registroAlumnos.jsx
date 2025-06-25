@@ -163,7 +163,7 @@ const RegistroAlumnos = () => {
             error.response?.data?.message ||
             "Ocurrio un error al registrar.";
           console.error('Error al registrar alumno:', error);
-          alert(mensajeError);
+          setErrors(mensajeError);
         }
       }
     } else {
