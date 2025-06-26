@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 import "./nuevaContra.css";
 
 const NuevaContrasena = () => {

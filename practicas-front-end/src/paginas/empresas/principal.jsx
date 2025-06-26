@@ -3,6 +3,7 @@ import { obtenerEmpresa } from '../../api/empresas';
 import './principal.css';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../src/componentes/header';
+import { API_BASE_URL } from '../../api/constantes/router';
 
 function PrincipalEmpresa() {
   console.log ("shi")
@@ -37,7 +38,7 @@ function PrincipalEmpresa() {
         {/* Columna izquierda */}
         <article id="contentLeft">
           <article id="articleImagen">
-            <img src={`http://localhost:3000/logos/${empresa.Logo}`} id="imagenEmpresa" alt={`Logo de ${empresa.Nombre}`} />
+            <img src={`http://${API_BASE_URL}/logos/${empresa.Logo}`} id="imagenEmpresa" alt={`Logo de ${empresa.Nombre}`} />
           </article>
           
           <article id="calificacionPrincipal">

@@ -11,6 +11,8 @@ const generarToken = async (req) => {
     try {
         const { correo } = req;
 
+        console.log (req);
+
          const usuarioExistente = await Usuario.buscarPorCorreo(correo);
 
         if (usuarioExistente) {

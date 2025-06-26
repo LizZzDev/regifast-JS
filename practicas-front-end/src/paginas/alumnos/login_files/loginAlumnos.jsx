@@ -71,7 +71,9 @@ const LoginAlumnos = ({ onLogin }) => {
             <button type="button" id="boton-inicio" onClick={handleSubmit}>Iniciar Sesión</button>
           </div>
         </form>
-        <p>¿No tienes una cuenta? <a href="/alumno/crear-cuenta">Regístrate aquí</a></p>
+        <a href="/recuperar-contra">¿Olvidaste tu contraseña?</a>
+
+        <a id="registrate" href="/alumno/crear-cuenta">Regístrate aquí</a>
 
         {mensaje && <p className="mensaje">{mensaje}</p>}
       </section>

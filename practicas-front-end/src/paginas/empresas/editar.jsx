@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { obtenerEmpresa } from '../../api/empresas';
 import './editar.css';
 import './principal.css';
+import { API_BASE_URL } from '../../api/constantes/router';
 
 function EditarEmpresa() {
     const fileInputRef = useRef(null);
@@ -77,7 +78,7 @@ function EditarEmpresa() {
         <article id="contentLeft">
           <article id="articleImagen">
             <img 
-              src={`http://localhost:3000/logos/${empresa.Logo}`}
+              src={`http://${API_BASE_URL}/logos/${empresa.Logo}`}
               id="imagenEmpresa" 
               alt="Logo empresa"
             /><br />

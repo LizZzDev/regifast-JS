@@ -6,6 +6,7 @@ import generarTokenService from './generarToken.js';
 import validarTokenService from './validarToken.js';
 import generarTokenRecuperarContrasenaService from './generarRecuperarContrasena.js';
 import verificarSesionService from "./verificarSesion.js";
+import restablecerContrasenaService from './cambiarContrasenaConfirmar.js';
 
 export const iniciarSesion = async (req, res) => {
   try {
@@ -50,6 +51,19 @@ export const generarTokenRecuperarContrasena = async (req, res) => {
     return res.status(401).json({ success: false, message: error.message });
   }
 };
+
+export const cambiarContrasenaConfirmar = async (req, res) => {
+  try {
+    const response = await restablecerContrasenaService(req.body);
+    return res.status(201).json({
+      data: response,
+    });
+  } catch (error) {
+    console.error("Error al cambiar contraseña:", error.message);
+    return res.status(401).json({ success: false, message: error.message });
+  }
+};
+
 
 export const generarToken = async (req, res) => {
   try {

@@ -8,7 +8,9 @@ const generarTokenRecuperarContrasena = async (req) => {
     try {
         const { correo } = req;
 
-         const usuarioExistente = await Usuario.buscarPorCorreo(correo);
+        console.log (correo);
+
+        const usuarioExistente = await Usuario.buscarPorCorreo(correo);
 
         if (!usuarioExistente) {
         throw new Error("El correo no está registrado.");
@@ -19,7 +21,7 @@ const generarTokenRecuperarContrasena = async (req) => {
 
         await Usuario.guardarTokenRecuperarContrasena(tokenGenerado, fechaExpiracion, correo);
 
-       const enlace = `${RUTA}5173/recuperar?token=${tokenGenerado}`;
+       const enlace = `${RUTA}5173/nueva-contra/${tokenGenerado}`;;
         
         await enviarCorreo({
             email: correo,

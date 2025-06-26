@@ -7,7 +7,8 @@ import {
     generarToken, 
     validarToken,
     generarTokenRecuperarContrasena, 
-    verificarSesion
+    verificarSesion,
+    cambiarContrasenaConfirmar
 } from '../controladores/usuarios/index.js';
 
 const router = express.Router();
@@ -19,6 +20,6 @@ router.post('/cerrarSesion', cerrarSesion);
 router.post('/generarToken', generarToken);
 router.post('/generarTokenRecuperarContrasena', generarTokenRecuperarContrasena);
 router.post('/validarToken', validarToken);
-
+router.put('/restablecerContrasena', cambiarContrasenaConfirmar);
 
 export default router;

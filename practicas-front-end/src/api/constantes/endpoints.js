@@ -5,7 +5,9 @@ export const endpoints = {
       GENERAR_TOKEN: '/generarToken',
       VALIDAR_TOKEN: '/validarToken',
       VERIFICAR_SESION: '/verificarSesion',
-      CERRAR_SESION: '/cerrarSesion',
+      GENERAR_RECUPERAR_CONTRASEÑA: '/generarTokenRecuperarContrasena',
+      RESTABLECER_CONTRA: '/restablecerContrasena',      
+      CERRAR_SESION: '/cerrarSesion'
     },
 
     ALUMNOS: {
