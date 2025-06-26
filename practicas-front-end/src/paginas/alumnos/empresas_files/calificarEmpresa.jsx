@@ -67,7 +67,7 @@ const CalificarEmpresa = () => {
           </section>
 
           <section id='ContenedorLogoEmpresa'>
-            <img id="imglogoempresa" src={`http://${API_BASE_URL}/logos/${empresa.Logo}`} alt="LogoEmpresa" />
+            <img id="imglogoempresa" src={`${API_BASE_URL}/logos/${empresa.Logo}`} alt="LogoEmpresa" />
           </section>
 
           <section id='ContenedorDescripcionEmpresa'>

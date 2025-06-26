@@ -38,7 +38,7 @@ function PrincipalEmpresa() {
         {/* Columna izquierda */}
         <article id="contentLeft">
           <article id="articleImagen">
-            <img src={`http://${API_BASE_URL}/logos/${empresa.Logo}`} id="imagenEmpresa" alt={`Logo de ${empresa.Nombre}`} />
+            <img src={`${API_BASE_URL}/logos/${empresa.Logo}`} id="imagenEmpresa" alt={`Logo de ${empresa.Nombre}`} />
           </article>
           
           <article id="calificacionPrincipal">

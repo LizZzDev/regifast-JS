@@ -68,7 +68,7 @@ const CalificacionEmpresa = () => {
 
         <article className="InformacionCalificacionEmpresa">
           <section className="LogoDeLaEmpresa">
-            <img id="logoempresa" src={`http://${API_BASE_URL}/logos/${empresa.Logo}`} alt="Logo de la empresa" />
+            <img id="logoempresa" src={`${API_BASE_URL}/logos/${empresa.Logo}`} alt="Logo de la empresa" />
           </section>
 
           <section className="Calificacion">

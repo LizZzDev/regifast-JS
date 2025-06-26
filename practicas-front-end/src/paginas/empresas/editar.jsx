@@ -78,7 +78,7 @@ function EditarEmpresa() {
         <article id="contentLeft">
           <article id="articleImagen">
             <img 
-              src={`http://${API_BASE_URL}/logos/${empresa.Logo}`}
+              src={`${API_BASE_URL}/logos/${empresa.Logo}`}
               id="imagenEmpresa" 
               alt="Logo empresa"
             /><br />
