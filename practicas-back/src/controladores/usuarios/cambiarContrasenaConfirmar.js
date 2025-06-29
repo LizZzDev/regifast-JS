@@ -12,7 +12,7 @@ const restablecerContrasena = async (req) => {
       throw new Error("Token inválido o expirado.");
     }
 
-    return { mensaje: "Contraseña restablecida correctamente." };
+    return { mensaje: "Contraseña restablecida correctamente.", success: true};
   } catch (error) {
     throw error;
   }

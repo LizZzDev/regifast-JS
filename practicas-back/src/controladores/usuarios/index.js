@@ -7,6 +7,7 @@ import validarTokenService from './validarToken.js';
 import generarTokenRecuperarContrasenaService from './generarRecuperarContrasena.js';
 import verificarSesionService from "./verificarSesion.js";
 import restablecerContrasenaService from './cambiarContrasenaConfirmar.js';
+import obtenerSiHayTokenService from './obtenerSiHayToken.js'
 
 export const iniciarSesion = async (req, res) => {
   try {
@@ -68,6 +69,18 @@ export const cambiarContrasenaConfirmar = async (req, res) => {
 export const generarToken = async (req, res) => {
   try {
     const response = await generarTokenService(req.body);
+    return res.status(201).json({
+      data: response,
+    });
+  } catch (error) {
+    console.error("Error al generar token:", error.message);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const obtenerSiHayToken = async (req, res) => {
+  try {
+    const response = await obtenerSiHayTokenService(req);
     return res.status(201).json({
       data: response,
     });

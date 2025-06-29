@@ -6,7 +6,8 @@ export const endpoints = {
       VALIDAR_TOKEN: '/validarToken',
       VERIFICAR_SESION: '/verificarSesion',
       GENERAR_RECUPERAR_CONTRASEÑA: '/generarTokenRecuperarContrasena',
-      RESTABLECER_CONTRA: '/restablecerContrasena',      
+      RESTABLECER_CONTRA: '/restablecerContrasena',
+      OBTENER_SI_HAY_TOKEN: '/obtenerSiHayToken',      
       CERRAR_SESION: '/cerrarSesion'
     },
 

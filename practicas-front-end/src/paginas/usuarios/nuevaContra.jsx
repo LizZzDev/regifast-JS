@@ -1,12 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./nuevaContra.css";
+import { obtenerSiHayToken, restablecerContrasena } from "../../api/usuarios";
 
 const NuevaContrasena = () => {
+  const { token } = useParams();
   const [nueva, setNueva] = useState("");
+  const [tokenValido, setTokenValido] = useState(null);
   const [confirmar, setConfirmar] = useState("");
   const [mostrarNueva, setMostrarNueva] = useState(false);
   const [mostrarConfirmar, setMostrarConfirmar] = useState(false);
   const [errores, setErrores] = useState("");
+
+  useEffect(() => {
+  const validarToken = async () => {
+    try {
+      const respuesta = await obtenerSiHayToken(token);
+      console.log (respuesta);
+      setTokenValido(true);
+    } catch (error) {
+      setTokenValido(false);
+      alert (error)
+    }
+  };
+
+  validarToken();
+}, [token]);
+
+  if (tokenValido === null) {
+    return <p style={{ textAlign: "center" }}>Verificando token...</p>;
+  }
+
+  if (!tokenValido) {
+    return <p style={{ color: "red", textAlign: "center" }}>Token inválido o expirado.</p>;
+  }
 
   const togglePassword = (tipo) => {
     if (tipo === "nueva") setMostrarNueva(!mostrarNueva);
@@ -18,7 +45,7 @@ const NuevaContrasena = () => {
     return regex.test(contrasena);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validarContrasena(nueva)) {
       setErrores("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.");
@@ -29,9 +56,15 @@ const NuevaContrasena = () => {
       return;
     }
     setErrores("");
-    // Aquí va la lógica para enviar la nueva contraseña al backend
-    alert("Contraseña cambiada con éxito.");
-  };
+    
+      try {
+          const restablecerContraseñaEndpoint = await restablecerContrasena (nueva, token);
+          console.log (restablecerContraseñaEndpoint)
+          alert("Contraseña cambiada con éxito.");
+      } catch (error) {
+          alert(error);
+      }
+    };
 
   return (
     <div id="nueva-container">
@@ -48,9 +81,6 @@ const NuevaContrasena = () => {
     onChange={(e) => setNueva(e.target.value)}
     required
   />
-  <span className="toggle-icon" onClick={() => togglePassword("nueva")}>
-    {mostrarNueva ? <FaEyeSlash /> : <FaEye />}
-  </span>
 </div>
 
 {/* Para el input "confirmar contraseña" */}
@@ -64,7 +94,6 @@ const NuevaContrasena = () => {
     required
   />
   <span className="toggle-icon" onClick={() => togglePassword("confirmar")}>
-    {mostrarConfirmar ? <FaEyeSlash /> : <FaEye />}
   </span>
 </div>
 
