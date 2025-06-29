@@ -12,6 +12,7 @@ import eliminarAlumnoService from "./eliminarAlumno.js";
 import modificarDatosEmpresaService from './modificarDatosEmpresa.js'
 import eliminarEmpresaService from './eliminarEmpresa.js';
 import revertirValidacionEmpresaService from "./revertirValidacionEmpresa.js";
+import obtenerFechasParaPostularseEmpresasService from "./obtenerFechas.js";
 
 export const asignarFechaIngresoPorCalificaciones = async (req, res) => {
   try {
@@ -69,6 +70,17 @@ export const obtenerNumeroAlumnos = async (req, res) => {
     res.status(201).json({ success: true, data: response });
   } catch (error) {
     console.error("Error al obtener numero de alumnos:", error.message);
+    return res.status(500).json({ success: false, message: error });
+  }
+};
+
+
+export const obtenerFechasParaPostularseEmpresas = async (req, res) => {
+  try {
+    const response = await obtenerFechasParaPostularseEmpresasService(req);
+    res.status(201).json({ success: true, data: response });
+  } catch (error) {
+    console.error("Error al obtener fechas:", error.message);
     return res.status(500).json({ success: false, message: error });
   }
 };

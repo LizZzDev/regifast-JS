@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './asignarFechas.css';
 import HeaderCoordinador from '../../../componentes/coordinador/header_coordinador';
-import { asignarFechaIngresoPorCalificacion } from '../../../api/coordinador';
+import { asignarFechaIngresoPorCalificacion, obtenerFechasParaPostularseEmpresas } from '../../../api/coordinador';
 
 
 const AsignarFechas = () => {
@@ -18,6 +18,24 @@ const AsignarFechas = () => {
     { idRango: 3, texto: "80-71" },
     { idRango: 4, texto: "70-60" }
   ]);
+
+  const [fechas, setFechas] = useState([]);
+
+
+   useEffect(() => {
+      const obtenerFechas = async () => {
+        try {
+          const response = await obtenerFechasParaPostularseEmpresas();
+                  console.log (response)
+  
+          setFechas(response);
+        } catch (error) {
+          alert("No se pudo obtener el alumno", error.response.data.message);
+        }
+      };
+      obtenerFechas();
+  }, []); 
+  
 
   const handleFechaChange = (idRango, campo, valor) => {
   setFechasPorRango(prev => ({
@@ -51,6 +69,10 @@ const AsignarFechas = () => {
     }
   };
 
+    const formatearFecha = (fechaISO) => {
+    return fechaISO ? fechaISO.slice(0, 10) : "";
+  };
+
   return (
     <div>
       <HeaderCoordinador/>
@@ -66,43 +88,46 @@ const AsignarFechas = () => {
             <th>Fecha Inicio</th>
             <th>Fecha Fin</th>
             <th>Confirmar</th>
-            <th>Ver fechas</th>
+            <th>Fecha de inicio</th>
+            <th>Fecha de fin</th>
           </tr>
         </thead>
         <tbody>
-          {rangos.map(rango => (
-            <tr key={rango.idRango}>
-              <td>{rango.texto}</td>
-              <td>
-                <input 
-                  type="date" 
-                  className="fecha-inicio" 
-                  value={fechasPorRango[rango.idRango]?.fechaInicio || ''}
-                  onChange={(e) => handleFechaChange(rango.idRango, 'fechaInicio', e.target.value)}
-                />
-              </td>
-              <td>
-                <input 
-                  type="date" 
-                  className="fecha-fin" 
-                  value={fechasPorRango[rango.idRango]?.fechaFin || ''}
-                  onChange={(e) => handleFechaChange(rango.idRango, 'fechaFin', e.target.value)}
-                />
-              </td>
-              <td>
-                <button 
-                  id="confirmarBotonFecha"
-                  onClick={() => handleSubmitRango(rango.idRango)}
-                >
-                  Confirmar
-                </button>
-              </td>
-              <td>
-                nomas jala las fechas acá, liz
-              </td>
-            </tr>
-          ))}
-        </tbody>
+           {rangos.map(rango => {
+              const fechaAsignada = fechas.find(f => f.IdRango === rango.idRango);
+
+              return (
+                <tr key={rango.idRango}>
+                  <td>{rango.texto}</td>
+                  <td>
+                    <input 
+                      type="date" 
+                      value={fechasPorRango[rango.idRango]?.fechaInicio || ''}
+                      onChange={(e) => handleFechaChange(rango.idRango, 'fechaInicio', e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input 
+                      type="date" 
+                      value={fechasPorRango[rango.idRango]?.fechaFin || ''}
+                      onChange={(e) => handleFechaChange(rango.idRango, 'fechaFin', e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <button onClick={() => handleSubmitRango(rango.idRango)}>
+                      Confirmar
+                    </button>
+                  </td>
+                  <td>
+                    {fechaAsignada ? formatearFecha(fechaAsignada.FechaInicio) : "—"}
+                  </td>
+                  <td>
+                    {fechaAsignada ? formatearFecha(fechaAsignada.FechaFin) : "—"}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
       </table>
     </main>
     </div>

@@ -38,7 +38,8 @@ export const endpoints = {
         MODIFICAR_DATOS_EMPRESA: '/modificarDatosEmpresa',
         ELIMINAR_EMPRESA: '/eliminarEmpresa',
         REVERTIR_VALIDACION_EMPRESA: '/revertirValidacionEmpresa',
-        OBTENER_NUMERO_ALUMNOS: '/obtenerNumeroAlumnos'
+        OBTENER_NUMERO_ALUMNOS: '/obtenerNumeroAlumnos',
+        OBTENER_FECHAS_POSTULACION: '/obtenerFechasParaPostularseEmpresas'
     },
   
     EMPRESAS: {

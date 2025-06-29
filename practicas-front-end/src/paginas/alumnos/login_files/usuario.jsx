@@ -53,6 +53,12 @@ const RegistroUsuario = () => {
             setMensaje("Solo se permiten correos @alumnos.udg.mx");
             return;
         }
+        
+        if (!validarContrasena(formData.password)) {
+            setMensaje("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.");
+            return;
+        }
+
 
         if (formData.correo) {
             try {
@@ -101,11 +107,6 @@ const RegistroUsuario = () => {
 
         if (!tokenValidado) {
             setMensaje("Primero debes validar tu token.");
-            return;
-        }
-
-          if (!validarContrasena(formData.password)) {
-            setMensaje("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.");
             return;
         }
 
