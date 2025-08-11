@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; 
+import HeaderContra from "../../componentes/headerContra"; 
 import "./nuevaContra.css";
 
 const NuevaContrasena = () => {
@@ -35,45 +36,47 @@ const NuevaContrasena = () => {
   };
 
   return (
+  <>
+    <HeaderContra />
     <div id="nueva-container">
       <form id="nueva-form" onSubmit={handleSubmit}>
         <h2 id="nueva-title">Crear Nueva Contraseña</h2>
         <p id="nueva-description">Introduce tu nueva contraseña y confírmala</p>
 
         <div id="nueva-group1" className="password-group">
-  <input
-    type={mostrarNueva ? "text" : "password"}
-    id="nueva"
-    placeholder="Nueva contraseña"
-    value={nueva}
-    onChange={(e) => setNueva(e.target.value)}
-    required
-  />
-  <span className="toggle-icon" onClick={() => togglePassword("nueva")}>
-    {mostrarNueva ? <FaEyeSlash /> : <FaEye />}
-  </span>
-</div>
+          <input
+            type={mostrarNueva ? "text" : "password"}
+            id="nueva"
+            placeholder="Nueva contraseña"
+            value={nueva}
+            onChange={(e) => setNueva(e.target.value)}
+            required
+          />
+          <span className="toggle-icon" onClick={() => togglePassword("nueva")}>
+            {mostrarNueva ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
 
-{/* Para el input "confirmar contraseña" */}
-<div id="nueva-group2" className="password-group">
-  <input
-    type={mostrarConfirmar ? "text" : "password"}
-    id="confirmar"
-    placeholder="Confirmar contraseña"
-    value={confirmar}
-    onChange={(e) => setConfirmar(e.target.value)}
-    required
-  />
-  <span className="toggle-icon" onClick={() => togglePassword("confirmar")}>
-    {mostrarConfirmar ? <FaEyeSlash /> : <FaEye />}
-  </span>
-</div>
+        <div id="nueva-group2" className="password-group">
+          <input
+            type={mostrarConfirmar ? "text" : "password"}
+            id="confirmar"
+            placeholder="Confirmar contraseña"
+            value={confirmar}
+            onChange={(e) => setConfirmar(e.target.value)}
+            required
+          />
+          <span className="toggle-icon" onClick={() => togglePassword("confirmar")}>
+            {mostrarConfirmar ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
 
         {errores && <p style={{ color: "red", textAlign: "center" }}>{errores}</p>}
 
         <button id="nueva-button" type="submit">Cambiar contraseña</button>
       </form>
     </div>
+  </>
   );
 };
 

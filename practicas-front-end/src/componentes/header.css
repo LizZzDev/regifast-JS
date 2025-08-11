@@ -1,52 +1,98 @@
-/* Header styles */
-header {
-    display: flex;
-    justify-content: center; /* Centrado horizontal */
-    align-items: center;
-    background-color: #890831ff;
-    color: white;
-    flex-wrap: wrap;
-    flex-direction: column; /* Apila elementos verticalmente */
-    gap: 20px; /* Espacio entre elementos */
+/* Variables para tamaños responsivos */
+:root {
+  --header-padding: 1rem;
+  --logo-height: 5rem; /* Tamaño base para escritorio */
+  --menu-gap: 1.5rem;
 }
 
-header #nomUDG {
-    display: flex;
-    justify-content: center; 
-    width: 100%;
+/* Estilos base del header */
+.header-container {
+  width: 100%;
+  background-color: #890831;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--header-padding);
+  box-sizing: border-box;
 }
 
-header #nomUDG img {
-    height: auto;
-    width: auto;
-    max-height: 100px; 
-    max-width: 100%; 
-    object-fit: contain; 
+/* Contenedor del logo */
+.logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+  cursor: pointer;
 }
 
-/* Media Queries para Responsive */
+/* Imagen del logo (ahora responsiva) */
+.logo-img {
+  height: var(--logo-height);
+  max-width: 100%; /* Evita que se desborde en móviles */
+  object-fit: contain; /* Mantiene la relación de aspecto */
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover .logo-img {
+  transform: scale(1.05);
+}
+
+/* Menú de navegación */
+.menu {
+  width: 100%;
+  background-color: rgba(217, 217, 217, 0.9);
+  padding: 0.75rem 0;
+}
+
+.menu-list {
+  display: flex;
+  justify-content: center;
+  gap: var(--menu-gap);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-link {
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.menu-link:hover {
+  background-color: white;
+  color: #890831;
+}
+
+/* Media Queries para dispositivos móviles */
 @media (max-width: 768px) {
-    header {
-        padding: 15px 20px;
-        gap: 15px;
-    }
-    
-    header #nomUDG img {
-        max-height: 80px;
-    }
-    
+  :root {
+    --logo-height: 4rem; /* Más pequeño en móviles */
+    --menu-gap: 1rem;
+  }
+
+  .header-container {
+    padding: 0.5rem;
+  }
+
+  .menu-list {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .menu-link {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
-    header #nomUDG img {
-        max-height: 60px;
-    }
-    
-}
-
-@media (max-width: 320px) {
-    header #nomUDG img {
-        max-height: 50px;
-    }
-
+  :root {
+    --logo-height: 3.5rem; /* Ajuste extra para pantallas muy pequeñas */
+  }
 }
