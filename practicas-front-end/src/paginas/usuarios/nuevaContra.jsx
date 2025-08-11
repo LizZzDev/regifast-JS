@@ -77,7 +77,6 @@ const NuevaContrasena = () => {
         <p id="nueva-description">Introduce tu nueva contraseña y confírmala</p>
 
         <div id="nueva-group1" className="password-group">
-<<<<<<< HEAD
           <input
             type={mostrarNueva ? "text" : "password"}
             id="nueva"
@@ -104,31 +103,6 @@ const NuevaContrasena = () => {
             {mostrarConfirmar ? <FaEyeSlash /> : <FaEye />}
           </span>
         </div>
-=======
-  <input
-    type={mostrarNueva ? "text" : "password"}
-    id="nueva"
-    placeholder="Nueva contraseña"
-    value={nueva}
-    onChange={(e) => setNueva(e.target.value)}
-    required
-  />
-</div>
-
-{/* Para el input "confirmar contraseña" */}
-<div id="nueva-group2" className="password-group">
-  <input
-    type={mostrarConfirmar ? "text" : "password"}
-    id="confirmar"
-    placeholder="Confirmar contraseña"
-    value={confirmar}
-    onChange={(e) => setConfirmar(e.target.value)}
-    required
-  />
-  <span className="toggle-icon" onClick={() => togglePassword("confirmar")}>
-  </span>
-</div>
->>>>>>> a5e5c21e288f3ae60a600b8f9e42da7ada737423
 
         {errores && <p style={{ color: "red", textAlign: "center" }}>{errores}</p>}
 
