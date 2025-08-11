@@ -3,6 +3,7 @@ import './calificarEmpresa.css';
 import Header from '../../../componentes/alumnos/header';
 import { useNavigate } from 'react-router-dom';
 import { calificarEmpresa, mostrarEmpresaSeleccionada } from '../../../api/alumnos';
+import { API_BASE_URL } from '../../../api/constantes/router';
 
 const CalificarEmpresa = () => {
   const [empresa, setEmpresa] = useState({});
@@ -66,7 +67,7 @@ const CalificarEmpresa = () => {
           </section>
 
           <section id='ContenedorLogoEmpresa'>
-            <img id="imglogoempresa" src={`http://localhost:3000/logos/${empresa.Logo}`} alt="LogoEmpresa" />
+            <img id="imglogoempresa" src={`${API_BASE_URL}/logos/${empresa.Logo}`} alt="LogoEmpresa" />
           </section>
 
           <section id='ContenedorDescripcionEmpresa'>

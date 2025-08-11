@@ -18,6 +18,7 @@ import {
     validarEmpresa,
     revertirValidacionEmpresa,
     eliminarEmpresa,
+    obtenerFechasParaPostularseEmpresas
 } from '../controladores/coordinador/index.js';
 
 const router = express.Router();
@@ -27,6 +28,7 @@ router.get('/obtenerAlumnos', obtenerAlumnos);
 router.get('/obtenerAlumno', obtenerAlumno);
 router.get('/obtenerNumeroAlumnos', obtenerNumeroAlumnos);
 router.get('/obtenerBarraStatusParaEstadisticas', obtenerBarraStatusParaEstadisticas);
+router.get('/obtenerFechasParaPostularseEmpresas', obtenerFechasParaPostularseEmpresas);
 
 router.put('/modificarDatosAlumno', modificarDatosDelAlumno);
 router.put('/asignarFechaIngresoPorCalificaciones', verificarSesion, soloCoordinador, asignarFechaIngresoPorCalificaciones);

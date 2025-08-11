@@ -5,7 +5,10 @@ export const endpoints = {
       GENERAR_TOKEN: '/generarToken',
       VALIDAR_TOKEN: '/validarToken',
       VERIFICAR_SESION: '/verificarSesion',
-      CERRAR_SESION: '/cerrarSesion',
+      GENERAR_RECUPERAR_CONTRASEÑA: '/generarTokenRecuperarContrasena',
+      RESTABLECER_CONTRA: '/restablecerContrasena',
+      OBTENER_SI_HAY_TOKEN: '/obtenerSiHayToken',      
+      CERRAR_SESION: '/cerrarSesion'
     },
 
     ALUMNOS: {
@@ -35,7 +38,8 @@ export const endpoints = {
         MODIFICAR_DATOS_EMPRESA: '/modificarDatosEmpresa',
         ELIMINAR_EMPRESA: '/eliminarEmpresa',
         REVERTIR_VALIDACION_EMPRESA: '/revertirValidacionEmpresa',
-        OBTENER_NUMERO_ALUMNOS: '/obtenerNumeroAlumnos'
+        OBTENER_NUMERO_ALUMNOS: '/obtenerNumeroAlumnos',
+        OBTENER_FECHAS_POSTULACION: '/obtenerFechasParaPostularseEmpresas'
     },
   
     EMPRESAS: {

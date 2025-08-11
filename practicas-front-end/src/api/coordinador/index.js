@@ -122,6 +122,20 @@ export async function obtenerNumeroAlumnos({carrera=null}) {
   }
 }
 
+export async function obtenerFechasParaPostularseEmpresas() {
+  try {
+    const response = await api.get(
+       router.COORDINADOR + endpoints.COORDINADOR.OBTENER_FECHAS_POSTULACION,
+
+    );
+
+    return response.data.data;;
+  } catch (error) {
+    console.error("Error en obtener barra status para estadisticas", error);
+    throw error;
+  }
+}
+
 export async function validarAlumno(idUsuario) {
   try {
     const response = await api.put(

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+  import React, { useState, useEffect } from 'react';
 import './validarAlumnos.css';
 import { validarAlumno, obtenerAlumnos } from '../../../api/coordinador';
 import { useNavigate } from 'react-router-dom';

@@ -27,6 +27,11 @@ const RegistroUsuario = () => {
         .replace(/\b\w/g, (letra) => letra.toUpperCase());
     }
 
+    const validarContrasena = (contrasena) => {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+        return regex.test(contrasena);
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -48,6 +53,12 @@ const RegistroUsuario = () => {
             setMensaje("Solo se permiten correos @alumnos.udg.mx");
             return;
         }
+        
+        if (!validarContrasena(formData.password)) {
+            setMensaje("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.");
+            return;
+        }
+
 
         if (formData.correo) {
             try {

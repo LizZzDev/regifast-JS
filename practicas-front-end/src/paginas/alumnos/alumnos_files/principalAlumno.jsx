@@ -73,7 +73,8 @@ const BarraStatus = () => {
     1: "Revisión de datos",
     2: "Selección de empresa",
     3: "Documentación",
-    4: "Trabajar en empresa"
+    4: "Trabajar en empresa",
+    5: "Has finalizado tu proceso"
   };
 
   return (

@@ -9,12 +9,23 @@ const validarCorreoAlumno = (correo) => {
   return correo.endsWith('@alumnos.udg.mx');
 };
 
+const obtenerCicloActual = () => {
+    const ahora = new Date();
+    const año = ahora.getFullYear();
+    const mes = ahora.getMonth() + 1; 
+
+    const ciclo = mes >= 1 && mes <= 6 ? 'A' : 'B';
+    return `${año}${ciclo}`; 
+}
+
 /**
  * Crea un nuevo usuario en la base de datos.
  */
 
 const crearUsuario = async (req) => {
   const { correo, contrasena, nombre, rol, datosJefeDepartamento } = req;
+
+  console.log (req);
   const connection = await pool.getConnection();
 
   try {
@@ -31,7 +42,7 @@ const crearUsuario = async (req) => {
     }
   
     const hashedPassword = await bcrypt.hash(contrasena, 10);
- 
+    
     const idUsuario = await Usuario.agregarNuevoUsuario(connection, {
       correo,
       hashedPassword,
@@ -44,7 +55,8 @@ const crearUsuario = async (req) => {
     }
 
     if (rol === 'alumno') {
-      await Alumno.agregarNuevoAlumno(connection, correo, idUsuario, nombre);
+      const ciclo = obtenerCicloActual();
+      await Alumno.agregarNuevoAlumno(connection, ciclo, correo, idUsuario, nombre);
     }
 
     await connection.commit(); 

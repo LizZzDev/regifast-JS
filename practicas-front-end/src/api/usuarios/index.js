@@ -81,6 +81,47 @@ export async function verificarSesion (rolEsperado) {
     }
 }
 
+export async function generarTokenRecuperarContrasena(correo) {
+  try {
+    const response = await api.post(router.USUARIOS + endpoints.USUARIOS.GENERAR_RECUPERAR_CONTRASEÑA,
+      { correo: correo }
+    );
+
+    return response.data.data;
+  } catch (error) {
+    console.error("Error en generar token:", error);
+    throw error;
+  }
+}
+
+export async function obtenerSiHayToken(token) {
+  try {
+    const response = await api.get(router.USUARIOS + endpoints.USUARIOS.OBTENER_SI_HAY_TOKEN,
+       {params: { token }}
+    );
+
+    return response.data.data;
+  } catch (error) {
+    console.error("Error en obtener si existe el token:", error);
+    throw error;
+  }
+}
+
+export async function restablecerContrasena(nuevaContrasena, token) {
+  try {
+    const response = await api.put(router.USUARIOS + endpoints.USUARIOS.RESTABLECER_CONTRA,
+      { nuevaContrasena: nuevaContrasena,
+        token: token
+       }
+    );
+
+    return response.data.data;
+  } catch (error) {
+    console.error("Error en generar token:", error);
+    throw error;
+  }
+}
+
 export async function cerrarSesion() {
   try {
     const response = await api.post(router.USUARIOS + endpoints.USUARIOS.CERRAR_SESION);

@@ -75,6 +75,9 @@ const Login = ({ onLogin }) => {
             <input type="submit" value="Iniciar Sesión" />
           </div>
         </form>
+
+        <a id="recuperar" href="/recuperar-contra">¿Olvidaste tu contraseña?</a>
+
         {mensaje && <p className="mensaje">{mensaje}</p>}
       </section>
     </div>

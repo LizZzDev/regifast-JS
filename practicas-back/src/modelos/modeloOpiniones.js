@@ -32,11 +32,11 @@ const Opiniones = {
   },
 
   agregarOpinion: async (data) => {
-    const {IdUsuario, Opinion, Calificacion, IdEmpresa } = data;
+    const {IdUsuario, NombreUsuario, Opinion, Calificacion, IdEmpresa } = data;
     try {
       const [result] = await pool.query(
-        'INSERT INTO opinionempresa (IdUsuario, IdEmpresa, Opinion, Calificacion) VALUES (?, ?, ?, ?)',
-        [IdUsuario, IdEmpresa, Opinion, Calificacion]
+        'INSERT INTO opinionempresa (IdUsuario, IdEmpresa, NombreUsuario, Opinion, Calificacion) VALUES (?, ?, ?, ?, ?)',
+        [IdUsuario, IdEmpresa, NombreUsuario, Opinion, Calificacion]
       );
       return result.insertId;
     } catch (error) {

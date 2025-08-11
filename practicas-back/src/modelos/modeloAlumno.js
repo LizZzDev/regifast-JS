@@ -79,14 +79,14 @@ console.log (ordinario);
     }
   },
 
-  agregarNuevoAlumno: async (connection, correo, idUsuario, nombre) => {
+  agregarNuevoAlumno: async (connection, ciclo, correo, idUsuario, nombre) => {
       try {
         const [result] = await connection.query(
           `INSERT INTO alumnos (
-            IdUsuario, NombreCompleto, CorreoInstitucional, BarraStatus
-          ) VALUES (?, ?, ?, ?)`,
+            Ciclo, IdUsuario, NombreCompleto, CorreoInstitucional, BarraStatus
+          ) VALUES (?, ?, ?, ?, ?)`,
           [
-            idUsuario, nombre, correo, 0
+            ciclo, idUsuario, nombre, correo, 0
           ]
         );
 

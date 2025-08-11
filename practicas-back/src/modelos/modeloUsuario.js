@@ -11,6 +11,16 @@ const Usuario = {
     }
   },
 
+    buscarPorToken: async (token) => {
+    try {
+      const [rows] = await pool.query('SELECT * FROM usuarios WHERE TokenRecuperacion = ?', [token]);
+      return rows[0] || null;
+    } catch (error) {
+      console.error("Error en buscar por token:", error);
+      throw error;
+    }
+  },
+
   buscarPorRol: async (rol) => {
     try {
       const [rows] = await pool.query('SELECT * FROM usuarios WHERE Rol = ?', [rol]);

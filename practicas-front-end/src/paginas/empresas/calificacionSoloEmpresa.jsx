@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './calificacionSoloEmpresa.css';
 import { obtenerCalificacionesEmpresa, obtenerEmpresaParaUsuario } from '../../api/alumnos';
+import { API_BASE_URL } from '../../api/constantes/router';
 
 const CalificacionEmpresa = () => {
   const { idEmpresa } = useParams();
@@ -74,7 +75,7 @@ const CalificacionEmpresa = () => {
 
         <article className="InformacionCalificacionEmpresa">
           <section className="LogoDeLaEmpresa">
-            <img id="logoempresa" src={`http://localhost:3000/logos/${empresa.Logo}`} alt="Logo de la empresa" />
+            <img id="logoempresa" src={`${API_BASE_URL}/logos/${empresa.Logo}`} alt="Logo de la empresa" />
           </section>
 
           <section className="Calificacion">
