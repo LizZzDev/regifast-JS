@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import './recuperarContra.css';
+import Header from "../../componentes/header.jsx";
 import {generarTokenRecuperarContrasena} from '../../api/usuarios';
 
 const RecuperarContra = () => {
@@ -19,16 +20,7 @@ const RecuperarContra = () => {
 
   return (
     <div id="recuperar-root">
-      <header id="recuperar-header">
-        <article id="recuperar-logo-container">
-          <img src="../img/udg_white.png" id="recuperar-logo" alt="Logo UDG" />
-        </article>
-        <nav id="recuperar-nav" className="menu">
-          <ul>
-            <li><a href="/principalAlumno">INICIO</a></li>
-          </ul>
-        </nav>
-      </header>
+      <Header />
 
       <div id="recuperar-container" className="montserrat">
         <form id="recuperar-form" className="form-box" onSubmit={handleSubmit}>

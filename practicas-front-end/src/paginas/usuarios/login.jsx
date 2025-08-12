@@ -76,7 +76,7 @@ const Login = ({ onLogin }) => {
           </div>
         </form>
 
-        <a id="recuperar" href="/recuperar-contra">¿Olvidaste tu contraseña?</a>
+        <a id="recuperar" href="/recuperar-contra" target="_blank">¿Olvidaste tu contraseña?</a>
 
         {mensaje && <p className="mensaje">{mensaje}</p>}
       </section>
