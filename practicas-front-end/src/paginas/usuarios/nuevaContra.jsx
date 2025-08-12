@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
+<<<<<<< HEAD
 import { useNavigate, useParams } from "react-router-dom";
+=======
+import { useParams } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; 
+import HeaderContra from "../../componentes/headerContra"; 
+>>>>>>> d0f2e8dc611980b9b3163d390f6115e33f518909
 import "./nuevaContra.css";
 import { obtenerSiHayToken, restablecerContrasena } from "../../api/usuarios";
 
@@ -78,12 +84,19 @@ const NuevaContrasena = () => {
     };
 
   return (
+<<<<<<< HEAD
       <div id="nueva-container">
+=======
+  <>
+    <HeaderContra />
+    <div id="nueva-container">
+>>>>>>> d0f2e8dc611980b9b3163d390f6115e33f518909
       <form id="nueva-form" onSubmit={handleSubmit}>
         <h2 id="nueva-title">Crear Nueva Contraseña</h2>
         <p id="nueva-description">Introduce tu nueva contraseña y confírmala</p>
 
         <div id="nueva-group1" className="password-group">
+<<<<<<< HEAD
       <input
         type={mostrarNueva ? "text" : "password"}
         id="nueva"
@@ -114,6 +127,68 @@ const NuevaContrasena = () => {
           </form>      
     </div>
    );
+=======
+<<<<<<< HEAD
+          <input
+            type={mostrarNueva ? "text" : "password"}
+            id="nueva"
+            placeholder="Nueva contraseña"
+            value={nueva}
+            onChange={(e) => setNueva(e.target.value)}
+            required
+          />
+          <span className="toggle-icon" onClick={() => togglePassword("nueva")}>
+            {mostrarNueva ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
+
+        <div id="nueva-group2" className="password-group">
+          <input
+            type={mostrarConfirmar ? "text" : "password"}
+            id="confirmar"
+            placeholder="Confirmar contraseña"
+            value={confirmar}
+            onChange={(e) => setConfirmar(e.target.value)}
+            required
+          />
+          <span className="toggle-icon" onClick={() => togglePassword("confirmar")}>
+            {mostrarConfirmar ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
+=======
+  <input
+    type={mostrarNueva ? "text" : "password"}
+    id="nueva"
+    placeholder="Nueva contraseña"
+    value={nueva}
+    onChange={(e) => setNueva(e.target.value)}
+    required
+  />
+</div>
+
+{/* Para el input "confirmar contraseña" */}
+<div id="nueva-group2" className="password-group">
+  <input
+    type={mostrarConfirmar ? "text" : "password"}
+    id="confirmar"
+    placeholder="Confirmar contraseña"
+    value={confirmar}
+    onChange={(e) => setConfirmar(e.target.value)}
+    required
+  />
+  <span className="toggle-icon" onClick={() => togglePassword("confirmar")}>
+  </span>
+</div>
+>>>>>>> a5e5c21e288f3ae60a600b8f9e42da7ada737423
+
+        {errores && <p style={{ color: "red", textAlign: "center" }}>{errores}</p>}
+
+        <button id="nueva-button" type="submit">Cambiar contraseña</button>
+      </form>
+    </div>
+  </>
+  );
+>>>>>>> d0f2e8dc611980b9b3163d390f6115e33f518909
 };
 
 export default NuevaContrasena;
