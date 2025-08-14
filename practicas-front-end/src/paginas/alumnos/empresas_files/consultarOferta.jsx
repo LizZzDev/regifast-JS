@@ -2,13 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './consultarOferta.css';
 import Header from "../../../componentes/alumnos/header.jsx";
-import { obtenerEmpresasParaUsuario, postularOfertaEmpresa } from '../../../api/alumnos/index.js';
+import { obtenerAlumno, obtenerEmpresasParaUsuario, postularOfertaEmpresa } from '../../../api/alumnos/index.js';
 
 const ConsultarOferta = () => {
+    const [alumno, setAlumno] = useState([]);
     const [empresas, setEmpresas] = useState([]);
     const [paginaActual, setPaginaActual] = useState(1);
     const [totalPaginas, setTotalPaginas] = useState(1);
     const navigate = useNavigate();
+
+   useEffect(() => {
+    const cargarAlumno = async () => {
+      try {
+        
+        const alumno = await obtenerAlumno();
+        setAlumno(alumno);
+      } catch (error) {
+        console.error('Error al cargar empresas:', error);
+      }
+    };
+
+    cargarAlumno();
+  }, []);
+
   
    useEffect(() => {
     const cargarEmpresas = async () => {
@@ -29,7 +45,7 @@ const ConsultarOferta = () => {
     };
 
     cargarEmpresas();
-  }, [paginaActual]);
+  }, [paginaActual, alumno]);
 
   const handleOpiniones = (idEmpresa) => {
       navigate(`ver-calificaciones-empresa/${idEmpresa}`);

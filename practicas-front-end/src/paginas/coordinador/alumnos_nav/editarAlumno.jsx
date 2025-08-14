@@ -8,6 +8,8 @@ import { eliminarAlumno, modificarDatosAlumno, obtenerAlumno, revertirValidacion
 
 const EditarAlumno = () => {
   const { idAlumno } = useParams();
+  const [totalAlumnos, setTotalAlumnos] = useState({});
+  const [alumnoActual, setAlumnoActual] = useState({});
   const [alumno, setAlumno] = useState({});
   const [formData, setFormData] = useState({});
     const navigate = useNavigate();
@@ -516,6 +518,24 @@ const EditarAlumno = () => {
             )}
           </div>
         </form>
+
+          <div className="paginacion">
+            <button 
+              className='button-paginacion'
+              onClick={() => setalumnoActual(prev => Math.max(prev - 1, 1))}
+              disabled={alumnoActual === 1}
+            >
+              Anterior
+            </button>
+
+            <button 
+              className='button-paginacion'
+              onClick={() => setalumnoActual(prev => Math.min(prev + 1, totalPaginas))}
+              disabled={alumnoActual === totalAlumnos}
+            >
+              Siguiente
+            </button>
+          </div>
       </div>
     </>
   );
