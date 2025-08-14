@@ -1,7 +1,7 @@
 /* Variables para tamaños responsivos */
 :root {
   --header-padding: 1rem;
-  --logo-height: 5rem; /* Tamaño base para escritorio */
+  --logo-height: 5rem; 
   --menu-gap: 1.5rem;
 }
 
@@ -28,8 +28,8 @@
 /* Imagen del logo (ahora responsiva) */
 .logo-img {
   height: var(--logo-height);
-  max-width: 100%; /* Evita que se desborde en móviles */
-  object-fit: contain; /* Mantiene la relación de aspecto */
+  max-width: 100%; 
+  object-fit: contain; 
   transition: transform 0.3s ease;
 }
 
@@ -71,7 +71,7 @@
 /* Media Queries para dispositivos móviles */
 @media (max-width: 768px) {
   :root {
-    --logo-height: 4rem; /* Más pequeño en móviles */
+    --logo-height: 4rem; 
     --menu-gap: 1rem;
   }
 
@@ -93,6 +93,6 @@
 
 @media (max-width: 480px) {
   :root {
-    --logo-height: 3.5rem; /* Ajuste extra para pantallas muy pequeñas */
+    --logo-height: 3.5rem; 
   }
 }
