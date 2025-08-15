@@ -141,7 +141,7 @@ const ValidacionAlumnos = () => {
             />
 
             <select
-              class="filtro-select-alumnos"
+              className="filtro-select-alumnos"
               name="carrera"
               value={filtros.carrera}
               onChange={handleFilterChange}
@@ -159,7 +159,7 @@ const ValidacionAlumnos = () => {
             </select>
 
             <select
-              class="filtro-select-alumnos"
+              className="filtro-select-alumnos"
               name="revision"
               value={filtros.revision}
               onChange={handleFilterChange}
@@ -170,7 +170,7 @@ const ValidacionAlumnos = () => {
             </select>
 
                <select
-              class="filtro-select-alumnos"
+              className="filtro-select-alumnos"
               name="ordinario"
               value={filtros.ordinario}
               onChange={handleFilterChange}
