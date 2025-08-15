@@ -64,13 +64,13 @@ const Empresa = {
         }
 
         if (carrera) {
-          query += ` AND Carrera = ?`;
-          queryCount += ` AND Carrera = ?`;
+          query += ` AND CarreraPreferida = ?`;
+          queryCount += ` AND CarreraPreferida = ?`;
           params.push(carrera);
           countParams.push(carrera);
         }
 
-        if (practicasOrdinariasNoOrdinarias) {
+        if (practicasOrdinariasNoOrdinarias !== null) {
           query += ` AND PracticasExtraordinarias = ?`;
           queryCount += ` AND PracticasExtraordinarias = ?`;
           params.push(practicasOrdinariasNoOrdinarias);
@@ -84,10 +84,12 @@ const Empresa = {
     
         query += ` ORDER BY Nombre ASC LIMIT ? OFFSET ?`;
         params.push(limite, offset);
+
     
         const [rows] = await pool.query(query, params);
         const [countRows] = await pool.query(queryCount, countParams);
         const total = countRows[0].total;
+        console.log (query, params)
         return { 
           empresas: rows, 
           total,

@@ -65,7 +65,6 @@ export async function obtenerAlumno(idUsuario) {
 
 export async function obtenerAlumnos({ pagina = 1, limite = 20, busqueda = null, carrera = null, validado = null, ordinario = null, calificacion = null } = {}) {
   try {
-    console.log (calificacion)
      const params = {
       pagina,
       limite,
@@ -99,7 +98,6 @@ export async function obtenerBarraStatusParaEstadisticas(carrera=null) {
        }
 
     );
-           console.log (response)
 
     return response.data.data;;
   } catch (error) {
@@ -213,7 +211,6 @@ export async function revertirValidacionEmpresa(idUsuario) {
 
 export async function eliminarEmpresa({idUsuario=null, idEmpresa=null}) {
   try {
-    console.log (idEmpresa);
     const response = await api.delete(
        router.COORDINADOR + endpoints.COORDINADOR.ELIMINAR_EMPRESA,      
              {

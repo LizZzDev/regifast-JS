@@ -23,8 +23,8 @@ export const obtenerEmpresasAlumnos = async (req, res) => {
     const data = await obtenerEmpresasAlumnosService(req);
     res.status(200).json({ success: true, data });
   } catch (error) {
-    console.error("Error al obtener barra status:", error.message);
-    res.status(500).json({ success: false, message: "Error al obtener barra status" });
+    console.error("Error al obtener empresas para alumno:", error.message);
+    res.status(500).json({ success: false, message: "Error al obtener empresas para alumno" });
   }
 };
 
@@ -33,8 +33,8 @@ export const obtenerAlumnosId = async (req, res) => {
     const data = await obtenerAlumnosIdServicio(req);
     res.status(200).json({ success: true, data });
   } catch (error) {
-    console.error("Error al obtener barra status:", error.message);
-    res.status(500).json({ success: false, message: "Error al obtener barra status" });
+    console.error("Error al obtener alumno por id:", error.message);
+    res.status(500).json({ success: false, message: "Error al obtener alumno por id" });
   }
 };
 
