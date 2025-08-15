@@ -14,11 +14,10 @@ const ConsultarOferta = () => {
    useEffect(() => {
     const cargarAlumno = async () => {
       try {
-        
         const alumno = await obtenerAlumno();
         setAlumno(alumno);
       } catch (error) {
-        console.error('Error al cargar empresas:', error);
+        console.error('Error al cargar alumno:', error);
       }
     };
 
