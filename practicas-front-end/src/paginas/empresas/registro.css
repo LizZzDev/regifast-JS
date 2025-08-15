@@ -26,6 +26,7 @@ header #nomUDG {
     display: flex;
     justify-content: center; 
     width: 100%;
+    min-height: 8vw;
 }
 
 header #nomUDG img {

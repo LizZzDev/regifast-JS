@@ -98,7 +98,7 @@
       const params = {
         pagina,
         limite,
-        ...(validada !== null && { validada }), 
+        ...(validada !== null && { validada }),   
         ...(vacantes && { vacantes: true })
       };
 

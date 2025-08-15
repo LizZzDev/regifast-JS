@@ -60,6 +60,8 @@ const NuevaContrasena = () => {
     
       try {
           const restablecerContraseñaEndpoint = await restablecerContrasena (nueva, token);
+
+          console.log(restablecerContraseñaEndpoint);
          if (restablecerContraseñaEndpoint?.rol === "alumno") {
             navigate("/alumno/");
           } else if (restablecerContraseñaEndpoint?.rol === "empresa") {

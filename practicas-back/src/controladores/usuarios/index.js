@@ -55,7 +55,7 @@ export const generarTokenRecuperarContrasena = async (req, res) => {
 
 export const cambiarContrasenaConfirmar = async (req, res) => {
   try {
-    const response = await restablecerContrasenaService(req.body);
+    const response = await restablecerContrasenaService(req);
     return res.status(201).json({
       data: response,
     });

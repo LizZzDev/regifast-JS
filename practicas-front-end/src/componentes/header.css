@@ -8,6 +8,7 @@
 /* Estilos base del header */
 .header-container {
   width: 100%;
+  width: 9vw;
   background-color: #890831;
   display: flex;
   flex-direction: column;
