@@ -50,8 +50,8 @@ const Header = () => {
   };
 
 return (
-  <header id="header-alumnos"> {/* ID único añadido aquí */}
-    <section id="header-alumnos-nomUDG"> {/* ID único para esta sección */}
+  <header id="header-alumnos"> 
+    <section id="header-alumnos-nomUDG"> 
       <a href="https://www.udg.mx/es">
         <img src="/img/udg_white.png" alt="Descripción" />
       </a>

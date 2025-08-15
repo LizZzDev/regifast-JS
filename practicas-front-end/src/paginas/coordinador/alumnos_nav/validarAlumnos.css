@@ -134,7 +134,8 @@ th {
   font-size: 14px;
   font-weight: bold;
   transition: background-color 0.3s ease;
-  margin-left: 0% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .confirmar-btn:hover {
@@ -195,7 +196,8 @@ th {
 
 .button-paginacion {
     padding: 0.5rem 1rem;
-    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
     font-weight: bold;
     border: none;
     background-color: #28507a;
@@ -211,6 +213,7 @@ th {
 .paginacion button:disabled {
     background-color: #aaa;
     cursor: not-allowed;
+
 }
 
 #label-paginacion {

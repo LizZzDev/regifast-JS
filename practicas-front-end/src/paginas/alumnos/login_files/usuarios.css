@@ -154,6 +154,8 @@ h1 {
 
 #registro-usuario-btn-submit{
     background-color: #D6B179ff;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .tokenBoton, 

@@ -114,7 +114,7 @@ const AsignarFechas = () => {
                     />
                   </td>
                   <td>
-                    <button onClick={() => handleSubmitRango(rango.idRango)}>
+                    <button id="confirmarBotonFecha" onClick={() => handleSubmitRango(rango.idRango)}>
                       Confirmar
                     </button>
                   </td>
