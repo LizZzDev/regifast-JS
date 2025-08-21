@@ -14,9 +14,7 @@ const EditarEmpresa = () => {
 
   const cargarEmpresa = async () => {
     try {
-              console.log (idUsuario);
       const response = await obtenerEmpresa(idUsuario);
-      console.log (response);
       setEmpresa(response);
     } catch (error) {
       alert("No se pudo obtener la empresa", error);
