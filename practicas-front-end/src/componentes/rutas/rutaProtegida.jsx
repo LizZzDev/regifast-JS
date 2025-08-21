@@ -21,7 +21,6 @@ const RutaProtegida = ({ children, rolEsperado }) => {
       try {
         const reponse = await verificarSesion(rolEsperado)
         if (!reponse.sesionValida) {
-            console.log ("here");
           redirigirPorRol(rolEsperado, navigate);
         }
         setCargando(false);

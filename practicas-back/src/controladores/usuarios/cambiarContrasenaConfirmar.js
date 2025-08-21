@@ -5,16 +5,12 @@ const restablecerContrasena = async (req) => {
   const {token, nuevaContrasena} = req.body;
 
   try {
-        console.log (token, nuevaContrasena);
 
     const hash = await bcrypt.hash(nuevaContrasena, 10); 
 
-    console.log ("hi");
 
     const rol = await Usuario.buscarPorToken (token);
 
-    console.log (token)
-    console.log (rol)
 
     const fueRestablecida = await Usuario.restablecerContrasenaPorToken(hash, token);
 

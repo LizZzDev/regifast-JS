@@ -56,9 +56,11 @@ const ValidacionAlumnos = () => {
   // Aplicar filtros cuando cambien los filtros o la lista de alumnos
   useEffect(() => {
     const filtered = alumnos.filter(alumno => {
+      console.log (filtros.busqueda);
       const coincideBusqueda = 
+       !filtros.busqueda ||
         alumno.NombreCompleto.toLowerCase().includes(filtros.busqueda.toLowerCase()) ||
-        alumno.Codigo.includes(filtros.busqueda);
+         (alumno.Codigo ?? "").toString().toLowerCase() .includes(filtros.busqueda.toLowerCase());
       
       const coincideCarrera = 
         !filtros.carrera || alumno.Carrera === filtros.carrera;

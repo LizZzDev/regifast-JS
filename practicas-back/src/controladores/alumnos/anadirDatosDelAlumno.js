@@ -10,11 +10,9 @@ const anadirDatosDelAlumno = async (req, res) => {
       BarraStatus: 1
     };
 
-    console.log (datos)
 
     const resultado = await Alumno.añadirDatosAlumnoModificando(datos, idUsuario);
 
-    console.log (resultado);
     return resultado;
   } catch (error) {
     console.error("Error al añadir datos del alumno:", error);

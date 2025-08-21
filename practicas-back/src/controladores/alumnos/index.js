@@ -14,7 +14,7 @@ export const anadirDatosDelAlumno = async (req, res) => {
     res.status(201).json({ success: true, data });
   } catch (error) {
     console.error("Error al agregar datos del alumno:", error.message);
-    res.status(500).json({ success: false, message: "Error al agregar datos del alumno" });
+    res.status(500).json({ success: false, message: "Error al agregar datos del alumno", error: error});
   }
 };
 

@@ -5,7 +5,6 @@ const revertirValidacionEmpresa = async (req, res) => {
 
     try { 
         const empresa = await Empresas.obtenerEmpresaPorId (idUsuario);
-        console.log (empresa)
         if (empresa.Validada == 0) {
             throw new Error ("Empresa no validada");
         }
