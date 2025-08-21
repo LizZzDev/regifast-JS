@@ -45,7 +45,7 @@ const BarraStatus = () => {
         try {
           const alumno = await obtenerAlumno();
           const datos = alumno?.alumno?.BarraStatus;
-          if (datos !== undefined && datos >= 2) {
+          if (datos !== undefined) {
             setProgreso(datos);
           } else {
             setProgreso(0);

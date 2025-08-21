@@ -79,7 +79,7 @@ const RegistroAlumnos = () => {
       'Codigo', 'NombreCompleto', 'Carrera', 'Grado', 'Grupo', 'Turno',
       'Domicilio', 'Colonia', 'Municipio', 'Edad', 'NSS', 'Movil',
       'NumeroCasa', 'CodigoPostal', 'Estado', 'Nacionalidad', 'Telefono', 'TelefonoEmergencia',
-      'NombrePadre', 'TelefonoPadre', 'NombreMadre', 'TelefonoMadre'
+      'NombrePadre', 'TelefonoPadre'
     ];
 
     requiredFields.forEach(field => {
@@ -160,9 +160,14 @@ const RegistroAlumnos = () => {
           navigate("/alumno/principal");
         } catch (error) {
           let mensajeError =
-            error.response?.data?.message ||
+            error.response?.data?.error?.message||
             "Ocurrio un error al registrar.";
+
+          if (mensajeError.includes("Duplicate entry") && mensajeError.includes("NSS")) {
+            mensajeError = "Tu NSS no es válido, otro alumno lo tiene.";
+          }
           console.error('Error al registrar alumno:', error);
+          alert(mensajeError);
           setErrors(mensajeError);
         }
       }
@@ -349,34 +354,58 @@ const RegistroAlumnos = () => {
           {/* Datos Familiares */}
           <fieldset className="grupo-campos">
             <legend>Datos Familiares</legend>
-            
-            {[
-              { name: 'NombrePadre', placeholder: 'Nombre del padre', type: 'text' },
-              { 
-                name: 'TelefonoPadre', 
-                placeholder: 'Teléfono del padre', 
-                type: 'number'
-              },
-              { name: 'NombreMadre', placeholder: 'Nombre de la madre', type: 'text' },
-              { 
-                name: 'TelefonoMadre', 
-                placeholder: 'Teléfono de la madre', 
-                type: 'number'
-              }
-            ].map((field, index) => (
-              <div className="campo-formulario" key={index}>
-                <input
-                  type={field.type}
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  value={formData[field.name]}
-                  onChange={handleChange}
-                  required
-                  className={errors[field.name] ? 'error' : ''}
-                />
-                {errors[field.name] && <span className="mensaje-error">{errors[field.name]}</span>}
-              </div>
-            ))}
+
+            {/* Padre */}
+            <div className="campo-formulario">
+              <input
+                type="text"
+                name="NombrePadre"
+                placeholder="Nombre del padre o tutor"
+                value={formData.NombrePadre}
+                onChange={handleChange}
+                required
+                className={errors.NombrePadre ? 'error' : ''}
+              />
+              {errors.NombrePadre && <span className="mensaje-error">{errors.NombrePadre}</span>}
+            </div>
+
+            <div className="campo-formulario">
+              <input
+                type="number"
+                name="TelefonoPadre"
+                placeholder="Teléfono del padre"
+                value={formData.TelefonoPadre}
+                onChange={handleChange}
+                required
+                className={errors.TelefonoPadre ? 'error' : ''}
+              />
+              {errors.TelefonoPadre && <span className="mensaje-error">{errors.TelefonoPadre}</span>}
+            </div>
+
+            {/* Madre */}
+            <div className="campo-formulario">
+              <input
+                type="text"
+                name="NombreMadre"
+                placeholder="Nombre de la madre o tutora"
+                value={formData.NombreMadre}
+                onChange={handleChange}
+                className={errors.NombreMadre ? 'error' : ''}
+              />
+              {errors.NombreMadre && <span className="mensaje-error">{errors.NombreMadre}</span>}
+            </div>
+
+            <div className="campo-formulario">
+              <input
+                type="number"
+                name="TelefonoMadre"
+                placeholder="Teléfono de la madre"
+                value={formData.TelefonoMadre}
+                onChange={handleChange}
+                className={errors.TelefonoMadre ? 'error' : ''}
+              />
+              {errors.TelefonoMadre && <span className="mensaje-error">{errors.TelefonoMadre}</span>}
+            </div>
           </fieldset>
 
           <button type="submit" className="boton-enviar">

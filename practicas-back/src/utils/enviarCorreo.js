@@ -12,7 +12,6 @@ import nodemailer from 'nodemailer';
 const enviarCorreo = async (data) => {
     const { email, subject, text } = data;
 
-    console.log (email, subject, text);
 
     try {
         const transporter = nodemailer.createTransport({

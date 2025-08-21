@@ -16,6 +16,7 @@ const obtenerAlumnosFiltrados = async (req) => {
   const calificacion = req.query.calificacion === 'true' ? true
                  : req.query.calificacion === 'false' ? false
                  : null;
+
   try {
     if (req.session.rol === "jefeDepartamento") {
         const carreraJefe = await Jefe.obtenerJefe(req.session.ID);

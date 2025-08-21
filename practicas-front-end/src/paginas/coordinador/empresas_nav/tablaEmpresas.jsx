@@ -40,6 +40,7 @@ const TablaEmpresas = () => {
           filtros.validada === 'validada' ? 1 :
           filtros.validada === 'no-validada' ? 0 :
           null
+        
       });
       setTotalPaginas(datos.totalPaginas)
       setEmpresas(datos.empresas);
@@ -97,7 +98,7 @@ const TablaEmpresas = () => {
 
       const datos = await obtenerEmpresas({
         pagina: 1,
-        limite: 1000,
+        limite: 20,
         busqueda: filtros.busqueda || null,
         validada:
           filtros.validada === 'validada' ? 1 :

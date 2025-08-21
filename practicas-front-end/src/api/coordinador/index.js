@@ -149,7 +149,6 @@ export async function validarAlumno(idUsuario) {
 
 export async function validarEmpresa(idUsuario) {
   try {
-    console.log (idUsuario)
     const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.VALIDAR_EMPRESA,
       { idUsuario: idUsuario }
@@ -164,7 +163,6 @@ export async function validarEmpresa(idUsuario) {
 
 export async function revertirValidacionAlumno(idUsuario) {
   try {
-    console.log (idUsuario)
     const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.REVERTIR_VALIDACION,
       { idUsuario: idUsuario }
@@ -222,7 +220,6 @@ export async function eliminarEmpresa({idUsuario=null, idEmpresa=null}) {
 
     );
 
-    console.log (idUsuario, response)
     return response.data.data;;
   } catch (error) {
     console.error("Error en eliminar empresa:", error);
@@ -231,7 +228,6 @@ export async function eliminarEmpresa({idUsuario=null, idEmpresa=null}) {
 }
 
 export async function modificarDatosEmpresa({data, idUsuario}) {
-  console.log (data, idUsuario)
   try {
     const response = await api.put(
        router.COORDINADOR + endpoints.COORDINADOR.MODIFICAR_DATOS_EMPRESA,

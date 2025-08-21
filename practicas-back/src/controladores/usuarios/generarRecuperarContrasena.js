@@ -8,7 +8,6 @@ const generarTokenRecuperarContrasena = async (req) => {
     try {
         const { correo } = req;
 
-        console.log (correo);
 
         const usuarioExistente = await Usuario.buscarPorCorreo(correo);
 

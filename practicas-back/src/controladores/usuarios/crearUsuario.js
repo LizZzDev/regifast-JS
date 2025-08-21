@@ -25,7 +25,6 @@ const obtenerCicloActual = () => {
 const crearUsuario = async (req) => {
   const { correo, contrasena, nombre, rol, datosJefeDepartamento } = req;
 
-  console.log (req);
   const connection = await pool.getConnection();
 
   try {

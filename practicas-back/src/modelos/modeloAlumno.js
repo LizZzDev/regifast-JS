@@ -3,7 +3,6 @@ const Alumno = {
   obtenerAlumno: async (id) => {
     try {
       const [rows] = await pool.query('SELECT * FROM alumnos WHERE IdUsuario = ?', [id]);
-      console.log (rows)
       return rows[0];
     } catch (error) {
       console.error("Error en buscar por código al alumno:", error);
@@ -12,7 +11,6 @@ const Alumno = {
   },
 
   obtenerAlumnos: async ({ pagina, limite, carrera, busqueda, validado, ordinario, calificacion }) => {
-console.log (ordinario);
    
     try {
       const offset = (pagina - 1) * limite;

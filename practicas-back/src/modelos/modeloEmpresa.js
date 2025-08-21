@@ -70,7 +70,7 @@ const Empresa = {
           countParams.push(carrera);
         }
 
-        if (practicasOrdinariasNoOrdinarias !== null) {
+        if (practicasOrdinariasNoOrdinarias == 0 ||practicasOrdinariasNoOrdinarias == 1) {
           query += ` AND PracticasExtraordinarias = ?`;
           queryCount += ` AND PracticasExtraordinarias = ?`;
           params.push(practicasOrdinariasNoOrdinarias);
@@ -89,7 +89,6 @@ const Empresa = {
         const [rows] = await pool.query(query, params);
         const [countRows] = await pool.query(queryCount, countParams);
         const total = countRows[0].total;
-        console.log (query, params)
         return { 
           empresas: rows, 
           total,
@@ -145,7 +144,6 @@ const Empresa = {
     },
 
     modificarDatosEmpresa: async (data, idEmpresa) => {
-      console.log (data)
       const fields = Object.keys(data); 
       const values = Object.values(data); 
   
