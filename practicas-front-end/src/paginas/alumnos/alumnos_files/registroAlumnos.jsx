@@ -79,7 +79,7 @@ const RegistroAlumnos = () => {
       'Codigo', 'NombreCompleto', 'Carrera', 'Grado', 'Grupo', 'Turno',
       'Domicilio', 'Colonia', 'Municipio', 'Edad', 'NSS', 'Movil',
       'NumeroCasa', 'CodigoPostal', 'Estado', 'Nacionalidad', 'Telefono', 'TelefonoEmergencia',
-      'NombrePadre', 'TelefonoPadre', 'NombreMadre', 'TelefonoMadre'
+      'NombrePadre', 'TelefonoPadre'
     ];
 
     requiredFields.forEach(field => {
@@ -163,6 +163,7 @@ const RegistroAlumnos = () => {
             error.response?.data?.message ||
             "Ocurrio un error al registrar.";
           console.error('Error al registrar alumno:', error);
+          alert(mensajeError);
           setErrors(mensajeError);
         }
       }
@@ -351,13 +352,13 @@ const RegistroAlumnos = () => {
             <legend>Datos Familiares</legend>
             
             {[
-              { name: 'NombrePadre', placeholder: 'Nombre del padre', type: 'text' },
+              { name: 'NombrePadre', placeholder: 'Nombre del padre o tutor', type: 'text' },
               { 
                 name: 'TelefonoPadre', 
                 placeholder: 'Teléfono del padre', 
                 type: 'number'
               },
-              { name: 'NombreMadre', placeholder: 'Nombre de la madre', type: 'text' },
+              { name: 'NombreMadre', placeholder: 'Nombre de la madre o tutor', type: 'text' },
               { 
                 name: 'TelefonoMadre', 
                 placeholder: 'Teléfono de la madre', 
