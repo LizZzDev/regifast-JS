@@ -5,7 +5,7 @@ const jefeDeDepartamento = {
       const { Carrera} = datos;
       try {
         const [result] = await connection.query(
-          `INSERT INTO jefeDeDepartamento (IdUsuario, Carrera) VALUES (?, ?)`,
+          `INSERT INTO jefededepartamento(IdUsuario, Carrera) VALUES (?, ?)`,
           [idUsuario, Carrera]
         );
         return result;
@@ -19,7 +19,7 @@ const jefeDeDepartamento = {
       try {
         console.log (idUsuario)
          const [result] = await pool.query(
-          `SELECT Carrera FROM jefeDeDepartamento WHERE IdUsuario = ?`,
+          `SELECT Carrera FROM jefededepartamento WHERE IdUsuario = ?`,
           [idUsuario]
          );
          console.log (result);
