@@ -182,7 +182,7 @@ const RegistroUsuario = () => {
                                     name="password"
                                     value={formData.password}
                                     onChange={handleChange}
-                                    placeholder="Mínimo 6 caracteres"
+                                    placeholder="Mínimo 8 caracteres"
                                     required
                                 />
                             </div>

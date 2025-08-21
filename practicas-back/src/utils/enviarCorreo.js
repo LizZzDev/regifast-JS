@@ -15,15 +15,16 @@ const enviarCorreo = async (data) => {
 
     try {
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'rodriguezjaramilloricardo103@gmail.com',
-                pass: 'klxz xngd yuqo eilq', 
-            },
+            host: '148.202.3.50',
+            port: 25,
+            secure: false, // true for 465, false for other ports
+            tls: {
+            rejectunauthorized: false // Permite conexiones inseguras
+            }
         });
 
         const mailOptions = {
-            from: 'rodriguezjaramilloricardo103@gmail.com',
+            from: 'hector.orozco@sems.udg.mx',
             to: email,
             subject: subject,
             text: text,

@@ -8,10 +8,7 @@ const fechaIngreso = {
     actualizarFechasPorId: async (connection, idRango, fechaInicio, fechaFin) => {
       try {
         const query = `
-          UPDATE accesoporcalificacion",
-          SET FechaInicio = ?, FechaFin = ?
-          WHERE IdRango = ?
-        `;
+          UPDATE accesoporcalificacion SET FechaInicio = ?, FechaFin = ? WHERE IdRango = ?`;
         const result = await connection.query(query, [fechaInicio, fechaFin, idRango]);
         return { success: true };
       } catch (error) {
