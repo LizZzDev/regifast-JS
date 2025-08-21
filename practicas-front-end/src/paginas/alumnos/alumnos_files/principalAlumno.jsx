@@ -105,7 +105,7 @@ const BarraStatus = () => {
           <section id="InformacionBarraEstado">
             <p>
               Tu proceso se encuentra en: <br />
-            <span>{textosEstado[progreso] || "No has iniciado el proceso"}</span>
+            <span>{textosEstado[progreso] || "No has iniciado el proceso. Favor de completar Registro de datos para iniciarlo."}</span>
             </p>
           </section>
         </article>
