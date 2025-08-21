@@ -373,7 +373,7 @@ const RegistroAlumnos = () => {
               <input
                 type="number"
                 name="TelefonoPadre"
-                placeholder="Teléfono del padre"
+                placeholder="Teléfono del padre o tutor"
                 value={formData.TelefonoPadre}
                 onChange={handleChange}
                 required
@@ -387,7 +387,7 @@ const RegistroAlumnos = () => {
               <input
                 type="text"
                 name="NombreMadre"
-                placeholder="Nombre de la madre o tutora"
+                placeholder="Nombre de la madre o tutor"
                 value={formData.NombreMadre}
                 onChange={handleChange}
                 className={errors.NombreMadre ? 'error' : ''}
@@ -399,7 +399,7 @@ const RegistroAlumnos = () => {
               <input
                 type="number"
                 name="TelefonoMadre"
-                placeholder="Teléfono de la madre"
+                placeholder="Teléfono de la madre o tutor"
                 value={formData.TelefonoMadre}
                 onChange={handleChange}
                 className={errors.TelefonoMadre ? 'error' : ''}
