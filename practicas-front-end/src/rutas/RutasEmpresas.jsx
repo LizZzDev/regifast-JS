@@ -20,14 +20,14 @@ const RutasEmpresas = () => (
 
         <Route path="/principal" 
         element={  
+             <RutaProtegida rolEsperado="empresa">
                 <Principal />
+            </RutaProtegida>
             } />
 
         <Route path="/registro" 
         element={
-            <RutaProtegida rolEsperado="empresa">
                 <Registro />
-            </RutaProtegida>
         } />
         <Route path="/principal/ver-calificaciones-empresa/:idEmpresa" 
         element={
