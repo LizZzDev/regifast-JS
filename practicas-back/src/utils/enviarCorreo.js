@@ -19,8 +19,8 @@ const enviarCorreo = async (data) => {
             port: 25,
             secure: false, // true for 465, false for other ports
             tls: {
-            rejectunauthorized: false // Permite conexiones inseguras
-            }
+                rejectUnauthorized: false // Permite conexiones inseguras
+            },
         });
 
         const mailOptions = {
