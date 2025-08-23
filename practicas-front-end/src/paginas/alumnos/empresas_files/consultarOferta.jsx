@@ -55,7 +55,7 @@ const ConsultarOferta = () => {
         try {
           await postularOfertaEmpresa(idEmpresa);
 
-            navigate('/alumno/principal');
+            navigate('/alumno_poli/principal');
         } catch (error) {
             alert(error.message);
         }

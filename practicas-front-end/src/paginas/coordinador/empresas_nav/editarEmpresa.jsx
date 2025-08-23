@@ -87,7 +87,7 @@ const EditarEmpresa = () => {
       
         await modificarDatosEmpresa({data: cambios, idUsuario: empresa.IdEmpresa});
         alert("La información se modificó correctamente");
-        navigate('/coordinador/empresas');
+        navigate('/coordinador_poli/empresas');
 
     } catch (error) {
         alert("No se pudo realizar la modificacion:", error.response?.data?.message)
@@ -125,7 +125,7 @@ const EditarEmpresa = () => {
         await eliminarEmpresa({idEmpresa: idEmpresa})
         alert("Se elimino al empresa");
         cargarEmpresa();
-        navigate("/coordinador/empresas");
+        navigate("/coordinador_poli/empresas");
 
       } catch (error) {
         alert ("Error al eliminar empresa:", error);

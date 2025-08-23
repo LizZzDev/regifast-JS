@@ -4,10 +4,10 @@ import { verificarSesion } from '../../api/usuarios';
 
 const redirigirPorRol = (rol, navigate) => {
   const rutas = {
-    alumno: '/alumno/',
-    empresa: '/empresa/',
-    coordinador: '/coordinador/',
-    jefeDepartamento: '/jefe/',
+    alumno: '/alumno_poli/',
+    empresa: '/empresa_poli/',
+    coordinador: '/coordinador_poli/',
+    jefeDepartamento: '/jefe_poli/',
   };
   navigate(rutas[rol] || '/');
 };

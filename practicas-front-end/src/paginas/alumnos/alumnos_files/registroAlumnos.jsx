@@ -46,7 +46,7 @@ const RegistroAlumnos = () => {
         const datos = alumno.alumno.BarraStatus;
         if (datos >= 2) {
           alert("Tu registro de datos ya fue enviado.");
-          window.location.href = '/alumno/principal';
+          window.location.href = '/alumno_poli/principal';
         }
       } catch (error) {
         console.error('Error al verificar etapa del alumno:', error);
@@ -157,7 +157,7 @@ const RegistroAlumnos = () => {
           console.log("Enviando datos:", formData);
           await anadirDatosDelAlumno(formData);
           alert("Registro exitoso.");
-          navigate("/alumno/principal");
+          navigate("/alumno_poli/principal");
         } catch (error) {
           let mensajeError =
             error.response?.data?.error?.message||

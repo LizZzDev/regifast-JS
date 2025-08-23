@@ -20,13 +20,13 @@ const LoginAlumnos = ({ onLogin }) => {
         const usuario = await iniciarSesion({ correo, contrasena: password }); // llamada al backend
         onLogin?.(usuario); 
         if (usuario?.rol === "alumno") {
-          navigate("/alumno/principal");
+          navigate("/alumno_poli/principal");
         } else if (usuario?.rol === "empresa") {
-          navigate("/empresa/principal");
+          navigate("/empresa_poli/principal");
         } else if (usuario?.rol === "coordinador") {
-          navigate("/coordinador/principal");
+          navigate("/coordinador_poli/principal");
         } else if (usuario?.rol === "jefeDepartamento") {
-          navigate("/jefe/principal");
+          navigate("/jefe_poli/principal");
         }else {
           navigate("/no-autorizado"); 
         }
@@ -73,7 +73,7 @@ const LoginAlumnos = ({ onLogin }) => {
         </form>
         <div class="links">
           <a id="olvidasteContra" href="/recuperar-contra" target="_blank">¿Olvidaste tu contraseña?</a>
-          <a id="registrate" href="/alumno/crear-cuenta">Regístrate aquí</a>
+          <a id="registrate" href="/alumno_poli/crear-cuenta">Regístrate aquí</a>
         </div>
 
         {mensaje && <p className="mensaje">{mensaje}</p>}

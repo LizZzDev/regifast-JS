@@ -118,7 +118,7 @@ const RegistroUsuario = () => {
                     rol: 'alumno'
                   } );
             setMensaje('Registro exitoso. Redirigiendo...');
-            setTimeout(() => navigate("/alumno/"), 1500);
+            setTimeout(() => navigate("/alumno_poli/"), 1500);
         } catch (error) {
             console.error('Error:', error);
             setMensaje(error.response?.data?.message || 'Error en el registro');

@@ -163,7 +163,7 @@ const EditarAlumno = () => {
         await eliminarAlumno(idUsuario)
         alert("Se elimino al alumno");
         cargarAlumno();
-        navigate("/coordinador/alumnos");
+        navigate("/coordinador_poli/alumnos");
 
       } catch (error) {
         alert ("Error al eliminar alumno:", error);

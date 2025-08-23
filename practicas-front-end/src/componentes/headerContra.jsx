@@ -9,16 +9,16 @@ const HeaderContra = () => {
     const tipo = localStorage.getItem("tipoUsuario");
     switch (tipo) {
       case "alumno":
-        navigate("/alumno");
+        navigate("/alumno_poli");
         break;
       case "empresa":
-        navigate("/empresa");
+        navigate("/empresa_poli");
         break;
       case "coordinador":
-        navigate("/coordinador");
+        navigate("/coordinador_poli");
         break;
       case "jefe":
-        navigate("/jefe");
+        navigate("/jefe_poli");
         break;
       default:
         navigate("/");

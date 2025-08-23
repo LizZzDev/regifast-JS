@@ -47,7 +47,7 @@ const CalificarEmpresa = () => {
       }
       await calificarEmpresa (data);
       alert("Opinión enviada exitosamente.");
-      navigate('/alumno/principal');
+      navigate('/alumno_poli/principal');
 
     } catch (error) {
         console.error('Error al registrar alumno:', error);

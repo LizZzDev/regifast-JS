@@ -111,7 +111,7 @@
     } catch (error) {
       if (error.response?.status === 409 && redirigirSiError) {
         alert("No tienes acceso a este apartado");
-        window.location.href = '/alumno/principal';
+        window.location.href = '/alumno_poli/principal';
       } else if (error.response?.status === 409) {
         console.warn ("Aun no tienes acceso a este apartado");
       }

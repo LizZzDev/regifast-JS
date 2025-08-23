@@ -28,7 +28,7 @@ const DocumentosAlumno = () => {
 
           if ( datos == null ||datos < 3) {
             alert("Tu documento aun no se encuentra disponible.");
-            window.location.href = '/alumno/principal';
+            window.location.href = '/alumno_poli/principal';
           }
         } catch (error) {
           console.error('Error al verificar etapa del alumno:', error);

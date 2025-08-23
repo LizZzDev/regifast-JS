@@ -30,7 +30,7 @@ const Header = () => {
         if (error?.response?.status === 409) {
           setPuedeConsultarOferta(false);
         }
-              navigate('/alumno/principal'); 
+              navigate('/alumno_poli/principal'); 
       }
     } catch (error) {
       console.error('Error al obtener etapa o acceso a empresas:', error);
@@ -43,7 +43,7 @@ const Header = () => {
     e.preventDefault(); 
     try {
       await cerrarSesion(); 
-      navigate('/alumno/'); 
+      navigate('/alumno_poli/'); 
     } catch (error) {
       console.error("Error al cerrar sesión", error);
     }
@@ -58,26 +58,26 @@ return (
     </section>
     <nav className="menu"> 
       <ul>
-        <li><a href="/alumno/principal">INICIO</a></li>
+        <li><a href="/alumno_poli/principal">INICIO</a></li>
         {(etapa === 0) && (
-          <li><a href="/alumno/registro">REGISTRO DE DATOS</a></li>
+          <li><a href="/alumno_poli/registro">REGISTRO DE DATOS</a></li>
         )}
         {etapa == 2 && puedeConsultarOferta && (
-          <li><a href="/alumno/consultar"> CONSULTAR OFERTA</a></li>
+          <li><a href="/alumno_poli/consultar"> CONSULTAR OFERTA</a></li>
         )}
 
         {etapa !== 0 && etapa > 2 && (
-          <li><a href="/alumno/documentos">DOCUMENTOS</a></li>
+          <li><a href="/alumno_poli/documentos">DOCUMENTOS</a></li>
         )}
         {etapa !== 0 && etapa == 4 && (
-          <li><a href="/alumno/calificar">OPINION</a></li>
+          <li><a href="/alumno_poli/calificar">OPINION</a></li>
         )}
 
         <li className="dropdown">
           <img src="../../img/usuario.png" alt="perfil_alumno" />
           <div className="dropdown-content">
              {etapa !== 0 && etapa > 0 && (
-              <a href="/alumno/ver-perfil">Perfil</a>
+              <a href="/alumno_poli/ver-perfil">Perfil</a>
             )}
             <a href="#" onClick={manejarCerrarSesion}>Salir</a>
           </div>

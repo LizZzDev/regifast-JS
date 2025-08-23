@@ -113,7 +113,7 @@ const RegistroEmpresa = () => {
     await crearEmpresa(form);
     setMensaje('Empresa registrada exitosamente.');
     setTimeout(() => {
-      navigate("/empresa");
+      navigate("/empresa_poli");
   }, 1000);
   } catch (error) {
     console.error('Error al registrar empresa:', error.response.data.message);

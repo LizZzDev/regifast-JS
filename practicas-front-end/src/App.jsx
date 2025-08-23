@@ -15,10 +15,10 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/nueva-contra/:token" element={<NuevaContrasena />} />
         <Route path="/recuperar-contra" element={<RecuperarContrasena />} />
-        <Route path="/alumno/*" element={<RutasAlumnos />} />
-        <Route path="/empresa/*" element={<RutasEmpresas />} />
-        <Route path="/coordinador/*" element={<RutasCoordinador />} />
-        <Route path="/jefe/*" element={<RutasJefe />} />
+        <Route path="/alumno_poli/*" element={<RutasAlumnos />} />
+        <Route path="/empresa_poli/*" element={<RutasEmpresas />} />
+        <Route path="/coordinador_poli/*" element={<RutasCoordinador />} />
+        <Route path="/jefe_poli/*" element={<RutasJefe />} />
       </Routes>
     </Router>
   );

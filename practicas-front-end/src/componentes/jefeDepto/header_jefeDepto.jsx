@@ -12,7 +12,7 @@ const HeaderJefeDepto = () => {
 
         try {
               await cerrarSesion(); 
-              navigate('/jefe'); 
+              navigate('/jefe_poli'); 
             } catch (error) {
               console.error("Error al cerrar sesión", error);
             }

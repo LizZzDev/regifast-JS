@@ -21,13 +21,13 @@ const Login = ({ onLogin }) => {
         const usuario = await iniciarSesion({ correo, contrasena: password }); // llamada al backend
         onLogin?.(usuario); 
         if (usuario?.rol === "alumno") {
-          navigate("/alumno/principal");
+          navigate("/alumno_poli/principal");
         } else if (usuario?.rol === "empresa") {
-          navigate("/empresa/principal");
+          navigate("/empresa_poli/principal");
         } else if (usuario?.rol === "coordinador") {
-          navigate("/coordinador/principal");
+          navigate("/coordinador_poli/principal");
         } else if (usuario?.rol === "jefeDepartamento") {
-          navigate("/jefe/principal");
+          navigate("/jefe_poli/principal");
         } else {
           navigate("/no-autorizado"); 
         }
@@ -72,7 +72,7 @@ const Login = ({ onLogin }) => {
             <input type="submit" value="Iniciar Sesión" />
           </div>
         </form>
-        <p>¿No tienes una cuenta? <a href="/empresa/registro">Regístrate aquí</a></p>
+        <p>¿No tienes una cuenta? <a href="/empresa_poli/registro">Regístrate aquí</a></p>
 
         {mensaje && <p className="mensaje">{mensaje}</p>}
       </section>

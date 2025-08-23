@@ -65,7 +65,7 @@ const CalificacionEmpresa = () => {
           <img src="/img/udg_white.png" alt="UDG Logo" />
         </article>
         <nav>
-            <a href="/empresa/principal">Inicio</a>          
+            <a href="/empresa_poli/principal">Inicio</a>          
         </nav>
       </header>
       <main>

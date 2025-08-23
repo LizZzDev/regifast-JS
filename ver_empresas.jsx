@@ -73,7 +73,7 @@ const EditarEmpresa = () => {
         await eliminarEmpresa({ idEmpresa });
         alert("Se eliminó la empresa");
         cargarEmpresa();
-        navigate("/coordinador/empresas");
+        navigate("/coordinador_poli/empresas");
       } catch (error) {
         alert("Error al eliminar empresa:", error);
       }

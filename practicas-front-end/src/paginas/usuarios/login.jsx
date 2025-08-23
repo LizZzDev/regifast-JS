@@ -21,13 +21,13 @@ const Login = ({ onLogin }) => {
         const usuario = await iniciarSesion({ correo, contrasena: password }); // llamada al backend
         onLogin?.(usuario); 
         if (usuario?.rol === "alumno") {
-          navigate("/alumno/principal");
+          navigate("/alumno_poli/principal");
         } else if (usuario?.rol === "empresa") {
-          navigate("/empresa/principal");
+          navigate("/empresa_poli/principal");
         } else if (usuario?.rol === "coordinador") {
-          navigate("/coordinador/principal");
+          navigate("/coordinador_poli/principal");
         } else if (usuario?.rol === "jefeDepartamento") {
-          navigate("/jefe/principal");
+          navigate("/jefe_poli/principal");
         } else {
           navigate("/no-autorizado"); 
         }

@@ -63,13 +63,13 @@ const NuevaContrasena = () => {
 
           console.log(restablecerContraseñaEndpoint);
          if (restablecerContraseñaEndpoint?.rol === "alumno") {
-            navigate("/alumno/");
+            navigate("/alumno_poli/");
           } else if (restablecerContraseñaEndpoint?.rol === "empresa") {
-            navigate("/empresa/");
+            navigate("/empresa_poli/");
           } else if (restablecerContraseñaEndpoint?.rol === "coordinador") {
-            navigate("/coordinador/");
+            navigate("/coordinador_poli/");
           } else if (restablecerContraseñaEndpoint?.rol === "jefeDepartamento") {
-            navigate("/jefe/");
+            navigate("/jefe_poli/");
           } else {
             navigate("/no-autorizado"); 
           }
