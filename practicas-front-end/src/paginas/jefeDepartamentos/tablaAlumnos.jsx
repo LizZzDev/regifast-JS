@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ver_alumnos.css";
-import { modificarDatosAlumno, obtenerAlumnos } from '../../api/coordinador';
+import { modificarDatosAlumno} from '../../api/coordinador';
+import { obtenerAlumnosJefe} from '../../api/jefeDepartamento';
 import HeaderJefeDepto from "../../componentes/jefeDepto/header_jefeDepto.jsx";
 
 function TablaAlumnos() {
@@ -22,7 +23,10 @@ function TablaAlumnos() {
   };
 
   const [filtros, setFiltros] = useState({
-    estadoCalificacion: ''
+    estadoCalificacion: '',
+    grado: '',
+    grupo: '',
+    turno: ''
   });
 
   useEffect(() => {
@@ -33,13 +37,19 @@ function TablaAlumnos() {
         ? "false"
         : null;
 
-        console.log (estadoNumerico)
+       const turno = filtros.turno;
+       const grado = filtros.grado;
+       const grupo = filtros.grupo;
+
       try {
 
-        const response = await obtenerAlumnos({
+        const response = await obtenerAlumnosJefe({
             pagina: paginaActual, 
-            limite: 10,
-            calificacion: estadoNumerico
+            limite: 30,
+            estadoNumerico: estadoNumerico,
+            turno: turno,
+            grado: grado,
+            grupo: grupo
         });
         const alumnosConEstado = response.alumnos.map(alumno => ({
           ...alumno,
@@ -102,7 +112,7 @@ function TablaAlumnos() {
       await modificarDatosAlumno(data, idUsuario);
       alert("La información se modificó correctamente");
 
-      const response = await obtenerAlumnos();
+      const response = await obtenerAlumnosJefe();
       const alumnosConEstado = response.alumnos.map(alumno => ({
         ...alumno,
         estado: mapEstadoDeDB(alumno.Ordinario),
@@ -128,7 +138,7 @@ function TablaAlumnos() {
         <main>
         <section id="titleA">
           <h2>Listado de Alumnos</h2>
-        </section>
+        </section> 
 
         <section className="filtros-container">
           <div className="filtros-centrados">
@@ -138,15 +148,48 @@ function TablaAlumnos() {
               value={filtros.estadoCalificacion}
               onChange={handleFilterChange}
             >
-              <option value="">Todos los alumnos</option>
+              <option value="">L / SC</option>
               <option value="calificados">Listos</option>
               <option value="no-calificados">Sin calificar</option>
+            </select>
+
+            <select
+              className="filtro-select-alumnos"
+              name="grado"
+              value={filtros.grado}
+              onChange={handleFilterChange}
+            >
+              <option value="">Turno</option>
+              <option value="8">8°</option>
+              <option value="6">6°</option>
+            </select>
+
+            <select
+              className="filtro-select-alumnos"
+              name="grupo"
+              value={filtros.grupo}
+              onChange={handleFilterChange}
+            >
+              <option value="">Grupo</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+            </select>
+
+            <select
+              className="filtro-select-alumnos"
+              name="turno"
+              value={filtros.turno}
+              onChange={handleFilterChange}
+            >
+              <option value="">Turno</option>
+              <option value="Matutino">Matutino</option>
+              <option value="Vespertino">Vespertino</option>
             </select>
           </div>
         </section>
         <div className="contador-total">Total: {totalAlumnos} alumnos
         </div>
-
+        
         <table>
           <thead>
             <tr>

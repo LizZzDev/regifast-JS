@@ -16,7 +16,9 @@ const ValidacionAlumnos = () => {
     busqueda: '',
     carrera: '',
     revision: '',
-    ordinario: ''
+    ordinario: '',
+    inicialNombre: '',
+    ciclo: ''
   });
   
   const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
@@ -29,9 +31,11 @@ const ValidacionAlumnos = () => {
       try {
        const response = await obtenerAlumnos({
           pagina: paginaActual,
-          limite: 10,
+          limite: 30,
+          ciclo: filtros.ciclo || null,
           carrera: filtros.carrera || null,
           busqueda: filtros.busqueda || null,
+          inicialNombre: filtros.inicialNombre || null,
           ordinario: filtros.ordinario === 'ordinario' ? 1 :
            filtros.ordinario === 'no-ordinario' ? 0 :
            null,
@@ -40,7 +44,6 @@ const ValidacionAlumnos = () => {
             filtros.revision === 'no-revisado' ? 0 :
             null
         });
-        console.log ("a", filtros, "a", response);
         const paginas = response.totalPaginas;
         setTotalPaginas(paginas < 1 ? 1 : paginas);
         setTotalAlumnos(response.total)
@@ -56,7 +59,6 @@ const ValidacionAlumnos = () => {
   // Aplicar filtros cuando cambien los filtros o la lista de alumnos
   useEffect(() => {
     const filtered = alumnos.filter(alumno => {
-      console.log (filtros.busqueda);
       const coincideBusqueda = 
        !filtros.busqueda ||
         alumno.NombreCompleto.toLowerCase().includes(filtros.busqueda.toLowerCase()) ||
@@ -64,6 +66,9 @@ const ValidacionAlumnos = () => {
       
       const coincideCarrera = 
         !filtros.carrera || alumno.Carrera === filtros.carrera;
+
+      const coincideCiclo = 
+          !filtros.carrera || alumno.Carrera === filtros.ciclo;
       
       const coincideRevision =
         !filtros.revision ||
@@ -75,7 +80,12 @@ const ValidacionAlumnos = () => {
         (filtros.ordinario === "ordinario" && alumno.Ordinario === 1) ||
         (filtros.ordinario === "no-ordinario" && alumno.Ordinario === 0);
 
-      return coincideBusqueda && coincideCarrera && coincideRevision && coincideOrdinario;
+      const coincideInicial = 
+      !filtros.inicialNombre || 
+      alumno.NombreCompleto.toUpperCase().startsWith(filtros.inicialNombre.toUpperCase());
+
+
+      return coincideBusqueda && coincideCarrera && coincideRevision && coincideOrdinario && coincideInicial && coincideCiclo;
     });
 
     setAlumnosFiltrados(filtered);
@@ -102,9 +112,11 @@ const ValidacionAlumnos = () => {
       alert("Validacion exitosa");
       const response = await obtenerAlumnos({
           pagina: paginaActual,
-          limite: 10,
+          limite: 30,
           carrera: filtros.carrera || null,
+          ciclo: filtros.ciclo || null,
           busqueda: filtros.busqueda || null,
+          inicialNombre: filtros.inicialNombre || null,
           ordinario: filtros.ordinario === 'ordinario' ? 1 :
            filtros.ordinario === 'no-ordinario' ? 0 :
            null,
@@ -126,6 +138,20 @@ const ValidacionAlumnos = () => {
       <HeaderCoordinador/>
 
       <main>
+          <div classNambe = "ciclo-cointainer">
+              <select
+              className="filtro-select-ciclo"
+              name="ciclo"
+              value={filtros.ciclo}
+              onChange={handleFilterChange}
+            >
+              <option value="">Ciclo</option>
+              <option value="x">x</option>
+            </select>
+
+
+          </div>
+
         <section id="titleA">
           <h2>Validación de Datos de Alumnos</h2>
         </section>
@@ -180,6 +206,23 @@ const ValidacionAlumnos = () => {
               <option value="">Todos los alumnos</option>
               <option value="ordinario">Ordinarios</option>
               <option value="no-ordinario">No ordinarios</option>
+            </select>
+
+            <select
+              className="filtro-select-alumnos"
+              name="inicialNombre"
+              value={filtros.inicialNombre}
+              onChange={handleFilterChange}
+            >
+              <option value="">Por inicial</option>
+              {Array.from({ length: 26 }, (_, i) => {
+                const letra = String.fromCharCode(65 + i);
+                return (
+                  <option key={letra} value={letra}>
+                    {letra}
+                  </option>
+                );
+              })}
             </select>
           </div>
         </section>
