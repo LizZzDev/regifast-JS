@@ -63,16 +63,17 @@ export async function obtenerAlumno(idUsuario) {
   }
 }
 
-export async function obtenerAlumnos({ pagina = 1, limite = 20, busqueda = null, carrera = null, validado = null, ordinario = null, calificacion = null } = {}) {
+export async function obtenerAlumnos({ pagina = 1, limite = 30, busqueda = null, carrera = null, validado = null, ordinario = null, inicialNombre= null, ciclo = null} = {}) {
   try {
      const params = {
       pagina,
       limite,
+      ...(ciclo && { ciclo }),
       ...(carrera && { carrera }),
       ...(busqueda && { busqueda }),
       ...(validado !== null && { validado }),
       ...(ordinario !== null && { ordinario }),
-      ...(calificacion !== null && { calificacion })
+      ...(inicialNombre !== null && { inicialNombre })
     };
 
     const response = await api.get(

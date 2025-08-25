@@ -22,3 +22,29 @@
       throw error;
     }
   }
+
+export async function obtenerAlumnosJefe({ pagina = 1, limite = 30, busqueda = null, grado = null, grupo = null, turno = null, estadoNumerico = null} = {}) {
+  try {
+     const params = {
+      pagina,
+      limite,
+      ...(busqueda && { busqueda }),
+      ...(estadoNumerico && { estadoNumerico }),
+      ...(grado && { grado }),
+      ...(grupo && { grupo }),
+      ...(turno && { turno }),
+
+    };
+
+    console.log (params);
+    const response = await axios.get(
+        API_BASE_URL + router.COORDINADOR + endpoints.COORDINADOR.OBTENER_ALUMNOS,
+      { params }
+    );
+
+    return response.data.data;;
+  } catch (error) {
+    console.error("Error en obtener alumno:", error);
+    throw error;
+  }
+}

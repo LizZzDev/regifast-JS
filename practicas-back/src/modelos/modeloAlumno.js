@@ -10,7 +10,7 @@ const Alumno = {
     }
   },
 
-  obtenerAlumnos: async ({ pagina, limite, carrera, busqueda, validado, ordinario, calificacion }) => {
+  obtenerAlumnos: async ({ pagina, limite, carrera, busqueda, validado, ordinario, calificacion, inicialAlumno, grado, grupo, turno, ciclo }) => {
    
     try {
       const offset = (pagina - 1) * limite;
@@ -26,12 +26,47 @@ const Alumno = {
         params.push(carrera);
         countParams.push(carrera);
       }
+
+      if (grado) {
+        query += ` AND Grado = ?`;
+        queryCount += ` AND Grado = ?`;
+        params.push(grado);
+        countParams.push(grado);
+      }
+
+      if (ciclo) {
+        query += ` AND Ciclo = ?`;
+        queryCount += ` AND Ciclo = ?`;
+        params.push(ciclo);
+        countParams.push(ciclo);
+      }      
+
+      if (grupo) {
+        query += ` AND Grupo = ?`;
+        queryCount += ` AND Grupo = ?`;
+        params.push(grupo);
+        countParams.push(grupo);
+      }
+
+      if (turno) {
+        query += ` AND Turno = ?`;
+        queryCount += ` AND Turno = ?`;
+        params.push(turno);
+        countParams.push(turno);
+      }
   
       if (busqueda) {
         query += ` AND Codigo LIKE ?`;
         queryCount += ` AND Codigo LIKE ?`;
         params.push(`%${busqueda}%`);
         countParams.push(`%${busqueda}%`);
+      }
+
+      if (inicialAlumno) {
+        query += ` AND NombreCompleto LIKE ?`;
+        queryCount += ` AND NombreCompleto LIKE ?`;
+        params.push(`${inicialAlumno}%`);
+        countParams.push(`${inicialAlumno}%`);
       }
   
       if (validado !== null) {
