@@ -47,7 +47,7 @@ const Empresa = {
       }
     },
 
-    obtenerEmpresasFiltradas: async ({ pagina, limite, validada, soloConVacantes, practicasOrdinariasNoOrdinarias, carrera }) => {
+    obtenerEmpresasFiltradas: async ({ pagina, limite, validada, soloConVacantes, practicasExtraordinarias, carrera }) => {
       try {
         const offset = (pagina - 1) * limite;
     
@@ -70,11 +70,11 @@ const Empresa = {
           countParams.push(carrera);
         }
 
-        if (practicasOrdinariasNoOrdinarias == 0 ||practicasOrdinariasNoOrdinarias == 1) {
+        if (practicasExtraordinarias == 0 ||practicasExtraordinarias == 1) {
           query += ` AND PracticasExtraordinarias = ?`;
           queryCount += ` AND PracticasExtraordinarias = ?`;
-          params.push(practicasOrdinariasNoOrdinarias);
-          countParams.push(practicasOrdinariasNoOrdinarias);
+          params.push(practicasExtraordinarias);
+          countParams.push(practicasExtraordinarias);
         }
     
         if (soloConVacantes) {

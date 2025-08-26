@@ -5,12 +5,14 @@ const obtenerEmpresas = async (req) => {
   const pagina = parseInt(req.query.pagina) || 1;
   const limite = parseInt(req.query.limite) || 20;
   const soloConVacantes = req.query.vacantes === 'true';
-  const validada = req.query.validada === 1 ? 1 
-                 : req.query.validada === 0 ? 0
+  const validada = req.query.validada === "1" ? 1 
+                 : req.query.validada === "0" ? 0
                  : null;  
-  const practicasExtraordinarias = req.query.validada === 1 ? 1 
-                 : req.query.validada ===  0 ? 0
+  const practicasExtraordinarias = req.query.practicasExtraordinarias === "1" ? 1 
+                 : req.query.validada ===  "0" ? 0
                  : null;  
+
+                 console.log (req.query)
 
   try {
     const empresas = await Empresas.obtenerEmpresasFiltradas(
@@ -22,6 +24,7 @@ const obtenerEmpresas = async (req) => {
         practicasExtraordinarias: practicasExtraordinarias
       }
     );
+      
     return empresas;
   } catch (error) {
     console.error("Error al obtener todas las empresas:", error);

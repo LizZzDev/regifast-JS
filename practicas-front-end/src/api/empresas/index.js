@@ -15,19 +15,25 @@ export async function crearEmpresa(formData) {
   }
 }
 
-export async function obtenerEmpresas({ pagina = 1, limite = 20, validada = null, vacantes = false } = {}) {
+export async function obtenerEmpresas({ pagina = 1, limite = 20, validada = null, vacantes = false, practicasExtraordinarias = null} = {}) {
   try {
     const params = {
       pagina,
       limite,
       ...(validada !== null && { validada }), 
+      ...(practicasExtraordinarias !== null && { practicasExtraordinarias }), 
       ...(vacantes && { vacantes: true })
     };
+
+    console.log (params)
 
     const response = await api.get(
       router.EMPRESAS + endpoints.EMPRESAS.OBTENER_EMPRESAS,
       { params }
     );
+
+        console.log (response)
+
 
     return response.data.data;; 
   } catch (error) {

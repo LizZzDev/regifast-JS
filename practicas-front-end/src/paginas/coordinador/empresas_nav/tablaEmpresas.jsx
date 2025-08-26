@@ -15,8 +15,7 @@ const TablaEmpresas = () => {
     busqueda: '',
     validada: '',
     tipoEmpresa: '',
-    editable: '',
-    ordinaria: ''
+    practicasExtraordinarias: ''
   });
 
   const navigate = useNavigate();
@@ -39,11 +38,16 @@ const TablaEmpresas = () => {
         validada:
           filtros.validada === 'validada' ? 1 :
           filtros.validada === 'no-validada' ? 0 :
+          null,
+        practicasExtraordinarias:
+          filtros.practicasExtraordinarias === 'ordinaria' ? 1 :
+          filtros.practicasExtraordinarias === 'interna' ? 0 :
           null
         
       });
       setTotalPaginas(datos.totalPaginas)
       setEmpresas(datos.empresas);
+      setTotalEmpresas(datos.total)
     } catch (error) {
       console.error('Error al cargar empresas:', error);
     }
@@ -68,22 +72,12 @@ const TablaEmpresas = () => {
         || (filtros.validada === 'no-validada' && empresa.Validada === 0);
 
     const coincideOrdinario =
-      filtros.ordinaria === ''
-        || (filtros.ordinaria === 'ordinaria' && empresa.PracticasExtraordinarias === 1)
-        || (filtros.ordinaria === 'interna' && empresa.PracticasExtraordinarias === 0);
+      filtros.practicasExtraordinarias === ''
+        || (filtros.practicasExtraordinarias === 'ordinaria' && empresa.PracticasExtraordinarias === 1)
+        || (filtros.practicasExtraordinarias === 'interna' && empresa.PracticasExtraordinarias === 0);
 
-   const coincideEditable =
-      filtros.editable === ''
-        || (filtros.editable === 'editable' && empresa.IdUsuario === null)
-        || (filtros.editable === 'no-editable' && empresa.IdUsuario)
-
-
-    return coincideBusqueda && coincideRevision && coincideOrdinario && coincideEditable;
+    return coincideBusqueda && coincideRevision && coincideOrdinario;
   });
-
-  useEffect(() => {
-    setTotalEmpresas(empresasFiltradas.length);
-  }, [empresasFiltradas]);
 
   const handleOpiniones = (idEmpresa) => {
       navigate(`ver-calificaciones-empresa/${idEmpresa}`);
@@ -103,9 +97,15 @@ const TablaEmpresas = () => {
         validada:
           filtros.validada === 'validada' ? 1 :
           filtros.validada === 'no-validada' ? 0 :
+          null,
+        practicasExtraordinarias:
+          filtros.practicasExtraordinarias === 'ordinaria' ? 1 :
+          filtros.practicasExtraordinarias === 'interna' ? 0 :
           null
       });
+      setTotalPaginas(datos.totalPaginas)
       setEmpresas(datos.empresas);
+      setTotalEmpresas(datos.total)
     } catch (error) {
       alert("Error al validar");
       console.error('Error al enviar datos de validación:', error);
@@ -148,27 +148,15 @@ const TablaEmpresas = () => {
 
             <select
               className="filtro-select-empresas"
-              name="ordinaria"
-              value={filtros.ordinaria}
+              name="practicasExtraordinarias"
+              value={filtros.practicasExtraordinarias}
               onChange={handleFilterChange}
             >
               <option value="">Todas las empresas</option>
               <option value="ordinaria">Ordinarias</option>
               <option value="interna">Internas</option>
 
-            </select>             
-
-            <select
-              className="filtro-select-empresas"
-              name="editable"
-              value={filtros.editable}
-              onChange={handleFilterChange}
-            >
-              <option value="">Todas las empresas</option>
-              <option value="editable">Editable</option>
-              <option value="no-editable">No editable</option>
-            </select>            
-
+            </select>               
           </div>
         </section>
 
@@ -185,8 +173,7 @@ const TablaEmpresas = () => {
                 <th>Domicilio</th>
                 <th>Opiniones</th>
                 <th>Validar</th>
-                {filtros.editable === 'editable' && <th>Editar</th>}
-                {filtros.editable === 'no-editable' && <th>Ver</th>}
+                <th>Editar</th>
               </tr>
             </thead>
             <tbody>
@@ -210,16 +197,11 @@ const TablaEmpresas = () => {
                         Validado
                       </span>
                     ) : (
-                      <button
-                        className="confirmar-btn"
-                        onClick={() => validarEmpresaConst(empresa.IdEmpresa)}
-                        disabled={validandoIds.includes(empresa.IdEmpresa)}
-                      >
-                        {validandoIds.includes(empresa.IdUsuario) ? 'Validando...' : 'Validar'}
-                      </button>
+                      <span style={{ color: "red", fontWeight: "bold" }}>
+                        Sin validar
+                      </span>
                     )}
                   </td>
-                  {filtros.editable === 'editable' && empresa.IdUsuario === null ?  (
                     <td>
                        <button
                         className="confirmar-btn"
@@ -228,19 +210,6 @@ const TablaEmpresas = () => {
                         Editar
                       </button>
                     </td>
-                  ) : null
-                  } 
-                  {filtros.editable === 'no-editable' && empresa.IdUsuario ?  (
-                  <td>
-                       <button
-                        className="confirmar-btn"
-                        onClick={() => VerEmpresa(empresa.IdEmpresa)}
-                      >
-                        Ver empresa
-                      </button>
-                    </td>                 
-                  ) : null
-                  } 
                 </tr>
               ))}
             </tbody>
