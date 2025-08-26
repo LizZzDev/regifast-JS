@@ -12,8 +12,7 @@ const EditarAlumno = () => {
   const [alumnoActual, setAlumnoActual] = useState({});
   const [alumno, setAlumno] = useState({});
   const [formData, setFormData] = useState({});
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   const cargarAlumno = async () => {
     try {

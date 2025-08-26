@@ -21,6 +21,7 @@ function RegistroEmpresaCoord() {
     imagen: null,
     carrera: '',
     tipo_empresa: '',
+    validada: '0'
   });
 
  const handleChange = (e) => {
@@ -44,6 +45,7 @@ function RegistroEmpresaCoord() {
         estado: 'Jalisco',
         municipio: 'Guadalajara',
         tipo_empresa: value,
+        validada: '1'
       }));
     } else {
       setFormData(prev => ({
@@ -75,7 +77,7 @@ function RegistroEmpresaCoord() {
           Cargo: formData.cargo,
           Estado: formData.estado,
           Municipio: formData.municipio,
-          Validada: 0,
+          Validada: formData.validada,
           PracticasExtraordinarias: formData.tipo_empresa
         };
 
