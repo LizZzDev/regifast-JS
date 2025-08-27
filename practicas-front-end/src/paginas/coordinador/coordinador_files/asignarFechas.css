@@ -20,7 +20,6 @@ html, body {
   font-weight: 400;
 }
 
-
 main {
   padding: 3vw;
 }
@@ -45,18 +44,28 @@ table {
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
   overflow: hidden;
+  table-layout: fixed; /* 👈 agregado */
 }
 
 th, td {
   padding: 1rem;
   text-align: center;
   border-bottom: 1px solid #ddd;
+  word-wrap: break-word; /* 👈 agregado */
 }
 
 th {
   background-color: #103E7E;
   color: white;
 }
+
+/* 👇 anchos de columnas */
+th:nth-child(1), td:nth-child(1) { width: 15%; } /* Rango */
+th:nth-child(2), td:nth-child(2) { width: 20%; } /* Fecha inicio */
+th:nth-child(3), td:nth-child(3) { width: 20%; } /* Fecha fin */
+th:nth-child(4), td:nth-child(4) { width: 15%; } /* Confirmar */
+th:nth-child(5), td:nth-child(5) { width: 15%; } /* Fecha inicio (resultado) */
+th:nth-child(6), td:nth-child(6) { width: 15%; } /* Fecha fin (resultado) */
 
 input[type="date"] {
   padding: 0.5rem 1rem;
@@ -107,7 +116,6 @@ input[type="date"] {
 }
 
   table, thead, tbody, th, td, tr {
-    display: block;
     width: 100%;
   }
 
