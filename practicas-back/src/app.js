@@ -4,38 +4,48 @@ import cors from 'cors';
 import { PORT, RUTA } from './configuracion/constantes.js';
 import rutas from './rutas/index.js';
 import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "path";
+import { fileURLToPath } from "url";
+
+const app = express();
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config();
-
-const app = express();
+// Middleware generales
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({
-  origin: `${RUTA}5173`, 
-  credentials: true
-}));
-
+// Sesiones
 app.use(
   session({
     secret: process.env.SECRET,      
     resave: false,                  
     saveUninitialized: false,        
-    cookie: { secure: false }        
+    cookie: { 
+      secure: process.env.NODE_ENV === "production", // true solo en producción con HTTPS
+      maxAge: 1000 * 60 * 60 * 2 // (ejemplo) 2 horas
+    }        
   })
 );
 
-app.use('/logos', express.static(path.join(__dirname, 'uploads/logos')));
+app.use('/api/logos', express.static(path.join(__dirname, 'uploads/logos')));
+app.use('/api', rutas);
+app.use(express.static(path.join(__dirname, "../dist")))
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.use('/', rutas);
+app.use((req, res, next) => {
+  if (
+    !req.originalUrl.startsWith('/api') &&
+    !req.originalUrl.startsWith('/uploads') && 
+    !req.originalUrl.startsWith('/logos')
+  ) {
+    res.sendFile(path.join(__dirname, "../dist", "index.html"));
+  } else {
+    next();
+  }
+});
 
 app.listen(PORT, () => {
-    console.log(`Servidor escuchando en ${RUTA}${PORT}`);
-  });
+  console.log(`Servidor escuchando en ${RUTA}${PORT}`);
+});
