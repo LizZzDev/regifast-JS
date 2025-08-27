@@ -57,7 +57,7 @@ table {
 th, td {
   padding: 15px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
+
 }
 
 th {
@@ -108,13 +108,6 @@ th {
 
 
 
-.estado-etiqueta{
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-  margin: 0 auto;
-}
-
-
 /* === Ancho personalizado por columna === */
 .col-carrera,
 .col-grado,
@@ -124,7 +117,7 @@ th {
 
 .col-codigo,
 .col-turno,
-.col-calificacion{
+.col-calificacion {
   width: 10%;
 }
 
@@ -134,35 +127,41 @@ th {
 }
 
 .paginacion {
-    width: 100%;
-    margin-top: 3%;
-    display: flex;
-    justify-content: center; 
-    align-items: center;    
-    gap: 1rem;               
+  width: 100%;
+  margin-top: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .button-paginacion {
-    padding: 0.5rem 1rem;
-    margin: 0;
-    font-weight: bold;
-    border: none;
-    background-color: #28507a;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  font-weight: bold;
+  border: none;
+  background-color: #28507a;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .button-paginacion:hover {
-    background-color: #14375c;
+  background-color: #14375c;
 }
 
 .paginacion button:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
+  background-color: #aaa;
+  cursor: not-allowed;
 }
 
 #label-paginacion {
-    font-weight: 500;
-    font-size: 125%;
+  font-weight: 500;
+  font-size: 125%;
+}
+td.estado-selector {
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-top: 1px solid #ccc;
 }
